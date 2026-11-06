@@ -44,6 +44,7 @@ Fuente: `docs_oficiales/BASES_DATAMAD_2026.pdf` (descargado el 27-oct de [la web
 | 5-nov-2026 | **Tabla de equivalencias de códigos** de los 179 municipios entre fuentes (código de la Comunidad, INE y nombres), en CSV y JSON | `scripts/codigos_municipios.py`, `data/interim/codigos_municipios.{csv,json}` |
 | 5-nov-2026 | **Verificación de todas las descargas** frente al portal (filas de la API y contenido). Descubre que el portal pasó de Latin-1 a UTF-8: los scripts ahora leen las dos codificaciones, y las tablas salen idénticas byte a byte | `scripts/verificar_descargas.py`, `scripts/comun.py`, `data/VERIFICACION.md` |
 | 5-nov-2026 | Nota MELODA 5 de los 15 datasets del portal (spain.meloda.org) | `scripts/meloda.py`, `data/MELODA.md` |
+| 6-nov-2026 | Repositorio privado en GitHub con todo el trabajo previo (primer commit `f20f196`), README, licencia MIT y `requirements.txt`. La tabla de municipios se regenera idéntica (MD5 `f4b7b1c4…`). El contraste real sigue sin ejecutar | [repositorio](https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid), `README.md` |
 
 ## Datos reunidos
 Todos son datos abiertos oficiales, cada uno en su carpeta de `data/raw/` con su `metadata.json` (título, licencia, fecha y enlace).
