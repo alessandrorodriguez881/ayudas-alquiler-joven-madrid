@@ -1,0 +1,26 @@
+{
+  "name": "1914500",
+  "title": "Plan alquila. Bolsa de vivienda joven",
+  "notes": "Sin información adicional",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-11-05T17:54:36.623375",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/1914500",
+  "resources": [
+    {
+      "name": "Plan alquila. Bolsa de vivienda joven.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/38394d5a-7562-458d-bfe6-c026cb5115a9/resource/3837a5ca-30fb-40b8-a84d-d0b7ef173167/download/plan-alquila.-bolsa-de-vivienda-joven.csv",
+      "size": 10974,
+      "last_modified": "2026-11-05T17:54:36.104091"
+    },
+    {
+      "name": "Plan alquila. Bolsa de vivienda joven.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/38394d5a-7562-458d-bfe6-c026cb5115a9/resource/321da893-6e19-4f1c-b4f6-6a4f50d6df62/download/plan-alquila.-bolsa-de-vivienda-joven.json",
+      "size": 26575,
+      "last_modified": "2026-11-05T17:54:36.610615"
+    }
+  ]
+}

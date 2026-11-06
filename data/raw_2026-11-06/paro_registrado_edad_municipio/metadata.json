@@ -1,0 +1,26 @@
+{
+  "name": "paro_registrado_edad_municipio",
+  "title": "Movimiento Laboral Registrado. Paro registrado, por edad y municipio. Comunidad de Madrid",
+  "notes": "Sin información adicional.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-11-05T18:20:00.288956",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/paro_registrado_edad_municipio",
+  "resources": [
+    {
+      "name": "Movimiento Laboral Registrado. Paro registrado, por edad y municipio. Comunidad de Madrid.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/270edb5a-6788-41d5-ab8a-551c9daead0a/resource/c2be6e03-4915-41ab-9b5e-6ce66602c718/download/extraccionesmovimiento-laboral-registrado.-paro-registrado-por-edad-y-municipio.-comunidad-de-ma.csv",
+      "size": 11154323,
+      "last_modified": "2026-11-05T18:19:57.543540"
+    },
+    {
+      "name": "Movimiento Laboral Registrado. Paro registrado, por edad y municipio. Comunidad de Madrid.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/270edb5a-6788-41d5-ab8a-551c9daead0a/resource/c85f5838-caa9-4771-9e88-11c23fbb4db0/download/extraccionesmovimiento-laboral-registrado.-paro-registrado-por-edad-y-municipio.-comunidad-de-m.json",
+      "size": 27741660,
+      "last_modified": "2026-11-05T18:20:00.281369"
+    }
+  ]
+}

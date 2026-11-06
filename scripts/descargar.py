@@ -2,7 +2,8 @@
 
 Each dataset goes to data/raw/<dataset_id>/ together with its metadata (metadata.json: title, licence, source URL).
 Only CSV resources are downloaded; files over MAX_MB are skipped and reported.
-Usage:  python scripts/descargar.py [dataset_id ...]   (no ids = all of DATASETS)
+Usage:  python scripts/descargar.py [--destino=data/raw_YYYY-MM-DD] [dataset_id ...]   (no ids = all of DATASETS)
+        --destino keeps the frozen snapshot in data/raw untouched (the preregistered test reads that one)
 """
 import json
 import pathlib
@@ -36,6 +37,8 @@ DATASETS = [
     "alquiler_medio_mensual_viviendas_arrendadas_valor_catastral_municipios_mas_20000",  # average rent, municipalities > 20k
     "1934445",                                       # rental price index, municipalities > 10k (base 2015)
     "censo_2021_viviendas_familiares_por_tenencia",  # 2021 census: households by tenure (rented) per municipality
+    # added 6-Nov
+    "1914500",  # Plan Alquila, young rental pool: regional totals 2012-2025 (context only)
 ]
 
 
@@ -45,15 +48,17 @@ def get(url):
 
 
 def main():
-    RAW.mkdir(parents=True, exist_ok=True)
+    args = sys.argv[1:]
+    raw = ROOT / args.pop(0).split("=", 1)[1] if args and args[0].startswith("--destino=") else RAW
+    raw.mkdir(parents=True, exist_ok=True)
     summary = []
-    for ds in sys.argv[1:] or DATASETS:
+    for ds in args or DATASETS:
         try:
             meta = json.loads(get(API + urllib.parse.quote(ds)))["result"]
         except Exception as e:  # dataset id not found, network error…
             summary.append(f"{ds}: METADATA ERROR {e}")
             continue
-        out = RAW / ds
+        out = raw / ds
         out.mkdir(exist_ok=True)
         keep = {k: meta.get(k) for k in ("name", "title", "notes", "license_title", "license_url", "metadata_modified", "url")}
         keep["portal_url"] = f"https://datos.comunidad.madrid/dataset/{meta.get('name')}"

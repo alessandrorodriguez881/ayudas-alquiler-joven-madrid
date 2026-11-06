@@ -34,6 +34,7 @@ Solo datos agregados por municipio: **ningún dato personal**.
 |---|---|---|
 | [Portal de Datos Abiertos de la Comunidad de Madrid](https://datos.comunidad.madrid/catalogo/) | Bono Alquiler Joven 2022 (solicitudes, aceptadas y rechazadas por municipio); Ayudas al alquiler para jóvenes 2022-2023; población por edad; renta disponible; paro registrado por edad; Censo 2021 (viviendas en alquiler); alquiler medio | CC BY 4.0 |
 | [SERPAVI, Ministerio de Vivienda y Agenda Urbana](https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi) | Alquiler mediano, p25 y p75 por municipio, 2022 y 2023 | [Aviso legal del MIVAU](https://www.mivau.gob.es/ministerio/aviso-legal): reutilización permitida citando la fuente |
+| [Base de Datos Nacional de Subvenciones](https://www.infosubvenciones.es/bdnstrans/) | Lista oficial de municipios con tope de 900 € en cada convocatoria, 2022-2025: 29 hasta 2023 y 55 desde 2024 (`scripts/topes_convocatorias.py` → `data/interim/topes_900_convocatorias.csv`) | Textos oficiales publicados |
 
 - El Excel de SERPAVI (71 MB, MD5 `bff6497f571b3323b75a49bcc3707a57`) no está en el repositorio. El recorte de Madrid que usamos está en `data/interim/serpavi_madrid_*.csv`, y la dirección de descarga, en `data/raw/serpavi_mivau/metadata.json`.
 - Qué es cada columna: [data/DICCIONARIO.md](data/DICCIONARIO.md). Calidad de los datos según MELODA 5: [data/MELODA.md](data/MELODA.md). Normativa y documentos oficiales: [docs_oficiales/FUENTES.md](docs_oficiales/FUENTES.md).

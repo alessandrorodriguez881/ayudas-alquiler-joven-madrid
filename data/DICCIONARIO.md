@@ -23,3 +23,17 @@ Una fila por municipio del CSV del Bono Alquiler Joven 2022 (159). La genera `sc
 | `alq_medio_portal_2023` | Alquiler medio mensual de viviendas habituales, solo municipios de más de 20.000 habitantes (€) | `alquiler_medio_mensual_…_mas_20000` |
 
 **Cobertura (2-nov):** SERPAVI 2022 en 133 de 159; paro en 159; hogares en 158; alquiler del portal en 37. Con todas las variables del modelo M1: **132 municipios** (48.298 de 48.383 solicitudes).
+
+# Diccionario de `data/interim/topes_900_convocatorias.csv` (6-nov)
+Una fila por municipio de la Comunidad (179). Sale de `scripts/topes_convocatorias.py`, que lee la lista de municipios con tope de 900 € en el texto oficial de cada convocatoria (ver `docs_oficiales/FUENTES.md`).
+
+| Columna | Qué es | Fuente |
+|---|---|---|
+| `ine`, `ine5`, `nombre_estadistica_cm` | Código INE (3 y 5 cifras) y nombre oficial | `codigos_municipios.csv` |
+| `tope_bono_2022` | Tope del Bono Alquiler Joven 2022: 900 en los 29 del Anexo II, 600 en el resto (€/mes, vivienda) | Acuerdo de 14-sep-2022 |
+| `tope_ayudas_2022`, `tope_ayudas_2023` | Tope de las Ayudas al alquiler (programa de jóvenes) de 2022 y 2023: la misma lista de 29 | Anexo I de las convocatorias (BDNS 654786 y 721190) |
+| `tope_ayudas_2024`, `tope_ayudas_2025` | Lo mismo en 2024 y 2025: **55 municipios** con 900 € | Anexo I (BDNS 793423 y 864406) |
+| `tope_bono_2024` | Tope del Bono Alquiler Joven 2024 (solicitudes desde el 3-feb-2025): los mismos 55 | Anexo II del Acuerdo de 26-dic-2024 (certificado en BDNS 805618) |
+| `sube_a_900_en_2024` | `True` en los **26 municipios** que pasan de 600 a 900 € entre 2023 y 2024 | calculado |
+
+Las familias numerosas tienen 900 € en todos los municipios en las Ayudas al alquiler; esta tabla recoge el tope general.

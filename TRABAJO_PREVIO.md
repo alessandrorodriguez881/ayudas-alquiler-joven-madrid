@@ -16,9 +16,9 @@ Fuente: `docs_oficiales/BASES_DATAMAD_2026.pdf` (descargado el 27-oct de [la web
 > - descargar los datos abiertos y unirlos en una tabla por municipio
 > - comprobar que la hipótesis se podía probar
 > - dejar escrito y probado con datos inventados el contraste estadístico, antes de verlo con los datos reales (`PREREGISTRO.md`)
-> - preparar los datos para que otros los reutilicen: tabla de códigos de municipio entre fuentes, comprobación de las descargas y nota MELODA de cada dataset
+> - preparar los datos para que otros los reutilicen: tabla de códigos de municipio entre fuentes, comprobación de las descargas, nota MELODA de cada dataset y la lista oficial de municipios con tope de 900 € en cada convocatoria (2022-2025)
 >
-> Scripts de esa fase: `descargar.py`, `explorar.py`, `viabilidad.py`, `hipotesis_tope.py`, `comun.py`, `preparar_datos.py`, `contraste.py`, `codigos_municipios.py`, `verificar_descargas.py` y `meloda.py`. El historial del repositorio (desde el 6-nov) lo muestra con fechas.
+> Scripts de esa fase: `descargar.py`, `explorar.py`, `viabilidad.py`, `hipotesis_tope.py`, `comun.py`, `preparar_datos.py`, `contraste.py`, `codigos_municipios.py`, `verificar_descargas.py`, `meloda.py` y `topes_convocatorias.py`. El historial del repositorio (desde el 6-nov) lo muestra con fechas.
 >
 > El contraste con datos reales, los índices, el mapa, el simulador, la app y la presentación se hicieron entre el 7 y el 26 de noviembre. Usamos IA (Claude, de Anthropic) para buscar fuentes y escribir código y documentos; revisamos y entendemos cada resultado.
 
@@ -45,6 +45,8 @@ Fuente: `docs_oficiales/BASES_DATAMAD_2026.pdf` (descargado el 27-oct de [la web
 | 5-nov-2026 | **Verificación de todas las descargas** frente al portal (filas de la API y contenido). Descubre que el portal pasó de Latin-1 a UTF-8: los scripts ahora leen las dos codificaciones, y las tablas salen idénticas byte a byte | `scripts/verificar_descargas.py`, `scripts/comun.py`, `data/VERIFICACION.md` |
 | 5-nov-2026 | Nota MELODA 5 de los 15 datasets del portal (spain.meloda.org) | `scripts/meloda.py`, `data/MELODA.md` |
 | 6-nov-2026 | Repositorio privado en GitHub con todo el trabajo previo (primer commit `f20f196`), README, licencia MIT y `requirements.txt`. La tabla de municipios se regenera idéntica (MD5 `f4b7b1c4…`). El contraste real sigue sin ejecutar | [repositorio](https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid), `README.md` |
+| 6-nov-2026 | **Topes de cada convocatoria** sacados de los textos oficiales de la BDNS: 29 municipios con 900 € en el Bono 2022 y en las Ayudas 2022-2023; **55** en las Ayudas 2024-2025 y en el Bono 2024 (26 pasan de 600 a 900 €). Corrige una nota del 5-nov: el Anexo II del Bono 2024 sí estaba en la BDNS | `scripts/topes_convocatorias.py`, `data/interim/topes_900_convocatorias.csv`, `docs_oficiales/FUENTES.md` |
+| 6-nov-2026 | Datos nuevos del portal en una carpeta aparte (renta e IRPF de 2024, paro hasta 2026), sin tocar la copia congelada del contraste; y el dataset de la bolsa de vivienda joven (solo contexto) | `scripts/descargar.py --destino`, `data/raw_2026-11-06/`, `data/raw/1914500/` |
 
 ## Datos reunidos
 Todos son datos abiertos oficiales, cada uno en su carpeta de `data/raw/` con su `metadata.json` (título, licencia, fecha y enlace).

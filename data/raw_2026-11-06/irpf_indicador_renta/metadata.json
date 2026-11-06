@@ -1,0 +1,26 @@
+{
+  "name": "irpf_indicador_renta",
+  "title": "Indicador de Renta Disponible Bruta Municipal. Municipios",
+  "notes": "\"-\" Dato protegido por secreto estadístico.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-11-05T17:31:25.926495",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/irpf_indicador_renta",
+  "resources": [
+    {
+      "name": "Indicador de Renta Disponible Bruta Municipal.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/1715068e-0527-4632-aba1-37da355b346f/resource/fc9d4336-3c4a-4dd3-8f8f-dac0a4e29033/download/indicador-de-renta-disponible-bruta-municipal.-municipios.csv",
+      "size": 392354,
+      "last_modified": "2026-11-05T17:31:24.961976"
+    },
+    {
+      "name": "Indicador de Renta Disponible Bruta Municipal. Municipios.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/1715068e-0527-4632-aba1-37da355b346f/resource/8cff9569-2cc0-438e-af6b-ad0487874ff8/download/indicador-de-renta-disponible-bruta-municipal.-municipios.json",
+      "size": 1160157,
+      "last_modified": "2026-11-05T17:31:25.917157"
+    }
+  ]
+}
