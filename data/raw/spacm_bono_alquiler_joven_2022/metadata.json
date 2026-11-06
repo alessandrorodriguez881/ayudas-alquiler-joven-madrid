@@ -1,0 +1,26 @@
+{
+  "name": "spacm_bono_alquiler_joven_2022",
+  "title": "Bono Alquiler Joven (2022)",
+  "notes": "Subvenciones destinadas a contribuir al pago del alquiler de la vivienda habitual o al precio de cesión de la vivienda o habitación para los jóvenes con escasos medios económicos, en aplicación del Acuerdo del Consejo de Gobierno de 14 de septiembre de 2022, por el que se autoriza la concesión directa de las subvenciones del Bono Alquiler Joven reguladas en el Real Decreto 42/2022, de 18 de enero, y se autoriza el procedimiento aplicable para la tramitación y resolución de los procedimientos de su concesión y pago en la Comunidad de Madrid (BOCM nº 224 de 20 de septiembre).\nLas solicitudes detalladas en la última fila del listado responden a solicitudes correspondientes a solicitantes que en lugar de aportar un contrato de alquiler de un inmueble localizado en un municipio concreto, expresaron que estaban en condiciones de suscribir un contrato de arrendamiento, pero que finalmente no llegaron a presentarlo.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-02-03T14:41:53.331223",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/spacm_bono_alquiler_joven_2022",
+  "resources": [
+    {
+      "name": "Bono Alquiler Joven (2022)",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/ff697366-36f4-41a1-a966-f5ccf3b6db7c/resource/6fbda6ce-b479-4319-83c6-0b977d3fa8d5/download/spacm_bono_alquiler_joven_2022.csv",
+      "size": 4623,
+      "last_modified": "2026-02-03T14:41:50.735840"
+    },
+    {
+      "name": "Bono Alquiler Joven (2022)",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/ff697366-36f4-41a1-a966-f5ccf3b6db7c/resource/8714060d-412a-474f-a0db-248b58758581/download/spacm_bono_alquiler_joven_2022.json",
+      "size": 25575,
+      "last_modified": "2026-02-03T14:41:51.441139"
+    }
+  ]
+}

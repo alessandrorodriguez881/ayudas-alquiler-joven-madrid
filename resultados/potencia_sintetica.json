@@ -1,0 +1,104 @@
+{
+ "dry_run": {
+  "n_municipalities": 132,
+  "by_cap": {
+   "600": 103,
+   "900": 29
+  },
+  "H1": {
+   "beta": -0.8957567509862778,
+   "ci95": [
+    -1.4314330014278838,
+    -0.3600805005446718
+   ],
+   "pct_per_10_points": -8.56809286796858,
+   "p_perm": 0.01,
+   "beta_without_madrid": -0.6735128258685511,
+   "H1_confirmed": true
+  },
+  "H2": {
+   "rent_range": [
+    580.0,
+    766.5489642184557
+   ],
+   "n": {
+    "600": 24,
+    "900": 18
+   },
+   "rate_ratio_cap600": 0.659963710076194,
+   "ci95": [
+    0.4971693582187076,
+    0.8760638430696143
+   ]
+  },
+  "R1_ayudas51": {
+   "beta": -1.3050857735645436,
+   "ci95": [
+    -1.8654867756948454,
+    -0.7446847714342416
+   ]
+  },
+  "fake_caps_deviance": {
+   "real_cap": 1580.8004844023437,
+   "uniform_600": 1733.4130279914518,
+   "uniform_900": 1732.0138163265378
+  },
+  "robustness_beta": {
+   "negative_binomial": -0.8951073216530746,
+   "per_rented_household": -0.7548103067025281,
+   "serpavi_2023": -0.7301740152901013,
+   "portal_rent_over_20k": {
+    "n": 37,
+    "beta": -0.6561097620086045
+   },
+   "young_at_least_1000": {
+    "n": 74,
+    "beta": -0.9048742952652309
+   }
+  }
+ },
+ "power": [
+  {
+   "noise_sd": 0.2,
+   "planted_beta": 0.0,
+   "pct_per_10_points": 0.0,
+   "H1_confirmed_share": 0.1,
+   "mean_beta_recovered": -0.0528878528337194
+  },
+  {
+   "noise_sd": 0.2,
+   "planted_beta": -0.5,
+   "pct_per_10_points": -4.9,
+   "H1_confirmed_share": 0.74,
+   "mean_beta_recovered": -0.5441117394081436
+  },
+  {
+   "noise_sd": 0.2,
+   "planted_beta": -1.1,
+   "pct_per_10_points": -10.4,
+   "H1_confirmed_share": 1.0,
+   "mean_beta_recovered": -1.1156135332356372
+  },
+  {
+   "noise_sd": 0.4,
+   "planted_beta": 0.0,
+   "pct_per_10_points": 0.0,
+   "H1_confirmed_share": 0.08,
+   "mean_beta_recovered": -0.09219163990717219
+  },
+  {
+   "noise_sd": 0.4,
+   "planted_beta": -0.5,
+   "pct_per_10_points": -4.9,
+   "H1_confirmed_share": 0.27,
+   "mean_beta_recovered": -0.45350545287050237
+  },
+  {
+   "noise_sd": 0.4,
+   "planted_beta": -1.1,
+   "pct_per_10_points": -10.4,
+   "H1_confirmed_share": 0.71,
+   "mean_beta_recovered": -1.081427054599991
+  }
+ ]
+}

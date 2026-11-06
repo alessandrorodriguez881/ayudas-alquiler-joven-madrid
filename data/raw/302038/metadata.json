@@ -1,0 +1,26 @@
+{
+  "name": "302038",
+  "title": "Total paro registrado. Municipios",
+  "notes": "Los datos corresponden a paro registrado a 31 de marzo de cada año.\n\nParo registrado: Demandas de empleo pendientes de satisfacer el último día del mes presentadas en la oficina correspondiente a su domicilio, excepto las que se encuentran en determinadas situaciones.\n\nDebido a las medidas tomadas para combatir el COVID-19 los datos de paro registrado para el año 2020 ,pueden no estar reflejando al completo las variaciones registradas, lo que aconsejamos tener en cuenta en su valoración.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-18T16:31:36.907315",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/302038",
+  "resources": [
+    {
+      "name": "Total paro registrado.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/4190d0f7-b832-4521-a3cb-854395309bcd/resource/4fe02826-b3c2-428b-ad5d-9243c2e49718/download/total-paro-registrado.-municipios.csv",
+      "size": 200936,
+      "last_modified": "2026-08-18T16:31:36.459917"
+    },
+    {
+      "name": "Total paro registrado. Municipios.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/4190d0f7-b832-4521-a3cb-854395309bcd/resource/914a69ed-9a47-4543-8fea-881f0abd2f25/download/total-paro-registrado.-municipios.json",
+      "size": 691284,
+      "last_modified": "2026-08-18T16:31:36.899391"
+    }
+  ]
+}

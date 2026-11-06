@@ -1,0 +1,546 @@
+programa;año_convocatoria;municipio_nombre;municipio;solicitudes;aceptadas;rechazadas
+2.0;2022;Ajalvir;002;7;0;7
+2.0;2022;Álamo, El;004;19;8;11
+2.0;2022;Alcalá de Henares;005;131;33;98
+2.0;2022;Alcobendas;006;149;51;98
+2.0;2022;Alcorcón;007;245;58;187
+2.0;2022;Aldea del Fresno;008;11;2;9
+2.0;2022;Algete;009;17;4;13
+2.0;2022;Alpedrete;010;12;5;7
+2.0;2022;Ambite;011;1;0;1
+2.0;2022;Anchuelo;012;1;0;1
+2.0;2022;Aranjuez;013;268;64;204
+2.0;2022;Arganda del Rey;014;75;17;58
+2.0;2022;Arroyomolinos;015;9;2;7
+2.0;2022;Becerril de la Sierra;018;21;6;15
+2.0;2022;Berrueco, El;021;1;0;1
+2.0;2022;Boadilla del Monte;022;8;2;6
+2.0;2022;Boalo, El;023;15;3;12
+2.0;2022;Brunete;026;29;8;21
+2.0;2022;Buitrago del Lozoya;027;2;0;2
+2.0;2022;Bustarviejo;028;7;1;6
+2.0;2022;Cabanillas de la Sierra;029;4;2;2
+2.0;2022;Cabrera, La;030;5;3;2
+2.0;2022;Cadalso de los Vidrios;031;6;0;6
+2.0;2022;Camarma de Esteruelas;032;9;2;7
+2.0;2022;Campo Real;033;5;0;5
+2.0;2022;Canencia;034;1;1;0
+2.0;2022;Carabaña;035;2;1;1
+2.0;2022;Casarrubuelos;036;6;2;4
+2.0;2022;Cercedilla;038;13;8;5
+2.0;2022;Ciempozuelos;040;81;14;67
+2.0;2022;Cobeña;041;3;0;3
+2.0;2022;Colmenar del Arroyo;042;6;3;3
+2.0;2022;Colmenar de Oreja;043;6;2;4
+2.0;2022;Colmenarejo;044;15;4;11
+2.0;2022;Colmenar Viejo;045;81;19;62
+2.0;2022;Collado Mediano;046;34;8;26
+2.0;2022;Collado Villalba;047;124;26;98
+2.0;2022;Corpa;048;2;1;1
+2.0;2022;Coslada;049;34;5;29
+2.0;2022;Cubas de la Sagra;050;3;0;3
+2.0;2022;Chapinería;051;4;1;3
+2.0;2022;Chinchón;052;9;3;6
+2.0;2022;Daganzo de Arriba;053;14;3;11
+2.0;2022;Escorial, El;054;24;4;20
+2.0;2022;Fresnedillas de la Oliva;056;3;0;3
+2.0;2022;Fuenlabrada;058;346;89;257
+2.0;2022;Fuente el Saz de Jarama;059;7;3;4
+2.0;2022;Fuentidueña de Tajo;060;1;1;0
+2.0;2022;Galapagar;061;84;28;56
+2.0;2022;Gargantilla del Lozoya y Pinilla de Buitrago;063;2;1;1
+2.0;2022;Getafe;065;284;72;212
+2.0;2022;Griñón;066;8;2;6
+2.0;2022;Guadalix de la Sierra;067;42;7;35
+2.0;2022;Guadarrama;068;13;3;10
+2.0;2022;Hoyo de Manzanares;072;8;1;7
+2.0;2022;Humanes de Madrid;073;62;17;45
+2.0;2022;Leganés;074;276;63;213
+2.0;2022;Loeches;075;15;2;13
+2.0;2022;Lozoya;076;3;2;1
+2.0;2022;Madrid;079;2516;709;1807
+2.0;2022;Majadahonda;080;50;9;41
+2.0;2022;Manzanares el Real;082;24;13;11
+2.0;2022;Meco;083;15;4;11
+2.0;2022;Mejorada del Campo;084;12;3;9
+2.0;2022;Miraflores de la Sierra;085;20;7;13
+2.0;2022;Molar, El;086;14;2;12
+2.0;2022;Molinos, Los;087;7;0;7
+2.0;2022;Montejo de la Sierra;088;1;0;1
+2.0;2022;Moraleja de Enmedio;089;5;2;3
+2.0;2022;Moralzarzal;090;14;0;14
+2.0;2022;Morata de Tajuña;091;9;3;6
+2.0;2022;Móstoles;092;287;63;224
+2.0;2022;Navacerrada;093;16;4;12
+2.0;2022;Navalafuente;094;9;4;5
+2.0;2022;Navalagamella;095;7;2;5
+2.0;2022;Navalcarnero;096;132;33;99
+2.0;2022;Navas del Rey;099;18;5;13
+2.0;2022;Nuevo Baztán;100;1;0;1
+2.0;2022;Orusco de Tajuña;102;3;1;2
+2.0;2022;Paracuellos de Jarama;104;35;4;31
+2.0;2022;Parla;106;187;45;142
+2.0;2022;Pedrezuela;108;8;3;5
+2.0;2022;Pelayos de la Presa;109;6;2;4
+2.0;2022;Perales de Tajuña;110;9;5;4
+2.0;2022;Pinto;113;54;10;44
+2.0;2022;Pozuelo de Alarcón;115;37;13;24
+2.0;2022;Pozuelo del Rey;116;1;0;1
+2.0;2022;Quijorna;119;1;0;1
+2.0;2022;Rascafría;120;2;0;2
+2.0;2022;Rivas-Vaciamadrid;123;25;4;21
+2.0;2022;Robledo de Chavela;125;11;3;8
+2.0;2022;Rozas de Madrid, Las;127;96;18;78
+2.0;2022;San Agustín del Guadalix;129;12;2;10
+2.0;2022;San Fernando de Henares;130;21;2;19
+2.0;2022;San Lorenzo de El Escorial;131;41;13;28
+2.0;2022;San Martín de la Vega;132;31;8;23
+2.0;2022;San Martín de Valdeiglesias;133;28;9;19
+2.0;2022;San Sebastián de los Reyes;134;87;26;61
+2.0;2022;Santa María de la Alameda;135;8;4;4
+2.0;2022;Santorcaz;136;1;1;0
+2.0;2022;Sevilla la Nueva;141;28;7;21
+2.0;2022;Soto del Real;144;14;5;9
+2.0;2022;Talamanca de Jarama;145;4;1;3
+2.0;2022;Tielmes;146;6;1;5
+2.0;2022;Titulcia;147;1;0;1
+2.0;2022;Torrejón de Ardoz;148;157;28;129
+2.0;2022;Torrejón de la Calzada;149;5;1;4
+2.0;2022;Torrejón de Velasco;150;4;0;4
+2.0;2022;Torrelaguna;151;8;4;4
+2.0;2022;Torrelodones;152;8;0;8
+2.0;2022;Torres de la Alameda;154;20;4;16
+2.0;2022;Valdeavero;156;2;1;1
+2.0;2022;Valdemanco;158;1;0;1
+2.0;2022;Valdemaqueda;159;3;2;1
+2.0;2022;Valdemorillo;160;50;11;39
+2.0;2022;Valdemoro;161;90;22;68
+2.0;2022;Valdeolmos-Alalpardo;162;2;0;2
+2.0;2022;Valdetorres de Jarama;164;8;2;6
+2.0;2022;Valdilecha;165;3;0;3
+2.0;2022;Valverde de Alcalá;166;2;1;1
+2.0;2022;Velilla de San Antonio;167;5;1;4
+2.0;2022;Vellón, El;168;10;3;7
+2.0;2022;Villaconejos;170;6;1;5
+2.0;2022;Villa del Prado;171;43;5;38
+2.0;2022;Villalbilla;172;3;1;2
+2.0;2022;Villamanta;174;9;4;5
+2.0;2022;Villamantilla;175;5;1;4
+2.0;2022;Villanueva de la Cañada;176;15;3;12
+2.0;2022;Villanueva del Pardillo;177;17;1;16
+2.0;2022;Villanueva de Perales;178;1;0;1
+2.0;2022;Villar del Olmo;179;3;1;2
+2.0;2022;Villarejo de Salvanés;180;6;0;6
+2.0;2022;Villaviciosa de Odón;181;8;3;5
+2.0;2022;Zarzalejo;183;22;6;16
+2.0;2022;Lozoyuela-Navas-Sieteiglesias;901;3;0;3
+2.0;2022;Tres Cantos;903;8;0;8
+2.0;2022;Otro;-;0;0;0
+5.1;2022;Ajalvir;002;6;1;5
+5.1;2022;Álamo, El;004;10;6;4
+5.1;2022;Alcalá de Henares;005;180;52;128
+5.1;2022;Alcobendas;006;87;24;63
+5.1;2022;Alcorcón;007;171;44;127
+5.1;2022;Aldea del Fresno;008;4;3;1
+5.1;2022;Algete;009;5;1;4
+5.1;2022;Alpedrete;010;14;6;8
+5.1;2022;Aranjuez;013;72;35;37
+5.1;2022;Arganda del Rey;014;53;18;35
+5.1;2022;Arroyomolinos;015;19;5;14
+5.1;2022;Becerril de la Sierra;018;8;4;4
+5.1;2022;Belmonte de Tajo;019;3;1;2
+5.1;2022;Boadilla del Monte;022;8;2;6
+5.1;2022;Boalo, El;023;2;1;1
+5.1;2022;Brea de Tajo;025;1;0;1
+5.1;2022;Brunete;026;6;2;4
+5.1;2022;Buitrago del Lozoya;027;1;0;1
+5.1;2022;Bustarviejo;028;4;2;2
+5.1;2022;Cabanillas de la Sierra;029;1;0;1
+5.1;2022;Cabrera, La;030;1;0;1
+5.1;2022;Cadalso de los Vidrios;031;4;1;3
+5.1;2022;Camarma de Esteruelas;032;7;1;6
+5.1;2022;Campo Real;033;13;4;9
+5.1;2022;Carabaña;035;2;0;2
+5.1;2022;Casarrubuelos;036;6;4;2
+5.1;2022;Cenicientos;037;1;1;0
+5.1;2022;Cercedilla;038;8;5;3
+5.1;2022;Ciempozuelos;040;25;9;16
+5.1;2022;Cobeña;041;2;0;2
+5.1;2022;Colmenar del Arroyo;042;2;0;2
+5.1;2022;Colmenar de Oreja;043;4;2;2
+5.1;2022;Colmenarejo;044;6;1;5
+5.1;2022;Colmenar Viejo;045;51;11;40
+5.1;2022;Collado Mediano;046;13;8;5
+5.1;2022;Collado Villalba;047;88;27;61
+5.1;2022;Coslada;049;29;5;24
+5.1;2022;Chinchón;052;5;1;4
+5.1;2022;Daganzo de Arriba;053;1;0;1
+5.1;2022;Escorial, El;054;19;6;13
+5.1;2022;Fresnedillas de la Oliva;056;1;0;1
+5.1;2022;Fuenlabrada;058;91;32;59
+5.1;2022;Fuente el Saz de Jarama;059;3;1;2
+5.1;2022;Fuentidueña de Tajo;060;1;0;1
+5.1;2022;Galapagar;061;38;12;26
+5.1;2022;Garganta de los Montes;062;1;0;1
+5.1;2022;Gascones;064;1;0;1
+5.1;2022;Getafe;065;186;54;132
+5.1;2022;Griñón;066;3;1;2
+5.1;2022;Guadalix de la Sierra;067;3;2;1
+5.1;2022;Guadarrama;068;12;3;9
+5.1;2022;Humanes de Madrid;073;28;13;15
+5.1;2022;Leganés;074;152;51;101
+5.1;2022;Loeches;075;3;2;1
+5.1;2022;Lozoya;076;2;0;2
+5.1;2022;Madrid;079;4083;1281;2802
+5.1;2022;Majadahonda;080;25;9;16
+5.1;2022;Manzanares el Real;082;7;5;2
+5.1;2022;Meco;083;8;2;6
+5.1;2022;Mejorada del Campo;084;14;8;6
+5.1;2022;Miraflores de la Sierra;085;2;1;1
+5.1;2022;Molar, El;086;3;1;2
+5.1;2022;Molinos, Los;087;1;0;1
+5.1;2022;Montejo de la Sierra;088;1;1;0
+5.1;2022;Moraleja de Enmedio;089;3;1;2
+5.1;2022;Moralzarzal;090;3;1;2
+5.1;2022;Morata de Tajuña;091;4;3;1
+5.1;2022;Móstoles;092;185;57;128
+5.1;2022;Navacerrada;093;6;1;5
+5.1;2022;Navalafuente;094;2;0;2
+5.1;2022;Navalagamella;095;3;2;1
+5.1;2022;Navalcarnero;096;30;14;16
+5.1;2022;Navas del Rey;099;4;4;0
+5.1;2022;Paracuellos de Jarama;104;6;2;4
+5.1;2022;Parla;106;103;25;78
+5.1;2022;Pedrezuela;108;7;3;4
+5.1;2022;Perales de Tajuña;110;1;0;1
+5.1;2022;Pinto;113;85;24;61
+5.1;2022;Pozuelo de Alarcón;115;37;14;23
+5.1;2022;Pozuelo del Rey;116;1;0;1
+5.1;2022;Quijorna;119;1;0;1
+5.1;2022;Rascafría;120;2;1;1
+5.1;2022;Redueña;121;1;0;1
+5.1;2022;Rivas-Vaciamadrid;123;52;13;39
+5.1;2022;Robledo de Chavela;125;4;2;2
+5.1;2022;Rozas de Madrid, Las;127;64;17;47
+5.1;2022;San Agustín del Guadalix;129;8;0;8
+5.1;2022;San Fernando de Henares;130;23;6;17
+5.1;2022;San Lorenzo de El Escorial;131;16;6;10
+5.1;2022;San Martín de la Vega;132;20;3;17
+5.1;2022;San Martín de Valdeiglesias;133;5;2;3
+5.1;2022;San Sebastián de los Reyes;134;97;19;78
+5.1;2022;Santa María de la Alameda;135;3;2;1
+5.1;2022;Serranillos del Valle;140;1;1;0
+5.1;2022;Sevilla la Nueva;141;9;5;4
+5.1;2022;Soto del Real;144;7;3;4
+5.1;2022;Talamanca de Jarama;145;5;0;5
+5.1;2022;Tielmes;146;2;1;1
+5.1;2022;Torrejón de Ardoz;148;132;26;106
+5.1;2022;Torrejón de la Calzada;149;1;0;1
+5.1;2022;Torrejón de Velasco;150;1;1;0
+5.1;2022;Torrelaguna;151;2;1;1
+5.1;2022;Torrelodones;152;12;7;5
+5.1;2022;Torres de la Alameda;154;5;3;2
+5.1;2022;Valdeavero;156;4;0;4
+5.1;2022;Valdelaguna;157;2;2;0
+5.1;2022;Valdemaqueda;159;2;1;1
+5.1;2022;Valdemorillo;160;7;4;3
+5.1;2022;Valdemoro;161;69;16;53
+5.1;2022;Valdeolmos-Alalpardo;162;5;1;4
+5.1;2022;Valdetorres de Jarama;164;1;0;1
+5.1;2022;Valdilecha;165;1;0;1
+5.1;2022;Velilla de San Antonio;167;8;3;5
+5.1;2022;Vellón, El;168;3;1;2
+5.1;2022;Venturada;169;1;0;1
+5.1;2022;Villaconejos;170;3;2;1
+5.1;2022;Villa del Prado;171;8;6;2
+5.1;2022;Villalbilla;172;8;2;6
+5.1;2022;Villamanta;174;6;4;2
+5.1;2022;Villamantilla;175;2;0;2
+5.1;2022;Villanueva de la Cañada;176;17;8;9
+5.1;2022;Villanueva del Pardillo;177;4;2;2
+5.1;2022;Villarejo de Salvanés;180;3;2;1
+5.1;2022;Villaviciosa de Odón;181;8;2;6
+5.1;2022;Villavieja del Lozoya;182;1;1;0
+5.1;2022;Zarzalejo;183;4;3;1
+5.1;2022;Tres Cantos;903;48;11;37
+5.1;2022;Otro;-;42;0;42
+2.0;2023;Ajalvir;002;7;4;3
+2.0;2023;Álamo, El;004;59;26;33
+2.0;2023;Alcalá de Henares;005;198;81;117
+2.0;2023;Alcobendas;006;187;68;119
+2.0;2023;Alcorcón;007;177;84;93
+2.0;2023;Aldea del Fresno;008;10;4;6
+2.0;2023;Algete;009;19;8;11
+2.0;2023;Alpedrete;010;20;5;15
+2.0;2023;Aranjuez;013;244;110;134
+2.0;2023;Arganda del Rey;014;95;37;58
+2.0;2023;Arroyomolinos;015;13;8;5
+2.0;2023;Becerril de la Sierra;018;21;9;12
+2.0;2023;Belmonte de Tajo;019;3;0;3
+2.0;2023;Berrueco, El;021;4;1;3
+2.0;2023;Boadilla del Monte;022;8;3;5
+2.0;2023;Boalo, El;023;13;6;7
+2.0;2023;Brunete;026;22;8;14
+2.0;2023;Buitrago del Lozoya;027;5;0;5
+2.0;2023;Bustarviejo;028;6;3;3
+2.0;2023;Cabanillas de la Sierra;029;2;2;0
+2.0;2023;Cabrera, La;030;7;3;4
+2.0;2023;Cadalso de los Vidrios;031;4;2;2
+2.0;2023;Camarma de Esteruelas;032;13;3;10
+2.0;2023;Campo Real;033;9;4;5
+2.0;2023;Carabaña;035;5;3;2
+2.0;2023;Casarrubuelos;036;3;0;3
+2.0;2023;Cenicientos;037;2;1;1
+2.0;2023;Cercedilla;038;14;8;6
+2.0;2023;Cervera de Buitrago;039;1;0;1
+2.0;2023;Ciempozuelos;040;83;27;56
+2.0;2023;Cobeña;041;4;0;4
+2.0;2023;Colmenar del Arroyo;042;9;2;7
+2.0;2023;Colmenar de Oreja;043;6;2;4
+2.0;2023;Colmenarejo;044;15;7;8
+2.0;2023;Colmenar Viejo;045;104;32;72
+2.0;2023;Collado Mediano;046;35;10;25
+2.0;2023;Collado Villalba;047;119;47;72
+2.0;2023;Corpa;048;2;1;1
+2.0;2023;Coslada;049;41;13;28
+2.0;2023;Cubas de la Sagra;050;2;0;2
+2.0;2023;Chapinería;051;5;2;3
+2.0;2023;Chinchón;052;8;3;5
+2.0;2023;Daganzo de Arriba;053;16;9;7
+2.0;2023;Escorial, El;054;27;14;13
+2.0;2023;Fresnedillas de la Oliva;056;13;6;7
+2.0;2023;Fuenlabrada;058;320;158;162
+2.0;2023;Fuente el Saz de Jarama;059;10;4;6
+2.0;2023;Fuentidueña de Tajo;060;2;2;0
+2.0;2023;Galapagar;061;101;42;59
+2.0;2023;Garganta de los Montes;062;2;1;1
+2.0;2023;Gargantilla del Lozoya y Pinilla de Buitrago;063;2;0;2
+2.0;2023;Getafe;065;346;135;211
+2.0;2023;Griñón;066;12;4;8
+2.0;2023;Guadalix de la Sierra;067;38;13;25
+2.0;2023;Guadarrama;068;18;6;12
+2.0;2023;Hoyo de Manzanares;072;9;1;8
+2.0;2023;Humanes de Madrid;073;53;26;27
+2.0;2023;Leganés;074;325;136;189
+2.0;2023;Loeches;075;19;10;9
+2.0;2023;Lozoya;076;2;2;0
+2.0;2023;Madrid;079;3093;1390;1703
+2.0;2023;Majadahonda;080;48;17;31
+2.0;2023;Manzanares el Real;082;24;15;9
+2.0;2023;Meco;083;11;5;6
+2.0;2023;Mejorada del Campo;084;12;6;6
+2.0;2023;Miraflores de la Sierra;085;21;7;14
+2.0;2023;Molar, El;086;21;11;10
+2.0;2023;Molinos, Los;087;5;0;5
+2.0;2023;Moraleja de Enmedio;089;3;0;3
+2.0;2023;Moralzarzal;090;23;7;16
+2.0;2023;Morata de Tajuña;091;11;3;8
+2.0;2023;Móstoles;092;314;129;185
+2.0;2023;Navacerrada;093;19;6;13
+2.0;2023;Navalafuente;094;9;4;5
+2.0;2023;Navalagamella;095;23;8;15
+2.0;2023;Navalcarnero;096;101;45;56
+2.0;2023;Navas del Rey;099;18;6;12
+2.0;2023;Orusco de Tajuña;102;2;0;2
+2.0;2023;Paracuellos de Jarama;104;16;4;12
+2.0;2023;Parla;106;203;86;117
+2.0;2023;Pedrezuela;108;27;8;19
+2.0;2023;Pelayos de la Presa;109;7;4;3
+2.0;2023;Perales de Tajuña;110;6;4;2
+2.0;2023;Pezuela de las Torres;111;1;0;1
+2.0;2023;Pinilla del Valle;112;2;1;1
+2.0;2023;Pinto;113;57;29;28
+2.0;2023;Pozuelo de Alarcón;115;57;26;31
+2.0;2023;Pozuelo del Rey;116;2;2;0
+2.0;2023;Prádena del Rincón;117;1;1;0
+2.0;2023;Quijorna;119;7;1;6
+2.0;2023;Rascafría;120;6;2;4
+2.0;2023;Redueña;121;1;0;1
+2.0;2023;Rivas-Vaciamadrid;123;55;12;43
+2.0;2023;Robledo de Chavela;125;15;4;11
+2.0;2023;Rozas de Madrid, Las;127;102;34;68
+2.0;2023;Rozas de Puerto Real;128;1;1;0
+2.0;2023;San Agustín del Guadalix;129;9;4;5
+2.0;2023;San Fernando de Henares;130;26;11;15
+2.0;2023;San Lorenzo de El Escorial;131;39;19;20
+2.0;2023;San Martín de la Vega;132;19;8;11
+2.0;2023;San Martín de Valdeiglesias;133;29;14;15
+2.0;2023;San Sebastián de los Reyes;134;114;46;68
+2.0;2023;Santa María de la Alameda;135;5;3;2
+2.0;2023;Santorcaz;136;2;1;1
+2.0;2023;Santos de la Humosa, Los;137;4;2;2
+2.0;2023;Serranillos del Valle;140;3;2;1
+2.0;2023;Sevilla la Nueva;141;24;13;11
+2.0;2023;Soto del Real;144;12;6;6
+2.0;2023;Talamanca de Jarama;145;5;3;2
+2.0;2023;Tielmes;146;4;2;2
+2.0;2023;Torrejón de Ardoz;148;149;63;86
+2.0;2023;Torrejón de la Calzada;149;11;2;9
+2.0;2023;Torrejón de Velasco;150;4;2;2
+2.0;2023;Torrelaguna;151;6;1;5
+2.0;2023;Torrelodones;152;10;2;8
+2.0;2023;Torremocha de Jarama;153;1;0;1
+2.0;2023;Torres de la Alameda;154;13;8;5
+2.0;2023;Valdeavero;156;7;3;4
+2.0;2023;Valdemanco;158;1;0;1
+2.0;2023;Valdemaqueda;159;4;1;3
+2.0;2023;Valdemorillo;160;57;30;27
+2.0;2023;Valdemoro;161;95;33;62
+2.0;2023;Valdeolmos-Alalpardo;162;4;0;4
+2.0;2023;Valdetorres de Jarama;164;4;1;3
+2.0;2023;Valdilecha;165;6;3;3
+2.0;2023;Valverde de Alcalá;166;1;1;0
+2.0;2023;Velilla de San Antonio;167;10;2;8
+2.0;2023;Vellón, El;168;7;3;4
+2.0;2023;Venturada;169;1;1;0
+2.0;2023;Villaconejos;170;3;1;2
+2.0;2023;Villa del Prado;171;27;9;18
+2.0;2023;Villalbilla;172;4;0;4
+2.0;2023;Villamanrique de Tajo;173;1;0;1
+2.0;2023;Villamanta;174;11;7;4
+2.0;2023;Villamantilla;175;5;2;3
+2.0;2023;Villanueva de la Cañada;176;22;3;19
+2.0;2023;Villanueva del Pardillo;177;18;8;10
+2.0;2023;Villar del Olmo;179;5;2;3
+2.0;2023;Villarejo de Salvanés;180;8;5;3
+2.0;2023;Villaviciosa de Odón;181;10;5;5
+2.0;2023;Zarzalejo;183;30;17;13
+2.0;2023;Lozoyuela-Navas-Sieteiglesias;901;4;3;1
+2.0;2023;Tres Cantos;903;28;9;19
+2.0;2023;Otro;-;0;0;0
+5.1;2023;Ajalvir;002;17;2;15
+5.1;2023;Álamo, El;004;18;7;11
+5.1;2023;Alcalá de Henares;005;384;145;239
+5.1;2023;Alcobendas;006;180;52;128
+5.1;2023;Alcorcón;007;221;62;159
+5.1;2023;Aldea del Fresno;008;6;2;4
+5.1;2023;Algete;009;11;4;7
+5.1;2023;Alpedrete;010;22;3;19
+5.1;2023;Anchuelo;012;1;1;0
+5.1;2023;Aranjuez;013;99;40;59
+5.1;2023;Arganda del Rey;014;87;30;57
+5.1;2023;Arroyomolinos;015;25;10;15
+5.1;2023;Becerril de la Sierra;018;11;3;8
+5.1;2023;Belmonte de Tajo;019;5;1;4
+5.1;2023;Berzosa del Lozoya;020;2;0;2
+5.1;2023;Berrueco, El;021;2;0;2
+5.1;2023;Boadilla del Monte;022;7;4;3
+5.1;2023;Boalo, El;023;6;1;5
+5.1;2023;Brunete;026;16;3;13
+5.1;2023;Bustarviejo;028;4;2;2
+5.1;2023;Cabrera, La;030;5;3;2
+5.1;2023;Cadalso de los Vidrios;031;1;0;1
+5.1;2023;Camarma de Esteruelas;032;17;5;12
+5.1;2023;Campo Real;033;11;4;7
+5.1;2023;Carabaña;035;2;2;0
+5.1;2023;Casarrubuelos;036;3;1;2
+5.1;2023;Cercedilla;038;11;6;5
+5.1;2023;Ciempozuelos;040;28;4;24
+5.1;2023;Cobeña;041;5;0;5
+5.1;2023;Colmenar del Arroyo;042;2;0;2
+5.1;2023;Colmenar de Oreja;043;5;3;2
+5.1;2023;Colmenarejo;044;14;2;12
+5.1;2023;Colmenar Viejo;045;76;12;64
+5.1;2023;Collado Mediano;046;13;5;8
+5.1;2023;Collado Villalba;047;163;57;106
+5.1;2023;Corpa;048;2;1;1
+5.1;2023;Coslada;049;84;29;55
+5.1;2023;Cubas de la Sagra;050;3;0;3
+5.1;2023;Chapinería;051;4;2;2
+5.1;2023;Chinchón;052;6;1;5
+5.1;2023;Daganzo de Arriba;053;9;4;5
+5.1;2023;Escorial, El;054;19;8;11
+5.1;2023;Estremera;055;3;0;3
+5.1;2023;Fresnedillas de la Oliva;056;1;0;1
+5.1;2023;Fresno de Torote;057;3;1;2
+5.1;2023;Fuenlabrada;058;216;69;147
+5.1;2023;Fuente el Saz de Jarama;059;5;1;4
+5.1;2023;Fuentidueña de Tajo;060;1;0;1
+5.1;2023;Galapagar;061;60;24;36
+5.1;2023;Garganta de los Montes;062;3;2;1
+5.1;2023;Getafe;065;307;101;206
+5.1;2023;Griñón;066;3;1;2
+5.1;2023;Guadalix de la Sierra;067;9;3;6
+5.1;2023;Guadarrama;068;13;4;9
+5.1;2023;Horcajo de la Sierra-Aoslos;070;1;1;0
+5.1;2023;Hoyo de Manzanares;072;9;1;8
+5.1;2023;Humanes de Madrid;073;31;15;16
+5.1;2023;Leganés;074;293;88;205
+5.1;2023;Loeches;075;6;2;4
+5.1;2023;Lozoya;076;2;1;1
+5.1;2023;Madrid;079;7388;2366;5022
+5.1;2023;Majadahonda;080;39;13;26
+5.1;2023;Manzanares el Real;082;7;3;4
+5.1;2023;Meco;083;13;3;10
+5.1;2023;Mejorada del Campo;084;28;5;23
+5.1;2023;Miraflores de la Sierra;085;7;1;6
+5.1;2023;Molar, El;086;15;4;11
+5.1;2023;Molinos, Los;087;2;2;0
+5.1;2023;Moraleja de Enmedio;089;5;1;4
+5.1;2023;Moralzarzal;090;13;7;6
+5.1;2023;Morata de Tajuña;091;24;9;15
+5.1;2023;Móstoles;092;318;75;243
+5.1;2023;Navacerrada;093;4;1;3
+5.1;2023;Navalafuente;094;6;4;2
+5.1;2023;Navalagamella;095;9;4;5
+5.1;2023;Navalcarnero;096;26;7;19
+5.1;2023;Navas del Rey;099;5;2;3
+5.1;2023;Nuevo Baztán;100;2;1;1
+5.1;2023;Paracuellos de Jarama;104;11;1;10
+5.1;2023;Parla;106;173;65;108
+5.1;2023;Pedrezuela;108;21;9;12
+5.1;2023;Perales de Tajuña;110;8;4;4
+5.1;2023;Pinto;113;126;38;88
+5.1;2023;Pozuelo de Alarcón;115;38;19;19
+5.1;2023;Pozuelo del Rey;116;2;0;2
+5.1;2023;Quijorna;119;4;1;3
+5.1;2023;Rascafría;120;2;2;0
+5.1;2023;Redueña;121;3;1;2
+5.1;2023;Rivas-Vaciamadrid;123;98;22;76
+5.1;2023;Robledo de Chavela;125;8;4;4
+5.1;2023;Rozas de Madrid, Las;127;87;22;65
+5.1;2023;San Agustín del Guadalix;129;6;1;5
+5.1;2023;San Fernando de Henares;130;47;10;37
+5.1;2023;San Lorenzo de El Escorial;131;34;11;23
+5.1;2023;San Martín de la Vega;132;17;5;12
+5.1;2023;San Martín de Valdeiglesias;133;6;2;4
+5.1;2023;San Sebastián de los Reyes;134;166;51;115
+5.1;2023;Santa María de la Alameda;135;2;0;2
+5.1;2023;Santorcaz;136;2;0;2
+5.1;2023;Santos de la Humosa, Los;137;1;1;0
+5.1;2023;Serranillos del Valle;140;2;2;0
+5.1;2023;Sevilla la Nueva;141;9;5;4
+5.1;2023;Soto del Real;144;10;3;7
+5.1;2023;Talamanca de Jarama;145;8;2;6
+5.1;2023;Tielmes;146;5;3;2
+5.1;2023;Torrejón de Ardoz;148;239;54;185
+5.1;2023;Torrejón de la Calzada;149;6;1;5
+5.1;2023;Torrejón de Velasco;150;3;1;2
+5.1;2023;Torrelaguna;151;5;4;1
+5.1;2023;Torrelodones;152;16;6;10
+5.1;2023;Torres de la Alameda;154;7;1;6
+5.1;2023;Valdeavero;156;3;0;3
+5.1;2023;Valdelaguna;157;2;2;0
+5.1;2023;Valdemaqueda;159;2;0;2
+5.1;2023;Valdemorillo;160;16;6;10
+5.1;2023;Valdemoro;161;135;37;98
+5.1;2023;Valdeolmos-Alalpardo;162;4;1;3
+5.1;2023;Valdetorres de Jarama;164;3;1;2
+5.1;2023;Valdilecha;165;6;3;3
+5.1;2023;Velilla de San Antonio;167;7;2;5
+5.1;2023;Vellón, El;168;3;0;3
+5.1;2023;Venturada;169;1;0;1
+5.1;2023;Villaconejos;170;5;2;3
+5.1;2023;Villa del Prado;171;11;6;5
+5.1;2023;Villalbilla;172;17;2;15
+5.1;2023;Villamanta;174;6;2;4
+5.1;2023;Villamantilla;175;3;1;2
+5.1;2023;Villanueva de la Cañada;176;18;5;13
+5.1;2023;Villanueva del Pardillo;177;20;9;11
+5.1;2023;Villanueva de Perales;178;1;1;0
+5.1;2023;Villarejo de Salvanés;180;5;2;3
+5.1;2023;Villaviciosa de Odón;181;18;5;13
+5.1;2023;Zarzalejo;183;7;5;2
+5.1;2023;Lozoyuela-Navas-Sieteiglesias;901;1;0;1
+5.1;2023;Tres Cantos;903;69;16;53
+5.1;2023;Otro;-;4;0;4

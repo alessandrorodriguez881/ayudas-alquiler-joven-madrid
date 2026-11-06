@@ -1,0 +1,26 @@
+{
+  "name": "irpf_declaraciones_por_tramo",
+  "title": "Declaraciones del IRPF por tramo base imponible. Municipios",
+  "notes": "IRPF:Impuesto sobre la Renta de las Personas Físicas\n\nEn Rascafría se incluyen los datos de Oteruelo del Valle siempre y cuando no estén protegidos por secreto estadístico.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:27:42.761577",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/irpf_declaraciones_por_tramo",
+  "resources": [
+    {
+      "name": "Declaraciones del IRPF por tramo base imponible.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/a1989316-3f3f-4868-9e1c-2a3a232fb682/resource/e2a02513-4e3a-41d4-b55a-0baa7bb8aecc/download/declaraciones-del-irpf-por-tramo-base-imponible.-municipios.csv",
+      "size": 1557172,
+      "last_modified": "2026-07-09T16:27:15.577236"
+    },
+    {
+      "name": "Declaraciones del IRPF por tramo base imponible. Municipios.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/a1989316-3f3f-4868-9e1c-2a3a232fb682/resource/f0afe76c-76c2-435a-a093-ac512612de86/download/declaraciones-del-irpf-por-tramo-base-imponible.-municipios.json",
+      "size": 4254399,
+      "last_modified": "2026-07-09T16:27:16.282592"
+    }
+  ]
+}

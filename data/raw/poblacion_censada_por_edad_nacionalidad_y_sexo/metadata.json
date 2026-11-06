@@ -1,0 +1,26 @@
+{
+  "name": "poblacion_censada_por_edad_nacionalidad_y_sexo",
+  "title": "Población censada por edad, nacionalidad y sexo. Censo anual. Municipios",
+  "notes": "La fecha de referencia es a 1 de enero de cada año.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:26:13.120509",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/poblacion_censada_por_edad_nacionalidad_y_sexo",
+  "resources": [
+    {
+      "name": "Población censada por edad, nacionalidad y sexo. Censo anual.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/0a14fbfe-783e-4de3-81b1-ff3792bfd402/resource/bab16922-8df1-49b5-9791-aed4edf8ced1/download/poblacion-censada-por-edad-nacionalidad-y-sexo.-censo-anual.-municipios.csv",
+      "size": 15083940,
+      "last_modified": "2026-02-17T06:31:15.769815"
+    },
+    {
+      "name": "Población censada por edad, nacionalidad y sexo. Censo anual. Municipios.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/0a14fbfe-783e-4de3-81b1-ff3792bfd402/resource/b30133ad-58c4-4532-b7cc-d63ca3f50e7a/download/poblacion-censada-por-edad-nacionalidad-y-sexo.-censo-anual.-municipios.json",
+      "size": 46208132,
+      "last_modified": "2026-02-17T06:31:21.395798"
+    }
+  ]
+}

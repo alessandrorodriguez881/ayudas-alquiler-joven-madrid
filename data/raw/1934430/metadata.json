@@ -1,0 +1,26 @@
+{
+  "name": "1934430",
+  "title": "Índice de precios de la vivienda en alquiler por distritos (Base 2015)",
+  "notes": "Sin información adicional",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:42:05.941396",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/1934430",
+  "resources": [
+    {
+      "name": "Índice de precios de la vivienda en alquiler por distritos (Base 2015).csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/0afaeb64-b7a5-48e7-bc08-46c9b6af11b6/resource/1aa11373-9e00-418d-a35e-a73e9b37e439/download/indice-de-precios-de-la-vivienda-en-alquiler-por-distritos-base-2015.csv",
+      "size": 36920,
+      "last_modified": "2026-06-04T16:31:33.127416"
+    },
+    {
+      "name": "Índice de precios de la vivienda en alquiler por distritos (Base 2015).json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/0afaeb64-b7a5-48e7-bc08-46c9b6af11b6/resource/e9c84486-bf37-4455-8ecc-6d90a54e64d8/download/indice-de-precios-de-la-vivienda-en-alquiler-por-distritos-base-2015.json",
+      "size": 78650,
+      "last_modified": "2026-06-04T16:31:33.458013"
+    }
+  ]
+}

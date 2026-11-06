@@ -1,0 +1,26 @@
+{
+  "name": "1934258",
+  "title": "Alquiler medio mensual de viviendas habituales arrendadas por código postal para el municipio de Madrid",
+  "notes": "Sólo se muestran códigos postales con más de 200 viviendas arrendadas como habituales.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:41:59.848178",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/1934258",
+  "resources": [
+    {
+      "name": "Alquiler medio mensual de viviendas habituales arrendadas por código postal para el municipio de Madrid.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/c9b49b8c-47a5-4deb-83b5-080b582fda7e/resource/54fbc230-31fd-4cf3-9673-7a85fed2a784/download/alquiler-medio-mensual-de-viviendas-habituales-arrendadas-por-codigo-postal-para-el-municipio-de.csv",
+      "size": 13745,
+      "last_modified": "2026-07-27T16:32:50.527340"
+    },
+    {
+      "name": "Alquiler medio mensual de viviendas habituales arrendadas por código postal para el municipio de Madrid.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/c9b49b8c-47a5-4deb-83b5-080b582fda7e/resource/5bfca7dd-422c-4a24-b56e-f19bb9cf7df2/download/alquiler-medio-mensual-de-viviendas-habituales-arrendadas-por-codigo-postal-para-el-municipio-d.json",
+      "size": 28933,
+      "last_modified": "2026-07-27T16:32:50.971900"
+    }
+  ]
+}

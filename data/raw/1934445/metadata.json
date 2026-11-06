@@ -1,0 +1,26 @@
+{
+  "name": "1934445",
+  "title": "Índice de precios de la vivienda en alquiler por municipios mayores de 10.000 habitantes (Base 2015). Municipios",
+  "notes": "Los municicios con menos de 10.000 habitantes de cada provincia están agrupados en una única categoría sin municipio asignado.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:42:06.256842",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/1934445",
+  "resources": [
+    {
+      "name": "Índice de precios de la vivienda en alquiler por municipios mayores de 10.000 habitantes (Base 2015). Municipios.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/4c5a6c8b-fdf7-4e20-a92d-92c119571fc6/resource/71a7d332-7298-4347-ab43-7471c1d7f9c3/download/indice-de-precios-de-la-vivienda-en-alquiler-por-municipios-mayores-de-10.000-habitantes-base-20.csv",
+      "size": 124546,
+      "last_modified": "2026-06-04T16:31:34.065657"
+    },
+    {
+      "name": "Índice de precios de la vivienda en alquiler por municipios mayores de 10.000 habitantes (Base 2015). Municipios.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/4c5a6c8b-fdf7-4e20-a92d-92c119571fc6/resource/f51466a3-a59a-4192-87e8-117ce08265da/download/indice-de-precios-de-la-vivienda-en-alquiler-por-municipios-mayores-de-10.000-habitantes-base-2.json",
+      "size": 432453,
+      "last_modified": "2026-06-04T16:31:34.548215"
+    }
+  ]
+}

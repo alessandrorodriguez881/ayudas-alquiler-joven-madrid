@@ -1,0 +1,26 @@
+{
+  "name": "1934246",
+  "title": "Rentabilidad y precios de alquiler de viviendas",
+  "notes": "Rentabilidad bruta obtenida a partir de los ingresos de arrendamiento efectivos en relación al valor de referencia. Los ingresos son proporcionales al número de días en que ha estado arrendado.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:41:59.184143",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/1934246",
+  "resources": [
+    {
+      "name": "Rentabilidad y precios de alquiler de viviendas.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/5199c7a1-46b3-4695-949e-1b77f0f69ce8/resource/1fad35b0-5b7a-4773-b3bd-5ff9abbc1af0/download/rentabilidad-y-precios-de-alquiler-de-viviendas.csv",
+      "size": 2746,
+      "last_modified": "2026-07-27T16:32:48.777266"
+    },
+    {
+      "name": "Rentabilidad y precios de alquiler de viviendas.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/5199c7a1-46b3-4695-949e-1b77f0f69ce8/resource/e247757c-bc7a-492a-a061-0599b098b601/download/rentabilidad-y-precios-de-alquiler-de-viviendas.json",
+      "size": 7172,
+      "last_modified": "2026-07-27T16:32:49.166983"
+    }
+  ]
+}

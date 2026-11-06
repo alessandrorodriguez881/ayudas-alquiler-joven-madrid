@@ -1,0 +1,26 @@
+{
+  "name": "1934261",
+  "title": "Días de alquiler medios de viviendas habituales arrendadas por código postal para el municipio de Madrid",
+  "notes": "Sólo se muestran códigos postales con más de 200 viviendas arrendadas como habituales.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:42:01.526475",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/1934261",
+  "resources": [
+    {
+      "name": "Días de alquiler medios de viviendas habituales arrendadas por código postal para el municipio de Madrid.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/1826c94a-cb3d-4c2a-adc5-4c4b59c6b5e2/resource/b23f1a70-8782-4247-89e9-8bdbafffe853/download/dias-de-alquiler-medios-de-viviendas-habituales-arrendadas-por-codigo-postal-para-el-municipio-d.csv",
+      "size": 13904,
+      "last_modified": "2026-07-27T16:32:53.016853"
+    },
+    {
+      "name": "Días de alquiler medios de viviendas habituales arrendadas por código postal para el municipio de Madrid.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/1826c94a-cb3d-4c2a-adc5-4c4b59c6b5e2/resource/79d7843a-7be3-458e-8e10-094ada18d871/download/dias-de-alquiler-medios-de-viviendas-habituales-arrendadas-por-codigo-postal-para-el-municipio-.json",
+      "size": 29200,
+      "last_modified": "2026-07-27T16:32:53.342155"
+    }
+  ]
+}

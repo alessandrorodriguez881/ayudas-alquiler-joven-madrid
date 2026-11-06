@@ -1,0 +1,26 @@
+{
+  "name": "censo_2021_viviendas_familiares_por_tenencia",
+  "title": "Censo de vivienda y locales 2021. Viviendas familiares principales por régimen de tenencia. Municipios",
+  "notes": "Vivienda familiar: vivienda destinada a ser habitada por una o varias personas que no constituyen un colectivo, independientemente de los vínculos existentes entre ellas.\n\nPara garantizar el secreto estadístico todos los datos están redondeados aleatoriamente a múltiplos de tres.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:28:24.586161",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/censo_2021_viviendas_familiares_por_tenencia",
+  "resources": [
+    {
+      "name": "Censo de vivienda y locales 2021. Viviendas familiares principales por régimen de tenencia.csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/e50045e7-5f31-4bfc-bccd-7f502ed7c95e/resource/9c9e2b00-a74d-461c-af49-82b1c168b23a/download/censo-de-vivienda-y-locales-2021.-viviendas-familiares-principales-por-regimen-de-tenencia.-muni.csv",
+      "size": 33125,
+      "last_modified": "2025-10-28T06:55:49.831171"
+    },
+    {
+      "name": "Censo de vivienda y locales 2021. Viviendas familiares principales por régimen de tenencia. Municipios.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/e50045e7-5f31-4bfc-bccd-7f502ed7c95e/resource/e80037f0-ec48-4f95-973a-265bb9e679f9/download/censo-de-vivienda-y-locales-2021.-viviendas-familiares-principales-por-regimen-de-tenencia.-mun.json",
+      "size": 110881,
+      "last_modified": "2025-10-28T06:55:52.008335"
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+codigo_estadistica_cm,nombre_estadistica_cm,ine,ine5,nombre_bono_ayudas,nombre_serpavi,nombre_paro,tope_bono_2022,en_bono,en_serpavi,en_paro
+14,Acebeda (La),001,28001,,"Acebeda, La","Acebeda, La",600,False,True,True
+29,Ajalvir,002,28002,Ajalvir,Ajalvir,Ajalvir,600,True,True,True
+35,Alameda del Valle,003,28003,,Alameda del Valle,Alameda del Valle,600,False,True,True
+40,Álamo (El),004,28004,"Álamo, El","Álamo, El","Álamo, El",600,True,True,True
+53,Alcalá de Henares,005,28005,Alcalá de Henares,Alcalá de Henares,Alcalá de Henares,900,True,True,True
+66,Alcobendas,006,28006,Alcobendas,Alcobendas,Alcobendas,900,True,True,True
+72,Alcorcón,007,28007,Alcorcón,Alcorcón,Alcorcón,900,True,True,True
+88,Aldea del Fresno,008,28008,Aldea del Fresno,Aldea del Fresno,Aldea del Fresno,600,True,True,True
+91,Algete,009,28009,Algete,Algete,Algete,900,True,True,True
+105,Alpedrete,010,28010,Alpedrete,Alpedrete,Alpedrete,600,True,True,True
+112,Ambite,011,28011,,Ambite,Ambite,600,False,True,True
+127,Anchuelo,012,28012,Anchuelo,Anchuelo,Anchuelo,600,True,True,True
+133,Aranjuez,013,28013,Aranjuez,Aranjuez,Aranjuez,600,True,True,True
+148,Arganda del Rey,014,28014,Arganda del Rey,Arganda del Rey,Arganda del Rey,600,True,True,True
+151,Arroyomolinos,015,28015,Arroyomolinos,Arroyomolinos,Arroyomolinos,900,True,True,True
+164,Atazar (El),016,28016,,"Atazar, El","Atazar, El",600,False,True,True
+170,Batres,017,28017,Batres,Batres,Batres,600,True,True,True
+186,Becerril de la Sierra,018,28018,Becerril de la Sierra,Becerril de la Sierra,Becerril de la Sierra,600,True,True,True
+199,Belmonte de Tajo,019,28019,Belmonte de Tajo,Belmonte de Tajo,Belmonte de Tajo,600,True,True,True
+203,Berzosa del Lozoya,020,28020,Berzosa del Lozoya,Berzosa del Lozoya,Berzosa de Lozoya,600,True,True,True
+210,Berrueco (El),021,28021,"Berrueco, El","Berrueco, El","Berrueco, El",600,True,True,True
+225,Boadilla del Monte,022,28022,Boadilla del Monte,Boadilla del Monte,Boadilla del Monte,900,True,True,True
+231,Boalo (El),023,28023,"Boalo, El","Boalo, El","Boalo, El",600,True,True,True
+246,Braojos,024,28024,,Braojos,Braojos,600,False,True,True
+259,Brea de Tajo,025,28025,Brea de Tajo,Brea de Tajo,Brea de Tajo,600,True,True,True
+262,Brunete,026,28026,Brunete,Brunete,Brunete,600,True,True,True
+278,Buitrago del Lozoya,027,28027,Buitrago del Lozoya,Buitrago del Lozoya,Buitrago del Lozoya,600,True,True,True
+284,Bustarviejo,028,28028,Bustarviejo,Bustarviejo,Bustarviejo,600,True,True,True
+297,Cabanillas de la Sierra,029,28029,,Cabanillas de la Sierra,Cabanillas de la Sierra,600,False,True,True
+301,Cabrera (La),030,28030,"Cabrera, La","Cabrera, La","Cabrera, La",600,True,True,True
+318,Cadalso de los Vidrios,031,28031,Cadalso de los Vidrios,Cadalso de los Vidrios,Cadalso de los Vidrios,600,True,True,True
+323,Camarma de Esteruelas,032,28032,Camarma de Esteruelas,Camarma de Esteruelas,Camarma de Esteruelas,600,True,True,True
+339,Campo Real,033,28033,Campo Real,Campo Real,Campo Real,600,True,True,True
+344,Canencia,034,28034,Canencia,Canencia,Canencia,600,True,True,True
+357,Carabaña,035,28035,Carabaña,Carabaña,Carabaña,600,True,True,True
+360,Casarrubuelos,036,28036,Casarrubuelos,Casarrubuelos,Casarrubuelos,600,True,True,True
+376,Cenicientos,037,28037,Cenicientos,Cenicientos,Cenicientos,600,True,True,True
+382,Cercedilla,038,28038,Cercedilla,Cercedilla,Cercedilla,600,True,True,True
+395,Cervera de Buitrago,039,28039,,Cervera de Buitrago,Cervera de Buitrago,600,False,True,True
+409,Ciempozuelos,040,28040,Ciempozuelos,Ciempozuelos,Ciempozuelos,600,True,True,True
+416,Cobeña,041,28041,Cobeña,Cobeña,Cobeña,600,True,True,True
+421,Colmenar del Arroyo,042,28042,Colmenar del Arroyo,Colmenar del Arroyo,Colmenar del Arroyo,600,True,True,True
+437,Colmenar de Oreja,043,28043,Colmenar de Oreja,Colmenar de Oreja,Colmenar de Oreja,600,True,True,True
+442,Colmenarejo,044,28044,Colmenarejo,Colmenarejo,Colmenarejo,600,True,True,True
+455,Colmenar Viejo,045,28045,Colmenar Viejo,Colmenar Viejo,Colmenar Viejo,600,True,True,True
+468,Collado Mediano,046,28046,Collado Mediano,Collado Mediano,Collado Mediano,600,True,True,True
+474,Collado Villalba,047,28047,Collado Villalba,Collado Villalba,Collado Villalba,900,True,True,True
+480,Corpa,048,28048,Corpa,Corpa,Corpa,600,True,True,True
+493,Coslada,049,28049,Coslada,Coslada,Coslada,900,True,True,True
+506,Cubas de la Sagra,050,28050,Cubas de la Sagra,Cubas de la Sagra,Cubas de la Sagra,600,True,True,True
+513,Chapinería,051,28051,Chapinería,Chapinería,Chapinería,600,True,True,True
+528,Chinchón,052,28052,Chinchón,Chinchón,Chinchón,600,True,True,True
+534,Daganzo de Arriba,053,28053,Daganzo de Arriba,Daganzo de Arriba,Daganzo de Arriba,600,True,True,True
+549,Escorial (El),054,28054,"Escorial, El","Escorial, El","Escorial, El",600,True,True,True
+552,Estremera,055,28055,Estremera,Estremera,Estremera,600,True,True,True
+565,Fresnedillas de la Oliva,056,28056,Fresnedillas de la Oliva,Fresnedillas de la Oliva,Fresnedillas de la Oliva,600,True,True,True
+571,Fresno de Torote,057,28057,Fresno de Torote,Fresno de Torote,Fresno de Torote,600,True,True,True
+587,Fuenlabrada,058,28058,Fuenlabrada,Fuenlabrada,Fuenlabrada,900,True,True,True
+590,Fuente el Saz de Jarama,059,28059,Fuente el Saz de Jarama,Fuente el Saz de Jarama,Fuente el Saz del Jarama,600,True,True,True
+604,Fuentidueña de Tajo,060,28060,Fuentidueña de Tajo,Fuentidueña de Tajo,Fuentidueña de Tajo,600,True,True,True
+611,Galapagar,061,28061,Galapagar,Galapagar,Galapagar,900,True,True,True
+626,Garganta de los Montes,062,28062,Garganta de los Montes,Garganta de los Montes,Garganta de los Montes,600,True,True,True
+632,Gargantilla del Lozoya y Pinilla de Buitrago,063,28063,Gargantilla del Lozoya y Pinilla de Buitrago,Gargantilla del Lozoya y Pinilla de Buitrago,Gargantilla del Lozoya y Pinilla de Buitrago,600,True,True,True
+647,Gascones,064,28064,Gascones,Gascones,Gascones,600,True,True,True
+650,Getafe,065,28065,Getafe,Getafe,Getafe,900,True,True,True
+663,Griñón,066,28066,Griñón,Griñón,Griñón,600,True,True,True
+679,Guadalix de la Sierra,067,28067,Guadalix de la Sierra,Guadalix de la Sierra,Guadalix de la Sierra,600,True,True,True
+685,Guadarrama,068,28068,Guadarrama,Guadarrama,Guadarrama,600,True,True,True
+698,Hiruela (La),069,28069,"Hiruela, La","Hiruela, La","Hiruela, La",600,True,True,True
+702,Horcajo de la Sierra-Aoslos,070,28070,Horcajo de la Sierra-Aoslos,Horcajo de la Sierra-Aoslos,Horcajo de la Sierra-Aoslos,600,True,True,True
+719,Horcajuelo de la Sierra,071,28071,,Horcajuelo de la Sierra,Horcajuelo de la Sierra,600,False,True,True
+724,Hoyo de Manzanares,072,28072,Hoyo de Manzanares,Hoyo de Manzanares,Hoyo de Manzanares,600,True,True,True
+730,Humanes de Madrid,073,28073,Humanes de Madrid,Humanes de Madrid,Humanes de Madrid,600,True,True,True
+745,Leganés,074,28074,Leganés,Leganés,Leganés,900,True,True,True
+758,Loeches,075,28075,Loeches,Loeches,Loeches,600,True,True,True
+761,Lozoya,076,28076,Lozoya,Lozoya,Lozoya,600,True,True,True
+783,Madarcos,078,28078,Madarcos,Madarcos,Madarcos,600,True,True,True
+796,Madrid,079,28079,Madrid,Madrid,Madrid,900,True,True,True
+800,Majadahonda,080,28080,Majadahonda,Majadahonda,Majadahonda,900,True,True,True
+822,Manzanares el Real,082,28082,Manzanares el Real,Manzanares el Real,Manzanares el Real,600,True,True,True
+838,Meco,083,28083,Meco,Meco,Meco,600,True,True,True
+843,Mejorada del Campo,084,28084,Mejorada del Campo,Mejorada del Campo,Mejorada del Campo,600,True,True,True
+856,Miraflores de la Sierra,085,28085,Miraflores de la Sierra,Miraflores de la Sierra,Miraflores de la Sierra,600,True,True,True
+869,Molar (El),086,28086,"Molar, El","Molar, El","Molar, El",600,True,True,True
+875,Molinos (Los),087,28087,"Molinos, Los","Molinos, Los","Molinos, Los",600,True,True,True
+881,Montejo de la Sierra,088,28088,Montejo de la Sierra,Montejo de la Sierra,Montejo de la Sierra,600,True,True,True
+894,Moraleja de Enmedio,089,28089,Moraleja de Enmedio,Moraleja de Enmedio,Moraleja de Enmedio,600,True,True,True
+908,Moralzarzal,090,28090,Moralzarzal,Moralzarzal,Moralzarzal,600,True,True,True
+915,Morata de Tajuña,091,28091,Morata de Tajuña,Morata de Tajuña,Morata de Tajuña,600,True,True,True
+920,Móstoles,092,28092,Móstoles,Móstoles,Móstoles,900,True,True,True
+936,Navacerrada,093,28093,Navacerrada,Navacerrada,Navacerrada,600,True,True,True
+941,Navalafuente,094,28094,Navalafuente,Navalafuente,Navalafuente,600,True,True,True
+954,Navalagamella,095,28095,Navalagamella,Navalagamella,Navalagamella,600,True,True,True
+967,Navalcarnero,096,28096,Navalcarnero,Navalcarnero,Navalcarnero,600,True,True,True
+973,Navarredonda y San Mamés,097,28097,,Navarredonda y San Mamés,,600,False,True,False
+992,Navas del Rey,099,28099,Navas del Rey,Navas del Rey,Navas del Rey,600,True,True,True
+1006,Nuevo Baztán,100,28100,Nuevo Baztán,Nuevo Baztán,Nuevo Baztán,600,True,True,True
+1013,Olmeda de las Fuentes,101,28101,,Olmeda de las Fuentes,Olmeda de las Fuentes,600,False,True,True
+1028,Orusco de Tajuña,102,28102,Orusco de Tajuña,Orusco de Tajuña,Orusco de Tajuña,600,True,True,True
+1049,Paracuellos de Jarama,104,28104,Paracuellos de Jarama,Paracuellos de Jarama,Paracuellos del Jarama,600,True,True,True
+1065,Parla,106,28106,Parla,Parla,Parla,900,True,True,True
+1071,Patones,107,28107,,Patones,Patones,600,False,True,True
+1087,Pedrezuela,108,28108,Pedrezuela,Pedrezuela,Pedrezuela,600,True,True,True
+1090,Pelayos de la Presa,109,28109,Pelayos de la Presa,Pelayos de la Presa,Pelayos de la Presa,600,True,True,True
+1104,Perales de Tajuña,110,28110,Perales de Tajuña,Perales de Tajuña,Perales de Tajuña,600,True,True,True
+1111,Pezuela de las Torres,111,28111,Pezuela de las Torres,Pezuela de las Torres,Pezuela de las Torres,600,True,True,True
+1126,Pinilla del Valle,112,28112,,Pinilla del Valle,Pinilla del Valle,600,False,True,True
+1132,Pinto,113,28113,Pinto,Pinto,Pinto,900,True,True,True
+1147,Piñuécar-Gandullas,114,28114,,Piñuécar-Gandullas,Piñuécar-Gandullas,600,False,True,True
+1150,Pozuelo de Alarcón,115,28115,Pozuelo de Alarcón,Pozuelo de Alarcón,Pozuelo de Alarcón,900,True,True,True
+1163,Pozuelo del Rey,116,28116,Pozuelo del Rey,Pozuelo del Rey,Pozuelo del Rey,600,True,True,True
+1179,Prádena del Rincón,117,28117,Prádena del Rincón,Prádena del Rincón,Prádena del Rincón,600,True,True,True
+1185,Puebla de la Sierra,118,28118,Puebla de la Sierra,Puebla de la Sierra,Puebla de la Sierra,600,True,True,True
+1198,Quijorna,119,28119,Quijorna,Quijorna,Quijorna,600,True,True,True
+1202,Rascafría,120,28120,Rascafría,Rascafría,Rascafría,600,True,True,True
+1219,Redueña,121,28121,Redueña,Redueña,Redueña,600,True,True,True
+1224,Ribatejada,122,28122,Ribatejada,Ribatejada,Ribatejada,600,True,True,True
+1230,Rivas-Vaciamadrid,123,28123,Rivas-Vaciamadrid,Rivas-Vaciamadrid,Rivas-Vaciamadrid,900,True,True,True
+1245,Robledillo de la Jara,124,28124,,Robledillo de la Jara,Robledillo de la Jara,600,False,True,True
+1258,Robledo de Chavela,125,28125,Robledo de Chavela,Robledo de Chavela,Robledo de Chavela,600,True,True,True
+1261,Robregordo,126,28126,,Robregordo,Robregordo,600,False,True,True
+1277,Rozas de Madrid (Las),127,28127,"Rozas de Madrid, Las","Rozas de Madrid, Las","Rozas de Madrid, Las",900,True,True,True
+1283,Rozas de Puerto Real,128,28128,,Rozas de Puerto Real,Rozas de Puerto Real,600,False,True,True
+1296,San Agustín del Guadalix,129,28129,San Agustín del Guadalix,San Agustín del Guadalix,San Agustín de Guadalix,600,True,True,True
+1300,San Fernando de Henares,130,28130,San Fernando de Henares,San Fernando de Henares,San Fernando de Henares,900,True,True,True
+1317,San Lorenzo de El Escorial,131,28131,San Lorenzo de El Escorial,San Lorenzo de El Escorial,San Lorenzo de El Escorial,600,True,True,True
+1322,San Martín de la Vega,132,28132,San Martín de la Vega,San Martín de la Vega,San Martín de la Vega,600,True,True,True
+1338,San Martín de Valdeiglesias,133,28133,San Martín de Valdeiglesias,San Martín de Valdeiglesias,San Martín de Valdeiglesias,600,True,True,True
+1343,San Sebastián de los Reyes,134,28134,San Sebastián de los Reyes,San Sebastián de los Reyes,San Sebastián de los Reyes,900,True,True,True
+1356,Santa María de la Alameda,135,28135,Santa María de la Alameda,Santa María de la Alameda,Santa María de la Alameda,600,True,True,True
+1369,Santorcaz,136,28136,Santorcaz,Santorcaz,Santorcaz,600,True,True,True
+1375,Santos de la Humosa (Los),137,28137,"Santos de la Humosa, Los","Santos de la Humosa, Los","Santos de la Humosa, Los",600,True,True,True
+1381,Serna del Monte (La),138,28138,,"Serna del Monte, La","Serna del Monte, La",600,False,True,True
+1408,Serranillos del Valle,140,28140,Serranillos del Valle,Serranillos del Valle,Serranillos del Valle,600,True,True,True
+1415,Sevilla la Nueva,141,28141,Sevilla la Nueva,Sevilla la Nueva,Sevilla la Nueva,600,True,True,True
+1436,Somosierra,143,28143,,Somosierra,Somosierra,600,False,True,True
+1441,Soto del Real,144,28144,Soto del Real,Soto del Real,Soto del Real,600,True,True,True
+1454,Talamanca de Jarama,145,28145,Talamanca de Jarama,Talamanca de Jarama,Talamanca de Jarama,600,True,True,True
+1467,Tielmes,146,28146,Tielmes,Tielmes,Tielmes,600,True,True,True
+1473,Titulcia,147,28147,,Titulcia,Titulcia,600,False,True,True
+1489,Torrejón de Ardoz,148,28148,Torrejón de Ardoz,Torrejón de Ardoz,Torrejón de Ardoz,900,True,True,True
+1492,Torrejón de la Calzada,149,28149,Torrejón de la Calzada,Torrejón de la Calzada,Torrejón de la Calzada,600,True,True,True
+1505,Torrejón de Velasco,150,28150,Torrejón de Velasco,Torrejón de Velasco,Torrejón de Velasco,600,True,True,True
+1512,Torrelaguna,151,28151,Torrelaguna,Torrelaguna,Torrelaguna,600,True,True,True
+1527,Torrelodones,152,28152,Torrelodones,Torrelodones,Torrelodones,900,True,True,True
+1533,Torremocha de Jarama,153,28153,Torremocha de Jarama,Torremocha de Jarama,Torremocha de Jarama,600,True,True,True
+1548,Torres de la Alameda,154,28154,Torres de la Alameda,Torres de la Alameda,Torres de la Alameda,600,True,True,True
+1551,Valdaracete,155,28155,,Valdaracete,Valdaracete,600,False,True,True
+1564,Valdeavero,156,28156,Valdeavero,Valdeavero,Valdeavero,600,True,True,True
+1570,Valdelaguna,157,28157,Valdelaguna,Valdelaguna,Valdelaguna,600,True,True,True
+1586,Valdemanco,158,28158,Valdemanco,Valdemanco,Valdemanco,600,True,True,True
+1599,Valdemaqueda,159,28159,Valdemaqueda,Valdemaqueda,Valdemaqueda,600,True,True,True
+1603,Valdemorillo,160,28160,Valdemorillo,Valdemorillo,Valdemorillo,600,True,True,True
+1610,Valdemoro,161,28161,Valdemoro,Valdemoro,Valdemoro,900,True,True,True
+1625,Valdeolmos-Alalpardo,162,28162,Valdeolmos-Alalpardo,Valdeolmos-Alalpardo,Valdeolmos-Alalpardo,600,True,True,True
+1631,Valdepiélagos,163,28163,Valdepiélagos,Valdepiélagos,Valdepiélagos,600,True,True,True
+1646,Valdetorres de Jarama,164,28164,Valdetorres de Jarama,Valdetorres de Jarama,Valdetorres de Jarama,600,True,True,True
+1659,Valdilecha,165,28165,Valdilecha,Valdilecha,Valdilecha,600,True,True,True
+1662,Valverde de Alcalá,166,28166,Valverde de Alcalá,Valverde de Alcalá,Valverde de Alcalá,600,True,True,True
+1678,Velilla de San Antonio,167,28167,Velilla de San Antonio,Velilla de San Antonio,Velilla de San Antonio,600,True,True,True
+1684,Vellón (El),168,28168,"Vellón, El","Vellón, El","Vellón, El",600,True,True,True
+1697,Venturada,169,28169,Venturada,Venturada,Venturada,600,True,True,True
+1701,Villaconejos,170,28170,Villaconejos,Villaconejos,Villaconejos,600,True,True,True
+1718,Villa del Prado,171,28171,Villa del Prado,Villa del Prado,Villa del Prado,600,True,True,True
+1723,Villalbilla,172,28172,Villalbilla,Villalbilla,Villalbilla,600,True,True,True
+1739,Villamanrique de Tajo,173,28173,Villamanrique de Tajo,Villamanrique de Tajo,Villamanrique de Tajo,600,True,True,True
+1744,Villamanta,174,28174,Villamanta,Villamanta,Villamanta,600,True,True,True
+1757,Villamantilla,175,28175,Villamantilla,Villamantilla,Villamantilla,600,True,True,True
+1760,Villanueva de la Cañada,176,28176,Villanueva de la Cañada,Villanueva de la Cañada,Villanueva de la Cañada,900,True,True,True
+1776,Villanueva del Pardillo,177,28177,Villanueva del Pardillo,Villanueva del Pardillo,Villanueva del Pardillo,900,True,True,True
+1782,Villanueva de Perales,178,28178,Villanueva de Perales,Villanueva de Perales,Villanueva de Perales,600,True,True,True
+1795,Villar del Olmo,179,28179,Villar del Olmo,Villar del Olmo,Villar del Olmo,600,True,True,True
+1809,Villarejo de Salvanés,180,28180,Villarejo de Salvanés,Villarejo de Salvanés,Villarejo de Salvanés,600,True,True,True
+1816,Villaviciosa de Odón,181,28181,Villaviciosa de Odón,Villaviciosa de Odón,Villaviciosa de Odón,900,True,True,True
+1821,Villavieja del Lozoya,182,28182,Villavieja del Lozoya,Villavieja del Lozoya,Villavieja de Lozoya,600,True,True,True
+1837,Zarzalejo,183,28183,Zarzalejo,Zarzalejo,Zarzalejo,600,True,True,True
+9015,Lozoyuela-Navas-Sieteiglesias,901,28901,Lozoyuela-Navas-Sieteiglesias,Lozoyuela-Navas-Sieteiglesias,Lozoyuela-Navas-Sieteiglesias,600,True,True,True
+9020,Puentes Viejas,902,28902,Puentes Viejas,Puentes Viejas,Puentes Viejas,600,True,True,True
+9036,Tres Cantos,903,28903,Tres Cantos,Tres Cantos,Tres Cantos,900,True,True,True

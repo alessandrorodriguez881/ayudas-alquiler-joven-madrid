@@ -1,0 +1,16 @@
+# Notas internas de trabajo: no van al repositorio
+PLAN.md
+IDEAS.md
+PREGUNTAS_FORMACION.md
+BASES_RESUMEN.md
+
+# Documentos oficiales: solo enlaces y huellas en docs_oficiales/FUENTES.md
+docs_oficiales/*.pdf
+
+# SERPAVI (71 MB): se descarga de la web del MIVAU; el recorte de Madrid está en data/interim/
+data/raw/serpavi_mivau/*.xlsx
+
+__pycache__/
+*.pyc
+.env
+.venv/

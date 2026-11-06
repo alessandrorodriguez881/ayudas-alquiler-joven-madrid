@@ -1,0 +1,26 @@
+{
+  "name": "spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos",
+  "title": "Ayudas al alquiler de vivienda para jóvenes y sectores de escasos recursos (2022 y 2023)",
+  "notes": "Ayudas para contribuir al pago del alquiler de la vivienda habitual o precio de cesión de la vivienda o habitación para: - Sectores con escasos medios económicos y mayores de 65 años. - Personas jóvenes menores de 35 años.\r\n\r\nLa subvención cubre hasta el 50 por ciento de la renta o precio mensual que abona la persona beneficiaria por el alquiler o uso de su vivienda o habitación habitual y permanente.\r\n\r\nEstas ayudas se enmarcan en el Plan Estatal de accesibilidad a la vivienda 2022-2025.\r\n\r\nPersonas destinatarias Ayuda al alquiler para sectores con escasos medios económicos y mayores de 65 años Personas mayores de edad titulares de un contrato de arrendamiento que se encuentran en alguno de los siguientes supuestos:\r\n\r\n1.- Familias numerosas.\r\n\r\n2.- Familias monoparentales con cargas familiares.\r\n\r\n3.- Unidades de convivencia con alguna víctima acreditada de violencia de género.\r\n\r\n4.- Unidades de convivencia con alguna víctima acreditada de terrorismo.\r\n\r\n5.- Unidades de convivencia que cuenten con algún miembro con discapacidad.\r\n\r\n6.- Unidades de convivencia con todos los miembros en situación de desempleo que han agotado prestaciones.\r\n\r\n7.- Unidades de convivencia con todos sus miembros mayores de 65 años.\r\n\r\nAyudas al alquiler para personas jóvenes: - Personas entre 18 y 35 años (ambos incluidos) titulares de un contrato de arrendamiento o que están en condiciones de suscribirlo.\r\n\r\nLas solicitudes detalladas en la última fila del listado responden a solicitudes que no resultaron beneficiarias y el municipio de residencia es desconocido o de fuera de la Comunidad de Madrid.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-05-27T10:55:18.874845",
+  "url": "",
+  "portal_url": "https://datos.comunidad.madrid/dataset/spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos",
+  "resources": [
+    {
+      "name": "Ayudas al alquiler de vivienda para jóvenes y sectores de escasos recursos (2022 y 2023)",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/54bce6b2-5259-40e6-9c2b-063c24fc2b51/resource/e6fe51b8-5b5f-4649-998d-34b0f073ebd9/download/spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos.csv",
+      "size": 19439,
+      "last_modified": "2026-05-27T10:55:13.283018"
+    },
+    {
+      "name": "Ayudas al alquiler de vivienda para jóvenes y sectores de escasos recursos (2022 y 2023)",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/54bce6b2-5259-40e6-9c2b-063c24fc2b51/resource/58fcdf4c-7330-4887-98a4-27889e5987da/download/spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos.json",
+      "size": 141032,
+      "last_modified": "2026-05-27T10:55:18.865185"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "grado_juventud_por_edad",
+  "title": "Grado de juventud por grupo de edad (porcentaje). Municipios",
+  "notes": "Datos oficiales INE. Para 1996 datos de padrón. Desde 1998 hasta 2020, datos de padrón continuo. A partir de 2021, datos del Censo anual de población.  \n  \n(Población de 0 a 14 años a fecha 1 de enero/población a fecha 1 de enero)*100.  \n(Población menor de 25 años a fecha 1 de enero/total población 1 de enero)*100.  \n(Población menor de 35 años a fecha 1 de enero/total población 1 de enero)*100.  \n(Población menor de 45 años a fecha 1 de enero/total población 1 de enero)*100.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2026-08-06T16:26:42.398254",
+  "url": null,
+  "portal_url": "https://datos.comunidad.madrid/dataset/grado_juventud_por_edad",
+  "resources": [
+    {
+      "name": "Grado de juventud por grupo de edad (porcentaje).csv",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/0a6d4242-1df3-4764-a8a9-0383b86ef39d/resource/4409cc54-2585-4760-9a09-2a1e5e702360/download/grado-de-juventud-por-grupo-de-edad-porcentaje.-municipios.csv",
+      "size": 1664110,
+      "last_modified": "2026-01-22T06:31:24.679186"
+    },
+    {
+      "name": "Grado de juventud por grupo de edad (porcentaje). Municipios.json",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/0a6d4242-1df3-4764-a8a9-0383b86ef39d/resource/4ce88d15-419d-4abe-b425-2af2c671d4bb/download/grado-de-juventud-por-grupo-de-edad-porcentaje.-municipios.json",
+      "size": 4616704,
+      "last_modified": "2026-01-22T06:31:26.532404"
+    }
+  ]
+}
