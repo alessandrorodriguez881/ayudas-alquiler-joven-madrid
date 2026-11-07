@@ -1,0 +1,296 @@
+{
+ "coverage_region_per_1000": 9.96,
+ "need_cut_top_tercile": 57.6,
+ "n": 36,
+ "young_2024": 177930,
+ "municipalities": [
+  {
+   "ine": "005",
+   "municipio": "Alcalá de Henares",
+   "indice_necesidad": 66.91,
+   "cobertura_2022": 9.59,
+   "bono_aceptadas": 305.0,
+   "jovenes_20_34_2024": 33940
+  },
+  {
+   "ine": "058",
+   "municipio": "Fuenlabrada",
+   "indice_necesidad": 63.97,
+   "cobertura_2022": 7.46,
+   "bono_aceptadas": 239.0,
+   "jovenes_20_34_2024": 32169
+  },
+  {
+   "ine": "074",
+   "municipio": "Leganés",
+   "indice_necesidad": 61.27,
+   "cobertura_2022": 8.3,
+   "bono_aceptadas": 234.0,
+   "jovenes_20_34_2024": 30771
+  },
+  {
+   "ine": "106",
+   "municipio": "Parla",
+   "indice_necesidad": 80.15,
+   "cobertura_2022": 5.98,
+   "bono_aceptadas": 128.0,
+   "jovenes_20_34_2024": 22649
+  },
+  {
+   "ine": "013",
+   "municipio": "Aranjuez",
+   "indice_necesidad": 66.18,
+   "cobertura_2022": 9.73,
+   "bono_aceptadas": 94.0,
+   "jovenes_20_34_2024": 10449
+  },
+  {
+   "ine": "014",
+   "municipio": "Arganda del Rey",
+   "indice_necesidad": 78.19,
+   "cobertura_2022": 6.98,
+   "bono_aceptadas": 67.0,
+   "jovenes_20_34_2024": 9860
+  },
+  {
+   "ine": "096",
+   "municipio": "Navalcarnero",
+   "indice_necesidad": 73.53,
+   "cobertura_2022": 6.83,
+   "bono_aceptadas": 33.0,
+   "jovenes_20_34_2024": 4917
+  },
+  {
+   "ine": "040",
+   "municipio": "Ciempozuelos",
+   "indice_necesidad": 80.64,
+   "cobertura_2022": 5.98,
+   "bono_aceptadas": 25.0,
+   "jovenes_20_34_2024": 4366
+  },
+  {
+   "ine": "084",
+   "municipio": "Mejorada del Campo",
+   "indice_necesidad": 62.5,
+   "cobertura_2022": 3.79,
+   "bono_aceptadas": 15.0,
+   "jovenes_20_34_2024": 4150
+  },
+  {
+   "ine": "132",
+   "municipio": "San Martín de la Vega",
+   "indice_necesidad": 66.91,
+   "cobertura_2022": 4.92,
+   "bono_aceptadas": 17.0,
+   "jovenes_20_34_2024": 3642
+  },
+  {
+   "ine": "073",
+   "municipio": "Humanes de Madrid",
+   "indice_necesidad": 71.81,
+   "cobertura_2022": 6.67,
+   "bono_aceptadas": 21.0,
+   "jovenes_20_34_2024": 3232
+  },
+  {
+   "ine": "026",
+   "municipio": "Brunete",
+   "indice_necesidad": 65.69,
+   "cobertura_2022": 3.87,
+   "bono_aceptadas": 7.0,
+   "jovenes_20_34_2024": 1955
+  },
+  {
+   "ine": "086",
+   "municipio": "Molar (El)",
+   "indice_necesidad": 66.18,
+   "cobertura_2022": 3.73,
+   "bono_aceptadas": 6.0,
+   "jovenes_20_34_2024": 1777
+  },
+  {
+   "ine": "004",
+   "municipio": "Álamo (El)",
+   "indice_necesidad": 75.25,
+   "cobertura_2022": 6.9,
+   "bono_aceptadas": 11.0,
+   "jovenes_20_34_2024": 1716
+  },
+  {
+   "ine": "171",
+   "municipio": "Villa del Prado",
+   "indice_necesidad": 63.24,
+   "cobertura_2022": 1.63,
+   "bono_aceptadas": 2.0,
+   "jovenes_20_34_2024": 1356
+  },
+  {
+   "ine": "091",
+   "municipio": "Morata de Tajuña",
+   "indice_necesidad": 62.01,
+   "cobertura_2022": 8.29,
+   "bono_aceptadas": 11.0,
+   "jovenes_20_34_2024": 1334
+  },
+  {
+   "ine": "059",
+   "municipio": "Fuente el Saz de Jarama",
+   "indice_necesidad": 64.71,
+   "cobertura_2022": 2.57,
+   "bono_aceptadas": 3.0,
+   "jovenes_20_34_2024": 1310
+  },
+  {
+   "ine": "154",
+   "municipio": "Torres de la Alameda",
+   "indice_necesidad": 59.31,
+   "cobertura_2022": 0.84,
+   "bono_aceptadas": 1.0,
+   "jovenes_20_34_2024": 1252
+  },
+  {
+   "ine": "164",
+   "municipio": "Valdetorres de Jarama",
+   "indice_necesidad": 65.69,
+   "cobertura_2022": 5.26,
+   "bono_aceptadas": 4.0,
+   "jovenes_20_34_2024": 807
+  },
+  {
+   "ine": "170",
+   "municipio": "Villaconejos",
+   "indice_necesidad": 68.14,
+   "cobertura_2022": 8.16,
+   "bono_aceptadas": 5.0,
+   "jovenes_20_34_2024": 580
+  },
+  {
+   "ine": "099",
+   "municipio": "Navas del Rey",
+   "indice_necesidad": 58.7,
+   "cobertura_2022": 0.0,
+   "bono_aceptadas": 0.0,
+   "jovenes_20_34_2024": 563
+  },
+  {
+   "ine": "095",
+   "municipio": "Navalagamella",
+   "indice_necesidad": 61.76,
+   "cobertura_2022": 6.7,
+   "bono_aceptadas": 3.0,
+   "jovenes_20_34_2024": 529
+  },
+  {
+   "ine": "109",
+   "municipio": "Pelayos de la Presa",
+   "indice_necesidad": 59.56,
+   "cobertura_2022": 0.0,
+   "bono_aceptadas": 0.0,
+   "jovenes_20_34_2024": 515
+  },
+  {
+   "ine": "110",
+   "municipio": "Perales de Tajuña",
+   "indice_necesidad": 61.27,
+   "cobertura_2022": 4.16,
+   "bono_aceptadas": 2.0,
+   "jovenes_20_34_2024": 497
+  },
+  {
+   "ine": "008",
+   "municipio": "Aldea del Fresno",
+   "indice_necesidad": 73.04,
+   "cobertura_2022": 6.22,
+   "bono_aceptadas": 3.0,
+   "jovenes_20_34_2024": 477
+  },
+  {
+   "ine": "146",
+   "municipio": "Tielmes",
+   "indice_necesidad": 77.45,
+   "cobertura_2022": 2.22,
+   "bono_aceptadas": 1.0,
+   "jovenes_20_34_2024": 458
+  },
+  {
+   "ine": "174",
+   "municipio": "Villamanta",
+   "indice_necesidad": 66.42,
+   "cobertura_2022": 2.12,
+   "bono_aceptadas": 1.0,
+   "jovenes_20_34_2024": 452
+  },
+  {
+   "ine": "028",
+   "municipio": "Bustarviejo",
+   "indice_necesidad": 58.33,
+   "cobertura_2022": 5.78,
+   "bono_aceptadas": 2.0,
+   "jovenes_20_34_2024": 366
+  },
+  {
+   "ine": "051",
+   "municipio": "Chapinería",
+   "indice_necesidad": 63.24,
+   "cobertura_2022": 2.87,
+   "bono_aceptadas": 1.0,
+   "jovenes_20_34_2024": 359
+  },
+  {
+   "ine": "035",
+   "municipio": "Carabaña",
+   "indice_necesidad": 72.79,
+   "cobertura_2022": 0.0,
+   "bono_aceptadas": 0.0,
+   "jovenes_20_34_2024": 326
+  },
+  {
+   "ine": "037",
+   "municipio": "Cenicientos",
+   "indice_necesidad": 64.46,
+   "cobertura_2022": 0.0,
+   "bono_aceptadas": 0.0,
+   "jovenes_20_34_2024": 317
+  },
+  {
+   "ine": "056",
+   "municipio": "Fresnedillas de la Oliva",
+   "indice_necesidad": 67.16,
+   "cobertura_2022": 3.38,
+   "bono_aceptadas": 1.0,
+   "jovenes_20_34_2024": 295
+  },
+  {
+   "ine": "178",
+   "municipio": "Villanueva de Perales",
+   "indice_necesidad": 58.33,
+   "cobertura_2022": 8.73,
+   "bono_aceptadas": 2.0,
+   "jovenes_20_34_2024": 257
+  },
+  {
+   "ine": "173",
+   "municipio": "Villamanrique de Tajo",
+   "indice_necesidad": 73.53,
+   "cobertura_2022": 0.0,
+   "bono_aceptadas": 0.0,
+   "jovenes_20_34_2024": 129
+  },
+  {
+   "ine": "076",
+   "municipio": "Lozoya",
+   "indice_necesidad": 66.42,
+   "cobertura_2022": 0.0,
+   "bono_aceptadas": 0.0,
+   "jovenes_20_34_2024": 89
+  },
+  {
+   "ine": "062",
+   "municipio": "Garganta de los Montes",
+   "indice_necesidad": 57.6,
+   "cobertura_2022": 0.0,
+   "bono_aceptadas": 0.0,
+   "jovenes_20_34_2024": 69
+  }
+ ]
+}
