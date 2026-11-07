@@ -10,9 +10,9 @@ Donde casi todos los pisos cuestan más que el tope, ¿piden la ayuda menos jóv
 
 El nuevo Plan Estatal de Vivienda 2026-2030 (RD 326/2026) sube el tope general a 1.000 € y deja que cada comunidad lo cambie si lo justifica con estudios actualizados de oferta (art. 135). Este proyecto quiere aportar ese estudio para la Comunidad de Madrid, con datos abiertos.
 
-## Estado (6-nov-2026)
-- **Trabajo previo, declarado en [TRABAJO_PREVIO.md](TRABAJO_PREVIO.md):** datos descargados y verificados, una tabla de 159 municipios, y la hipótesis y las reglas para darla por buena escritas antes de ver el resultado ([PREREGISTRO.md](PREREGISTRO.md)). El contraste se ha probado solo con datos inventados.
-- **El contraste con los datos reales aún no se ha hecho.** `scripts/contraste.py` no lo deja ejecutar antes del 7-nov-2026.
+## Estado (7-nov-2026)
+- **Trabajo previo, declarado en [TRABAJO_PREVIO.md](TRABAJO_PREVIO.md):** datos descargados y verificados, una tabla de 159 municipios, y la hipótesis y las reglas para darla por buena escritas antes de ver el resultado ([PREREGISTRO.md](PREREGISTRO.md)). El contraste se probó antes solo con datos inventados.
+- **Contraste real hecho el 7-nov** (`resultados/contraste_real.json`): la hipótesis principal se confirma. Por cada 10 puntos más de mercado de alquiler por encima del tope, hay un **7,6 % menos de solicitudes** por joven (intervalo del 3,9 % al 11,1 %), y lo mismo en las Ayudas al alquiler. Dos comprobaciones no señalan el tope en concreto: el experimento natural no llega a ser preciso y un umbral de 900 € igual para todos ajusta mejor. Todo, en la última sección de [PREREGISTRO.md](PREREGISTRO.md).
 - Las notas internas de planificación (`PLAN.md`, `IDEAS.md`) no están en el repositorio.
 
 ## Cómo repetirlo
@@ -23,6 +23,7 @@ pip install -r requirements.txt
 python scripts/preparar_datos.py          # data/interim/municipios.csv (159 municipios)
 python scripts/contraste.py --sintetico   # potencia y falsos positivos con datos inventados
 python scripts/contraste.py               # contraste real (a partir del 7-nov-2026)
+python scripts/exploratorio_topes_falsos.py  # exploratorio, no preregistrado: los topes falsos, más de cerca
 ```
 
 Los CSV del portal que usamos están en `data/raw/`, tal y como se descargaron. El portal cambia sus ficheros: entre el 21-oct y el 5-nov pasó de Latin-1 a UTF-8 y añadió años. `scripts/verificar_descargas.py` lo comprueba (resultado en [data/VERIFICACION.md](data/VERIFICACION.md)) y `scripts/descargar.py` los vuelve a bajar.

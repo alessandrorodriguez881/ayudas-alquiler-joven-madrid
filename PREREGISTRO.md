@@ -75,3 +75,23 @@ Hecho con `scripts/contraste.py --sintetico`. Se usan las **covariables reales**
 Archivos: `potencia_sintetica_200x199.json` (β₁ = 0 y −0,5) y `potencia_sintetica_100x199.json` (β₁ = −1,1). `potencia_sintetica.json` es la primera pasada, con el umbral antiguo de 0,05.
 
 **Cómo leer un «no»:** con un efecto pequeño (−5 % por cada 10 puntos), un «no» puede ser falta de datos (potencia del 22-51 %), así que se dirá «no se puede confirmar», no «no hay efecto».
+
+## Resultado con datos reales (sáb 7-nov-2026, 9:07; añadido después, sin cambiar nada de lo de arriba)
+Un solo comando, `python -P scripts/contraste.py`, sobre `data/interim/municipios.csv` (MD5 `f4b7b1c4…`, el mismo del 2-nov). Resultado completo en `resultados/contraste_real.json` (commit `c3c8a34`).
+
+| Prueba | Resultado | ¿Sale lo esperado? |
+|---|---|---|
+| **H1 (1)** β₁ e intervalo HC1 | β₁ = −0,79 (IC −1,17 a −0,40): **−7,6 % de solicitudes por cada +10 puntos** de mercado sobre el tope (IC −11,1 % a −3,9 %) | ✅ |
+| **H1 (2)** permutación por tercios, 2.000 sorteos | p = 0,0005: ningún sorteo da un β₁ tan negativo (umbral 0,01) | ✅ |
+| **H1 (3)** sin Madrid capital | β₁ = −0,72 (−7,0 % por cada 10 puntos) | ✅ |
+| **→ H1** | **Confirmada** según la regla fijada | ✅ |
+| **H2** experimento natural, tramo de alquiler 580-767 € (24 municipios con 600 €, 18 con 900 €) | Razón de tasas con tope 600 = 0,76 (IC 0,57 a 1,02): un 24 % menos, pero el intervalo **incluye el 1** | ⚠️ va en la dirección esperada, sin precisión suficiente |
+| **R1** Ayudas al alquiler 5.1 (2022-2023) | β₁ = −0,77 (IC −1,18 a −0,37) | ✅ mismo signo |
+| **Topes falsos** (desviación; menor = mejor) | tope real 1.022,7; 600 € para todos 972,5; **900 € para todos 966,3** | ❌ los topes falsos ajustan mejor que el real |
+| Robustez: binomial negativa / por hogar de alquiler / SERPAVI 2023 / alquiler del portal (37 municipios) / ≥ 1.000 jóvenes (74) | β₁ = −0,71 / −0,69 / −0,68 / −0,83 / −0,79 | ✅ todos negativos y parecidos |
+
+**Lectura (según «Qué se cuenta», escrito antes):** H1 se confirma: donde más parte del mercado de alquiler supera el tope, menos jóvenes piden el Bono, y lo mismo pasa en las Ayudas. Pero **dos comprobaciones no señalan el tope en concreto**: el experimento natural (H2) no llega a ser preciso, y un umbral de 900 € igual para todos explica las solicitudes mejor que el tope real. Se cuenta así, con las dos cosas.
+
+**Exploratorio (no preregistrado, hecho después de ver lo anterior; `scripts/exploratorio_topes_falsos.py` → `resultados/exploratorio_topes_falsos.json`):**
+- Con 600 € para todos, el signo sale **al revés** (β = +1,82): más mercado por encima de 600 € → más solicitudes. Lo empujan los 29 municipios con tope de 900 €, que tienen casi todo el mercado por encima de 600 € y aun así piden más. No es una explicación rival del tope
+- Con el tope real y el de 900 € para todos en el mismo modelo, **los dos siguen negativos** y sus intervalos no tocan el 0: tope real β = −0,54 (IC −0,89 a −0,20; −5,3 % por cada 10 puntos), 900 € para todos β = −1,68. El tope real añade algo, pero no lo explica todo: el alquiler caro en general también frena las solicitudes
