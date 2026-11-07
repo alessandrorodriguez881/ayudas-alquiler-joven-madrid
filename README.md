@@ -6,13 +6,14 @@ Proyecto para **DataMad 2026** (URJC, UCM y Comunidad de Madrid), sobre el **Bon
 ## La pregunta
 El Bono Alquiler Joven (RD 42/2022) da 250 € al mes, pero solo si el alquiler no pasa de **600 €**, o de **900 €** en los 29 municipios del Anexo II del Acuerdo del Consejo de Gobierno de 14-sep-2022.
 
-Donde casi todos los pisos cuestan más que el tope, ¿piden la ayuda menos jóvenes? Si es así, el tope no rechaza: **disuade**. Y eso no se ve en el número de solicitudes rechazadas, porque quien no llega al tope ni siquiera la pide.
+Donde casi todos los pisos cuestan más que el tope, ¿piden la ayuda menos jóvenes? Si es así, el tope no solo rechaza: también **frena las solicitudes**. Y eso no se ve en el número de solicitudes rechazadas, porque quien no llega al tope ni siquiera la pide.
 
-El nuevo Plan Estatal de Vivienda 2026-2030 (RD 326/2026) sube el tope general a 1.000 € y deja que cada comunidad lo cambie si lo justifica con estudios actualizados de oferta (art. 135). Este proyecto quiere aportar ese estudio para la Comunidad de Madrid, con datos abiertos.
+El nuevo Plan Estatal de Vivienda 2026-2030 (RD 326/2026, art. 133.1.e) pone el tope en 1.000 €, o en **500 € en los municipios de 10.000 habitantes o menos**, y deja que cada comunidad lo suba si lo justifica con estudios actualizados de la oferta de alquiler (art. 135). Este proyecto quiere ser una base abierta y repetible para ese estudio en la Comunidad de Madrid.
 
 ## Estado (7-nov-2026)
 - **Trabajo previo, declarado en [TRABAJO_PREVIO.md](TRABAJO_PREVIO.md):** datos descargados y verificados, una tabla de 159 municipios, y la hipótesis y las reglas para darla por buena escritas antes de ver el resultado ([PREREGISTRO.md](PREREGISTRO.md)). El contraste se probó antes solo con datos inventados.
-- **Contraste real hecho el 7-nov** (`resultados/contraste_real.json`): la hipótesis principal se confirma. Por cada 10 puntos más de mercado de alquiler por encima del tope, hay un **7,6 % menos de solicitudes** por joven (intervalo del 3,9 % al 11,1 %), y lo mismo en las Ayudas al alquiler. Dos comprobaciones no señalan el tope en concreto: el experimento natural no llega a ser preciso y un umbral de 900 € igual para todos ajusta mejor. Todo, en la última sección de [PREREGISTRO.md](PREREGISTRO.md).
+- **Contraste real hecho el 7-nov** (`resultados/contraste_real.json`): la hipótesis principal cumple las tres condiciones fijadas antes de mirar. **Donde más alquileres superan el tope, menos jóvenes piden el Bono:** por cada 10 puntos más de mercado por encima del tope, un **7,6 % menos de solicitudes** por joven (intervalo del 3,9 % al 11,1 %). El mismo patrón sale en las Ayudas al alquiler, que tienen los mismos topes (no es una prueba independiente).
+- **Lo que no salió:** un umbral de 900 € igual para todos explica las solicitudes mejor que el tope real, así que una parte es el tope y otra el alquiler caro en sí; y la comparación entre municipios parecidos con tope de 600 y de 900 € va en la misma dirección, pero no es precisa. Separando las dos cosas (análisis exploratorio, hecho después), la parte del tope es un **−5,3 % por cada 10 puntos** (intervalo del −8,5 % al −2,0 %): es la que usa el simulador. Todo, en la última sección de [PREREGISTRO.md](PREREGISTRO.md) y en `resultados/figuras/contraste_todas_las_pruebas.png`.
 - Las notas internas de planificación (`PLAN.md`, `IDEAS.md`) no están en el repositorio.
 
 ## Cómo repetirlo
@@ -21,13 +22,17 @@ Python 3.11 o posterior.
 ```bash
 pip install -r requirements.txt
 python scripts/preparar_datos.py          # data/interim/municipios.csv (159 municipios)
-python scripts/contraste.py --sintetico   # potencia y falsos positivos con datos inventados
+python scripts/potencia_umbral.py         # tabla de potencia del preregistro, con las simulaciones guardadas
 python scripts/contraste.py               # contraste real (a partir del 7-nov-2026)
 python scripts/exploratorio_topes_falsos.py  # exploratorio, no preregistrado: los topes falsos, más de cerca
 python scripts/necesidad_2024.py          # tabla de 2024 e índice de necesidad (desarrollo)
 python scripts/simulador.py               # reparto de los 5.300 bonos (31,8 M€) con distintas reglas
 python scripts/graficos.py                # figuras (resultados/figuras/) y mapa municipal para la app
 ```
+
+Dos pasos que no hace falta repetir, porque su resultado ya está en el repositorio:
+- `scripts/codigos_municipios.py` y `scripts/topes_convocatorias.py` sacan los códigos INE y los topes de 600 / 900 € de cada convocatoria (29 municipios en 2022, 55 en 2024) de los PDF oficiales, que no se suben: sus enlaces y huellas están en [docs_oficiales/FUENTES.md](docs_oficiales/FUENTES.md). Con los PDF en `docs_oficiales/`, regeneran `data/interim/topes_900_convocatorias.csv` idéntico.
+- Las simulaciones de potencia con datos inventados tardan unos 13 minutos. Las del preregistro se hicieron con `python scripts/contraste.py --sintetico --sims 200 --betas 0 -0.5 --sin-ensayo` y `--sims 100 --betas -1.1 --sin-ensayo` (cada una escribe su `resultados/potencia_sintetica_<sims>x199.json`).
 
 Los CSV del portal que usamos están en `data/raw/`, tal y como se descargaron. El portal cambia sus ficheros: entre el 21-oct y el 5-nov pasó de Latin-1 a UTF-8 y añadió años. `scripts/verificar_descargas.py` lo comprueba (resultado en [data/VERIFICACION.md](data/VERIFICACION.md)) y `scripts/descargar.py` los vuelve a bajar.
 

@@ -7,27 +7,51 @@
   "of_young_2024": 0.9959161861948362
  },
  "betas": {
-  "central": -0.7855472570366644,
-  "ic_bajo": -1.1724736639221036,
-  "ic_alto": -0.39862085015122506,
-  "prudente_exploratorio": -0.5446,
+  "central": -0.5446185552468725,
+  "ic_bajo": -0.8893596516932294,
+  "ic_alto": -0.19987745880051572,
+  "contraste_preregistrado": -0.7855472570366644,
   "sin_efecto": 0.0
  },
  "gap_above_cap": {
   "2022_rents_2022_list": {
    "all": 0.313,
    "without_madrid_city": 0.218,
-   "madrid_city": 0.399
+   "madrid_city": 0.399,
+   "over_10000_without_madrid": 0.217,
+   "10000_or_fewer": 0.228
   },
   "2024_rents_2022_list": {
    "all": 0.417,
    "without_madrid_city": 0.315,
-   "madrid_city": 0.504
+   "madrid_city": 0.504,
+   "over_10000_without_madrid": 0.312,
+   "10000_or_fewer": 0.346
   },
   "2024_rents_2024_list": {
    "all": 0.384,
    "without_madrid_city": 0.244,
-   "madrid_city": 0.504
+   "madrid_city": 0.504,
+   "over_10000_without_madrid": 0.242,
+   "10000_or_fewer": 0.255
+  },
+  "2024_rents_plan_estatal": {
+   "all": 0.299,
+   "without_madrid_city": 0.188,
+   "madrid_city": 0.394,
+   "over_10000_without_madrid": 0.148,
+   "10000_or_fewer": 0.581
+  },
+  "2024_rents_plan_p75_hasta_1000": {
+   "all": 0.284,
+   "without_madrid_city": 0.154,
+   "madrid_city": 0.394,
+   "over_10000_without_madrid": 0.148,
+   "10000_or_fewer": 0.214
+  },
+  "municipalities_10000_or_fewer": {
+   "n": 78,
+   "young_2024": 53817
   },
   "young_2024_where_over_half_above_cap": {
    "municipalities": 21,
@@ -35,23 +59,43 @@
    "of_all_young": 0.612
   }
  },
+ "young_by_group": {
+  "Madrid capital": 684390,
+  "resto, necesidad alta": 225245,
+  "resto, necesidad baja": 181759,
+  "resto, necesidad media": 174043
+ },
+ "requests_not_made_2022": {
+  "actual_requests_2022": 48298,
+  "central": 9324,
+  "ic_bajo": 16348,
+  "ic_alto": 3193,
+  "contraste_preregistrado": 14131,
+  "sin_efecto": 0
+ },
  "rules": {
   "lista_2022_29": {
    "allocation": "llegada",
    "central": {
-    "requests": 49461,
+    "requests": 50666,
     "bonos": 5300,
-    "requests_per_bono": 9.33,
-    "extra_meur_same_success_rate": -0.59,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.66,
-     "baja": 2.09,
-     "media": 3.11
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0571,
+     "resto, necesidad alta": 3.6278,
+     "resto, necesidad baja": 2.181,
+     "resto, necesidad media": 3.5935
     },
-    "ratio_high_vs_low_need": 2.23,
-    "pct_bonos_high_need": 85.7,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.2,
+    "requests_per_bono": 9.5597,
+    "extra_meur_same_success_rate": -0.3891,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6606,
+     "baja": 2.1007,
+     "media": 3.1075
+    },
+    "ratio_high_vs_low_need": 2.219,
+    "pct_bonos_high_need": 85.67,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.3,
     "mean_share_above_cap_weighted_by_young": 0.417
    },
    "movers_vs_actual_2024_55": {
@@ -59,158 +103,188 @@
      {
       "municipio": "Arganda del Rey",
       "indice_necesidad": 78.2,
-      "bonos_now": 44.4,
-      "bonos": 30.2,
-      "delta": -14.3
+      "bonos_now": 40.0,
+      "bonos": 30.6,
+      "delta": -9.4
      },
      {
       "municipio": "Colmenar Viejo",
       "indice_necesidad": 55.6,
-      "bonos_now": 36.4,
-      "bonos": 24.3,
-      "delta": -12.1
+      "bonos_now": 32.4,
+      "bonos": 24.5,
+      "delta": -7.9
      },
      {
       "municipio": "Aranjuez",
       "indice_necesidad": 66.2,
-      "bonos_now": 48.8,
-      "bonos": 38.5,
-      "delta": -10.3
+      "bonos_now": 45.6,
+      "bonos": 38.6,
+      "delta": -6.9
      },
      {
       "municipio": "Navalcarnero",
       "indice_necesidad": 73.5,
-      "bonos_now": 19.6,
-      "bonos": 13.1,
-      "delta": -6.5
+      "bonos_now": 17.5,
+      "bonos": 13.2,
+      "delta": -4.3
      },
      {
       "municipio": "Mejorada del Campo",
       "indice_necesidad": 62.5,
-      "bonos_now": 12.9,
-      "bonos": 8.3,
-      "delta": -4.6
+      "bonos_now": 11.5,
+      "bonos": 8.5,
+      "delta": -3.1
      }
     ],
     "gain": [
      {
       "municipio": "Madrid",
       "indice_necesidad": 70.8,
-      "bonos_now": 3392.7,
-      "bonos": 3456.6,
-      "delta": 63.9
+      "bonos_now": 3418.7,
+      "bonos": 3461.0,
+      "delta": 42.3
      },
      {
       "municipio": "Alcalá de Henares",
       "indice_necesidad": 66.9,
-      "bonos_now": 150.3,
-      "bonos": 153.1,
-      "delta": 2.8
+      "bonos_now": 149.2,
+      "bonos": 151.1,
+      "delta": 1.8
      },
      {
       "municipio": "Móstoles",
       "indice_necesidad": 61.5,
-      "bonos_now": 131.5,
-      "bonos": 134.0,
-      "delta": 2.5
+      "bonos_now": 131.0,
+      "bonos": 132.6,
+      "delta": 1.6
      },
      {
       "municipio": "Getafe",
       "indice_necesidad": 57.6,
-      "bonos_now": 125.8,
-      "bonos": 128.2,
-      "delta": 2.4
+      "bonos_now": 126.7,
+      "bonos": 128.3,
+      "delta": 1.6
      },
      {
       "municipio": "Leganés",
       "indice_necesidad": 61.3,
-      "bonos_now": 124.5,
-      "bonos": 126.8,
-      "delta": 2.3
+      "bonos_now": 124.3,
+      "bonos": 125.8,
+      "delta": 1.5
      }
     ]
    },
    "ic_bajo": {
-    "requests": 47590,
+    "requests": 48952,
     "bonos": 5300,
-    "requests_per_bono": 8.98,
-    "extra_meur_same_success_rate": -0.95,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.67,
-     "baja": 2.07,
-     "media": 3.1
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0477,
+     "resto, necesidad alta": 3.6622,
+     "resto, necesidad baja": 2.158,
+     "resto, necesidad media": 3.6099
     },
-    "ratio_high_vs_low_need": 2.256,
-    "pct_bonos_high_need": 85.8,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.1,
+    "requests_per_bono": 9.2362,
+    "extra_meur_same_success_rate": -0.6789,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6634,
+     "baja": 2.084,
+     "media": 3.1055
+    },
+    "ratio_high_vs_low_need": 2.238,
+    "pct_bonos_high_need": 85.72,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.18,
     "mean_share_above_cap_weighted_by_young": 0.417
    },
    "ic_alto": {
-    "requests": 51412,
+    "requests": 52446,
     "bonos": 5300,
-    "requests_per_bono": 9.7,
-    "extra_meur_same_success_rate": -0.28,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.66,
-     "baja": 2.11,
-     "media": 3.11
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.066,
+     "resto, necesidad alta": 3.594,
+     "resto, necesidad baja": 2.2047,
+     "resto, necesidad media": 3.5773
     },
-    "ratio_high_vs_low_need": 2.209,
-    "pct_bonos_high_need": 85.6,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.4,
+    "requests_per_bono": 9.8954,
+    "extra_meur_same_success_rate": -0.1338,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6577,
+     "baja": 2.1179,
+     "media": 3.1102
+    },
+    "ratio_high_vs_low_need": 2.199,
+    "pct_bonos_high_need": 85.61,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.42,
     "mean_share_above_cap_weighted_by_young": 0.417
    },
-   "prudente_exploratorio": {
-    "requests": 50666,
+   "contraste_preregistrado": {
+    "requests": 49461,
     "bonos": 5300,
-    "requests_per_bono": 9.56,
-    "extra_meur_same_success_rate": -0.39,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.66,
-     "baja": 2.1,
-     "media": 3.11
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0506,
+     "resto, necesidad alta": 3.6518,
+     "resto, necesidad baja": 2.1649,
+     "resto, necesidad media": 3.6049
     },
-    "ratio_high_vs_low_need": 2.219,
+    "requests_per_bono": 9.3323,
+    "extra_meur_same_success_rate": -0.5878,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6626,
+     "baja": 2.089,
+     "media": 3.1061
+    },
+    "ratio_high_vs_low_need": 2.232,
     "pct_bonos_high_need": 85.7,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.3,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.22,
     "mean_share_above_cap_weighted_by_young": 0.417
    },
    "sin_efecto": {
     "requests": 53508,
     "bonos": 5300,
-    "requests_per_bono": 10.1,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.071,
+     "resto, necesidad alta": 3.5747,
+     "resto, necesidad baja": 2.2187,
+     "resto, necesidad media": 3.568
+    },
+    "requests_per_bono": 10.0958,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.66,
-     "baja": 2.13,
-     "media": 3.11
+     "alta": 4.6559,
+     "baja": 2.1281,
+     "media": 3.112
     },
     "ratio_high_vs_low_need": 2.188,
-    "pct_bonos_high_need": 85.6,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.5,
+    "pct_bonos_high_need": 85.58,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.48,
     "mean_share_above_cap_weighted_by_young": 0.417
    }
   },
   "actual_2024_55": {
    "allocation": "llegada",
    "central": {
-    "requests": 50393,
+    "requests": 51294,
     "bonos": 5300,
-    "requests_per_bono": 9.51,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.9952,
+     "resto, necesidad alta": 3.7456,
+     "resto, necesidad baja": 2.2435,
+     "resto, necesidad media": 3.6191
+    },
+    "requests_per_bono": 9.6781,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.63,
-     "baja": 2.17,
-     "media": 3.23
+     "alta": 4.6411,
+     "baja": 2.1517,
+     "media": 3.187
     },
-    "ratio_high_vs_low_need": 2.134,
-    "pct_bonos_high_need": 85.2,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.0,
+    "ratio_high_vs_low_need": 2.157,
+    "pct_bonos_high_need": 85.31,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.5,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "movers_vs_actual_2024_55": {
@@ -218,15 +292,15 @@
      {
       "municipio": "Ajalvir",
       "indice_necesidad": 62.3,
-      "bonos_now": 7.5,
-      "bonos": 7.5,
+      "bonos_now": 6.8,
+      "bonos": 6.8,
       "delta": 0.0
      },
      {
       "municipio": "San Sebastián de los Reyes",
       "indice_necesidad": 51.2,
-      "bonos_now": 61.7,
-      "bonos": 61.7,
+      "bonos_now": 62.6,
+      "bonos": 62.6,
       "delta": 0.0
      },
      {
@@ -239,15 +313,15 @@
      {
       "municipio": "San Martín de la Vega",
       "indice_necesidad": 66.9,
-      "bonos_now": 12.2,
-      "bonos": 12.2,
+      "bonos_now": 11.2,
+      "bonos": 11.2,
       "delta": 0.0
      },
      {
       "municipio": "San Lorenzo de El Escorial",
       "indice_necesidad": 56.1,
-      "bonos_now": 13.0,
-      "bonos": 13.0,
+      "bonos_now": 11.7,
+      "bonos": 11.7,
       "delta": 0.0
      }
     ],
@@ -255,29 +329,29 @@
      {
       "municipio": "Tres Cantos",
       "indice_necesidad": 34.1,
-      "bonos_now": 25.5,
-      "bonos": 25.5,
+      "bonos_now": 26.2,
+      "bonos": 26.2,
       "delta": 0.0
      },
      {
       "municipio": "Galapagar",
       "indice_necesidad": 44.6,
-      "bonos_now": 16.9,
-      "bonos": 16.9,
+      "bonos_now": 16.8,
+      "bonos": 16.8,
       "delta": 0.0
      },
      {
       "municipio": "Collado Mediano",
       "indice_necesidad": 28.7,
-      "bonos_now": 3.4,
-      "bonos": 3.4,
+      "bonos_now": 3.5,
+      "bonos": 3.5,
       "delta": 0.0
      },
      {
       "municipio": "Collado Villalba",
       "indice_necesidad": 76.0,
-      "bonos_now": 58.7,
-      "bonos": 58.7,
+      "bonos_now": 58.6,
+      "bonos": 58.6,
       "delta": 0.0
      },
      {
@@ -290,404 +364,683 @@
     ]
    },
    "ic_bajo": {
-    "requests": 49049,
+    "requests": 50020,
     "bonos": 5300,
-    "requests_per_bono": 9.25,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.9399,
+     "resto, necesidad alta": 3.8652,
+     "resto, necesidad baja": 2.2691,
+     "resto, necesidad media": 3.655
+    },
+    "requests_per_bono": 9.4377,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.62,
-     "baja": 2.2,
-     "media": 3.3
+     "alta": 4.6289,
+     "baja": 2.1749,
+     "media": 3.2454
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.9,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 63.1,
+    "ratio_high_vs_low_need": 2.128,
+    "pct_bonos_high_need": 85.08,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 63.79,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "ic_alto": {
-    "requests": 51864,
+    "requests": 52667,
     "bonos": 5300,
-    "requests_per_bono": 9.79,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0447,
+     "resto, necesidad alta": 3.635,
+     "resto, necesidad baja": 2.2258,
+     "resto, necesidad media": 3.5861
+    },
+    "requests_per_bono": 9.9372,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.65,
-     "baja": 2.14,
-     "media": 3.16
+     "alta": 4.6511,
+     "baja": 2.1351,
+     "media": 3.1372
     },
-    "ratio_high_vs_low_need": 2.173,
-    "pct_bonos_high_need": 85.4,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.8,
+    "ratio_high_vs_low_need": 2.178,
+    "pct_bonos_high_need": 85.49,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.14,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
-   "prudente_exploratorio": {
-    "requests": 51294,
+   "contraste_preregistrado": {
+    "requests": 50393,
     "bonos": 5300,
-    "requests_per_bono": 9.68,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.9572,
+     "resto, necesidad alta": 3.8282,
+     "resto, necesidad baja": 2.2605,
+     "resto, necesidad media": 3.6439
+    },
+    "requests_per_bono": 9.5081,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.64,
-     "baja": 2.15,
-     "media": 3.19
+     "alta": 4.6328,
+     "baja": 2.1672,
+     "media": 3.2268
     },
-    "ratio_high_vs_low_need": 2.158,
-    "pct_bonos_high_need": 85.3,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.5,
+    "ratio_high_vs_low_need": 2.138,
+    "pct_bonos_high_need": 85.16,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.01,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "sin_efecto": {
     "requests": 53508,
     "bonos": 5300,
-    "requests_per_bono": 10.1,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.071,
+     "resto, necesidad alta": 3.5747,
+     "resto, necesidad baja": 2.2187,
+     "resto, necesidad media": 3.568
+    },
+    "requests_per_bono": 10.0958,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.66,
-     "baja": 2.13,
-     "media": 3.11
+     "alta": 4.6559,
+     "baja": 2.1281,
+     "media": 3.112
     },
     "ratio_high_vs_low_need": 2.188,
-    "pct_bonos_high_need": 85.6,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.5,
+    "pct_bonos_high_need": 85.58,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.48,
     "mean_share_above_cap_weighted_by_young": 0.384
    }
   },
-  "1000_para_todos": {
+  "plan_estatal": {
    "allocation": "llegada",
    "central": {
-    "requests": 54800,
+    "requests": 53948,
     "bonos": 5300,
-    "requests_per_bono": 10.34,
-    "extra_meur_same_success_rate": 2.78,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.61,
-     "baja": 2.3,
-     "media": 3.26
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0422,
+     "resto, necesidad alta": 3.6525,
+     "resto, necesidad baja": 2.2273,
+     "resto, necesidad media": 3.5718
     },
-    "ratio_high_vs_low_need": 2.004,
-    "pct_bonos_high_need": 84.7,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.2,
-    "mean_share_above_cap_weighted_by_young": 0.275
+    "requests_per_bono": 10.1789,
+    "extra_meur_same_success_rate": 1.6454,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6494,
+     "baja": 2.157,
+     "media": 3.127
+    },
+    "ratio_high_vs_low_need": 2.155,
+    "pct_bonos_high_need": 85.46,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.11,
+    "mean_share_above_cap_weighted_by_young": 0.299
    },
    "movers_vs_actual_2024_55": {
     "lose": [
      {
-      "municipio": "Alcalá de Henares",
-      "indice_necesidad": 66.9,
-      "bonos_now": 150.3,
-      "bonos": 145.7,
-      "delta": -4.6
+      "municipio": "Ajalvir",
+      "indice_necesidad": 62.3,
+      "bonos_now": 6.8,
+      "bonos": 4.1,
+      "delta": -2.7
      },
      {
-      "municipio": "Leganés",
-      "indice_necesidad": 61.3,
-      "bonos_now": 124.5,
-      "bonos": 120.7,
-      "delta": -3.8
+      "municipio": "Colmenarejo",
+      "indice_necesidad": 45.1,
+      "bonos_now": 6.8,
+      "bonos": 4.2,
+      "delta": -2.5
+     },
+     {
+      "municipio": "Alcalá de Henares",
+      "indice_necesidad": 66.9,
+      "bonos_now": 149.2,
+      "bonos": 147.2,
+      "delta": -2.0
+     },
+     {
+      "municipio": "Camarma de Esteruelas",
+      "indice_necesidad": 52.7,
+      "bonos_now": 5.5,
+      "bonos": 3.5,
+      "delta": -2.0
      },
      {
       "municipio": "Fuenlabrada",
       "indice_necesidad": 64.0,
-      "bonos_now": 90.5,
-      "bonos": 86.8,
-      "delta": -3.7
-     },
-     {
-      "municipio": "Móstoles",
-      "indice_necesidad": 61.5,
-      "bonos_now": 131.5,
-      "bonos": 128.0,
-      "delta": -3.5
-     },
-     {
-      "municipio": "Aranjuez",
-      "indice_necesidad": 66.2,
-      "bonos_now": 48.8,
-      "bonos": 45.6,
-      "delta": -3.2
+      "bonos_now": 90.2,
+      "bonos": 88.3,
+      "delta": -1.9
      }
     ],
     "gain": [
      {
       "municipio": "Madrid",
       "indice_necesidad": 70.8,
-      "bonos_now": 3392.7,
-      "bonos": 3400.9,
-      "delta": 8.3
+      "bonos_now": 3418.7,
+      "bonos": 3450.8,
+      "delta": 32.2
      },
      {
       "municipio": "Villalbilla",
       "indice_necesidad": 28.2,
-      "bonos_now": 9.8,
-      "bonos": 14.6,
-      "delta": 4.8
+      "bonos_now": 10.0,
+      "bonos": 13.3,
+      "delta": 3.3
      },
      {
       "municipio": "Rivas-Vaciamadrid",
       "indice_necesidad": 45.8,
-      "bonos_now": 42.7,
-      "bonos": 45.5,
-      "delta": 2.8
+      "bonos_now": 43.8,
+      "bonos": 46.1,
+      "delta": 2.3
      },
      {
       "municipio": "Meco",
       "indice_necesidad": 28.2,
-      "bonos_now": 8.0,
-      "bonos": 10.8,
-      "delta": 2.8
+      "bonos_now": 8.1,
+      "bonos": 10.1,
+      "delta": 2.0
      },
      {
-      "municipio": "Sevilla la Nueva",
-      "indice_necesidad": 53.4,
-      "bonos_now": 4.6,
-      "bonos": 6.8,
-      "delta": 2.2
+      "municipio": "San Sebastián de los Reyes",
+      "indice_necesidad": 51.2,
+      "bonos_now": 62.6,
+      "bonos": 64.3,
+      "delta": 1.7
      }
     ]
    },
    "ic_bajo": {
-    "requests": 55574,
+    "requests": 54320,
     "bonos": 5300,
-    "requests_per_bono": 10.49,
-    "extra_meur_same_success_rate": 4.23,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.58,
-     "baja": 2.4,
-     "media": 3.35
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0155,
+     "resto, necesidad alta": 3.7101,
+     "resto, necesidad baja": 2.2485,
+     "resto, necesidad media": 3.5799
     },
-    "ratio_high_vs_low_need": 1.908,
-    "pct_bonos_high_need": 84.2,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 63.4,
-    "mean_share_above_cap_weighted_by_young": 0.275
+    "requests_per_bono": 10.2491,
+    "extra_meur_same_success_rate": 2.7342,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.641,
+     "baja": 2.1895,
+     "media": 3.1508
+    },
+    "ratio_high_vs_low_need": 2.12,
+    "pct_bonos_high_need": 85.31,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.77,
+    "mean_share_above_cap_weighted_by_young": 0.299
    },
    "ic_alto": {
-    "requests": 54122,
+    "requests": 53649,
     "bonos": 5300,
-    "requests_per_bono": 10.21,
-    "extra_meur_same_success_rate": 1.38,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.63,
-     "baja": 2.21,
-     "media": 3.18
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0623,
+     "resto, necesidad alta": 3.6014,
+     "resto, necesidad baja": 2.2184,
+     "resto, necesidad media": 3.5682
     },
-    "ratio_high_vs_low_need": 2.095,
-    "pct_bonos_high_need": 85.2,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.9,
-    "mean_share_above_cap_weighted_by_young": 0.275
+    "requests_per_bono": 10.1225,
+    "extra_meur_same_success_rate": 0.5929,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6544,
+     "baja": 2.1356,
+     "media": 3.1144
+    },
+    "ratio_high_vs_low_need": 2.179,
+    "pct_bonos_high_need": 85.55,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.37,
+    "mean_share_above_cap_weighted_by_young": 0.299
    },
-   "prudente_exploratorio": {
-    "requests": 54367,
+   "contraste_preregistrado": {
+    "requests": 54200,
     "bonos": 5300,
-    "requests_per_bono": 10.26,
-    "extra_meur_same_success_rate": 1.91,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.62,
-     "baja": 2.24,
-     "media": 3.21
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0243,
+     "resto, necesidad alta": 3.6921,
+     "resto, necesidad baja": 2.2408,
+     "resto, necesidad media": 3.5769
     },
-    "ratio_high_vs_low_need": 2.062,
-    "pct_bonos_high_need": 85.0,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.6,
-    "mean_share_above_cap_weighted_by_young": 0.275
+    "requests_per_bono": 10.2264,
+    "extra_meur_same_success_rate": 2.4026,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6438,
+     "baja": 2.1785,
+     "media": 3.1425
+    },
+    "ratio_high_vs_low_need": 2.132,
+    "pct_bonos_high_need": 85.36,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.88,
+    "mean_share_above_cap_weighted_by_young": 0.299
    },
    "sin_efecto": {
     "requests": 53508,
     "bonos": 5300,
-    "requests_per_bono": 10.1,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.071,
+     "resto, necesidad alta": 3.5747,
+     "resto, necesidad baja": 2.2187,
+     "resto, necesidad media": 3.568
+    },
+    "requests_per_bono": 10.0958,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.66,
-     "baja": 2.13,
-     "media": 3.11
+     "alta": 4.6559,
+     "baja": 2.1281,
+     "media": 3.112
     },
     "ratio_high_vs_low_need": 2.188,
-    "pct_bonos_high_need": 85.6,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.5,
-    "mean_share_above_cap_weighted_by_young": 0.275
+    "pct_bonos_high_need": 85.58,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.48,
+    "mean_share_above_cap_weighted_by_young": 0.299
    }
   },
-  "1000_o_p75_local": {
+  "plan_o_p75_local": {
    "allocation": "llegada",
    "central": {
-    "requests": 60129,
+    "requests": 57818,
     "bonos": 5300,
-    "requests_per_bono": 11.35,
-    "extra_meur_same_success_rate": 6.14,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.65,
-     "baja": 2.28,
-     "media": 3.02
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.1545,
+     "resto, necesidad alta": 3.4294,
+     "resto, necesidad baja": 2.2577,
+     "resto, necesidad media": 3.387
     },
-    "ratio_high_vs_low_need": 2.039,
-    "pct_bonos_high_need": 85.4,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 66.7,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 10.9091,
+    "extra_meur_same_success_rate": 4.0448,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6598,
+     "baja": 2.2052,
+     "media": 3.0102
+    },
+    "ratio_high_vs_low_need": 2.113,
+    "pct_bonos_high_need": 85.65,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 66.56,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
    "movers_vs_actual_2024_55": {
     "lose": [
      {
       "municipio": "Alcalá de Henares",
       "indice_necesidad": 66.9,
-      "bonos_now": 150.3,
-      "bonos": 132.8,
-      "delta": -17.5
+      "bonos_now": 149.2,
+      "bonos": 137.3,
+      "delta": -11.9
      },
      {
       "municipio": "Móstoles",
       "indice_necesidad": 61.5,
-      "bonos_now": 131.5,
-      "bonos": 116.7,
-      "delta": -14.9
+      "bonos_now": 131.0,
+      "bonos": 120.9,
+      "delta": -10.1
      },
      {
       "municipio": "Leganés",
       "indice_necesidad": 61.3,
-      "bonos_now": 124.5,
-      "bonos": 110.0,
-      "delta": -14.5
+      "bonos_now": 124.3,
+      "bonos": 114.4,
+      "delta": -9.9
      },
      {
       "municipio": "Getafe",
       "indice_necesidad": 57.6,
-      "bonos_now": 125.8,
-      "bonos": 113.1,
-      "delta": -12.7
+      "bonos_now": 126.7,
+      "bonos": 118.0,
+      "delta": -8.7
      },
      {
       "municipio": "Fuenlabrada",
       "indice_necesidad": 64.0,
-      "bonos_now": 90.5,
-      "bonos": 79.1,
-      "delta": -11.4
+      "bonos_now": 90.2,
+      "bonos": 82.4,
+      "delta": -7.8
      }
     ],
     "gain": [
      {
       "municipio": "Madrid",
       "indice_necesidad": 70.8,
-      "bonos_now": 3392.7,
-      "bonos": 3535.9,
-      "delta": 143.2
+      "bonos_now": 3418.7,
+      "bonos": 3527.7,
+      "delta": 109.0
      },
      {
       "municipio": "Rozas de Madrid (Las)",
       "indice_necesidad": 34.6,
-      "bonos_now": 34.5,
-      "bonos": 38.9,
-      "delta": 4.4
+      "bonos_now": 34.7,
+      "bonos": 37.8,
+      "delta": 3.1
      },
      {
       "municipio": "Majadahonda",
       "indice_necesidad": 54.9,
-      "bonos_now": 20.0,
-      "bonos": 23.9,
-      "delta": 4.0
+      "bonos_now": 19.9,
+      "bonos": 22.6,
+      "delta": 2.7
+     },
+     {
+      "municipio": "Tres Cantos",
+      "indice_necesidad": 34.1,
+      "bonos_now": 26.2,
+      "bonos": 28.7,
+      "delta": 2.5
      },
      {
       "municipio": "Pozuelo de Alarcón",
       "indice_necesidad": 29.2,
-      "bonos_now": 17.9,
-      "bonos": 21.5,
-      "delta": 3.6
-     },
-     {
-      "municipio": "Villalbilla",
-      "indice_necesidad": 28.2,
-      "bonos_now": 9.8,
-      "bonos": 13.3,
-      "delta": 3.5
+      "bonos_now": 17.8,
+      "bonos": 20.2,
+      "delta": 2.5
      }
     ]
    },
    "ic_bajo": {
-    "requests": 63828,
+    "requests": 60818,
     "bonos": 5300,
-    "requests_per_bono": 12.04,
-    "extra_meur_same_success_rate": 9.58,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.64,
-     "baja": 2.37,
-     "media": 2.98
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.2001,
+     "resto, necesidad alta": 3.3451,
+     "resto, necesidad baja": 2.2911,
+     "resto, necesidad media": 3.282
     },
-    "ratio_high_vs_low_need": 1.958,
-    "pct_bonos_high_need": 85.3,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 67.2,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 11.475,
+    "extra_meur_same_success_rate": 6.8648,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6595,
+     "baja": 2.2622,
+     "media": 2.9562
+    },
+    "ratio_high_vs_low_need": 2.06,
+    "pct_bonos_high_need": 85.65,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 67.15,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
    "ic_alto": {
-    "requests": 56729,
+    "requests": 55032,
     "bonos": 5300,
-    "requests_per_bono": 10.7,
-    "extra_meur_same_success_rate": 2.98,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.65,
-     "baja": 2.2,
-     "media": 3.06
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.1033,
+     "resto, necesidad alta": 3.5197,
+     "resto, necesidad baja": 2.2311,
+     "resto, necesidad media": 3.4995
     },
-    "ratio_high_vs_low_need": 2.114,
-    "pct_bonos_high_need": 85.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 66.2,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 10.3835,
+    "extra_meur_same_success_rate": 1.428,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6579,
+     "baja": 2.1546,
+     "media": 3.0724
+    },
+    "ratio_high_vs_low_need": 2.162,
+    "pct_bonos_high_need": 85.62,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.9,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
-   "prudente_exploratorio": {
-    "requests": 57978,
+   "contraste_preregistrado": {
+    "requests": 59891,
     "bonos": 5300,
-    "requests_per_bono": 10.94,
-    "extra_meur_same_success_rate": 4.14,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.65,
-     "baja": 2.23,
-     "media": 3.04
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.187,
+     "resto, necesidad alta": 3.3699,
+     "resto, necesidad baja": 2.2803,
+     "resto, necesidad media": 3.3128
     },
-    "ratio_high_vs_low_need": 2.085,
-    "pct_bonos_high_need": 85.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 66.4,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 11.3001,
+    "extra_meur_same_success_rate": 5.9937,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6598,
+     "baja": 2.2443,
+     "media": 2.9715
+    },
+    "ratio_high_vs_low_need": 2.076,
+    "pct_bonos_high_need": 85.65,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 66.98,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
    "sin_efecto": {
     "requests": 53508,
     "bonos": 5300,
-    "requests_per_bono": 10.1,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.071,
+     "resto, necesidad alta": 3.5747,
+     "resto, necesidad baja": 2.2187,
+     "resto, necesidad media": 3.568
+    },
+    "requests_per_bono": 10.0958,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.66,
-     "baja": 2.13,
-     "media": 3.11
+     "alta": 4.6559,
+     "baja": 2.1281,
+     "media": 3.112
     },
     "ratio_high_vs_low_need": 2.188,
-    "pct_bonos_high_need": 85.6,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 65.5,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "pct_bonos_high_need": 85.58,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.48,
+    "mean_share_above_cap_weighted_by_young": 0.173
+   }
+  },
+  "plan_p75_hasta_1000": {
+   "allocation": "llegada",
+   "central": {
+    "requests": 54207,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0181,
+     "resto, necesidad alta": 3.6579,
+     "resto, necesidad baja": 2.2956,
+     "resto, necesidad media": 3.5881
+    },
+    "requests_per_bono": 10.2277,
+    "extra_meur_same_success_rate": 1.806,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6332,
+     "baja": 2.214,
+     "media": 3.1782
+    },
+    "ratio_high_vs_low_need": 2.093,
+    "pct_bonos_high_need": 85.16,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.8,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "movers_vs_actual_2024_55": {
+    "lose": [
+     {
+      "municipio": "Alcalá de Henares",
+      "indice_necesidad": 66.9,
+      "bonos_now": 149.2,
+      "bonos": 146.5,
+      "delta": -2.7
+     },
+     {
+      "municipio": "Leganés",
+      "indice_necesidad": 61.3,
+      "bonos_now": 124.3,
+      "bonos": 122.0,
+      "delta": -2.3
+     },
+     {
+      "municipio": "Fuenlabrada",
+      "indice_necesidad": 64.0,
+      "bonos_now": 90.2,
+      "bonos": 87.9,
+      "delta": -2.3
+     },
+     {
+      "municipio": "Móstoles",
+      "indice_necesidad": 61.5,
+      "bonos_now": 131.0,
+      "bonos": 128.9,
+      "delta": -2.1
+     },
+     {
+      "municipio": "Parla",
+      "indice_necesidad": 80.1,
+      "bonos_now": 64.5,
+      "bonos": 62.5,
+      "delta": -2.0
+     }
+    ],
+    "gain": [
+     {
+      "municipio": "Madrid",
+      "indice_necesidad": 70.8,
+      "bonos_now": 3418.7,
+      "bonos": 3434.3,
+      "delta": 15.7
+     },
+     {
+      "municipio": "Villalbilla",
+      "indice_necesidad": 28.2,
+      "bonos_now": 10.0,
+      "bonos": 13.2,
+      "delta": 3.2
+     },
+     {
+      "municipio": "Rivas-Vaciamadrid",
+      "indice_necesidad": 45.8,
+      "bonos_now": 43.8,
+      "bonos": 45.9,
+      "delta": 2.1
+     },
+     {
+      "municipio": "Meco",
+      "indice_necesidad": 28.2,
+      "bonos_now": 8.1,
+      "bonos": 10.0,
+      "delta": 1.9
+     },
+     {
+      "municipio": "San Sebastián de los Reyes",
+      "indice_necesidad": 51.2,
+      "bonos_now": 62.6,
+      "bonos": 64.0,
+      "delta": 1.4
+     }
+    ]
+   },
+   "ic_bajo": {
+    "requests": 54724,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.9785,
+     "resto, necesidad alta": 3.7176,
+     "resto, necesidad baja": 2.3549,
+     "resto, necesidad media": 3.6046
+    },
+    "requests_per_bono": 10.3253,
+    "extra_meur_same_success_rate": 2.991,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6159,
+     "baja": 2.2792,
+     "media": 3.229
+    },
+    "ratio_high_vs_low_need": 2.025,
+    "pct_bonos_high_need": 84.85,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.29,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "ic_alto": {
+    "requests": 53749,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0529,
+     "resto, necesidad alta": 3.6037,
+     "resto, necesidad baja": 2.2447,
+     "resto, necesidad media": 3.5747
+    },
+    "requests_per_bono": 10.1414,
+    "extra_meur_same_success_rate": 0.6532,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6482,
+     "baja": 2.1574,
+     "media": 3.1345
+    },
+    "ratio_high_vs_low_need": 2.154,
+    "pct_bonos_high_need": 85.44,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.25,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "contraste_preregistrado": {
+    "requests": 54562,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.991,
+     "resto, necesidad alta": 3.699,
+     "resto, necesidad baja": 2.3361,
+     "resto, necesidad media": 3.5993
+    },
+    "requests_per_bono": 10.2947,
+    "extra_meur_same_success_rate": 2.6308,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6214,
+     "baja": 2.2586,
+     "media": 3.2129
+    },
+    "ratio_high_vs_low_need": 2.046,
+    "pct_bonos_high_need": 84.95,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.45,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "sin_efecto": {
+    "requests": 53508,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.071,
+     "resto, necesidad alta": 3.5747,
+     "resto, necesidad baja": 2.2187,
+     "resto, necesidad media": 3.568
+    },
+    "requests_per_bono": 10.0958,
+    "extra_meur_same_success_rate": 0.0,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.6559,
+     "baja": 2.1281,
+     "media": 3.112
+    },
+    "ratio_high_vs_low_need": 2.188,
+    "pct_bonos_high_need": 85.58,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 65.48,
+    "mean_share_above_cap_weighted_by_young": 0.284
    }
   },
   "necesidad_topes_actuales": {
    "allocation": "necesidad^1",
    "central": {
-    "requests": 50393,
+    "requests": 51294,
     "bonos": 5300,
-    "requests_per_bono": 9.51,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6788,
+     "resto, necesidad alta": 4.55,
+     "resto, necesidad baja": 2.3692,
+     "resto, necesidad media": 3.6911
+    },
+    "requests_per_bono": 9.6781,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+     "alta": 4.5991,
+     "baja": 2.1901,
+     "media": 3.4279
     },
     "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
+    "pct_bonos_high_need": 84.54,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.42,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "movers_vs_actual_2024_55": {
@@ -695,158 +1048,188 @@
      {
       "municipio": "Madrid",
       "indice_necesidad": 70.8,
-      "bonos_now": 3392.7,
-      "bonos": 3202.2,
-      "delta": -190.4
+      "bonos_now": 3418.7,
+      "bonos": 3202.1,
+      "delta": -216.6
      },
      {
       "municipio": "Alcorcón",
       "indice_necesidad": 52.5,
-      "bonos_now": 111.3,
+      "bonos_now": 110.9,
       "bonos": 92.1,
-      "delta": -19.2
+      "delta": -18.9
      },
      {
       "municipio": "Pinto",
       "indice_necesidad": 63.7,
-      "bonos_now": 51.5,
+      "bonos_now": 51.3,
       "bonos": 38.4,
-      "delta": -13.1
+      "delta": -12.9
      },
      {
       "municipio": "Getafe",
       "indice_necesidad": 57.6,
-      "bonos_now": 125.8,
+      "bonos_now": 126.7,
       "bonos": 115.5,
-      "delta": -10.3
+      "delta": -11.2
      },
      {
       "municipio": "San Sebastián de los Reyes",
       "indice_necesidad": 51.2,
-      "bonos_now": 61.7,
+      "bonos_now": 62.6,
       "bonos": 53.5,
-      "delta": -8.2
+      "delta": -9.1
      }
     ],
     "gain": [
      {
       "municipio": "Parla",
       "indice_necesidad": 80.1,
-      "bonos_now": 65.0,
+      "bonos_now": 64.5,
       "bonos": 119.9,
-      "delta": 54.9
+      "delta": 55.4
      },
      {
       "municipio": "Fuenlabrada",
       "indice_necesidad": 64.0,
-      "bonos_now": 90.5,
+      "bonos_now": 90.2,
       "bonos": 135.9,
-      "delta": 45.5
+      "delta": 45.8
      },
      {
       "municipio": "Majadahonda",
       "indice_necesidad": 54.9,
-      "bonos_now": 20.0,
+      "bonos_now": 19.9,
       "bonos": 45.0,
-      "delta": 25.0
+      "delta": 25.1
      },
      {
       "municipio": "Torrejón de Ardoz",
       "indice_necesidad": 72.5,
       "bonos_now": 94.5,
       "bonos": 113.0,
-      "delta": 18.4
+      "delta": 18.5
      },
      {
       "municipio": "Boadilla del Monte",
       "indice_necesidad": 34.8,
       "bonos_now": 5.8,
       "bonos": 21.9,
-      "delta": 16.1
+      "delta": 16.0
      }
     ]
    },
    "ic_bajo": {
-    "requests": 49049,
+    "requests": 50020,
     "bonos": 5300,
-    "requests_per_bono": 9.25,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.679,
+     "resto, necesidad alta": 4.5503,
+     "resto, necesidad baja": 2.3683,
+     "resto, necesidad media": 3.6906
+    },
+    "requests_per_bono": 9.4377,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+     "alta": 4.5994,
+     "baja": 2.1889,
+     "media": 3.4271
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
+    "ratio_high_vs_low_need": 2.101,
+    "pct_bonos_high_need": 84.54,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.42,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "ic_alto": {
-    "requests": 51864,
+    "requests": 52667,
     "bonos": 5300,
-    "requests_per_bono": 9.79,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6917
+    },
+    "requests_per_bono": 9.9372,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+     "alta": 4.5988,
+     "baja": 2.1913,
+     "media": 3.4286
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
-   "prudente_exploratorio": {
-    "requests": 51294,
+   "contraste_preregistrado": {
+    "requests": 50393,
     "bonos": 5300,
-    "requests_per_bono": 9.68,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.679,
+     "resto, necesidad alta": 4.5502,
+     "resto, necesidad baja": 2.3686,
+     "resto, necesidad media": 3.6907
+    },
+    "requests_per_bono": 9.5081,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+     "alta": 4.5993,
+     "baja": 2.1893,
+     "media": 3.4274
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
+    "ratio_high_vs_low_need": 2.101,
+    "pct_bonos_high_need": 84.54,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.42,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "sin_efecto": {
     "requests": 53508,
     "bonos": 5300,
-    "requests_per_bono": 10.1,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6921
+    },
+    "requests_per_bono": 10.0958,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4292
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
     "mean_share_above_cap_weighted_by_young": 0.384
    }
   },
   "necesidad2_topes_actuales": {
    "allocation": "necesidad^2",
    "central": {
-    "requests": 50393,
+    "requests": 51294,
     "bonos": 5300,
-    "requests_per_bono": 9.51,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0123,
+     "resto, necesidad alta": 4.7805,
+     "resto, necesidad baja": 1.3587,
+     "resto, necesidad media": 3.1365
+    },
+    "requests_per_bono": 9.6781,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.86,
-     "baja": 1.15,
-     "media": 2.71
+     "alta": 4.8607,
+     "baja": 1.1542,
+     "media": 2.7114
     },
-    "ratio_high_vs_low_need": 4.226,
-    "pct_bonos_high_need": 89.3,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.7,
+    "ratio_high_vs_low_need": 4.211,
+    "pct_bonos_high_need": 89.35,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.72,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "movers_vs_actual_2024_55": {
@@ -854,299 +1237,542 @@
      {
       "municipio": "Alcorcón",
       "indice_necesidad": 52.5,
-      "bonos_now": 111.3,
+      "bonos_now": 110.9,
       "bonos": 73.0,
-      "delta": -38.3
+      "delta": -37.9
      },
      {
       "municipio": "Alcobendas",
       "indice_necesidad": 39.5,
-      "bonos_now": 63.0,
+      "bonos_now": 63.7,
       "bonos": 33.0,
-      "delta": -30.0
+      "delta": -30.7
      },
      {
       "municipio": "Getafe",
       "indice_necesidad": 57.6,
-      "bonos_now": 125.8,
+      "bonos_now": 126.7,
       "bonos": 100.6,
-      "delta": -25.2
+      "delta": -26.1
      },
      {
       "municipio": "San Sebastián de los Reyes",
       "indice_necesidad": 51.2,
-      "bonos_now": 61.7,
+      "bonos_now": 62.6,
       "bonos": 41.4,
-      "delta": -20.3
+      "delta": -21.2
      },
      {
-      "municipio": "Rozas de Madrid (Las)",
-      "indice_necesidad": 34.6,
-      "bonos_now": 34.5,
-      "bonos": 19.3,
-      "delta": -15.3
+      "municipio": "Tres Cantos",
+      "indice_necesidad": 34.1,
+      "bonos_now": 26.2,
+      "bonos": 10.6,
+      "delta": -15.6
      }
     ],
     "gain": [
      {
       "municipio": "Parla",
       "indice_necesidad": 80.1,
-      "bonos_now": 65.0,
+      "bonos_now": 64.5,
       "bonos": 145.3,
-      "delta": 80.4
+      "delta": 80.9
      },
      {
       "municipio": "Fuenlabrada",
       "indice_necesidad": 64.0,
-      "bonos_now": 90.5,
+      "bonos_now": 90.2,
       "bonos": 131.5,
-      "delta": 41.1
-     },
-     {
-      "municipio": "Madrid",
-      "indice_necesidad": 70.8,
-      "bonos_now": 3392.7,
-      "bonos": 3430.4,
-      "delta": 37.8
+      "delta": 41.3
      },
      {
       "municipio": "Torrejón de Ardoz",
       "indice_necesidad": 72.5,
       "bonos_now": 94.5,
       "bonos": 124.0,
-      "delta": 29.4
+      "delta": 29.5
+     },
+     {
+      "municipio": "Arganda del Rey",
+      "indice_necesidad": 78.2,
+      "bonos_now": 40.0,
+      "bonos": 60.2,
+      "delta": 20.2
      },
      {
       "municipio": "Majadahonda",
       "indice_necesidad": 54.9,
-      "bonos_now": 20.0,
+      "bonos_now": 19.9,
       "bonos": 37.4,
       "delta": 17.4
      }
     ]
    },
    "ic_bajo": {
-    "requests": 49049,
+    "requests": 50020,
     "bonos": 5300,
-    "requests_per_bono": 9.25,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0124,
+     "resto, necesidad alta": 4.7806,
+     "resto, necesidad baja": 1.3587,
+     "resto, necesidad media": 3.1359
+    },
+    "requests_per_bono": 9.4377,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.86,
-     "baja": 1.15,
-     "media": 2.71
+     "alta": 4.8608,
+     "baja": 1.1542,
+     "media": 2.7105
     },
-    "ratio_high_vs_low_need": 4.226,
-    "pct_bonos_high_need": 89.3,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.7,
+    "ratio_high_vs_low_need": 4.211,
+    "pct_bonos_high_need": 89.35,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.73,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "ic_alto": {
-    "requests": 51864,
+    "requests": 52667,
     "bonos": 5300,
-    "requests_per_bono": 9.79,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0122,
+     "resto, necesidad alta": 4.7804,
+     "resto, necesidad baja": 1.3586,
+     "resto, necesidad media": 3.137
+    },
+    "requests_per_bono": 9.9372,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.86,
-     "baja": 1.15,
-     "media": 2.71
+     "alta": 4.8606,
+     "baja": 1.1542,
+     "media": 2.712
     },
-    "ratio_high_vs_low_need": 4.226,
-    "pct_bonos_high_need": 89.3,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.7,
+    "ratio_high_vs_low_need": 4.211,
+    "pct_bonos_high_need": 89.34,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.72,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
-   "prudente_exploratorio": {
-    "requests": 51294,
+   "contraste_preregistrado": {
+    "requests": 50393,
     "bonos": 5300,
-    "requests_per_bono": 9.68,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0124,
+     "resto, necesidad alta": 4.7806,
+     "resto, necesidad baja": 1.3587,
+     "resto, necesidad media": 3.1361
+    },
+    "requests_per_bono": 9.5081,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.86,
-     "baja": 1.15,
-     "media": 2.71
+     "alta": 4.8608,
+     "baja": 1.1542,
+     "media": 2.7108
     },
-    "ratio_high_vs_low_need": 4.226,
-    "pct_bonos_high_need": 89.3,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.7,
+    "ratio_high_vs_low_need": 4.211,
+    "pct_bonos_high_need": 89.35,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.73,
     "mean_share_above_cap_weighted_by_young": 0.384
    },
    "sin_efecto": {
     "requests": 53508,
     "bonos": 5300,
-    "requests_per_bono": 10.1,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 5.0122,
+     "resto, necesidad alta": 4.7804,
+     "resto, necesidad baja": 1.3586,
+     "resto, necesidad media": 3.137
+    },
+    "requests_per_bono": 10.0958,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.86,
-     "baja": 1.15,
-     "media": 2.71
+     "alta": 4.8606,
+     "baja": 1.1542,
+     "media": 2.712
     },
-    "ratio_high_vs_low_need": 4.226,
-    "pct_bonos_high_need": 89.3,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 64.7,
+    "ratio_high_vs_low_need": 4.211,
+    "pct_bonos_high_need": 89.34,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 64.72,
     "mean_share_above_cap_weighted_by_young": 0.384
    }
   },
-  "necesidad_1000_o_p75_local": {
+  "necesidad_plan_o_p75_local": {
    "allocation": "necesidad^1",
    "central": {
-    "requests": 60129,
+    "requests": 57818,
     "bonos": 5300,
-    "requests_per_bono": 11.35,
-    "extra_meur_same_success_rate": 6.14,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6922
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 10.9091,
+    "extra_meur_same_success_rate": 4.0448,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4293
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
    "movers_vs_actual_2024_55": {
     "lose": [
      {
       "municipio": "Madrid",
       "indice_necesidad": 70.8,
-      "bonos_now": 3392.7,
-      "bonos": 3201.6,
-      "delta": -191.1
+      "bonos_now": 3418.7,
+      "bonos": 3201.8,
+      "delta": -216.8
      },
      {
       "municipio": "Alcorcón",
       "indice_necesidad": 52.5,
-      "bonos_now": 111.3,
+      "bonos_now": 110.9,
       "bonos": 92.1,
-      "delta": -19.3
+      "delta": -18.9
      },
      {
       "municipio": "Pinto",
       "indice_necesidad": 63.7,
-      "bonos_now": 51.5,
+      "bonos_now": 51.3,
       "bonos": 38.4,
-      "delta": -13.1
+      "delta": -12.9
      },
      {
       "municipio": "Getafe",
       "indice_necesidad": 57.6,
-      "bonos_now": 125.8,
+      "bonos_now": 126.7,
       "bonos": 115.5,
-      "delta": -10.3
+      "delta": -11.2
      },
      {
       "municipio": "San Sebastián de los Reyes",
       "indice_necesidad": 51.2,
-      "bonos_now": 61.7,
+      "bonos_now": 62.6,
       "bonos": 53.5,
-      "delta": -8.2
+      "delta": -9.1
      }
     ],
     "gain": [
      {
       "municipio": "Parla",
       "indice_necesidad": 80.1,
-      "bonos_now": 65.0,
+      "bonos_now": 64.5,
       "bonos": 119.9,
-      "delta": 54.9
+      "delta": 55.4
      },
      {
       "municipio": "Fuenlabrada",
       "indice_necesidad": 64.0,
-      "bonos_now": 90.5,
+      "bonos_now": 90.2,
       "bonos": 135.9,
-      "delta": 45.4
+      "delta": 45.7
      },
      {
       "municipio": "Majadahonda",
       "indice_necesidad": 54.9,
-      "bonos_now": 20.0,
+      "bonos_now": 19.9,
       "bonos": 45.0,
-      "delta": 25.0
+      "delta": 25.1
      },
      {
       "municipio": "Torrejón de Ardoz",
       "indice_necesidad": 72.5,
       "bonos_now": 94.5,
-      "bonos": 112.9,
-      "delta": 18.4
+      "bonos": 113.0,
+      "delta": 18.5
      },
      {
       "municipio": "Boadilla del Monte",
       "indice_necesidad": 34.8,
       "bonos_now": 5.8,
       "bonos": 21.9,
-      "delta": 16.1
+      "delta": 16.0
      }
     ]
    },
    "ic_bajo": {
-    "requests": 63828,
+    "requests": 60818,
     "bonos": 5300,
-    "requests_per_bono": 12.04,
-    "extra_meur_same_success_rate": 9.58,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6783,
+     "resto, necesidad alta": 4.5496,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6923
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 11.475,
+    "extra_meur_same_success_rate": 6.8648,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4294
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
    "ic_alto": {
-    "requests": 56729,
+    "requests": 55032,
     "bonos": 5300,
-    "requests_per_bono": 10.7,
-    "extra_meur_same_success_rate": 2.98,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6922
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 10.3835,
+    "extra_meur_same_success_rate": 1.428,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4292
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
-   "prudente_exploratorio": {
-    "requests": 57978,
+   "contraste_preregistrado": {
+    "requests": 59891,
     "bonos": 5300,
-    "requests_per_bono": 10.94,
-    "extra_meur_same_success_rate": 4.14,
-    "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6783,
+     "resto, necesidad alta": 4.5496,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6923
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "requests_per_bono": 11.3001,
+    "extra_meur_same_success_rate": 5.9937,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4293
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.173
    },
    "sin_efecto": {
     "requests": 53508,
     "bonos": 5300,
-    "requests_per_bono": 10.1,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6921
+    },
+    "requests_per_bono": 10.0958,
     "extra_meur_same_success_rate": 0.0,
     "bonos_per_1000_young_by_need": {
-     "alta": 4.6,
-     "baja": 2.19,
-     "media": 3.43
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4292
     },
-    "ratio_high_vs_low_need": 2.1,
-    "pct_bonos_high_need": 84.5,
-    "pct_young_high_need": 77.0,
-    "pct_bonos_madrid_city": 60.4,
-    "mean_share_above_cap_weighted_by_young": 0.165
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.173
+   }
+  },
+  "necesidad_plan_p75_hasta_1000": {
+   "allocation": "necesidad^1",
+   "central": {
+    "requests": 54207,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6922
+    },
+    "requests_per_bono": 10.2277,
+    "extra_meur_same_success_rate": 1.806,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4293
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "movers_vs_actual_2024_55": {
+    "lose": [
+     {
+      "municipio": "Madrid",
+      "indice_necesidad": 70.8,
+      "bonos_now": 3418.7,
+      "bonos": 3201.8,
+      "delta": -216.8
+     },
+     {
+      "municipio": "Alcorcón",
+      "indice_necesidad": 52.5,
+      "bonos_now": 110.9,
+      "bonos": 92.1,
+      "delta": -18.9
+     },
+     {
+      "municipio": "Pinto",
+      "indice_necesidad": 63.7,
+      "bonos_now": 51.3,
+      "bonos": 38.4,
+      "delta": -12.9
+     },
+     {
+      "municipio": "Getafe",
+      "indice_necesidad": 57.6,
+      "bonos_now": 126.7,
+      "bonos": 115.5,
+      "delta": -11.2
+     },
+     {
+      "municipio": "San Sebastián de los Reyes",
+      "indice_necesidad": 51.2,
+      "bonos_now": 62.6,
+      "bonos": 53.5,
+      "delta": -9.1
+     }
+    ],
+    "gain": [
+     {
+      "municipio": "Parla",
+      "indice_necesidad": 80.1,
+      "bonos_now": 64.5,
+      "bonos": 119.9,
+      "delta": 55.4
+     },
+     {
+      "municipio": "Fuenlabrada",
+      "indice_necesidad": 64.0,
+      "bonos_now": 90.2,
+      "bonos": 135.9,
+      "delta": 45.7
+     },
+     {
+      "municipio": "Majadahonda",
+      "indice_necesidad": 54.9,
+      "bonos_now": 19.9,
+      "bonos": 45.0,
+      "delta": 25.1
+     },
+     {
+      "municipio": "Torrejón de Ardoz",
+      "indice_necesidad": 72.5,
+      "bonos_now": 94.5,
+      "bonos": 113.0,
+      "delta": 18.5
+     },
+     {
+      "municipio": "Boadilla del Monte",
+      "indice_necesidad": 34.8,
+      "bonos_now": 5.8,
+      "bonos": 21.9,
+      "delta": 16.0
+     }
+    ]
+   },
+   "ic_bajo": {
+    "requests": 54724,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6783,
+     "resto, necesidad alta": 4.5496,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6923
+    },
+    "requests_per_bono": 10.3253,
+    "extra_meur_same_success_rate": 2.991,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4294
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "ic_alto": {
+    "requests": 53749,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6922
+    },
+    "requests_per_bono": 10.1414,
+    "extra_meur_same_success_rate": 0.6532,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4292
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "contraste_preregistrado": {
+    "requests": 54562,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6783,
+     "resto, necesidad alta": 4.5496,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6923
+    },
+    "requests_per_bono": 10.2947,
+    "extra_meur_same_success_rate": 2.6308,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4293
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.284
+   },
+   "sin_efecto": {
+    "requests": 53508,
+    "bonos": 5300,
+    "bonos_per_1000_young_by_group": {
+     "Madrid capital": 4.6784,
+     "resto, necesidad alta": 4.5497,
+     "resto, necesidad baja": 2.3701,
+     "resto, necesidad media": 3.6921
+    },
+    "requests_per_bono": 10.0958,
+    "extra_meur_same_success_rate": 0.0,
+    "bonos_per_1000_young_by_need": {
+     "alta": 4.5987,
+     "baja": 2.1913,
+     "media": 3.4292
+    },
+    "ratio_high_vs_low_need": 2.099,
+    "pct_bonos_high_need": 84.53,
+    "pct_young_high_need": 76.99,
+    "pct_bonos_madrid_city": 60.41,
+    "mean_share_above_cap_weighted_by_young": 0.284
    }
   }
  }
