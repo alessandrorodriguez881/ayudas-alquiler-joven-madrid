@@ -1,0 +1,93 @@
+{
+ "note": "EXPLORATORIO: no preregistrado, hecho tras el contraste real. Proxy con todas las edades; ver docstring",
+ "threshold_eur_year": {
+  "2021": 23725.8,
+  "2024": 25200.0
+ },
+ "share_of_returns_below_threshold_2024": {
+  "by_group_weighted_by_young": {
+   "Madrid capital": 0.473,
+   "resto, necesidad alta": 0.596,
+   "resto, necesidad baja": 0.427,
+   "resto, necesidad media": 0.524
+  },
+  "all_weighted_by_young": 0.495,
+  "spearman_with": {
+   "indice_necesidad": 0.629,
+   "renta_pc_2024": -0.957,
+   "share_above_tope_2024_en_2024": -0.532,
+   "esfuerzo_alquiler_2024": -0.006
+  },
+  "n_municipalities": 131
+ },
+ "range_all_weighted_by_young_2024": {
+  "low": 0.409,
+  "central": 0.495,
+  "high": 0.595
+ },
+ "h1_with_income_rule_control": {
+  "n_municipalities": 132,
+  "spearman_elig_with_log_income": -0.926,
+  "h1_same_sample": {
+   "beta": -0.7855472570366644,
+   "ci95": [
+    -1.1724736639221036,
+    -0.39862085015122506
+   ],
+   "pct_per_10_points": -7.55
+  },
+  "h1_plus_elig": {
+   "beta": -0.7733583245186719,
+   "ci95": [
+    -1.1701525607849568,
+    -0.376564088252387
+   ],
+   "pct_per_10_points": -7.44,
+   "elig": {
+    "beta": -2.7366595363535806,
+    "ci95": [
+     -4.753673914173712,
+     -0.7196451585334493
+    ]
+   }
+  },
+  "cap_only_same_sample": {
+   "beta": -0.5446185552468725,
+   "ci95": [
+    -0.8893596516932294,
+    -0.19987745880051572
+   ],
+   "pct_per_10_points": -5.3
+  },
+  "cap_only_plus_elig": {
+   "beta": -0.5448447300947519,
+   "ci95": [
+    -0.8940474385985787,
+    -0.19564202159092503
+   ],
+   "pct_per_10_points": -5.3,
+   "elig": {
+    "beta": -2.550934426835214,
+    "ci95": [
+     -4.418462128599487,
+     -0.6834067250709408
+    ]
+   }
+  }
+ },
+ "rule_arithmetic": {
+  "max_income_eur_month_2024": 2100.0,
+  "rent_over_max_income_pct": {
+   "600": 28.6,
+   "900": 42.9,
+   "plan_1000": 47.6,
+   "plan_500": 23.8
+  },
+  "rent_minus_bono_over_max_income_pct": {
+   "600": 16.7,
+   "900": 31.0,
+   "plan_1000": 35.7,
+   "plan_500": 11.9
+  }
+ }
+}

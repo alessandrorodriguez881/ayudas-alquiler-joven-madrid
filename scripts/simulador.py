@@ -7,7 +7,9 @@ is WHERE the 5,300 bonos go. Each rule sets a cap per municipality and an alloca
                where s = share of the rental market above the cap (SERPAVI p25/p75, log-normal, as in the test)
   - "llegada"   (first come): bonos in proportion to requests (assumes arrival order does not depend on the municipality)
   - "necesidad" : bonos in proportion to young_2024 x need index^k (k = 1, or 2 to weigh need more), never more than a
-                  municipality's requests
+                  municipality's requests; the "requisito" variant also multiplies by the share of IRPF returns at or
+                  below 3 x IPREM (2024, from requisito_ingresos.py), so quotas follow the people the income rule lets
+                  in (municipalities without that figure take the median)
 Plan Estatal 2026-2030 (RD 326/2026, art. 133.1.e): cap 1,000 EUR, or 500 EUR in municipalities of 10,000 people or
 fewer (also in small "núcleos" inside bigger ones, which municipal data cannot see); art. 135 lets the region raise it
 with an updated rent study, which is what the "o p75 local" rules do (never below the Plan's cap).
@@ -19,7 +21,7 @@ beta: changing the cap only moves the part of the deterrence that is due to the 
 of the exploratory model that also has the uniform 900 EUR share (with its 95 % interval); the -0.79 of the
 pre-registered test (which also carries "expensive rent deters") is the high case, and 0 the no-deterrence case.
 Also: requests not made in 2022 = requests if the cap had covered the whole market (share above = 0) minus actual.
-Usage:  python -P scripts/simulador.py   (run exploratorio_topes_falsos.py and necesidad_2024.py first)
+Usage:  python -P scripts/simulador.py   (run exploratorio_topes_falsos.py, necesidad_2024.py and requisito_ingresos.py first)
         -> resultados/simulador_reparto.json and data/interim/simulador_municipios.csv (central beta)
 """
 import json
@@ -44,8 +46,13 @@ def load():
     s = t.dropna(subset=need)
     s = s[s["jovenes_20_34_2022"] > 0].copy()
     s["tasa_2022"] = s["bono_solicitudes"] / s["jovenes_20_34_2022"]
+    inc = pd.read_csv(INTERIM / "requisito_ingresos.csv", dtype={"ine": str}).set_index("ine")
+    s["share_irpf_bajo_3iprem_2024"] = s["ine"].map(inc["share_irpf_bajo_3iprem_2024"])
+    missing = int(s["share_irpf_bajo_3iprem_2024"].isna().sum())
+    s["share_irpf_bajo_3iprem_2024"] = s["share_irpf_bajo_3iprem_2024"].fillna(s["share_irpf_bajo_3iprem_2024"].median())
     cover = {"municipalities": len(s), "of_2022_requests": s["bono_solicitudes"].sum() / t["bono_solicitudes"].sum(),
-             "of_young_2024": s["jovenes_20_34_2024"].sum() / t["jovenes_20_34_2024"].sum()}
+             "of_young_2024": s["jovenes_20_34_2024"].sum() / t["jovenes_20_34_2024"].sum(),
+             "municipalities_income_share_filled_with_median": missing}
     return s.reset_index(drop=True), cover
 
 
@@ -68,6 +75,7 @@ def rules(s):
         "necesidad2_topes_actuales": (s["tope_2024"].to_numpy(float), ("necesidad", 2)),
         "necesidad_plan_o_p75_local": (local, ("necesidad", 1)),
         "necesidad_plan_p75_hasta_1000": (upto1000, ("necesidad", 1)),
+        "necesidad_requisito_plan_p75_hasta_1000": (upto1000, ("necesidad", 1, "requisito")),
     }
 
 
@@ -178,7 +186,9 @@ def main():
              "contraste_preregistrado": res["beta"], "sin_efecto": 0.0}
     n_bonos = BUDGET_EUR / BONO_EUR
     s["grupo_necesidad"] = need_groups(s)
-    need = lambda k: (s["jovenes_20_34_2024"] * s["indice_necesidad"] ** k).to_numpy()  # noqa: E731
+    def need(how):
+        w = s["jovenes_20_34_2024"] * s["indice_necesidad"] ** how[1]
+        return (w * s["share_irpf_bajo_3iprem_2024"] if "requisito" in how else w).to_numpy()
     caps_now = s["tope_2024"].to_numpy(float)
     now = {b: requests(s, caps_now, v)[0] for b, v in betas.items()}
     bonos_now = allocate(now["central"], now["central"], n_bonos)
@@ -187,12 +197,12 @@ def main():
            "young_by_group": s.groupby("grupo_necesidad")["jovenes_20_34_2024"].sum().astype(int).to_dict(),
            "requests_not_made_2022": not_made(s, betas), "rules": {}}
     per_muni = s[["ine", "municipio", "pob_total_2024", "tope_2022", "tope_2024", "indice_necesidad", "tercil_necesidad", "grupo_necesidad",
-                  "jovenes_20_34_2024", "serpavi_med_2024", "serpavi_p75_2024"]].copy()
+                  "jovenes_20_34_2024", "share_irpf_bajo_3iprem_2024", "serpavi_med_2024", "serpavi_p75_2024"]].copy()
     for name, (caps, how) in rules(s).items():
-        out["rules"][name] = {"allocation": how if how == "llegada" else f"necesidad^{how[1]}"}
+        out["rules"][name] = {"allocation": how if how == "llegada" else " x ".join(["necesidad^%d" % how[1], *how[2:]])}
         for bname, b in betas.items():
             req, sh = requests(s, caps, b)
-            bonos = allocate(req, req if how == "llegada" else need(how[1]), n_bonos)
+            bonos = allocate(req, req if how == "llegada" else need(how), n_bonos)
             out["rules"][name][bname] = summarise(s, req, bonos, sh, now[bname].sum())
             if bname == "central":
                 out["rules"][name]["movers_vs_actual_2024_55"] = movers(s, bonos, bonos_now)

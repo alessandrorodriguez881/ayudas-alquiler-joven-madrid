@@ -57,7 +57,8 @@ SOURCE = "Fuente: Comunidad de Madrid (portal de datos abiertos) y SERPAVI (MIVA
 RULES = {"actual_2024_55": "Actual: 600 / 900 €\npor orden de llegada",
          "plan_o_p75_local": "Plan + p75 local, sin límite\npor orden de llegada",
          "plan_p75_hasta_1000": "Plan + p75 local, hasta 1.000 €\npor orden de llegada",
-         "necesidad_plan_p75_hasta_1000": "Propuesta: plan + p75 hasta 1.000 €\ncupos por jóvenes × necesidad"}
+         "necesidad_plan_p75_hasta_1000": "Plan + p75 local, hasta 1.000 €\ncupos por jóvenes × necesidad",
+         "necesidad_requisito_plan_p75_hasta_1000": "Propuesta: plan + p75 hasta 1.000 €\ncupos por jóvenes × necesidad\n× parte bajo el límite de ingresos"}
 GROUPS = [("Madrid capital", "Madrid capital", MUTED), ("resto, necesidad alta", "Resto: necesidad alta", ORDINAL[2]),
           ("resto, necesidad media", "Resto: necesidad media", ORDINAL[1]),
           ("resto, necesidad baja", "Resto: necesidad baja", ORDINAL[0])]
@@ -235,7 +236,7 @@ def gap_chart(gap):
 
 
 def allocation_chart(sim):
-    fig, ax = plt.subplots(figsize=(8, 5.4))
+    fig, ax = plt.subplots(figsize=(8, 6.6))
     h = 0.2
     for j, (key, label, colour) in enumerate(GROUPS):
         y = np.arange(len(RULES)) + (j - 1.5) * h
@@ -252,12 +253,13 @@ def allocation_chart(sim):
     ax.legend(loc="lower left", bbox_to_anchor=(0, 1.0), ncol=2, frameon=False, fontsize=8, labelcolor=INK2)
     by = lambda r: sim["rules"][r]["central"]["bonos_per_1000_young_by_group"]["resto, necesidad alta"]  # noqa: E731
     title(fig, f"Con cupos por necesidad, el resto con más necesidad pasa de {es(by('actual_2024_55'))} a "
-               f"{es(by('necesidad_plan_p75_hasta_1000'))} bonos por cada 1.000 jóvenes", size=11.5)
+               f"{es(by('necesidad_requisito_plan_p75_hasta_1000'))} bonos por cada 1.000 jóvenes", size=11.5)
     young = sim["young_by_group"]
     note(fig, "Simulación propia (scripts/simulador.py): demanda del Bono 2022 por municipio y β = "
               f"{es(sim['betas']['central'], 2)} (solo la parte del tope). Fuera de Madrid capital ("
               f"{thousands(young['Madrid capital'])} jóvenes),\nlos municipios se agrupan en tres tercios de jóvenes "
               "por su índice de necesidad 2024. Plan: 1.000 €, o 500 € en municipios de 10.000 habitantes o menos.\n"
+              "Límite de ingresos: parte de las declaraciones del IRPF 2024 con base imponible de hasta 3 × IPREM (25.200 €), de todas las edades.\n"
               "Con cupos, el tope no cambia el reparto: solo cuánta gente pide cada bono.")
     fig.tight_layout(rect=(0, 0.09, 1, 0.97))
     fig.savefig(FIG / "reparto_por_necesidad.png", dpi=200)

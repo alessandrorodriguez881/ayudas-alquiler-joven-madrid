@@ -14,6 +14,7 @@ El nuevo Plan Estatal de Vivienda 2026-2030 (RD 326/2026, art. 133.1.e) pone el 
 - **Trabajo previo, declarado en [TRABAJO_PREVIO.md](TRABAJO_PREVIO.md):** datos descargados y verificados, una tabla de 159 municipios, y la hipótesis y las reglas para darla por buena escritas antes de ver el resultado ([PREREGISTRO.md](PREREGISTRO.md)). El contraste se probó antes solo con datos inventados.
 - **Contraste real hecho el 7-nov** (`resultados/contraste_real.json`): la hipótesis principal cumple las tres condiciones fijadas antes de mirar. **Donde más alquileres superan el tope, menos jóvenes piden el Bono:** por cada 10 puntos más de mercado por encima del tope, un **7,6 % menos de solicitudes** por joven (intervalo del 3,9 % al 11,1 %). El mismo patrón sale en las Ayudas al alquiler, que tienen los mismos topes (no es una prueba independiente).
 - **Lo que no salió:** un umbral de 900 € igual para todos explica las solicitudes mejor que el tope real, así que una parte es el tope y otra el alquiler caro en sí; y la comparación entre municipios parecidos con tope de 600 y de 900 € va en la misma dirección, pero no es precisa. Separando las dos cosas (análisis exploratorio, hecho después), la parte del tope es un **−5,3 % por cada 10 puntos** (intervalo del −8,5 % al −2,0 %): es la que usa el simulador. Todo, en la última sección de [PREREGISTRO.md](PREREGISTRO.md) y en `resultados/figuras/contraste_todas_las_pruebas.png`.
+- **El límite de ingresos no lo explica** (exploratorio, `resultados/requisito_ingresos.json`): el Bono pide ingresos de hasta 3 veces el IPREM. Si se añade como control la parte de las declaraciones del IRPF por debajo de ese límite en cada municipio, el efecto queda en **−7,4 %** por cada 10 puntos, y la parte del tope sigue en −5,3 %. Esa parte va casi a la par que la renta por habitante, que ya era un control.
 - Las notas internas de planificación (`PLAN.md`, `IDEAS.md`) no están en el repositorio.
 
 ## Cómo repetirlo
@@ -26,6 +27,7 @@ python scripts/potencia_umbral.py         # tabla de potencia del preregistro, c
 python scripts/contraste.py               # contraste real (a partir del 7-nov-2026)
 python scripts/exploratorio_topes_falsos.py  # exploratorio, no preregistrado: los topes falsos, más de cerca
 python scripts/necesidad_2024.py          # tabla de 2024 e índice de necesidad (desarrollo)
+python scripts/requisito_ingresos.py      # exploratorio: el límite de ingresos (3 × IPREM) con el IRPF por tramos
 python scripts/simulador.py               # reparto de los 5.300 bonos (31,8 M€) con distintas reglas
 python scripts/graficos.py                # figuras (resultados/figuras/) y mapa municipal para la app
 python scripts/validar_serpavi.py         # el SERPAVI frente a los alquileres del propio portal
@@ -42,7 +44,7 @@ Solo datos agregados por municipio: **ningún dato personal**.
 
 | Fuente | Qué usamos | Licencia |
 |---|---|---|
-| [Portal de Datos Abiertos de la Comunidad de Madrid](https://datos.comunidad.madrid/catalogo/) | Bono Alquiler Joven 2022 (solicitudes, aceptadas y rechazadas por municipio); Ayudas al alquiler para jóvenes 2022-2023; población por edad; renta disponible; paro registrado por edad; Censo 2021 (viviendas en alquiler); alquiler medio | CC BY 4.0 |
+| [Portal de Datos Abiertos de la Comunidad de Madrid](https://datos.comunidad.madrid/catalogo/) | Bono Alquiler Joven 2022 (solicitudes, aceptadas y rechazadas por municipio); Ayudas al alquiler para jóvenes 2022-2023; población por edad; renta disponible; declaraciones del IRPF por tramo de base imponible; paro registrado por edad; Censo 2021 (viviendas en alquiler); alquiler medio | CC BY 4.0 |
 | [SERPAVI, Ministerio de Vivienda y Agenda Urbana](https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi) | Alquiler mediano, p25 y p75 por municipio, 2022 y 2023 | [Aviso legal del MIVAU](https://www.mivau.gob.es/ministerio/aviso-legal): reutilización permitida citando la fuente |
 | [Base de Datos Nacional de Subvenciones](https://www.infosubvenciones.es/bdnstrans/) | Lista oficial de municipios con tope de 900 € en cada convocatoria, 2022-2025: 29 hasta 2023 y 55 desde 2024 (`scripts/topes_convocatorias.py` → `data/interim/topes_900_convocatorias.csv`) | Textos oficiales publicados |
 
