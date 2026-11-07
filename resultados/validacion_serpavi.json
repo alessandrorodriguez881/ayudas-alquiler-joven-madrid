@@ -1,0 +1,36 @@
+{
+ "level_2023": {
+  "n": 37,
+  "pearson": 0.969,
+  "spearman": 0.948,
+  "median_ratio_serpavi_over_portal": 0.924
+ },
+ "level_2024": {
+  "n": 37,
+  "pearson": 0.969,
+  "spearman": 0.937,
+  "median_ratio_serpavi_over_portal": 0.915
+ },
+ "change_2022_2024": {
+  "n": 51,
+  "pearson": 0.296,
+  "spearman": 0.383,
+  "median_ratio_serpavi_over_portal": 1.674,
+  "median_growth_pct": {
+   "serpavi": 9.3,
+   "portal_index": 5.3
+  }
+ },
+ "gap_2024_with_portal_growth": {
+  "municipalities_with_portal_index": 51,
+  "serpavi_2024": {
+   "all": 0.384,
+   "without_madrid_city": 0.243
+  },
+  "portal_growth": {
+   "all": 0.349,
+   "without_madrid_city": 0.209
+  }
+ },
+ "note": "SERPAVI: median rent of collective rented dwellings; portal: average rent of rented homes (level) and rental price index base 2015 (change). Pearson and Spearman by municipality."
+}

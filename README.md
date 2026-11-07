@@ -28,6 +28,7 @@ python scripts/exploratorio_topes_falsos.py  # exploratorio, no preregistrado: l
 python scripts/necesidad_2024.py          # tabla de 2024 e índice de necesidad (desarrollo)
 python scripts/simulador.py               # reparto de los 5.300 bonos (31,8 M€) con distintas reglas
 python scripts/graficos.py                # figuras (resultados/figuras/) y mapa municipal para la app
+python scripts/validar_serpavi.py         # el SERPAVI frente a los alquileres del propio portal
 ```
 
 Dos pasos que no hace falta repetir, porque su resultado ya está en el repositorio:
