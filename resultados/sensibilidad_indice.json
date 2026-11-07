@@ -1,0 +1,22 @@
+{
+ "sin_esfuerzo_alquiler_2024": {
+  "spearman": 0.781,
+  "top20_compartidos": 8
+ },
+ "sin_paro25_por_1000_15_24_2024": {
+  "spearman": 0.771,
+  "top20_compartidos": 11
+ },
+ "sin_pct_alquiler_2021": {
+  "spearman": 0.78,
+  "top20_compartidos": 10
+ },
+ "zscores": {
+  "spearman": 0.961,
+  "top20_compartidos": 14
+ },
+ "media_geometrica": {
+  "spearman": 0.909,
+  "top20_compartidos": 18
+ }
+}

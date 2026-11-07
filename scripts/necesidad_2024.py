@@ -9,6 +9,7 @@ Not part of the pre-registered test (that one reads data/raw only and data/inter
     1,000 EUR (default cap of the Plan Estatal 2026-2030)
   - Did the Comunidad pick the right municipalities in Dec-2024? Ranks the 600 EUR municipalities of 2022 by their share
     of rents above 600 EUR in 2023 (the last SERPAVI year it could see) and compares with the 26 it moved to 900 EUR
+  - Sensitivity of the index: same ranking without each component, with z-scores, or with a geometric mean?
 Usage:  python -P scripts/necesidad_2024.py   (run preparar_datos.py and topes_convocatorias.py first)
 """
 import json
@@ -101,6 +102,19 @@ def chosen_right(t):
             "moved_outside_top_k": c.loc[moved_low, cols + []].assign(rank=moved_low + 1).round(3).to_dict("records")}
 
 
+def sensitivity(t, top=20):
+    """Spearman and top-20 overlap of alternative indices against the main one (equal-weight mean of ranks)."""
+    d = t.dropna(subset=["indice_necesidad"])
+    ranks = d[[f"rango_{c}" for c in COMPONENTS]]
+    z = (d[list(COMPONENTS)] - d[list(COMPONENTS)].mean()) / d[list(COMPONENTS)].std()
+    alt = {f"sin_{c}": ranks.drop(columns=f"rango_{c}").mean(axis=1) for c in COMPONENTS}
+    alt["zscores"] = z.mean(axis=1)
+    alt["media_geometrica"] = np.exp(np.log(ranks).mean(axis=1))
+    main_top = set(d.nlargest(top, "indice_necesidad")["ine"])
+    return {k: {"spearman": round(float(v.corr(d["indice_necesidad"], method="spearman")), 3),
+                f"top{top}_compartidos": len(main_top & set(d.loc[v.nlargest(top).index, "ine"]))} for k, v in alt.items()}
+
+
 def main():
     t, months = build()
     t.to_csv(INTERIM / "municipios_2024.csv", index=False, encoding="utf-8")
@@ -111,6 +125,10 @@ def main():
     print("missing:", {c: int(t[c].isna().sum()) for c in ["renta_pc_2024", "paro_menor25_2024", "serpavi_med_2024",
                                                            "pct_alquiler_2021", "jovenes_20_34_2024"]})
     print("Spearman between components:\n", t.loc[full, list(COMPONENTS)].corr("spearman").round(2).to_string())
+    sens = sensitivity(t)
+    print("index sensitivity:", sens)
+    (ROOT / "resultados" / "sensibilidad_indice.json").write_text(json.dumps(sens, indent=1), encoding="utf-8")
+    print("top 10 need:", t.nlargest(10, "indice_necesidad")[["municipio", "indice_necesidad"]].round(1).values.tolist())
     right = chosen_right(t)
     print(json.dumps(right, indent=1, ensure_ascii=False, default=float))
     (ROOT / "resultados" / "acierto_ampliacion_2024.json").write_text(
