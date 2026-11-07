@@ -24,6 +24,8 @@ python scripts/preparar_datos.py          # data/interim/municipios.csv (159 mun
 python scripts/contraste.py --sintetico   # potencia y falsos positivos con datos inventados
 python scripts/contraste.py               # contraste real (a partir del 7-nov-2026)
 python scripts/exploratorio_topes_falsos.py  # exploratorio, no preregistrado: los topes falsos, más de cerca
+python scripts/necesidad_2024.py          # tabla de 2024 e índice de necesidad (desarrollo)
+python scripts/simulador.py               # reparto de los 5.300 bonos (31,8 M€) con distintas reglas
 ```
 
 Los CSV del portal que usamos están en `data/raw/`, tal y como se descargaron. El portal cambia sus ficheros: entre el 21-oct y el 5-nov pasó de Latin-1 a UTF-8 y añadió años. `scripts/verificar_descargas.py` lo comprueba (resultado en [data/VERIFICACION.md](data/VERIFICACION.md)) y `scripts/descargar.py` los vuelve a bajar.

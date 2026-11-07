@@ -37,3 +37,28 @@ Una fila por municipio de la Comunidad (179). Sale de `scripts/topes_convocatori
 | `sube_a_900_en_2024` | `True` en los **26 municipios** que pasan de 600 a 900 € entre 2023 y 2024 | calculado |
 
 Las familias numerosas tienen 900 € en todos los municipios en las Ayudas al alquiler; esta tabla recoge el tope general.
+
+# Diccionario de `data/interim/municipios_2024.csv` (7-nov, periodo de desarrollo)
+Una fila por municipio (179). Sale de `scripts/necesidad_2024.py`. **No la usa el contraste preregistrado**: es la versión 2024 para el producto (índice de necesidad y simulador). Renta y paro salen de `data/raw_2026-11-06/`; población, Censo y SERPAVI, de `data/raw/`.
+
+| Columna | Qué es | Fuente |
+|---|---|---|
+| `ine`, `municipio` | Código INE de 3 cifras y nombre oficial | `topes_900_convocatorias.csv` |
+| `tope_2022`, `tope_2024` | Tope del Bono 2022 (29 municipios con 900 €) y del Bono 2024 (55) | idem |
+| `sube_a_900_en_2024` | `True` en los 26 que pasan de 600 a 900 € | idem |
+| `pob_total_2024`, `jovenes_20_34_2024`, `jovenes_15_24_2024` | Población total y por edad, 2024 | `poblacion_censada_por_edad_nacionalidad_y_sexo` |
+| `renta_pc_2024` | Renta disponible bruta per cápita, 2024 (€) | `irpf_indicador_renta` (descarga del 6-nov) |
+| `paro_menor25_2024`, `paro25_por_1000_15_24_2024` | Parados menores de 25 (media de los 12 meses de 2024) y por cada 1.000 jóvenes de 15 a 24 | `paro_registrado_edad_municipio` (descarga del 6-nov) |
+| `pct_alquiler_2021` | % de hogares de alquiler (Censo 2021) | `censo_2021_viviendas_familiares_por_tenencia` |
+| `serpavi_{n,med,p25,p75}_{2023,2024}` | Viviendas colectivas en alquiler y alquiler mensual mediano, p25 y p75 (€) | SERPAVI (MIVAU) |
+| `share_above_tope_2022_en_2024`, `share_above_tope_2024_en_2024` | Parte del mercado de 2024 por encima del tope con la lista de 2022 y con la de 2024 | calculado |
+| `share_above_1000_2024` | Parte del mercado de 2024 por encima de 1.000 € (tope general del Plan Estatal 2026-2030) | calculado |
+| `share_above_600_2023` | Parte del mercado de 2023 por encima de 600 € (lo que podía ver la Comunidad al ampliar la lista en dic-2024) | calculado |
+| `esfuerzo_alquiler_2024` | 12 × alquiler mediano 2024 / renta per cápita 2024 | calculado |
+| `rango_*` | Rango percentil (0-1) de cada componente entre los municipios con los tres | calculado |
+| `indice_necesidad` | **Índice de necesidad (0-100):** media de los rangos de esfuerzo de alquiler, paro juvenil y % de hogares de alquiler. Hay valor en 136 municipios (99,6 % de los jóvenes de 20 a 34) | calculado |
+| `tercil_necesidad` | baja / media / alta (tercios de municipios, no de población) | calculado |
+| `bono_solicitudes`, `bono_aceptadas`, `jovenes_20_34_2022`, `share_above_cap_2022` | Datos del Bono 2022, base del simulador | `municipios.csv` |
+
+# Diccionario de `data/interim/simulador_municipios.csv` (7-nov)
+Una fila por municipio del simulador (132; 99,8 % de las solicitudes de 2022 y 99,6 % de los jóvenes de 2024). Sale de `scripts/simulador.py` con el β₁ central del contraste (−0,79). Para cada regla `<regla>`: `tope_<regla>` (€/mes), `solicitudes_<regla>` (a la escala de 2022) y `bonos_<regla>` (de los 5.300 que pagan 31,8 M€). Reglas y supuestos, en el docstring del script; resumen con todos los β₁ en `resultados/simulador_reparto.json`.

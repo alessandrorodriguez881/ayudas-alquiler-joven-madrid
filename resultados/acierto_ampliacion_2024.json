@@ -1,0 +1,101 @@
+{
+ "candidates_600_with_serpavi_2023": 106,
+ "moved_with_data": 26,
+ "moved_total": 26,
+ "moved_among_top_k": 19,
+ "left_out_in_top_k": [
+  {
+   "municipio": "Hoyo de Manzanares",
+   "share_above_600_2023": 0.75,
+   "serpavi_med_2023": 725.0,
+   "pob_total_2024": 9186
+  },
+  {
+   "municipio": "Sevilla la Nueva",
+   "share_above_600_2023": 0.574,
+   "serpavi_med_2023": 618.809,
+   "pob_total_2024": 9694
+  },
+  {
+   "municipio": "Villalbilla",
+   "share_above_600_2023": 0.567,
+   "serpavi_med_2023": 650.0,
+   "pob_total_2024": 17967
+  },
+  {
+   "municipio": "Griñón",
+   "share_above_600_2023": 0.522,
+   "serpavi_med_2023": 608.888,
+   "pob_total_2024": 10714
+  },
+  {
+   "municipio": "Torrejón de la Calzada",
+   "share_above_600_2023": 0.509,
+   "serpavi_med_2023": 600.0,
+   "pob_total_2024": 10366
+  },
+  {
+   "municipio": "Cubas de la Sagra",
+   "share_above_600_2023": 0.47,
+   "serpavi_med_2023": 565.0,
+   "pob_total_2024": 6984
+  },
+  {
+   "municipio": "Molinos (Los)",
+   "share_above_600_2023": 0.465,
+   "serpavi_med_2023": 576.868,
+   "pob_total_2024": 4812
+  }
+ ],
+ "moved_outside_top_k": [
+  {
+   "municipio": "Humanes de Madrid",
+   "share_above_600_2023": 0.461,
+   "serpavi_med_2023": 600.0,
+   "pob_total_2024": 20054,
+   "rank": 27
+  },
+  {
+   "municipio": "Fuente el Saz de Jarama",
+   "share_above_600_2023": 0.396,
+   "serpavi_med_2023": 576.625,
+   "pob_total_2024": 7384,
+   "rank": 37
+  },
+  {
+   "municipio": "Camarma de Esteruelas",
+   "share_above_600_2023": 0.365,
+   "serpavi_med_2023": 553.083,
+   "pob_total_2024": 8107,
+   "rank": 39
+  },
+  {
+   "municipio": "San Martín de la Vega",
+   "share_above_600_2023": 0.353,
+   "serpavi_med_2023": 574.186,
+   "pob_total_2024": 20664,
+   "rank": 41
+  },
+  {
+   "municipio": "Aranjuez",
+   "share_above_600_2023": 0.299,
+   "serpavi_med_2023": 525.0,
+   "pob_total_2024": 62508,
+   "rank": 46
+  },
+  {
+   "municipio": "Ciempozuelos",
+   "share_above_600_2023": 0.25,
+   "serpavi_med_2023": 525.0,
+   "pob_total_2024": 26046,
+   "rank": 51
+  },
+  {
+   "municipio": "Moraleja de Enmedio",
+   "share_above_600_2023": 0.25,
+   "serpavi_med_2023": 550.0,
+   "pob_total_2024": 5630,
+   "rank": 52
+  }
+ ]
+}
