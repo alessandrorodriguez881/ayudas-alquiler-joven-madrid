@@ -1,0 +1,257 @@
+{
+ "note": "EXPLORATORIO: no preregistrado, hecho tras el contraste real. Habitación = alquiler del piso / n (sin gastos ni sobreprecio por alquilar por habitaciones): caso optimista; ver docstring",
+ "rule_arithmetic": {
+  "actual_general": {
+   "flat_cap": 600,
+   "room_cap": 300,
+   "max_flat_rent_2_sharers_one_contract": 600,
+   "max_flat_rent_3_sharers_one_contract": 600,
+   "max_flat_rent_2_sharers_room_contracts": 600,
+   "max_flat_rent_3_sharers_room_contracts": 900,
+   "room_cap_over_max_income_pct": 14.3
+  },
+  "actual_anexo_II": {
+   "flat_cap": 900,
+   "room_cap": 450,
+   "max_flat_rent_2_sharers_one_contract": 900,
+   "max_flat_rent_3_sharers_one_contract": 900,
+   "max_flat_rent_2_sharers_room_contracts": 900,
+   "max_flat_rent_3_sharers_room_contracts": 1350,
+   "room_cap_over_max_income_pct": 21.4
+  },
+  "plan_mas_de_10000_hab": {
+   "flat_cap": 1000,
+   "room_cap": 600,
+   "max_flat_rent_2_sharers_one_contract": 1000,
+   "max_flat_rent_3_sharers_one_contract": 1000,
+   "max_flat_rent_2_sharers_room_contracts": 1200,
+   "max_flat_rent_3_sharers_room_contracts": 1800,
+   "room_cap_over_max_income_pct": 28.6
+  },
+  "plan_10000_hab_o_menos": {
+   "flat_cap": 500,
+   "room_cap": 250,
+   "max_flat_rent_2_sharers_one_contract": 500,
+   "max_flat_rent_3_sharers_one_contract": 500,
+   "max_flat_rent_2_sharers_room_contracts": 500,
+   "max_flat_rent_3_sharers_room_contracts": 750,
+   "room_cap_over_max_income_pct": 11.9
+  }
+ },
+ "market_above_cap_2024": {
+  "young_by_group": {
+   "todos": 1265437,
+   "municipios_10000_hab_o_menos": 53817,
+   "Madrid capital": 684390,
+   "resto, necesidad alta": 225245,
+   "resto, necesidad baja": 181759,
+   "resto, necesidad media": 174043
+  },
+  "actual_2024_55": {
+   "room_cap_range": [
+    300.0,
+    450.0
+   ],
+   "share_above": {
+    "one_tenant_or_couple": {
+     "todos": 0.384,
+     "municipios_10000_hab_o_menos": 0.255,
+     "Madrid capital": 0.504,
+     "resto, necesidad alta": 0.103,
+     "resto, necesidad baja": 0.442,
+     "resto, necesidad media": 0.218
+    },
+    "2_sharers_best_route": {
+     "todos": 0.384,
+     "municipios_10000_hab_o_menos": 0.255,
+     "Madrid capital": 0.504,
+     "resto, necesidad alta": 0.103,
+     "resto, necesidad baja": 0.442,
+     "resto, necesidad media": 0.218
+    },
+    "3_sharers_best_route": {
+     "todos": 0.097,
+     "municipios_10000_hab_o_menos": 0.025,
+     "Madrid capital": 0.144,
+     "resto, necesidad alta": 0.002,
+     "resto, necesidad baja": 0.102,
+     "resto, necesidad media": 0.029
+    }
+   }
+  },
+  "plan_estatal": {
+   "room_cap_range": [
+    250.0,
+    600.0
+   ],
+   "share_above": {
+    "one_tenant_or_couple": {
+     "todos": 0.299,
+     "municipios_10000_hab_o_menos": 0.581,
+     "Madrid capital": 0.394,
+     "resto, necesidad alta": 0.061,
+     "resto, necesidad baja": 0.373,
+     "resto, necesidad media": 0.157
+    },
+    "2_sharers_best_route": {
+     "todos": 0.175,
+     "municipios_10000_hab_o_menos": 0.581,
+     "Madrid capital": 0.227,
+     "resto, necesidad alta": 0.03,
+     "resto, necesidad baja": 0.249,
+     "resto, necesidad media": 0.086
+    },
+    "3_sharers_best_route": {
+     "todos": 0.029,
+     "municipios_10000_hab_o_menos": 0.122,
+     "Madrid capital": 0.034,
+     "resto, necesidad alta": 0.004,
+     "resto, necesidad baja": 0.053,
+     "resto, necesidad media": 0.014
+    }
+   }
+  },
+  "propuesta_p75_hasta_1000": {
+   "room_cap_range": [
+    300.0,
+    600.0
+   ],
+   "share_above": {
+    "one_tenant_or_couple": {
+     "todos": 0.284,
+     "municipios_10000_hab_o_menos": 0.214,
+     "Madrid capital": 0.394,
+     "resto, necesidad alta": 0.047,
+     "resto, necesidad baja": 0.305,
+     "resto, necesidad media": 0.134
+    },
+    "2_sharers_best_route": {
+     "todos": 0.154,
+     "municipios_10000_hab_o_menos": 0.066,
+     "Madrid capital": 0.227,
+     "resto, necesidad alta": 0.008,
+     "resto, necesidad baja": 0.156,
+     "resto, necesidad media": 0.052
+    },
+    "3_sharers_best_route": {
+     "todos": 0.024,
+     "municipios_10000_hab_o_menos": 0.001,
+     "Madrid capital": 0.034,
+     "resto, necesidad alta": 0.0,
+     "resto, necesidad baja": 0.027,
+     "resto, necesidad media": 0.008
+    }
+   }
+  }
+ },
+ "h1_with_room_contracts": {
+  "n_municipalities": 132,
+  "real_cap": {
+   "beta": -0.7855472570366644,
+   "ci95": [
+    -1.1724736639221036,
+    -0.39862085015122506
+   ],
+   "pct_per_10_points": -7.55,
+   "deviance": 1022.6959571572165
+  },
+  "uniform_900": {
+   "beta": -2.0701132549674504,
+   "ci95": [
+    -2.969905260856363,
+    -1.1703212490785377
+   ],
+   "pct_per_10_points": -18.7,
+   "deviance": 966.2848232335592
+  },
+  "mix_flat_and_3_sharers_rooms": {
+   "0.25": {
+    "beta": -1.0736471524709819,
+    "ci95": [
+     -1.5645095714443353,
+     -0.5827847334976284
+    ],
+    "pct_per_10_points": -10.18,
+    "deviance": 993.3993559517662
+   },
+   "0.5": {
+    "beta": -1.6006964413532816,
+    "ci95": [
+     -2.268501914152753,
+     -0.9328909685538103
+    ],
+    "pct_per_10_points": -14.79,
+    "deviance": 944.7110865233954
+   },
+   "0.75": {
+    "beta": -2.6529832958924735,
+    "ci95": [
+     -3.6451959291441463,
+     -1.6607706626408008
+    ],
+    "pct_per_10_points": -23.3,
+    "deviance": 863.0308452268913
+   },
+   "1.0": {
+    "beta": -4.178693096522261,
+    "ci95": [
+     -5.582746680432998,
+     -2.7746395126115244
+    ],
+    "pct_per_10_points": -34.16,
+    "deviance": 804.6658036782086
+   }
+  },
+  "all_beta_negative": true,
+  "uniform_1350": {
+   "beta": -4.566788871768056,
+   "ci95": [
+    -6.124411193366647,
+    -3.009166550169464
+   ],
+   "pct_per_10_points": -36.66,
+   "deviance": 849.7981411292976
+  },
+  "w1_permutation_annex_label": {
+   "n_perm": 2000,
+   "p_deviance_as_low": 0.0004997501249375312,
+   "median_deviance_shuffled": 1111.9573492983877,
+   "min_deviance_shuffled": 844.8234047674366
+  },
+  "w1_without_madrid": {
+   "beta": -3.9641761969996265,
+   "pct_per_10_points": -32.73
+  },
+  "negative_binomial": {
+   "real_cap": {
+    "beta": -0.7086793822483438,
+    "pct_per_10_points": -6.84,
+    "log_likelihood": -535.318682027651,
+    "converged": true
+   },
+   "w1": {
+    "beta": -3.736859926302202,
+    "pct_per_10_points": -31.18,
+    "log_likelihood": -528.0262332160455,
+    "converged": true
+   }
+  },
+  "w1_and_uniform_1350": {
+   "w1": {
+    "beta": -2.772128268166952,
+    "ci95": [
+     -4.450815062334907,
+     -1.0934414739989973
+    ]
+   },
+   "uniform_1350": {
+    "beta": -2.001496308183933,
+    "ci95": [
+     -3.898114884746739,
+     -0.1048777316211269
+    ]
+   },
+   "deviance": 782.680481051319
+  }
+ }
+}
