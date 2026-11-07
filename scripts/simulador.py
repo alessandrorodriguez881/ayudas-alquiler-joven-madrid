@@ -99,6 +99,12 @@ def requests(s, caps, beta):
     return s["tasa_2022"].to_numpy() * s["jovenes_20_34_2024"].to_numpy() * np.exp(beta * (sh - s["share_above_cap_2022"].to_numpy())), sh
 
 
+def need_weights(s, how):
+    """Quota weights: young_2024 x need index^k, also x the share under 3 x IPREM in the "requisito" variant."""
+    w = s["jovenes_20_34_2024"] * s["indice_necesidad"] ** how[1]
+    return (w * s["share_irpf_bajo_3iprem_2024"] if "requisito" in how else w).to_numpy()
+
+
 def allocate(req, weights, n_bonos):
     """Water-filling: bonos in proportion to weights, capped at each municipality's requests; leftovers go round again.
     Weights that are 0 or missing get nothing; if no open municipality has a weight left, the rest stays unallocated."""
@@ -186,9 +192,6 @@ def main():
              "contraste_preregistrado": res["beta"], "sin_efecto": 0.0}
     n_bonos = BUDGET_EUR / BONO_EUR
     s["grupo_necesidad"] = need_groups(s)
-    def need(how):
-        w = s["jovenes_20_34_2024"] * s["indice_necesidad"] ** how[1]
-        return (w * s["share_irpf_bajo_3iprem_2024"] if "requisito" in how else w).to_numpy()
     caps_now = s["tope_2024"].to_numpy(float)
     now = {b: requests(s, caps_now, v)[0] for b, v in betas.items()}
     bonos_now = allocate(now["central"], now["central"], n_bonos)
@@ -202,7 +205,7 @@ def main():
         out["rules"][name] = {"allocation": how if how == "llegada" else " x ".join(["necesidad^%d" % how[1], *how[2:]])}
         for bname, b in betas.items():
             req, sh = requests(s, caps, b)
-            bonos = allocate(req, req if how == "llegada" else need(how), n_bonos)
+            bonos = allocate(req, req if how == "llegada" else need_weights(s, how), n_bonos)
             out["rules"][name][bname] = summarise(s, req, bonos, sh, now[bname].sum())
             if bname == "central":
                 out["rules"][name]["movers_vs_actual_2024_55"] = movers(s, bonos, bonos_now)

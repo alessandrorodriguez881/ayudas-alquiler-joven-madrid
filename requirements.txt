@@ -6,3 +6,5 @@ pypdf>=4
 matplotlib>=3.8
 pyshp>=2.3
 pyproj>=3.6
+streamlit>=1.57
+altair>=5.4
