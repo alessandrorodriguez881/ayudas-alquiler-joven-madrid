@@ -1,11 +1,11 @@
 """Calculator: does one young person meet the requirements today, with the Plan 2026-2030 and with our proposal, and how
 much would they get. All the rules live in scripts/reglas_bono.py, one function per article."""
-import numpy as np
 import pandas as pd
 import streamlit as st
 
-from datos import es, municipalities, rb
+from datos import es, municipalities, query, rb
 
+RULE_IN_DB = {"hoy": "bono_2024", "plan": "plan_2026_2030", "propuesta": "propuesta"}
 INCLUDES = {"vivienda": "Solo la vivienda", "garaje": "Vivienda y garaje", "trastero": "Vivienda y trastero",
             "garaje_trastero": "Vivienda, garaje y trastero"}
 LIVING = {"solo": "Solo o sola", "jovenes": "Con otros jóvenes de hasta 35 años que también firman",
@@ -81,10 +81,11 @@ case = rb.Case(age=int(age), kind=kind, price=float(price), includes=includes, e
                sharers=int(sharers), income=float(income), others_income=float(others), regular_income=regular,
                nationality=nationality, disability=disability, exclusions=frozenset(exclusions),
                other_rent_aid=other_aid)
-r = t.loc[name]
-p75 = None if np.isnan(r["serpavi_p75_2024"]) else float(r["serpavi_p75_2024"])
-results = {rule: rb.evaluate(case, rule, *rb.caps(rule, r["tope_2024"], r["pob_total_2024"], p75), iprem=float(iprem))
-           for rule in rb.RULES}
+# caps from the database (table topes, written by scripts/base_datos.py with rb.caps)
+caps = query("SELECT regla, tope_piso, tope_habitacion FROM topes WHERE ine = ?", (t.loc[name, "ine"],)).set_index("regla")
+results = {rule: rb.evaluate(case, rule, float(caps.loc[key, "tope_piso"]), float(caps.loc[key, "tope_habitacion"]),
+                             iprem=float(iprem))
+           for rule, key in RULE_IN_DB.items()}
 
 st.subheader(f"En {name}")
 SUBTITLE = {"hoy": "Convocatoria abierta desde el 3-feb-2025: 250 € al mes durante 2 años",

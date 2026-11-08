@@ -2,7 +2,9 @@
 caps, shares above the cap and the simulator come from the same functions as the report (scripts/simulador.py)."""
 import json
 import pathlib
+import sqlite3
 import sys
+from contextlib import closing
 from decimal import ROUND_HALF_UP, Decimal
 
 import altair as alt
@@ -17,6 +19,7 @@ import simulador  # noqa: E402
 from comun import INTERIM, share_above  # noqa: E402
 
 RES = ROOT / "resultados"
+DB = ROOT / "data" / "bono_alquiler_joven.sqlite"  # scripts/base_datos.py
 MIN_YOUNG = 500  # as in graficos.py: the rate of a village with 1 or 2 bonos is noise
 PROPOSAL = "necesidad_requisito_plan_p75_hasta_1000"
 # Reference palette of the dataviz method, the same as the figures (scripts/graficos.py)
@@ -109,6 +112,13 @@ def map_spec(col, bins, colors, title, fmt):
     t = municipalities()
     return choropleth(t.set_index("ine")[col], dict(zip(t["ine"], t["municipio"])), list(bins), list(colors), title,
                       fmt).to_dict()
+
+
+@st.cache_data(show_spinner=False)
+def query(sql, params=()):
+    """Rows of the project's SQLite database, opened read-only."""
+    with closing(sqlite3.connect(DB.as_uri() + "?mode=ro", uri=True)) as con:
+        return pd.read_sql(sql, con, params=params)
 
 
 @st.cache_data(show_spinner=False)
