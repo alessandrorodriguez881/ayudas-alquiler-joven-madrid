@@ -2,7 +2,7 @@
 
 Una sola base SQLite con todo lo que usa el proyecto, por municipio (y el alquiler de Madrid capital también por distrito). La genera `scripts/base_datos.py` (este fichero también, con el mismo diccionario que va dentro de la base, en la tabla `diccionario`). La leen la app y, más adelante, el servidor MCP.
 
-Hecha el 2026-11-08 desde el commit `f4510d7 (con cambios sin commit)`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
+Hecha el 2026-11-08 desde el commit `7a3be3c`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
 
 ```sql
 SELECT municipio, tope_hoy, tope_plan, tope_propuesta, alquiler_p75_2024
