@@ -8,16 +8,19 @@ is WHERE the 5,300 bonos go. Each rule sets a cap per municipality and an alloca
   - "llegada"   (first come): bonos in proportion to requests (assumes arrival order does not depend on the municipality)
   - "necesidad" : bonos in proportion to young_2024 x need index^k (k = 1, or 2 to weigh need more), never more than a
                   municipality's requests; the "requisito" variant also multiplies by the share of IRPF returns at or
-                  below 3 x IPREM (2024, from requisito_ingresos.py), so quotas follow the people the income rule lets
-                  in (municipalities without that figure take the median)
+                  below the income limit (2024, from requisito_ingresos.py), so quotas follow the people the income rule
+                  lets in: 3 x IPREM with today's aid, 5 x IPREM with the Plan's (municipalities without that figure
+                  take the median)
 Plan Estatal 2026-2030 (RD 326/2026, art. 133.1.e): cap 1,000 EUR, or 500 EUR in municipalities of 10,000 people or
 fewer (also in small "núcleos" inside bigger ones, which municipal data cannot see); art. 135 lets the region raise it
 with an updated rent study, which is what the "o p75 local" rules do (never below the Plan's cap).
 The Plan also pays more per aid (art. 137: up to 300 EUR a month, never more than 60 % of the rent) and lets in more
 people (art. 133.1.d: 5 x IPREM of the person, not 3 x IPREM of the household). Added 8-Nov: "plan_amount" redoes the
 Plan rules with the Plan's aid, min(300, 60 % of the median rent capped at the cap) per municipality, so the same money
-gives fewer aids (allocate_money). The wider income limit is NOT simulated: requests start from the 2022 ones, made
-under 3 x IPREM, so with the Plan's rules more people would ask than this shows.
+gives fewer aids (allocate_money), and with quotas weighed by the share under the Plan's 5 x IPREM. Its requests still
+start from the 2022 ones, made under 3 x IPREM; "plan_income_limit" (exploratory) adds the people the wider limit lets
+in: requests x (1 + p x (share under 5 x IPREM / share under 3 x IPREM - 1)), with p = 0.5 and 1 (1 = the newly
+eligible ask as much as the rest, an upper case: they earn more and need it less).
 Outputs per rule: requests, requests per bono, share of the rental market above the cap (weighted by young people),
 extra money to keep the success rate of the current rule, bonos per 1,000 young people by need group (Madrid city
 apart, the rest in thirds of young people by need; also the old thirds of municipalities), and the municipalities that
@@ -42,6 +45,8 @@ from comun import INTERIM, ROOT, share_above  # noqa: E402
 BUDGET_EUR = 31.8e6
 BONO_EUR = 250 * 24
 MADRID = "079"
+# share of IRPF returns under each income limit (requisito_ingresos.py): the Bono's 3 x IPREM and the Plan's 5 x IPREM
+BONO_INCOME, PLAN_INCOME = "share_irpf_bajo_3iprem_2024", "share_irpf_bajo_5iprem_2024"
 
 
 def load():
@@ -52,9 +57,10 @@ def load():
     s = s[s["jovenes_20_34_2022"] > 0].copy()
     s["tasa_2022"] = s["bono_solicitudes"] / s["jovenes_20_34_2022"]
     inc = pd.read_csv(INTERIM / "requisito_ingresos.csv", dtype={"ine": str}).set_index("ine")
-    s["share_irpf_bajo_3iprem_2024"] = s["ine"].map(inc["share_irpf_bajo_3iprem_2024"])
-    missing = int(s["share_irpf_bajo_3iprem_2024"].isna().sum())
-    s["share_irpf_bajo_3iprem_2024"] = s["share_irpf_bajo_3iprem_2024"].fillna(s["share_irpf_bajo_3iprem_2024"].median())
+    missing = int(s["ine"].map(inc[BONO_INCOME]).isna().sum())
+    for col in (BONO_INCOME, PLAN_INCOME, PLAN_INCOME + "_min", PLAN_INCOME + "_max"):
+        s[col] = s["ine"].map(inc[col])
+        s[col] = s[col].fillna(s[col].median())
     cover = {"municipalities": len(s), "of_2022_requests": s["bono_solicitudes"].sum() / t["bono_solicitudes"].sum(),
              "of_young_2024": s["jovenes_20_34_2024"].sum() / t["jovenes_20_34_2024"].sum(),
              "municipalities_income_share_filled_with_median": missing}
@@ -104,10 +110,11 @@ def requests(s, caps, beta):
     return s["tasa_2022"].to_numpy() * s["jovenes_20_34_2024"].to_numpy() * np.exp(beta * (sh - s["share_above_cap_2022"].to_numpy())), sh
 
 
-def need_weights(s, how):
-    """Quota weights: young_2024 x need index^k, also x the share under 3 x IPREM in the "requisito" variant."""
+def need_weights(s, how, income=BONO_INCOME):
+    """Quota weights: young_2024 x need index^k, also x the share under the income limit in the "requisito" variant
+    (income: the column of that share; the Bono's 3 x IPREM unless the Plan's rules are simulated)."""
     w = s["jovenes_20_34_2024"] * s["indice_necesidad"] ** how[1]
-    return (w * s["share_irpf_bajo_3iprem_2024"] if "requisito" in how else w).to_numpy()
+    return (w * s[income] if "requisito" in how else w).to_numpy()
 
 
 def allocate(req, weights, n_bonos):
@@ -146,13 +153,14 @@ def plan_amount(s, beta, req_now, bonos_now):
     """The Plan's rules with the Plan's aid instead of 250 EUR (central beta): aids, requests per aid and the money that
     would keep today's share of requests that get an aid."""
     success_now = bonos_now.sum() / req_now.sum()
-    out = {"note": "Cuantía del Plan (art. 137); el límite de ingresos del Plan (5 x IPREM de la persona) no se simula"}
+    out = {"note": "Cuantía del Plan (art. 137) y, en los cupos, la parte bajo su límite de ingresos (5 x IPREM de la "
+                   "persona); las solicitudes, las de 2022 (con más gente por ese límite, en plan_income_limit)"}
     for name, (caps, how) in rules(s).items():
         if "plan" not in name:
             continue
         req, _ = requests(s, caps, beta)
         aid = plan_aid(s, caps)
-        bonos = allocate_money(req, req if how == "llegada" else need_weights(s, how), BUDGET_EUR, aid)
+        bonos = allocate_money(req, req if how == "llegada" else need_weights(s, how, PLAN_INCOME), BUDGET_EUR, aid)
         young = s["jovenes_20_34_2024"].to_numpy()
         out[name] = {"mean_monthly_aid_weighted_by_requests": round(float(np.average(aid, weights=req)), 2),
                      "aids": round(float(bonos.sum())), "requests_per_aid": round(float(req.sum() / bonos.sum()), 4),
@@ -160,6 +168,44 @@ def plan_amount(s, beta, req_now, bonos_now):
                      "aids_per_1000_young_by_group": {g: round(float(1000 * bonos[k].sum() / young[k].sum()), 4) for g, k in
                                                       ((g, (s["grupo_necesidad"] == g).to_numpy())
                                                        for g in sorted(s["grupo_necesidad"].unique()))}}
+    return out
+
+
+def more_eligible(s, p):
+    """Request multiplier for the Plan's wider income limit: 1 + p x (share under 5 x IPREM / share under 3 x IPREM - 1)."""
+    return 1 + p * (s[PLAN_INCOME] / s[BONO_INCOME]).to_numpy() - p
+
+
+def plan_income_limit(s, beta, req_now, bonos_now):
+    """Exploratory: the Plan as it is (first come) and the proposal, with the Plan's aid and more requests from its wider
+    income limit (p = 0, 0.5, 1): aids, the chance that a request gets one, the money for today's chance and aids per
+    1,000 young people by need group. Also the proposal's quotas with the two ends of the 5 x IPREM bracket and with
+    3 x IPREM (p = 0)."""
+    young = s["jovenes_20_34_2024"].to_numpy()
+    groups = [(g, (s["grupo_necesidad"] == g).to_numpy()) for g in sorted(s["grupo_necesidad"].unique())]
+    per1000 = lambda b: {g: round(float(1000 * b[k].sum() / young[k].sum()), 4) for g, k in groups}  # noqa: E731
+    chance_now = bonos_now.sum() / req_now.sum()
+    out = {"note": "EXPLORATORIO: solicitudes x (1 + p x (parte bajo 5 x IPREM / parte bajo 3 x IPREM - 1)); con p = 1, "
+                   "los que entran nuevos piden como los demás (caso alto: ganan más y la necesitan menos)",
+           "chance_today": round(float(chance_now), 4),
+           "returns_let_in_vs_3iprem_weighted_by_young": round(float(np.average(more_eligible(s, 1), weights=young)), 4)}
+    plan = rules(s)
+    for p in (0, 0.5, 1):
+        block = out[f"p_{p}"] = {}
+        for name in ("plan_estatal", "necesidad_requisito_plan_p75_hasta_1000"):
+            caps, how = plan[name]
+            req = requests(s, caps, beta)[0] * more_eligible(s, p)
+            aid = plan_aid(s, caps)
+            bonos = allocate_money(req, req if how == "llegada" else need_weights(s, how, PLAN_INCOME), BUDGET_EUR, aid)
+            block[name] = {"requests": round(float(req.sum())), "aids": round(float(bonos.sum())),
+                           "chance_of_aid": round(float(bonos.sum() / req.sum()), 4),
+                           "meur_same_chance_as_today": round(float(chance_now * (req * 24 * aid).sum() / 1e6), 4),
+                           "aids_per_1000_young_by_group": per1000(bonos)}
+    caps, how = plan["necesidad_requisito_plan_p75_hasta_1000"]
+    req, aid = requests(s, caps, beta)[0], plan_aid(s, caps)
+    out["proposal_quotas_by_income_share"] = {
+        col: per1000(allocate_money(req, need_weights(s, how, col), BUDGET_EUR, aid))
+        for col in (PLAN_INCOME + "_min", PLAN_INCOME, PLAN_INCOME + "_max", BONO_INCOME)}
     return out
 
 
@@ -240,7 +286,7 @@ def main():
            "young_by_group": s.groupby("grupo_necesidad")["jovenes_20_34_2024"].sum().astype(int).to_dict(),
            "requests_not_made_2022": not_made(s, betas), "rules": {}}
     per_muni = s[["ine", "municipio", "pob_total_2024", "tope_2022", "tope_2024", "indice_necesidad", "tercil_necesidad", "grupo_necesidad",
-                  "jovenes_20_34_2024", "share_irpf_bajo_3iprem_2024", "serpavi_med_2024", "serpavi_p75_2024"]].copy()
+                  "jovenes_20_34_2024", BONO_INCOME, PLAN_INCOME, "serpavi_med_2024", "serpavi_p75_2024"]].copy()
     for name, (caps, how) in rules(s).items():
         out["rules"][name] = {"allocation": how if how == "llegada" else " x ".join(["necesidad^%d" % how[1], *how[2:]])}
         for bname, b in betas.items():
@@ -253,6 +299,7 @@ def main():
                 per_muni[f"solicitudes_{name}"] = req.round(1)
                 per_muni[f"bonos_{name}"] = bonos.round(1)
     out["plan_amount"] = plan_amount(s, betas["central"], now["central"], bonos_now)
+    out["plan_income_limit"] = plan_income_limit(s, betas["central"], now["central"], bonos_now)
     text = json.dumps(out, indent=1, ensure_ascii=False, default=float)
     (ROOT / "resultados" / "simulador_reparto.json").write_text(text, encoding="utf-8")
     per_muni.to_csv(INTERIM / "simulador_municipios.csv", index=False, encoding="utf-8")

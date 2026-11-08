@@ -22,6 +22,8 @@ CAPS = {"Hoy (600 / 900 €)": s["tope_2024"].to_numpy(float), "Plan 2026-2030":
 ALLOC = {"Orden de llegada (hoy)": "llegada", "Cupos: jóvenes × necesidad": ("necesidad", 1),
          "Cupos: jóvenes × necesidad × límite de ingresos": ("necesidad", 1, "requisito")}
 AID = {"250 € (hoy)": "hoy", "La del Plan: hasta 300 €, sin pasar del 60 % del alquiler": "plan"}
+MORE = {"Los mismos que en 2022": 0, "Y la mitad de los que entran nuevos": 0.5, "Y todos los que entran nuevos": 1}
+let_in = result("simulador_reparto")["plan_income_limit"]["returns_let_in_vs_3iprem_weighted_by_young"]
 
 with st.container(border=True):
     with st.container(horizontal=True, vertical_alignment="bottom"):
@@ -35,6 +37,14 @@ with st.container(border=True):
         "Cuánto da cada ayuda al mes", list(AID), default="250 € (hoy)", key="cuantia",
         help="Plan 2026-2030, art. 137: hasta 300 € al mes (habitación, 200 €) y nunca más del 60 % del alquiler. Aquí, "
              "con el alquiler mediano de 2024 del municipio, o el tope si el mediano pasa del tope.") or "250 € (hoy)"
+    plan_rules = AID[aid_name] == "plan"
+    more_name = st.segmented_control(
+        "Con el límite de ingresos del Plan, quién la pide", list(MORE), default="Los mismos que en 2022",
+        key="mas_gente", disabled=not plan_rules,
+        help=f"El Plan deja pedirla con ingresos de hasta 5 × IPREM de la persona (42.000 € al año); hoy, 3 × IPREM del "
+             f"hogar (25.200 €). En las declaraciones del IRPF, eso deja entrar a {es(let_in, 2)} veces más gente de "
+             f"media, y más donde la renta es alta. «Todos» es el caso alto: los que entran nuevos ganan más y la "
+             f"necesitan menos. Solo con la cuantía del Plan.") or "Los mismos que en 2022"
     left, right = st.columns(2, gap="large", vertical_alignment="bottom")
     with left:
         beta_name = st.segmented_control(
@@ -50,8 +60,14 @@ beta = BETAS[beta_name]
 caps = CAPS[cap_name] if cap_name != "Un tope único" else np.full(len(s), float(single))
 how = ALLOC[alloc_name]
 req, sh = simulador.requests(s, caps, beta)
-aid = simulador.plan_aid(s, caps) if AID[aid_name] == "plan" else np.full(len(s), simulador.BONO_EUR / 24)
-bonos = simulador.allocate_money(req, req if how == "llegada" else simulador.need_weights(s, how), budget * 1e6, aid)
+if plan_rules:  # the Plan's rules: its aid, its income limit in the quotas and, if chosen, more people asking
+    req = req * simulador.more_eligible(s, MORE[more_name])
+    aid = simulador.plan_aid(s, caps)
+    weights = req if how == "llegada" else simulador.need_weights(s, how, simulador.PLAN_INCOME)
+else:
+    aid = np.full(len(s), simulador.BONO_EUR / 24)
+    weights = req if how == "llegada" else simulador.need_weights(s, how)
+bonos = simulador.allocate_money(req, weights, budget * 1e6, aid)
 req0, sh0 = simulador.requests(s, s["tope_2024"].to_numpy(float), beta)
 bonos0 = simulador.allocate(req0, req0, simulador.BUDGET_EUR / simulador.BONO_EUR)
 
@@ -75,10 +91,11 @@ m5.metric("Dinero para la misma probabilidad que hoy", es(same_chance, 1) + " M�
           delta=es(same_chance - simulador.BUDGET_EUR / 1e6, 1) + " M€", delta_color="inverse", border=True,
           height="stretch", help="Presupuesto que mantendría las solicitudes por bono de hoy (31,8 M€ para 5.300 bonos).")
 st.caption(f"Con {es(budget, 1)} M€ y esta cuantía salen {es(bonos.sum())} ayudas de {es(np.average(aid, weights=req))} € "
-           f"al mes de media durante 2 años (hoy, 5.300 de 250 €)."
-           + (" El Plan también sube el límite de ingresos a 5 × IPREM de la persona (hoy, 3 × IPREM del hogar). Eso no "
-              "está simulado: las solicitudes salen de las de 2022, así que con esas reglas pedirían más jóvenes."
-              if AID[aid_name] == "plan" else ""))
+           f"al mes de media durante 2 años (hoy, 5.300 de 250 €). De cada 100 que la piden, la consiguen unos "
+           f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())})."
+           + (" Con las reglas del Plan, los cupos «× límite de ingresos» usan el suyo (5 × IPREM de la persona), y las "
+              "solicitudes son las de 2022 más las de quienes entran nuevos, según el control de arriba (exploratorio: "
+              "sale de las declaraciones del IRPF de todas las edades)." if plan_rules else ""))
 
 groups = s["grupo_necesidad"].to_numpy()
 ORDER = ["Madrid capital", "resto, necesidad alta", "resto, necesidad media", "resto, necesidad baja"]

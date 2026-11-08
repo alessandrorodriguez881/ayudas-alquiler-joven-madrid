@@ -91,6 +91,7 @@ def ficha_municipio(municipio):
         "solicitudes_bono_2022_no_hechas_por_el_tope": not_made,
         "bonos_simulados": {k: round(v[0]["bonos"], 1) if v else None for k, v in sim.items()},
         "parte_irpf_bajo_3iprem_2024": r["parte_irpf_bajo_3iprem_2024"],
+        "parte_irpf_bajo_5iprem_2024": r["parte_irpf_bajo_5iprem_2024"],
         "nota": NOTE + ". «solicitudes_bono_2022_no_hechas_por_el_tope» es una estimación del modelo: las que habría "
                 "con todo el alquiler de 2022 por debajo del tope, menos las que hubo.",
         "fuentes": sources("spacm_bono_alquiler_joven_2022", "spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos",

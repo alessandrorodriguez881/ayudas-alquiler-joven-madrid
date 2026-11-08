@@ -60,7 +60,7 @@ def municipalities():
     s, _ = simulation_base()
     rules = simulador.rules(s)
     caps = {"plan": simulador.plan_cap(s), "propuesta": rules[PROPOSAL][0]}
-    extra = s[["ine", "grupo_necesidad", "share_irpf_bajo_3iprem_2024"]].copy()
+    extra = s[["ine", "grupo_necesidad", simulador.BONO_INCOME, simulador.PLAN_INCOME]].copy()
     for k, c in caps.items():
         extra[f"tope_{k}"] = c
         extra[f"fuera_{k}"] = [share_above(v, a, z) for v, a, z in zip(c, s["serpavi_p25_2024"], s["serpavi_p75_2024"])]

@@ -98,6 +98,10 @@ with st.container(horizontal=True):
               border=True, height="stretch",
               help="Parte de las declaraciones con base imponible de hasta 25.200 €, de todas las edades: compara "
                    "municipios, no cuenta jóvenes.")
+    st.metric("Ídem, por debajo de 5 × IPREM: el límite del Plan", pct(r["share_irpf_bajo_5iprem_2024"]),
+              border=True, height="stretch",
+              help="Base imponible de hasta 42.000 €. El Plan 2026-2030 mira los ingresos de la persona, no los del "
+                   "hogar (art. 133.1.d).")
     st.metric("Bonos con la regla de hoy (simulación)", es(r["bonos_actual_2024_55"]), border=True, height="stretch",
               help="5.300 bonos (31,8 M€) por orden de llegada, con los topes de 2024.")
     delta = r["bonos_propuesta"] - r["bonos_actual_2024_55"]

@@ -1967,7 +1967,7 @@
   }
  },
  "plan_amount": {
-  "note": "Cuantía del Plan (art. 137); el límite de ingresos del Plan (5 x IPREM de la persona) no se simula",
+  "note": "Cuantía del Plan (art. 137) y, en los cupos, la parte bajo su límite de ingresos (5 x IPREM de la persona); las solicitudes, las de 2022 (con más gente por ese límite, en plan_income_limit)",
   "plan_estatal": {
    "mean_monthly_aid_weighted_by_requests": 299.76,
    "aids": 4420,
@@ -2030,10 +2030,119 @@
   },
   "necesidad_requisito_plan_p75_hasta_1000": {
    "mean_monthly_aid_weighted_by_requests": 299.75,
-   "aids": 4427,
-   "requests_per_aid": 12.2453,
+   "aids": 4426,
+   "requests_per_aid": 12.2484,
    "meur_same_success_rate_as_today": 40.2936,
    "aids_per_1000_young_by_group": {
+    "Madrid capital": 3.754,
+    "resto, necesidad alta": 4.2948,
+    "resto, necesidad baja": 1.8034,
+    "resto, necesidad media": 3.2248
+   }
+  }
+ },
+ "plan_income_limit": {
+  "note": "EXPLORATORIO: solicitudes x (1 + p x (parte bajo 5 x IPREM / parte bajo 3 x IPREM - 1)); con p = 1, los que entran nuevos piden como los demás (caso alto: ganan más y la necesitan menos)",
+  "chance_today": 0.1033,
+  "returns_let_in_vs_3iprem_weighted_by_young": 1.4447,
+  "p_0": {
+   "plan_estatal": {
+    "requests": 53948,
+    "aids": 4420,
+    "chance_of_aid": 0.0819,
+    "meur_same_chance_as_today": 40.102,
+    "aids_per_1000_young_by_group": {
+     "Madrid capital": 4.2052,
+     "resto, necesidad alta": 3.0462,
+     "resto, necesidad baja": 1.8576,
+     "resto, necesidad media": 2.9789
+    }
+   },
+   "necesidad_requisito_plan_p75_hasta_1000": {
+    "requests": 54207,
+    "aids": 4426,
+    "chance_of_aid": 0.0816,
+    "meur_same_chance_as_today": 40.2936,
+    "aids_per_1000_young_by_group": {
+     "Madrid capital": 3.754,
+     "resto, necesidad alta": 4.2948,
+     "resto, necesidad baja": 1.8034,
+     "resto, necesidad media": 3.2248
+    }
+   }
+  },
+  "p_0.5": {
+   "plan_estatal": {
+    "requests": 65902,
+    "aids": 4420,
+    "chance_of_aid": 0.0671,
+    "meur_same_chance_as_today": 48.9903,
+    "aids_per_1000_young_by_group": {
+     "Madrid capital": 4.2254,
+     "resto, necesidad alta": 2.9529,
+     "resto, necesidad baja": 1.9145,
+     "resto, necesidad media": 2.9592
+    }
+   },
+   "necesidad_requisito_plan_p75_hasta_1000": {
+    "requests": 66213,
+    "aids": 4426,
+    "chance_of_aid": 0.0668,
+    "meur_same_chance_as_today": 49.2208,
+    "aids_per_1000_young_by_group": {
+     "Madrid capital": 3.7538,
+     "resto, necesidad alta": 4.2945,
+     "resto, necesidad baja": 1.8033,
+     "resto, necesidad media": 3.226
+    }
+   }
+  },
+  "p_1": {
+   "plan_estatal": {
+    "requests": 77855,
+    "aids": 4420,
+    "chance_of_aid": 0.0568,
+    "meur_same_chance_as_today": 57.8786,
+    "aids_per_1000_young_by_group": {
+     "Madrid capital": 4.2394,
+     "resto, necesidad alta": 2.8883,
+     "resto, necesidad baja": 1.954,
+     "resto, necesidad media": 2.9456
+    }
+   },
+   "necesidad_requisito_plan_p75_hasta_1000": {
+    "requests": 78219,
+    "aids": 4426,
+    "chance_of_aid": 0.0566,
+    "meur_same_chance_as_today": 58.148,
+    "aids_per_1000_young_by_group": {
+     "Madrid capital": 3.7538,
+     "resto, necesidad alta": 4.2945,
+     "resto, necesidad baja": 1.8033,
+     "resto, necesidad media": 3.226
+    }
+   }
+  },
+  "proposal_quotas_by_income_share": {
+   "share_irpf_bajo_5iprem_2024_min": {
+    "Madrid capital": 3.6928,
+    "resto, necesidad alta": 4.5076,
+    "resto, necesidad baja": 1.7371,
+    "resto, necesidad media": 3.2629
+   },
+   "share_irpf_bajo_5iprem_2024": {
+    "Madrid capital": 3.754,
+    "resto, necesidad alta": 4.2948,
+    "resto, necesidad baja": 1.8034,
+    "resto, necesidad media": 3.2248
+   },
+   "share_irpf_bajo_5iprem_2024_max": {
+    "Madrid capital": 3.8171,
+    "resto, necesidad alta": 4.0778,
+    "resto, necesidad baja": 1.8673,
+    "resto, necesidad media": 3.1865
+   },
+   "share_irpf_bajo_3iprem_2024": {
     "Madrid capital": 3.6908,
     "resto, necesidad alta": 4.5379,
     "resto, necesidad baja": 1.7295,

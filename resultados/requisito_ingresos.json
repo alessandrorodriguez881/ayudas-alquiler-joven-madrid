@@ -89,5 +89,43 @@
    "plan_1000": 35.7,
    "plan_500": 11.9
   }
+ },
+ "plan_limit_5iprem": {
+  "threshold_eur_year_2024": 42000.0,
+  "max_income_eur_month": 3500.0,
+  "share_of_returns_below_threshold_2024": {
+   "by_group_weighted_by_young": {
+    "Madrid capital": 0.687,
+    "resto, necesidad alta": 0.808,
+    "resto, necesidad baja": 0.642,
+    "resto, necesidad media": 0.747
+   },
+   "all_weighted_by_young": 0.71,
+   "spearman_with": {
+    "indice_necesidad": 0.636,
+    "renta_pc_2024": -0.967,
+    "share_above_tope_2024_en_2024": -0.524,
+    "esfuerzo_alquiler_2024": 0.06
+   },
+   "n_municipalities": 131
+  },
+  "range_all_weighted_by_young_2024": {
+   "low": 0.595,
+   "central": 0.71,
+   "high": 0.885
+  },
+  "returns_let_in_vs_3iprem": {
+   "by_group_weighted_by_young": {
+    "Madrid capital": 1.455,
+    "resto, necesidad alta": 1.36,
+    "resto, necesidad baja": 1.525,
+    "resto, necesidad media": 1.431
+   },
+   "all_weighted_by_young": 1.445,
+   "spearman_with": {
+    "indice_necesidad": -0.596,
+    "renta_pc_2024": 0.911
+   }
+  }
  }
 }

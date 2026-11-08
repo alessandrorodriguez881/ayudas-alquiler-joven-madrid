@@ -10,8 +10,13 @@ many people the rule lets in, comparable across municipalities, not a head count
   2. Is that share related to the need index, income per head and the share of rents above the cap?
   3. Does the pre-registered H1 effect hold with that share as one more control? (also the cap-only model)
   4. Rule arithmetic: each cap as a share of the highest income the rule allows (gross, per month)
-The simulator reads the 2024 share to weigh need quotas by the young people the rule lets in (rule
-"necesidad_requisito_plan_p75_hasta_1000" in simulador.py).
+  5. Added 8-Nov: the Plan Estatal 2026-2030 limit, 5 x IPREM of the person (RD 326/2026, art. 133.1.d; 5.5 or 6 with a
+     disability, not used here): the same share with 5 x IPREM (42,000 EUR with 2024 income), and how many more returns
+     it lets in than 3 x IPREM, by municipality. Returns are mostly individual, so this proxy fits the Plan's personal
+     limit better than the Bono's household one; the 5 x IPREM line falls in a wide bracket (30,051-60,101 EUR), so the
+     range from its two ends is wide too
+The simulator reads the 2024 shares to weigh need quotas by the young people the rule lets in (rule
+"necesidad_requisito_plan_p75_hasta_1000" in simulador.py): 3 x IPREM with today's aid, 5 x IPREM with the Plan's.
 Usage:  python -P scripts/requisito_ingresos.py   (after necesidad_2024.py and exploratorio_topes_falsos.py; before simulador.py)
         -> resultados/requisito_ingresos.json and data/interim/requisito_ingresos.csv
 """
@@ -36,8 +41,8 @@ BRACKETS = [("Menor de 6.010,00 euros", 0.0), ("Entre 6.010,01  y 12.020,00 euro
             ("Más de 60.101,21 euros", 60101.22)]
 
 
-def threshold(year):
-    return 3 * 14 * IPREM_MONTH[year]
+def threshold(year, times=3):
+    return times * 14 * IPREM_MONTH[year]
 
 
 def irpf(base):
@@ -48,15 +53,15 @@ def irpf(base):
     return d.pivot_table(index=["Año", "ine"], columns="Tramo", values="Valor")
 
 
-def share_below(table, year):
-    """Share of returns with taxable base <= 3 x IPREM: central (linear inside the bracket) and the two bracket ends."""
+def share_below(table, year, times=3):
+    """Share of returns with taxable base <= times x IPREM: central (linear inside the bracket) and the two bracket ends."""
     t = table.loc[year]
     counts = t[[b for b, _ in BRACKETS]]
     total = t["Total"]
     gap = (counts.sum(axis=1, min_count=len(BRACKETS)) - total).abs()
     assert (gap.dropna() <= 1).all(), "brackets do not add up to the total"  # also checks the "Miles euros" label
     edges = [lo for _, lo in BRACKETS] + [np.inf]
-    thr = threshold(year)
+    thr = threshold(year, times)
     k = max(i for i, lo in enumerate(edges[:-1]) if lo <= thr)
     below = counts.iloc[:, :k].sum(axis=1)
     frac = (thr - edges[k]) / (edges[k + 1] - edges[k])
@@ -110,9 +115,27 @@ def arithmetic():
             "rent_minus_bono_over_max_income_pct": {k: round(100 * (c - 250) / top, 1) for k, c in caps.items()}}
 
 
+def plan_limit(s, e3, e5):
+    """The Plan's 5 x IPREM of the person against today's 3 x IPREM (2024 income): the share of returns under it, and
+    how many times more returns it lets in than 3 x IPREM, by need group."""
+    desc, s = describe(s, e5["central"])
+    s = s.assign(more=s["ine"].map(e5["central"] / e3["central"]))
+    young = s["jovenes_20_34_2024"]
+    return {"threshold_eur_year_2024": threshold(2024, 5), "max_income_eur_month": round(threshold(2024, 5) / 12, 2),
+            "share_of_returns_below_threshold_2024": desc,
+            "range_all_weighted_by_young_2024": {k: wavg(s["ine"].map(e5[k]), young) for k in ("low", "central", "high")},
+            "returns_let_in_vs_3iprem": {
+                "by_group_weighted_by_young": {g: wavg(x["more"], x["jovenes_20_34_2024"])
+                                               for g, x in s.groupby("grupo_necesidad")},
+                "all_weighted_by_young": wavg(s["more"], young),
+                "spearman_with": {c: round(float(s["more"].corr(s[c], method="spearman")), 3)
+                                  for c in ("indice_necesidad", "renta_pc_2024")}}}
+
+
 def main():
     old, new = irpf(RAW), irpf(NEW)  # data/raw stays frozen for the 2022 test; 2024 comes from the 6-Nov download
     e21, e24 = share_below(old, 2021), share_below(new, 2024)
+    e24_plan = share_below(new, 2024, times=5)
     s, _ = simulador.load()
     s["grupo_necesidad"] = simulador.need_groups(s)
     desc, s = describe(s, e24["central"])
@@ -122,9 +145,12 @@ def main():
            "range_all_weighted_by_young_2024": {k: wavg(s["ine"].map(e24[k]), s["jovenes_20_34_2024"])
                                                 for k in ("low", "central", "high")},
            "h1_with_income_rule_control": robustness(e21["central"]),
-           "rule_arithmetic": arithmetic()}
+           "rule_arithmetic": arithmetic(),
+           "plan_limit_5iprem": plan_limit(s, e24, e24_plan)}
     per = pd.DataFrame({"share_irpf_bajo_3iprem_2021": e21["central"], "share_irpf_bajo_3iprem_2024": e24["central"],
                         "share_irpf_bajo_3iprem_2024_min": e24["low"], "share_irpf_bajo_3iprem_2024_max": e24["high"],
+                        "share_irpf_bajo_5iprem_2024": e24_plan["central"], "share_irpf_bajo_5iprem_2024_min": e24_plan["low"],
+                        "share_irpf_bajo_5iprem_2024_max": e24_plan["high"],
                         "declaraciones_2024": e24["returns"]}).round(4).reset_index()
     per.to_csv(INTERIM / "requisito_ingresos.csv", index=False, encoding="utf-8")
     text = json.dumps(out, indent=1, ensure_ascii=False, default=float)

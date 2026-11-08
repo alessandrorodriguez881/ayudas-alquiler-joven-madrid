@@ -46,6 +46,10 @@ ok(at, "simulador: propuesta")
 at.segmented_control(key="cuantia").set_value("La del Plan: hasta 300 €, sin pasar del 60 % del alquiler").run()
 assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount
 ok(at, "simulador: propuesta con la cuantía del Plan")
+at.segmented_control(key="mas_gente").set_value("Y todos los que entran nuevos").run()
+assert at.metric[4].value == "58,1 M€", at.metric[4].value  # plan_income_limit, p_1
+ok(at, "simulador: propuesta con el Plan y todos los que entran nuevos por su límite de ingresos")
+at.segmented_control(key="mas_gente").set_value("Los mismos que en 2022").run()
 at.segmented_control(key="cuantia").set_value("250 € (hoy)").run()
 at.segmented_control(key="tope").set_value("Hoy (600 / 900 €)").run()
 at.segmented_control(key="reparto").set_value("Orden de llegada (hoy)").run()

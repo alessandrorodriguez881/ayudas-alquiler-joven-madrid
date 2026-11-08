@@ -37,6 +37,29 @@ st.markdown(
 st.image(str(RES / "figuras" / "contraste_todas_las_pruebas.png"),
          alt="Todas las estimaciones del efecto del tope, también las que no salieron, con sus intervalos")
 
+limit = result("requisito_ingresos")["plan_limit_5iprem"]
+more = limit["returns_let_in_vs_3iprem"]["by_group_weighted_by_young"]
+plan = result("simulador_reparto")["plan_income_limit"]
+chance = lambda p: es(100 * plan[p]["plan_estatal"]["chance_of_aid"])  # noqa: E731
+high = lambda p, rule: es(plan[p][rule]["aids_per_1000_young_by_group"]["resto, necesidad alta"], 1)  # noqa: E731
+st.subheader("Lo que cambia con el Plan 2026-2030 (simulación, con 31,8 M€)")
+st.markdown(
+    f"- **Paga más por ayuda:** hasta 300 € al mes y nunca más del 60 % del alquiler (art. 137). Con el mismo dinero "
+    f"salen {es(plan['p_0']['plan_estatal']['aids'])} ayudas, no 5.300.\n"
+    f"- **Deja entrar a más gente:** ingresos de hasta 5 × IPREM de la persona ({es(limit['threshold_eur_year_2024'])} € al "
+    f"año), no 3 × IPREM del hogar (25.200 €) (art. 133.1.d). En las declaraciones del IRPF son "
+    f"{es(limit['returns_let_in_vs_3iprem']['all_weighted_by_young'], 2)} veces más personas, y más donde la renta es alta: "
+    f"{es(more['resto, necesidad baja'], 2)} veces en el tercio de menos necesidad y {es(more['resto, necesidad alta'], 2)} "
+    f"en el de más (exploratorio: son declaraciones de todas las edades).\n"
+    f"- **Por orden de llegada, como hoy:** de cada 100 que la piden, hoy la consiguen unos "
+    f"{es(100 * plan['chance_today'])}. Con el Plan, unos {chance('p_0')} si la piden los mismos que en 2022, y unos "
+    f"{chance('p_0.5')} o {chance('p_1')} si la pide también la mitad o el total de los que entran nuevos. Y las ayudas se "
+    f"van un poco hacia los municipios ricos: el tercio de más necesidad baja de {high('p_0', 'plan_estatal')} a "
+    f"{high('p_1', 'plan_estatal')} ayudas por cada 1.000 jóvenes.\n"
+    f"- **Con cupos por necesidad (la propuesta),** ese tercio recibe {high('p_0', 'necesidad_requisito_plan_p75_hasta_1000')} "
+    f"pida quien pida: los cupos no dependen de quién llega antes."
+)
+
 st.subheader("Datos")
 st.table({
     "Fuente": ["Portal de Datos Abiertos de la Comunidad de Madrid", "SERPAVI, Ministerio de Vivienda y Agenda Urbana",

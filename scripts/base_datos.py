@@ -66,6 +66,9 @@ SCHEMA = {
         "parte_irpf_bajo_3iprem_2024": ("REAL", "proporción", "Declaraciones del IRPF con base imponible de hasta 3 × IPREM "
                                         "(25.200 €), de todas las edades: compara municipios, no cuenta jóvenes",
                                         "irpf_declaraciones_por_tramo (requisito_ingresos.py)"),
+        "parte_irpf_bajo_5iprem_2024": ("REAL", "proporción", "Ídem con 5 × IPREM (42.000 €), el límite de la persona en el "
+                                        "Plan 2026-2030; el tramo que lo contiene es ancho (30.051-60.101 €)",
+                                        "irpf_declaraciones_por_tramo (requisito_ingresos.py)"),
         "anexo_ii_2022": ("INTEGER", "0/1", "1 si tenía tope de 900 € en el Bono 2022 (29 municipios)", "Acuerdo de 14-sep-2022"),
         "anexo_ii_2024": ("INTEGER", "0/1", "1 si tiene tope de 900 € en el Bono 2024 (55 municipios)",
                           "Acuerdo de 26-dic-2024 (BDNS 805618)"),
@@ -114,7 +117,8 @@ SCHEMA = {
     "simulacion": ("Escenarios del simulador de reparto con el β central (−0,54) y 31,8 M€", ["ine", "escenario"], {
         "ine": ("TEXT", "", "Código INE del municipio", ""),
         "escenario": ("TEXT", "", "Regla del simulador (scripts/simulador.py, rules)", ""),
-        "reparto": ("TEXT", "", "llegada (orden de llegada) o cupos (jóvenes × necesidad, a veces × límite de ingresos)", ""),
+        "reparto": ("TEXT", "", "llegada (orden de llegada) o cupos (jóvenes × necesidad, a veces × límite de ingresos: "
+                    "aquí, el de hoy, 3 × IPREM, porque son bonos de 250 €)", ""),
         "tope_piso": ("REAL", "€/mes", "Tope del piso en el escenario", "simulador.py"),
         "solicitudes": ("REAL", "solicitudes", "Solicitudes esperadas con ese tope", "simulador.py"),
         "bonos": ("REAL", "bonos", "Bonos que recibiría (5.300 en total)", "simulador.py"),
@@ -152,9 +156,10 @@ def municipalities():
     inc = pd.read_csv(INTERIM / "requisito_ingresos.csv", dtype={"ine": str})
     s, _ = simulador.load()
     t = (t.merge(codes[["ine", "ine5"]], on="ine", how="left")
-         .merge(inc[["ine", "share_irpf_bajo_3iprem_2024"]], on="ine", how="left")
+         .merge(inc[["ine", simulador.BONO_INCOME, simulador.PLAN_INCOME]], on="ine", how="left")
          .merge(s[["ine"]].assign(grupo_necesidad=simulador.need_groups(s)), on="ine", how="left"))
-    return t.assign(parte_irpf_bajo_3iprem_2024=t["share_irpf_bajo_3iprem_2024"],
+    return t.assign(parte_irpf_bajo_3iprem_2024=t[simulador.BONO_INCOME],
+                    parte_irpf_bajo_5iprem_2024=t[simulador.PLAN_INCOME],
                     anexo_ii_2022=(t["tope_2022"] == 900).astype(int), anexo_ii_2024=(t["tope_2024"] == 900).astype(int),
                     hasta_10000_hab=(t["pob_total_2024"] <= 10000).astype(int))
 

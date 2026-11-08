@@ -2,7 +2,7 @@
 
 Una sola base SQLite con todo lo que usa el proyecto, por municipio. La genera `scripts/base_datos.py` (este fichero también, con el mismo diccionario que va dentro de la base, en la tabla `diccionario`). La leen la app y, más adelante, el servidor MCP.
 
-Hecha el 2026-11-08 desde el commit `52b3cfc`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
+Hecha el 2026-11-08 desde el commit `26a433c (con cambios sin commit)`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
 
 ```sql
 SELECT municipio, tope_hoy, tope_plan, tope_propuesta, alquiler_p75_2024
@@ -31,6 +31,7 @@ Una fila por municipio de la Comunidad de Madrid. Clave: `ine`.
 | `tercil_necesidad` | TEXT |  | baja, media o alta (tercios de municipios) | calculado (necesidad_2024.py) |
 | `grupo_necesidad` | TEXT |  | Grupo del simulador: Madrid capital aparte y el resto en tercios de jóvenes por necesidad (132 municipios) | calculado (simulador.py) |
 | `parte_irpf_bajo_3iprem_2024` | REAL | proporción | Declaraciones del IRPF con base imponible de hasta 3 × IPREM (25.200 €), de todas las edades: compara municipios, no cuenta jóvenes | irpf_declaraciones_por_tramo (requisito_ingresos.py) |
+| `parte_irpf_bajo_5iprem_2024` | REAL | proporción | Ídem con 5 × IPREM (42.000 €), el límite de la persona en el Plan 2026-2030; el tramo que lo contiene es ancho (30.051-60.101 €) | irpf_declaraciones_por_tramo (requisito_ingresos.py) |
 | `anexo_ii_2022` | INTEGER | 0/1 | 1 si tenía tope de 900 € en el Bono 2022 (29 municipios) | Acuerdo de 14-sep-2022 |
 | `anexo_ii_2024` | INTEGER | 0/1 | 1 si tiene tope de 900 € en el Bono 2024 (55 municipios) | Acuerdo de 26-dic-2024 (BDNS 805618) |
 | `hasta_10000_hab` | INTEGER | 0/1 | 1 si tiene 10.000 habitantes o menos en 2024 (tope de 500 € en el Plan) | calculado |
@@ -99,7 +100,7 @@ Escenarios del simulador de reparto con el β central (−0,54) y 31,8 M€. Cla
 |---|---|---|---|---|
 | `ine` | TEXT |  | Código INE del municipio |  |
 | `escenario` | TEXT |  | Regla del simulador (scripts/simulador.py, rules) |  |
-| `reparto` | TEXT |  | llegada (orden de llegada) o cupos (jóvenes × necesidad, a veces × límite de ingresos) |  |
+| `reparto` | TEXT |  | llegada (orden de llegada) o cupos (jóvenes × necesidad, a veces × límite de ingresos: aquí, el de hoy, 3 × IPREM, porque son bonos de 250 €) |  |
 | `tope_piso` | REAL | €/mes | Tope del piso en el escenario | simulador.py |
 | `solicitudes` | REAL | solicitudes | Solicitudes esperadas con ese tope | simulador.py |
 | `bonos` | REAL | bonos | Bonos que recibiría (5.300 en total) | simulador.py |
@@ -119,7 +120,7 @@ Datos usados, con su licencia. Clave: `fuente`.
 | `actualizado` | TEXT |  | Fecha de la última actualización según la fuente |  |
 | `carpeta` | TEXT |  | Carpeta del repositorio con la copia y su metadata.json |  |
 
-## `diccionario` (69 filas)
+## `diccionario` (70 filas)
 
 Cada columna de cada tabla. Clave: `tabla, columna`.
 
