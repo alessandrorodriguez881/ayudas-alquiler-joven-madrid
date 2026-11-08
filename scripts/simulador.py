@@ -67,8 +67,8 @@ def rules(s):
     plan = plan_cap(s)
     # Art. 135 raise: the Plan's cap, or the local p75 where it is higher (3 of every 4 rents fit under the cap)
     local = np.maximum(plan, p75)
-    # The same raise, but never above 1,000 EUR: income must stay under 3 x IPREM (whole household), so caps far above
-    # 1,000 EUR mostly add requests from the west; this only lifts the 500 EUR of small municipalities up to their p75
+    # The same raise, but never above the Plan's general 1,000 EUR: caps far above it mostly add requests from the west
+    # (Pozuelo, Majadahonda, Boadilla); this only lifts the 500 EUR of small municipalities up to their p75
     upto1000 = np.clip(p75, plan, 1000)
     return {
         "lista_2022_29": (s["tope_2022"].to_numpy(float), "llegada"),
