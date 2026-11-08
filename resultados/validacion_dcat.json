@@ -6,6 +6,11 @@
  "triples": 171,
  "Violation": [
   {
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos",
+   "propiedad": "http://purl.org/dc/terms/publisher",
+   "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
+  },
+  {
    "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#catalogo",
    "propiedad": "http://purl.org/dc/terms/publisher",
    "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
@@ -16,19 +21,14 @@
    "mensaje": "El valor debe ser un IRI del vocabulario de organismos del sector público http://datos.gob.es/recurso/sector-publico/org/Organismo"
   },
   {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado",
-   "propiedad": "http://purl.org/dc/terms/publisher",
-   "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
-  },
-  {
    "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo",
    "propiedad": "None",
    "mensaje": "El valor debe ser un IRI del vocabulario de organismos del sector público http://datos.gob.es/recurso/sector-publico/org/Organismo"
   },
   {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos",
-   "propiedad": "http://purl.org/dc/terms/publisher",
-   "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo",
+   "propiedad": "None",
+   "mensaje": "El valor debe ser un IRI del vocabulario de organismos del sector público http://datos.gob.es/recurso/sector-publico/org/Organismo"
   },
   {
    "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo",
@@ -41,26 +41,21 @@
    "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
   },
   {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo",
-   "propiedad": "None",
-   "mensaje": "El valor debe ser un IRI del vocabulario de organismos del sector público http://datos.gob.es/recurso/sector-publico/org/Organismo"
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado",
+   "propiedad": "http://purl.org/dc/terms/publisher",
+   "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
   }
  ],
  "Warning": [
   {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado-json",
-   "propiedad": "http://data.europa.eu/r5r/applicableLegislation",
-   "mensaje": "La distribución debería contener al menos un dcatap:applicableLegislation."
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos",
+   "propiedad": "http://purl.org/dc/terms/publisher",
+   "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
   },
   {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado-csv",
-   "propiedad": "http://data.europa.eu/r5r/applicableLegislation",
-   "mensaje": "La distribución debería contener al menos un dcatap:applicableLegislation."
-  },
-  {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#indicadores-municipios-2024-csv",
-   "propiedad": "http://data.europa.eu/r5r/applicableLegislation",
-   "mensaje": "La distribución debería contener al menos un dcatap:applicableLegislation."
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos",
+   "propiedad": "http://www.w3.org/ns/dcat#contactPoint",
+   "mensaje": "Se recomienda que el punto de contacto utilice vcard:fn, vcard:hasTelephone y vcard:hasUID. Ver: https://datosgobes.github.io/DCAT-AP-ES/convenciones/#convencion-19"
   },
   {
    "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos-sqlite",
@@ -78,92 +73,22 @@
    "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
   },
   {
-   "nodo": "n56a666c5375846479148ccb6b8649432b2",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b8",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b5",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b2",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b8",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b5",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b2",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
-   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasUID."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b8",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
-   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasUID."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b5",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
-   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasUID."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b2",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasEmail",
-   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasEmail."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b8",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasEmail",
-   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasEmail."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b5",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasEmail",
-   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasEmail."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b2",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b8",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b5",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
-  },
-  {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado",
-   "propiedad": "http://purl.org/dc/terms/publisher",
-   "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
-  },
-  {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos",
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#indicadores-municipios-2024",
    "propiedad": "http://purl.org/dc/terms/publisher",
    "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
   },
   {
    "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#indicadores-municipios-2024",
+   "propiedad": "http://www.w3.org/ns/dcat#contactPoint",
+   "mensaje": "Se recomienda que el punto de contacto utilice vcard:fn, vcard:hasTelephone y vcard:hasUID. Ver: https://datosgobes.github.io/DCAT-AP-ES/convenciones/#convencion-19"
+  },
+  {
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#indicadores-municipios-2024-csv",
+   "propiedad": "http://data.europa.eu/r5r/applicableLegislation",
+   "mensaje": "La distribución debería contener al menos un dcatap:applicableLegislation."
+  },
+  {
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado",
    "propiedad": "http://purl.org/dc/terms/publisher",
    "mensaje": "El valor de dct:publisher debe ser un IRI o un nodo en blanco que cumpla con las restricciones de la forma de agente."
   },
@@ -173,42 +98,117 @@
    "mensaje": "Se recomienda que el punto de contacto utilice vcard:fn, vcard:hasTelephone y vcard:hasUID. Ver: https://datosgobes.github.io/DCAT-AP-ES/convenciones/#convencion-19"
   },
   {
-   "nodo": "n56a666c5375846479148ccb6b8649432b8",
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado-csv",
+   "propiedad": "http://data.europa.eu/r5r/applicableLegislation",
+   "mensaje": "La distribución debería contener al menos un dcatap:applicableLegislation."
+  },
+  {
+   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#reparto-simulado-json",
+   "propiedad": "http://data.europa.eu/r5r/applicableLegislation",
+   "mensaje": "La distribución debería contener al menos un dcatap:applicableLegislation."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasEmail",
+   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasEmail."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasEmail",
+   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasEmail."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasEmail",
+   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasEmail."
+  },
+  {
+   "nodo": "nodo en blanco",
    "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
    "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
   },
   {
-   "nodo": "n56a666c5375846479148ccb6b8649432b8",
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
+   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasUID."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
+   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasUID."
+  },
+  {
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
+   "mensaje": "Un vcard:Kind debería contener al menos un vcard:hasUID."
+  },
+  {
+   "nodo": "nodo en blanco",
    "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
    "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
   },
   {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos",
-   "propiedad": "http://www.w3.org/ns/dcat#contactPoint",
-   "mensaje": "Se recomienda que el punto de contacto utilice vcard:fn, vcard:hasTelephone y vcard:hasUID. Ver: https://datosgobes.github.io/DCAT-AP-ES/convenciones/#convencion-19"
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b2",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
-  },
-  {
-   "nodo": "n56a666c5375846479148ccb6b8649432b2",
+   "nodo": "nodo en blanco",
    "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
    "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
   },
   {
-   "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#indicadores-municipios-2024",
-   "propiedad": "http://www.w3.org/ns/dcat#contactPoint",
-   "mensaje": "Se recomienda que el punto de contacto utilice vcard:fn, vcard:hasTelephone y vcard:hasUID. Ver: https://datosgobes.github.io/DCAT-AP-ES/convenciones/#convencion-19"
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
   },
   {
-   "nodo": "n56a666c5375846479148ccb6b8649432b5",
-   "propiedad": "http://www.w3.org/2006/vcard/ns#hasTelephone",
-   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasTelephone."
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
   },
   {
-   "nodo": "n56a666c5375846479148ccb6b8649432b5",
+   "nodo": "nodo en blanco",
+   "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
+   "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
+  },
+  {
+   "nodo": "nodo en blanco",
    "propiedad": "http://www.w3.org/2006/vcard/ns#hasUID",
    "mensaje": "Un vcard:Kind debería incluir al menos un vcard:hasUID."
   }

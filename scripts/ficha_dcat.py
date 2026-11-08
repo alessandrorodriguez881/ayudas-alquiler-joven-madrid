@@ -180,7 +180,8 @@ def shapes():
     meta.write_text(json.dumps({
         "name": "dcat_ap_es_shacl", "title": "Plantillas SHACL de DCAT-AP-ES 1.0.0 (datos.gob.es)",
         "source": f"https://github.com/datosgobes/DCAT-AP-ES/tree/{SHAPES_COMMIT}/shacl/1.0.0", "license": "CC BY 4.0",
-        "files": {n: hashlib.md5((SHAPES_DIR / n).read_bytes()).hexdigest() for n in SHAPES}},
+        # MD5 with LF line ends, as published: a clone with core.autocrlf=true checks the files out with CRLF
+        "files": {n: hashlib.md5((SHAPES_DIR / n).read_bytes().replace(b"\r\n", b"\n")).hexdigest() for n in SHAPES}},
         indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     sg = Graph()
     for name in SHAPES:
@@ -199,9 +200,11 @@ def main():
     for r in report.subjects(RDF.type, sh.ValidationResult):
         sev = str(report.value(r, sh.resultSeverity)).rsplit("#", 1)[-1]
         msgs = [m for m in report.objects(r, sh.resultMessage) if getattr(m, "language", None) in ("es", None)]
-        found.setdefault(sev, []).append({"nodo": str(report.value(r, sh.focusNode)),
+        node = report.value(r, sh.focusNode)  # blank nodes get a new id each run: a fixed label keeps the file stable
+        found.setdefault(sev, []).append({"nodo": "nodo en blanco" if isinstance(node, BNode) else str(node),
                                           "propiedad": str(report.value(r, sh.resultPath)),
                                           "mensaje": str(msgs[0]) if msgs else ""})
+    found = {k: sorted(v, key=lambda x: (x["nodo"], x["propiedad"], x["mensaje"])) for k, v in found.items()}
     # the same record with a placeholder DIR3 code as publisher: does anything else fail?
     swap = Graph()
     for s, p, o in g:
