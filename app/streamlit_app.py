@@ -15,3 +15,5 @@ page = st.navigation(
     position="top",
 )
 page.run()
+st.caption("Herramienta independiente hecha para DataMad 2026 con datos abiertos. **No es una herramienta oficial** de la "
+           "Comunidad de Madrid ni del Ministerio de Vivienda: para pedir la ayuda, la convocatoria oficial es la que vale.")
