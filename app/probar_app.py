@@ -76,6 +76,14 @@ ok(at, "ficha: Parla")
 for name in ["Madrid", "Majadahonda", "Acebeda (La)"]:  # Acebeda: 7 young people and no SERPAVI rents
     at.selectbox(key="municipio").select(name).run()
     ok(at, f"ficha: {name}")
+# the base of the art. 135 study, in each of its three cases (resultados/estudio_art135.csv)
+for name, says in [("Hoyo de Manzanares", "lo justifica: el alquiler mediano del SERPAVI subió un 24,7 %"),
+                   ("Rascafría", "no lo justifica: el alquiler mediano del SERPAVI subió un 14,3 %"),
+                   ("Garganta de los Montes", "faltan datos")]:
+    at.selectbox(key="municipio").select(name).run()
+    boxes = [b.value for b in [*at.success, *at.info]]
+    assert any(says in b for b in boxes), boxes
+    ok(at, f"ficha: {name}, art. 135")
 
 at.switch_page("app_pages/simular.py").run()  # opens with the proposal and the Plan's aid, as on the cover
 assert "recibe 4,3 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # plan_amount

@@ -1,11 +1,18 @@
 import altair as alt
 import numpy as np
+import pandas as pd
 import streamlit as st
 
-from datos import BLUE, SLOT1, SLOT2, SOURCE, es, municipalities, pct, query
+from datos import BLUE, RES, SLOT1, SLOT2, SOURCE, es, municipalities, pct, query, result
 
 PROGRAMMES = {"bono_alquiler_joven": "Bono Alquiler Joven", "ayudas_alquiler_jovenes": "Ayudas al alquiler para jóvenes",
               "ayudas_alquiler_escasos_recursos": "Ayudas al alquiler, escasos recursos"}
+
+
+@st.cache_data(show_spinner=False)
+def art135():
+    """The base of the art. 135 study, one row per municipality (scripts/estudio_art135.py)."""
+    return pd.read_csv(RES / "estudio_art135.csv", dtype={"ine": str}).set_index("ine")
 
 
 def rent_chart(rent, caps):
@@ -66,6 +73,21 @@ else:
         st.page_link("app_pages/donde.py", icon=":material/explore:",
                      label="Madrid tiene 21 distritos y el alquiler cambia mucho entre ellos: míralos uno a uno en "
                            "«¿Dónde me llega?»")
+study = art135()
+if r["ine"] in study.index and study.loc[r["ine"], "sube_tope"]:  # a village where the proposal lifts the Plan's 500 EUR
+    a, threshold = study.loc[r["ine"]], result("estudio_art135")["cpi"]["threshold_b_pct"]
+    lift = f"La propuesta sube aquí el tope de {es(a['tope_plan'])} € a {es(a['tope_propuesta'])} €"
+    rise = f"el alquiler mediano del SERPAVI subió un {es(a['subida_alquiler_pct'], 1)} % de 2019 a 2024"
+    if a["justificacion"] in ("a", "b", "a y b"):
+        why = (f"{rise}, más que el IPC + 3 puntos ({es(threshold, 1)} %)" if "b" in a["justificacion"] else
+               "el alquiler pasa del 30 % de la renta del hogar")
+        st.success(f"{lift}, y la base del estudio del art. 135 lo justifica: {why}.", icon=":material/gavel:")
+    elif a["justificacion"] == "ninguno":
+        st.info(f"{lift}, pero con estos datos el art. 135 no lo justifica: {rise} (hacía falta un "
+                f"{es(threshold, 1)} %) y no pasa del 30 % de la renta del hogar.", icon=":material/gavel:")
+    else:
+        st.info(f"{lift}. Para justificarlo por el art. 135 faltan datos: el SERPAVI tiene aquí menos de 30 viviendas "
+                "en alquiler en 2019 o en 2024.", icon=":material/gavel:")
 
 left, right = st.columns([3, 2], gap="large")
 with left:
