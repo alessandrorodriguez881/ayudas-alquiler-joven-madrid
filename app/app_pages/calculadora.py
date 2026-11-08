@@ -33,47 +33,50 @@ with st.container(border=True):
     kind = c.segmented_control("¿Qué alquilas?", ["Piso entero", "Habitación"], key="calc_tipo")
     kind = "habitacion" if kind == "Habitación" else "piso"
 
-    a, b, c = st.columns(3, vertical_alignment="bottom")
+    a, b = st.columns(2)
     price = a.number_input("Precio al mes del contrato (€)", min_value=0, max_value=10000, step=10,
                            key="calc_precio", help="Si compartís piso y firmáis todos el contrato, el precio del piso entero.")
-    includes = b.selectbox("¿Qué incluye ese precio?", list(INCLUDES), format_func=INCLUDES.get, key="calc_incluye",
-                           help="Si el contrato no separa el garaje o el trastero, la norma cuenta como alquiler el 80 %, "
-                                "el 95 % o el 75 % del precio.")
-    expenses = c.checkbox("Incluye gastos sin separar", key="calc_gastos",
-                          help="Comunidad, luz, agua… Leemos la norma así: esos gastos valen el 5 % del precio, y el "
-                               "alquiler es el 95 % restante.")
-
-    living, sharers, others = "solo", 1, 0
-    if kind == "piso":
-        a, b = st.columns([2, 1])
-        living = a.radio("¿Con quién vives?", list(LIVING), format_func=LIVING.get, key="calc_convivencia")
-        if living == "jovenes":
-            sharers = b.number_input("¿Cuántos firmáis y la pedís, contándote?", min_value=2, max_value=8, key="calc_n")
-        elif living == "otros":
-            others = b.number_input("Ingresos al año de los demás que viven en el piso (€)", min_value=0,
-                                    max_value=1000000, value=0, step=1000, key="calc_otros",
-                                    help="Hoy cuentan los ingresos de todos los que viven en el piso; en el Plan, solo "
-                                         "los tuyos.")
-
-    a, b, c = st.columns(3, vertical_alignment="bottom")
-    income = a.number_input("Tus ingresos del último año declarado (€ al año)", min_value=0, max_value=1000000,
+    income = b.number_input("Tus ingresos del último año declarado (€ al año)", min_value=0, max_value=1000000,
                             step=500, key="calc_ingresos",
                             help="Los del último año con la declaración de la renta ya cerrada: la Comunidad los mira en "
                                  "Hacienda.")
-    disability = b.selectbox("¿Alguna de estas situaciones?", list(DISABILITY), format_func=DISABILITY.get,
-                             key="calc_discapacidad", help="Solo cambia el límite de ingresos del Plan (5,5 o 6 × IPREM).")
-    regular = c.checkbox("Tengo trabajo o una prestación", value=True, key="calc_fuente",
-                         help="Con al menos 3 meses cotizados en los últimos 6, o una fuente de ingresos prevista de al "
-                              "menos 6 meses. La pide la regla de hoy (art. 4.1.d).")
-    a, b = st.columns([2, 1], vertical_alignment="bottom")
-    exclusions = a.multiselect("¿Te pasa alguna de estas cosas?", list(rb.EXCLUSIONS), format_func=rb.EXCLUSIONS.get,
-                               key="calc_exclusiones", placeholder="Ninguna")
-    nationality = b.checkbox("Nacionalidad o residencia válidas", value=True, key="calc_nacionalidad",
-                             help="Nacionalidad española, de la UE, del EEE o Suiza, o residencia legal en España.")
-    other_aid = b.checkbox("Cobro otra ayuda al alquiler", key="calc_otra_ayuda",
-                           help="Otra ayuda pública para pagar el alquiler. El Ingreso Mínimo Vital y las pensiones no "
-                                "contributivas no cuentan.")
-    with st.expander("Ajuste: el IPREM"):
+
+    # the five questions above decide most cases; the rest keeps its usual answer unless the visitor opens this
+    with st.expander("Más detalles: con quién vives, garaje o trastero, otras situaciones", icon=":material/tune:"):
+        living, sharers, others = "solo", 1, 0
+        if kind == "piso":
+            a, b = st.columns([2, 1])
+            living = a.radio("¿Con quién vives?", list(LIVING), format_func=LIVING.get, key="calc_convivencia")
+            if living == "jovenes":
+                sharers = b.number_input("¿Cuántos firmáis y la pedís, contándote?", min_value=2, max_value=8,
+                                         key="calc_n")
+            elif living == "otros":
+                others = b.number_input("Ingresos al año de los demás que viven en el piso (€)", min_value=0,
+                                        max_value=1000000, value=0, step=1000, key="calc_otros",
+                                        help="Hoy cuentan los ingresos de todos los que viven en el piso; en el Plan, "
+                                             "solo los tuyos.")
+        a, b = st.columns(2, vertical_alignment="bottom")
+        includes = a.selectbox("¿Qué incluye el precio?", list(INCLUDES), format_func=INCLUDES.get, key="calc_incluye",
+                               help="Si el contrato no separa el garaje o el trastero, la norma cuenta como alquiler el "
+                                    "80 %, el 95 % o el 75 % del precio.")
+        expenses = b.checkbox("Incluye gastos sin separar", key="calc_gastos",
+                              help="Comunidad, luz, agua… Leemos la norma así: esos gastos valen el 5 % del precio, y el "
+                                   "alquiler es el 95 % restante.")
+        a, b = st.columns(2, vertical_alignment="bottom")
+        disability = a.selectbox("¿Alguna de estas situaciones?", list(DISABILITY), format_func=DISABILITY.get,
+                                 key="calc_discapacidad",
+                                 help="Solo cambia el límite de ingresos del Plan (5,5 o 6 × IPREM).")
+        regular = b.checkbox("Tengo trabajo o una prestación", value=True, key="calc_fuente",
+                             help="Con al menos 3 meses cotizados en los últimos 6, o una fuente de ingresos prevista de "
+                                  "al menos 6 meses. La pide la regla de hoy (art. 4.1.d).")
+        exclusions = st.multiselect("¿Te pasa alguna de estas cosas?", list(rb.EXCLUSIONS), format_func=rb.EXCLUSIONS.get,
+                                    key="calc_exclusiones", placeholder="Ninguna")
+        a, b = st.columns(2)
+        nationality = a.checkbox("Nacionalidad o residencia válidas", value=True, key="calc_nacionalidad",
+                                 help="Nacionalidad española, de la UE, del EEE o Suiza, o residencia legal en España.")
+        other_aid = b.checkbox("Cobro otra ayuda al alquiler", key="calc_otra_ayuda",
+                               help="Otra ayuda pública para pagar el alquiler. El Ingreso Mínimo Vital y las pensiones "
+                                    "no contributivas no cuentan.")
         iprem = st.number_input("IPREM al año, en 14 pagas (€)", min_value=1000, max_value=20000,
                                 value=int(rb.IPREM_YEAR_2024), step=100, key="calc_iprem",
                                 help="Los ingresos se comparan con el IPREM del año al que se refieren. 8.400 € es el de "
@@ -88,6 +91,17 @@ caps = query("SELECT regla, tope_piso, tope_habitacion FROM topes WHERE ine = ?"
 results = {rule: rb.evaluate(case, rule, float(caps.loc[key, "tope_piso"]), float(caps.loc[key, "tope_habitacion"]),
                              iprem=float(iprem))
            for rule, key in RULE_IN_DB.items()}
+
+euros = lambda x: es(x) + " €" if x % 1 == 0 else es(x, 2) + " €"  # noqa: E731
+today = results["hoy"]
+if today.eligible:
+    st.success(f"**Hoy cumples los requisitos del Bono:** te darían {euros(today.monthly)} al mes durante "
+               f"{today.months} meses ({euros(today.monthly * today.months)} en total).", icon=":material/check_circle:")
+else:
+    why = next(ch.text for ch in today.checks if not ch.ok)
+    better = [n for k, n in (("plan", "el Plan 2026-2030"), ("propuesta", "nuestra propuesta")) if results[k].eligible]
+    st.error(f"**Hoy no cumples los requisitos del Bono.** {why}." + (f" Con {' y con '.join(better)}, sí." if better
+                                                                       else ""), icon=":material/cancel:")
 
 st.subheader(f"En {name}")
 SUBTITLE = {"hoy": "Convocatoria abierta desde el 3-feb-2025: 250 € al mes durante 2 años",

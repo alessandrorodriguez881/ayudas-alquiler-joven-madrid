@@ -6,7 +6,7 @@ st.set_page_config(page_title="El tope del Bono Alquiler Joven", page_icon=":mat
 
 page = st.navigation(
     [
-        st.Page("app_pages/mapa.py", title="Mapa", icon=":material/map:", default=True),
+        st.Page("app_pages/mapa.py", title="Inicio", icon=":material/home:", default=True),
         st.Page("app_pages/calculadora.py", title="¿Puedo pedirla?", icon=":material/checklist:"),
         st.Page("app_pages/donde.py", title="¿Dónde me llega?", icon=":material/explore:"),
         st.Page("app_pages/ficha.py", title="Tu municipio", icon=":material/location_city:"),

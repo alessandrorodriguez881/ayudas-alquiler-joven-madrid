@@ -73,14 +73,18 @@ if failed:
              icon=":material/cancel:")
 
 half = d[d["entra"] >= 0.5]
-k1, k2, k3 = st.columns(3)
-k1.metric("Con la mitad o más dentro del tope", f"{len(half)} de {len(d)} municipios", border=True,
-          help="Municipios donde al menos la mitad de los alquileres de 2024 entra en el tope de esta regla.")
 cheap = d.loc[d["pagas"].idxmin()]
-k2.metric(f"Donde menos pagarías tú: {cheap['municipio']}", f"{es(cheap['pagas'])} € al mes", border=True)
-k3.metric("La ayuda, al mes", f"hasta {es(d['ayuda'].max())} €" if d["ayuda"].max() else "0 €", border=True,
-          help="Por persona. Hoy, 250 € y nunca más que el alquiler; con el Plan y la propuesta, hasta 300 € y nunca más "
-               "del 60 % del alquiler.")
+KPIS = [  # short label and value (metric labels are cut to one line on a phone), what it means below
+    ("Municipios con la mitad dentro", f"{len(half)} de {len(d)}",
+     "con al menos la mitad de los alquileres de 2024 dentro del tope"),
+    ("Donde menos pagarías", f"{es(cheap['pagas'])} €/mes", f"en {cheap['municipio']}, con su alquiler mediano y la ayuda"),
+    ("La ayuda, al mes", f"hasta {es(d['ayuda'].max())} €" if d["ayuda"].max() else "0 €",
+     "por persona: hoy, 250 € y nunca más que el alquiler; con el Plan y la propuesta, hasta 300 € y nunca más del 60 %"),
+]
+for col, (label, value, note) in zip(st.columns(3), KPIS):
+    with col.container(border=True, height="stretch"):
+        st.metric(label, value)
+        st.caption(note)
 
 left, right = st.columns([3, 2], gap="large")
 with left:

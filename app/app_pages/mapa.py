@@ -10,17 +10,20 @@ st.caption("Bono Alquiler Joven de la Comunidad de Madrid: 250 € al mes durant
 h1 = result("contraste_real")["H1"]
 sim = result("simulador_reparto")
 high = lambda rule: sim["plan_amount"][rule]["aids_per_1000_young_by_group"]["resto, necesidad alta"]  # noqa: E731
-k1, k2, k3 = st.columns(3)
-k1.metric("Menos solicitudes por cada 10 puntos de alquiler por encima del tope", f"{es(h1['pct_per_10_points'], 1)} %",
-          border=True, help="Contraste registrado antes de ver los datos, con los 159 municipios del Bono 2022.")
-k2.metric("Alquiler por encima del tope del Plan 2026-2030 en los municipios pequeños",
-          pct(sim["gap_above_cap"]["2024_rents_plan_estatal"]["10000_or_fewer"]), border=True,
-          help="Municipios de 10.000 habitantes o menos, donde el Plan pone el tope en 500 €. Hoy, el "
-               f"{pct(sim['gap_above_cap']['2024_rents_2024_list']['10000_or_fewer'])}.")
-k3.metric("Más ayudas donde más falta con nuestra propuesta, frente al Plan",
-          "+" + pct(high("necesidad_requisito_plan_p75_hasta_1000") / high("plan_estatal") - 1), border=True,
-          help="Ayudas por cada 1.000 jóvenes en el tercio de municipios con más necesidad (sin Madrid capital), con el "
-               "mismo dinero y las reglas del Plan. Cuesta 0,2 M€ más.")
+gap = sim["gap_above_cap"]
+KPIS = [  # short label, value, what it means (in sight: metric labels are cut to one line)
+    ("Menos solicitudes", f"{es(h1['pct_per_10_points'], 1)} %",
+     "por cada 10 puntos de alquiler por encima del tope. Contraste registrado antes de ver los datos (159 municipios)"),
+    ("Alquiler fuera del tope", pct(gap["2024_rents_plan_estatal"]["10000_or_fewer"]),
+     f"en los municipios pequeños con el Plan 2026-2030, que les pone 500 € (hoy, "
+     f"{pct(gap['2024_rents_2024_list']['10000_or_fewer'])})"),
+    ("Más ayudas donde más falta", "+" + pct(high("necesidad_requisito_plan_p75_hasta_1000") / high("plan_estatal") - 1),
+     "con nuestra propuesta frente al Plan, con el mismo dinero: cuesta solo 0,2 M€ más"),
+]
+for col, (label, value, note) in zip(st.columns(3), KPIS):
+    with col.container(border=True, height="stretch"):
+        st.metric(label, value)
+        st.caption(note)
 with st.container(horizontal=True):
     if st.button("¿Puedo pedirla?", icon=":material/checklist:", type="primary"):
         st.switch_page("app_pages/calculadora.py")

@@ -60,6 +60,24 @@ st.markdown(
     f"pida quien pida: los cupos no dependen de quién llega antes."
 )
 
+st.subheader("Para quién es y cuánto cuesta mantenerlo")
+st.markdown(
+    "- **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado "
+    "de la oferta de alquiler (art. 135). Este proyecto es ese estudio, repetible con un comando, y el simulador le deja "
+    "probar topes y cupos antes de sacar la convocatoria, con su coste.\n"
+    "- **Ayuntamientos y oficinas de juventud:** la ficha de cada municipio, «¿Dónde me llega la ayuda?» y la calculadora, "
+    "para orientar a quien pregunta.\n"
+    "- **Los jóvenes:** saber en dos minutos si pueden pedirla, cuánto cobrarían y dónde les llega.\n"
+    "- **Asistentes de IA:** el servidor MCP responde con nuestras cifras y cita la fuente de cada una.\n\n"
+    "**Mantenerlo cuesta casi nada:** el código es abierto (MIT) y los datos, públicos. Cuando el portal o el SERPAVI "
+    "publican un año nuevo, se descarga y se vuelven a ejecutar los scripts; las pruebas automáticas avisan si algo "
+    "cambia (`probar_app.py`, `probar_reglas.py`, `probar_servidor.py`). La app puede funcionar en un servicio gratuito "
+    "como Streamlit Community Cloud, y la base de datos es un solo fichero de medio megabyte.\n\n"
+    "**Límites:** el SERPAVI solo ve los alquileres declarados en el IRPF y llega hasta 2024; el efecto del tope sobre las "
+    "solicitudes es una asociación entre municipios, no un experimento; y la parte de la gente por debajo del límite de "
+    "ingresos sale de declaraciones de todas las edades."
+)
+
 st.subheader("Datos")
 st.table({
     "Fuente": ["Portal de Datos Abiertos de la Comunidad de Madrid", "SERPAVI, Ministerio de Vivienda y Agenda Urbana",

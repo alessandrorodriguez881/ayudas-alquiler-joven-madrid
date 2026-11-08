@@ -21,9 +21,11 @@ for option in ["Cobertura del Bono", "Alquiler por encima del tope", "Con el Pla
 at.switch_page("app_pages/calculadora.py").run()
 money = lambda: [m.value for m in at.metric]  # noqa: E731  (per rule: aid a month, aid in 24 months)
 assert money() == ["250 €", "6.000 €", "300 €", "7.200 €", "300 €", "7.200 €"], money()
+assert "Hoy cumples" in at.success[0].value, at.success[0].value
 ok(at, "calculadora: piso de 750 € en Parla, 18.000 € al año")
 at.number_input(key="calc_precio").set_value(950).run()
 assert money()[:4] == ["0 €", "0 €", "300 €", "7.200 €"], money()  # above today's 900 EUR, inside the Plan's 1,000 EUR
+assert "Hoy no cumples" in at.error[0].value and "Plan 2026-2030 y con nuestra propuesta, sí" in at.error[0].value
 ok(at, "calculadora: piso de 950 €")
 at.radio(key="calc_convivencia").set_value("jovenes").run()
 at.number_input(key="calc_n").set_value(3).run()

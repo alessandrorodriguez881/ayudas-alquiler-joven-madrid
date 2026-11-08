@@ -1,0 +1,31 @@
+# Look of the app (read by `streamlit run` from the repository root). Blue of the figures (scripts/graficos.py) as the
+# brand colour; light and dark versions, so the app follows the visitor's system and they can switch in the menu.
+[client]
+toolbarMode = "minimal"  # no developer menu or "Deploy" button for visitors
+
+[theme]
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+headingFontWeights = [800, 700, 650]
+metricValueFontWeight = 700
+baseRadius = "0.75rem"
+buttonRadius = "full"
+showWidgetBorder = true
+linkUnderline = false
+
+[theme.light]
+primaryColor = "#256abf"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f2f6fb"
+textColor = "#18212f"
+borderColor = "#d6dfeb"
+linkColor = "#256abf"
+chartCategoricalColors = ["#2a78d6", "#eb6834", "#1a7f5a", "#8250df", "#bf8700", "#57606a"]
+
+[theme.dark]
+primaryColor = "#2f7fe0"
+backgroundColor = "#0d1522"
+secondaryBackgroundColor = "#152238"
+textColor = "#e6edf6"
+borderColor = "#263750"
+linkColor = "#9ec5f4"
+chartCategoricalColors = ["#6da7ec", "#f39a74", "#4fbf8f", "#a98bf0", "#e0b44a", "#9aa3ad"]
