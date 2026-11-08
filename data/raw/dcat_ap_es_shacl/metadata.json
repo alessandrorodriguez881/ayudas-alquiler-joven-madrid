@@ -1,0 +1,13 @@
+{
+ "name": "dcat_ap_es_shacl",
+ "title": "Plantillas SHACL de DCAT-AP-ES 1.0.0 (datos.gob.es)",
+ "source": "https://github.com/datosgobes/DCAT-AP-ES/tree/c6ab5330edd33b24350429fc2c17906506f04fa1/shacl/1.0.0",
+ "license": "CC BY 4.0",
+ "files": {
+  "shacl_catalog_shape.ttl": "da3bb1d4b1fe3392a8ffecf04ee18eb5",
+  "shacl_dataset_shape.ttl": "47dd80c7fe95e55e3285f5bdfc5f4324",
+  "shacl_distribution_shape.ttl": "5340d70016443b795af69d4420494e59",
+  "shacl_common_shapes.ttl": "3a719303f0e011a9f21013363053690a",
+  "shacl_mdr-vocabularies.shape.ttl": "e83c219975c07a8dd13e9b05da3aaf65"
+ }
+}
