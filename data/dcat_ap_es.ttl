@@ -60,7 +60,7 @@
     dct:title "Bono Alquiler Joven y alquiler por municipio: base de datos del proyecto (SQLite)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "876039ec3cfc01dabc5cccd9942b865be8069d35"^^xsd:hexBinary ] ;
+            spdx:checksumValue "d63ee6966f917f30d5a69a5cf6afd47640ad12e2"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/data/bono_alquiler_joven.sqlite> ;
     dcat:byteSize "528384"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/data/bono_alquiler_joven.sqlite> ;
@@ -147,13 +147,13 @@
     dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
     dct:issued "2026-11-07"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
-    dct:modified "2026-11-07"^^xsd:date ;
+    dct:modified "2026-11-08"^^xsd:date ;
     dct:title "Reparto simulado del Bono Alquiler Joven con distintos topes y criterios (CSV)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "42451b52da6bde0ff52119420025a5256a5f0523"^^xsd:hexBinary ] ;
+            spdx:checksumValue "cf7ec222e3c705fbc0f1ab1e4c892ce1462127f9"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/data/interim/simulador_municipios.csv> ;
-    dcat:byteSize "36721"^^xsd:nonNegativeInteger ;
+    dcat:byteSize "37660"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/data/interim/simulador_municipios.csv> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> .
 
@@ -167,9 +167,9 @@
     dct:title "Reparto simulado del Bono Alquiler Joven con distintos topes y criterios (JSON)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "286cff63b284e6b0c3ddc00ea386359121a6abc2"^^xsd:hexBinary ] ;
+            spdx:checksumValue "64fdf2977d221601088afb1d5f15883dae547705"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/resultados/simulador_reparto.json> ;
-    dcat:byteSize "54422"^^xsd:nonNegativeInteger ;
+    dcat:byteSize "57806"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/resultados/simulador_reparto.json> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/application/json> .
 
