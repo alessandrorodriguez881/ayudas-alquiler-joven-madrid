@@ -1,0 +1,41 @@
+{
+ "note": "Base para el estudio del art. 135 del RD 326/2026 (no es el estudio oficial). Criterios del art. 18.3 a) y b) de la Ley 12/2023: a) alquiler mediano 2024 sobre la renta del hogar (sin gastos ni suministros), más del 30 %; b) subida del alquiler mediano 2019-2024 al menos 3 puntos por encima del IPC de la Comunidad",
+ "cpi": {
+  "series": "INE IPC256325",
+  "mean_2019": 97.683,
+  "mean_2024": 113.809,
+  "rise_pct": 16.51,
+  "threshold_b_pct": 19.51
+ },
+ "min_rentals": 30,
+ "where_proposal_raises_cap": {
+  "municipalities": 63,
+  "young_20_34_2024": 46458,
+  "with_data": 50,
+  "a_only": 0,
+  "b_only": 46,
+  "a_and_b": 0,
+  "none": 4,
+  "no_data": 13,
+  "some_case": 46,
+  "young_in_some_case": 40681,
+  "median_share_above_plan_cap": 0.58
+ },
+ "all_municipalities": {
+  "with_data": 112,
+  "case_a": 0,
+  "case_b": 87
+ },
+ "sensitivity": {
+  "raised_in_simulation": 62,
+  "not_justified_kept_at_plan": 16,
+  "proposal": {
+   "aids_per_1000_young_high_need": 4.2948,
+   "meur_same_chance_as_today": 40.2936
+  },
+  "proposal_only_where_justified": {
+   "aids_per_1000_young_high_need": 4.2949,
+   "meur_same_chance_as_today": 40.2846
+  }
+ }
+}

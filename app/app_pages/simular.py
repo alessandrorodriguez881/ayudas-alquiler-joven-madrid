@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 import simulador
-from datos import SLOT1, SLOT2, es, pct, result, simulation_base
+from datos import DB, RES, SLOT1, SLOT2, es, pct, result, simulation_base
 
 st.title("¿Y si el tope fuera otro?")
 st.caption("Con un presupuesto fijo, subir el tope trae más solicitudes, no más bonos: lo que cambia es dónde van. "
@@ -144,3 +144,49 @@ st.download_button("Descargar el reparto por municipio (CSV)",
 st.caption("Supuestos: las solicitudes por joven de 2022 cambian con exp(β × cambio de la parte del alquiler por encima "
            "del tope); los cupos nunca dan más bonos que solicitudes. Es una simulación con supuestos escritos en "
            "scripts/simulador.py, no una predicción.")
+
+# The legal path for the proposal's caps: scripts/estudio_art135.py
+st.divider()
+st.subheader("Para la Consejería: la base del estudio del art. 135")
+study = result("estudio_art135")
+up, cpi, sens = study["where_proposal_raises_cap"], study["cpi"], study["sensitivity"]
+st.caption("El Plan deja que la Comunidad suba el tope de 500 € si lo justifica con un estudio actualizado del alquiler "
+           "(art. 135). El estudio puede apoyarse en dos supuestos de la Ley de Vivienda (art. 18.3): a) que el alquiler "
+           "pase del 30 % de la renta del hogar; b) que en cinco años haya subido al menos 3 puntos más que el IPC (en la "
+           f"Comunidad de Madrid, un {es(cpi['rise_pct'], 1)} % de 2019 a 2024). Lo medimos en cada municipio donde la "
+           "propuesta sube el tope.")
+STUDY = [  # short label, value, what it means (in sight: metric labels are cut to one line on a phone)
+    ("Sube el tope", f"{up['municipalities']} municipios",
+     "pequeños: de 500 € a su percentil 75 del alquiler, como mucho 1.000 €"),
+    ("Se puede justificar", f"{up['some_case']} de {up['municipalities']}",
+     f"por el supuesto b): el alquiler ha subido más del {es(cpi['threshold_b_pct'], 1)} %. El a) no se cumple en "
+     "ninguno: con la renta media del hogar, el alquiler no llega al 30 %"),
+    ("Jóvenes que viven ahí", es(up["young_in_some_case"]), f"de 20 a 34 años, en esos {up['some_case']} municipios"),
+]
+for col, (label, value, note) in zip(st.columns(3), STUDY):
+    with col.container(border=True, height="stretch"):
+        st.metric(label, value)
+        st.caption(note)
+table = pd.read_csv(RES / "estudio_art135.csv", dtype={"ine": str})
+table = table[table["sube_tope"]].assign(parte=lambda d: 100 * d["parte_por_encima_tope_plan"])
+st.dataframe(table[["municipio", "jovenes_20_34_2024", "mediana_2024", "tope_propuesta", "parte", "subida_alquiler_pct",
+                    "justificacion"]], hide_index=True,
+             column_config={"municipio": "Municipio",
+                            "jovenes_20_34_2024": st.column_config.NumberColumn("Jóvenes", format="%d"),
+                            "mediana_2024": st.column_config.NumberColumn("Alquiler mediano", format="%.0f €"),
+                            "tope_propuesta": st.column_config.NumberColumn("Tope propuesto", format="%.0f €"),
+                            "parte": st.column_config.ProgressColumn("Fuera con 500 €", format="%.0f %%", min_value=0,
+                                                                     max_value=100),
+                            "subida_alquiler_pct": st.column_config.NumberColumn("Subida 2019-2024", format="%.0f %%"),
+                            "justificacion": "Supuesto"},
+             alt="Municipios pequeños donde la propuesta sube el tope, con el alquiler, la subida y el supuesto que lo justifica")
+with st.container(horizontal=True):
+    st.download_button("Descargar la tabla (CSV)", (RES / "estudio_art135.csv").read_bytes(), "estudio_art135.csv",
+                       "text/csv", icon=":material/download:")
+    st.download_button("Descargar el informe", (DB.parent / "ESTUDIO_ART135.md").read_bytes(), "estudio_art135.md",
+                       "text/markdown", icon=":material/description:")
+st.caption(f"Si el tope solo sube donde se puede justificar, la propuesta da lo mismo: "
+           f"{es(sens['proposal_only_where_justified']['aids_per_1000_young_high_need'], 1)} ayudas por cada 1.000 jóvenes "
+           f"en el tercio con más necesidad y {es(sens['proposal_only_where_justified']['meur_same_chance_as_today'], 1)} M€ "
+           "para la misma probabilidad que hoy. Es una base con datos abiertos, no el estudio oficial: decidirlo y "
+           "acordarlo con el Ministerio le toca a la Comunidad. Método y límites en el informe (scripts/estudio_art135.py).")

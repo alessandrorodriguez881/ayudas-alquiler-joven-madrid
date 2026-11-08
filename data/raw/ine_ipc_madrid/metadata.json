@@ -1,0 +1,13 @@
+{
+  "name": "ine_ipc_madrid",
+  "title": "IPC. Índice general de la Comunidad de Madrid (base 2021), mensual, 2019-2024",
+  "publisher": "Instituto Nacional de Estadística (INE)",
+  "series": "IPC256325 (tabla 50913: índices por comunidades autónomas)",
+  "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_SERIE/IPC256325?date=20190101:20241231",
+  "portal_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=50913",
+  "license_title": "Condiciones de uso del INE: reutilización permitida citando la fuente",
+  "license_url": "https://www.ine.es/aviso_legal",
+  "downloaded": "2026-11-08",
+  "md5": "e0e53cd4613d53b189ed59ea51c82773",
+  "used_for": "Criterio b) del art. 18.3 de la Ley 12/2023 en scripts/estudio_art135.py"
+}

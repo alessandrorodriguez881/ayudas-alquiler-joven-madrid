@@ -69,6 +69,9 @@ at.switch_page("app_pages/simular.py").run()  # opens with the proposal and the 
 assert "recibe 4,3 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # plan_amount
 assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount
 ok(at, "simulador: propuesta con la cuantía del Plan")
+assert [m.value for m in at.metric][5:] == ["63 municipios", "46 de 63", "40.681"], [m.value for m in at.metric][5:]
+assert "40,3 M€" in at.caption[-2].value, at.caption[-2].value  # estudio_art135.json, sensitivity (last: the footer)
+ok(at, "simulador: la base del estudio del art. 135")
 at.segmented_control(key="mas_gente").set_value("Y todos los que entran nuevos").run()
 assert at.metric[4].value == "58,1 M€", at.metric[4].value  # plan_income_limit, p_1
 ok(at, "simulador: propuesta con el Plan y todos los que entran nuevos por su límite de ingresos")
@@ -78,7 +81,7 @@ assert "recibe 5,4 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].va
 ok(at, "simulador: propuesta con los 250 € de hoy")
 at.segmented_control(key="tope").set_value("Hoy (600 / 900 €)").run()
 at.segmented_control(key="reparto").set_value("Orden de llegada (hoy)").run()
-assert {m.delta for m in at.metric} <= {"0", "0,0", "0,0 puntos", "0,0 M€"}, [m.delta for m in at.metric]
+assert {m.delta for m in at.metric[:5]} <= {"0", "0,0", "0,0 puntos", "0,0 M€"}, [m.delta for m in at.metric]
 ok(at, "simulador: la regla de hoy no cambia nada")
 at.segmented_control(key="tope").set_value("Un tope único").run()
 at.slider(key="tope_unico").set_value(1200).run()
