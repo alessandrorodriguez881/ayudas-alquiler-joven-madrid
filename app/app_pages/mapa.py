@@ -7,13 +7,15 @@ st.caption("Bono Alquiler Joven de la Comunidad de Madrid: 250 € al mes durant
            "600 o 900 € (habitación: 300 o 450 €). No es un buscador de pisos: medimos si la ayuda llega a quien más la "
            "necesita y proponemos cómo hacer que llegue.")
 
-h1 = result("contraste_real")["H1"]
+test = result("contraste_real")
+h1 = test["H1"]
 sim = result("simulador_reparto")
 high = lambda rule: sim["plan_amount"][rule]["aids_per_1000_young_by_group"]["resto, necesidad alta"]  # noqa: E731
 gap = sim["gap_above_cap"]
 KPIS = [  # short label, value, what it means (in sight: metric labels are cut to one line)
     ("Menos solicitudes", f"{es(h1['pct_per_10_points'], 1)} %",
-     "por cada 10 puntos de alquiler por encima del tope. Contraste registrado antes de ver los datos (159 municipios)"),
+     f"por cada 10 puntos de alquiler por encima del tope. Contraste registrado antes de ver los datos "
+     f"({test['n_municipalities']} municipios con todos los datos)"),
     ("Alquiler fuera del tope", pct(gap["2024_rents_plan_estatal"]["10000_or_fewer"]),
      f"en los municipios pequeños con el Plan 2026-2030, que les pone 500 € (hoy, "
      f"{pct(gap['2024_rents_2024_list']['10000_or_fewer'])})"),
