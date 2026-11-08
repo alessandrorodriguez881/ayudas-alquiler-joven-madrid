@@ -115,4 +115,4 @@ print("ok", "sin alquileres del SERPAVI, la propuesta usa el tope del Plan")
 lines = pathlib.Path(rb.__file__).read_text(encoding="utf-8").splitlines()
 for row in rb.article_table():
     assert lines[row["linea"] - 1].startswith(f"def {row['funcion']}("), row
-print("ok", f"lista artículo → línea de código ({len(rb.article_table())} filas)")
+print("ok", f"lista artículo -> línea de código ({len(rb.article_table())} filas)")  # no "→": cp1252 consoles
