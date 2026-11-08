@@ -157,7 +157,7 @@ def tests_chart(test, explo):
     rob = test["robustness_beta"]
     rows = [("H1: contraste preregistrado (132 municipios)", test["H1"]["beta"], test["H1"]["ci95"], "pre"),
             ("H1 sin Madrid capital", test["H1"]["beta_without_madrid"], None, "pre"),
-            ("R1: Ayudas al alquiler 2022 (mismos topes)", test["R1_ayudas51"]["beta"], test["R1_ayudas51"]["ci95"], "pre"),
+            ("R1: Ayudas al alquiler 2022 + 2023 (mismos topes)", test["R1_ayudas51"]["beta"], test["R1_ayudas51"]["ci95"], "pre"),
             ("Binomial negativa", rob["negative_binomial"], None, "pre"),
             ("Por hogar de alquiler", rob["per_rented_household"], None, "pre"),
             ("Alquileres del SERPAVI de 2023", rob["serpavi_2023"], None, "pre"),
@@ -183,7 +183,7 @@ def tests_chart(test, explo):
     ax.xaxis.grid(True, color=GRID, linewidth=0.6)
     ax.set_axisbelow(True)
     ax.tick_params(axis="y", length=0)
-    ax.set_xlabel("Cambio en las solicitudes por cada 10 puntos más de mercado por encima del tope (%)")
+    ax.set_xlabel("Cambio en las solicitudes (%) por cada 10 puntos más de mercado\npor encima del tope")
     dot = lambda c: Line2D([], [], marker="o", color=c, markersize=7, linewidth=2)  # noqa: E731
     ax.legend([dot(SLOT1), dot(MUTED)], ["Preregistrado (línea: intervalo del 95 %)", "Exploratorio, hecho después"],
               loc="lower left", bbox_to_anchor=(0, 1.0), ncol=2, frameon=False, fontsize=8.5, labelcolor=INK2)

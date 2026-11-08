@@ -1,0 +1,154 @@
+{
+ "note": "EXPLORATORIO: no preregistrado, hecho tras el contraste real; lo esperado está en el docstring",
+ "n_municipalities": 132,
+ "A_bono_2022_cross_validation": {
+  "leave_one_out": {
+   "solo_constante": {
+    "deviance": 9800.791197149363,
+    "deviance_without_madrid": 3729.6222885274783,
+    "median_abs_pct_error_10_or_more": 51.08803440174603
+   },
+   "controles": {
+    "deviance": 5762.2510584584215,
+    "deviance_without_madrid": 1526.2463810471686,
+    "median_abs_pct_error_10_or_more": 20.854290701017387
+   },
+   "controles_tope_real": {
+    "deviance": 1579.1945760542617,
+    "deviance_without_madrid": 1358.5961205852586,
+    "median_abs_pct_error_10_or_more": 17.766557559480624,
+    "gain_vs_controls": {
+     "deviance": 4183.0564824041585,
+     "se": 4015.366854430505,
+     "deviance_without_madrid": 167.65026046190974,
+     "se_without_madrid": 99.80184274546843,
+     "municipalities_better": 75,
+     "of": 132
+    }
+   },
+   "controles_900_igual": {
+    "deviance": 1494.4682102747188,
+    "deviance_without_madrid": 1237.319295102951,
+    "median_abs_pct_error_10_or_more": 21.21063587840557,
+    "gain_vs_controls": {
+     "deviance": 4267.782848183703,
+     "se": 3979.8555016551877,
+     "deviance_without_madrid": 288.92708594421754,
+     "se_without_madrid": 159.70094525799877,
+     "municipalities_better": 68,
+     "of": 132
+    }
+   },
+   "controles_ambas": {
+    "deviance": 1692.8059589879547,
+    "deviance_without_madrid": 1191.0950056465133,
+    "median_abs_pct_error_10_or_more": 18.015809856002242,
+    "gain_vs_controls": {
+     "deviance": 4069.4450994704666,
+     "se": 3735.608462345309,
+     "deviance_without_madrid": 335.1513754006552,
+     "se_without_madrid": 170.0699739657336,
+     "municipalities_better": 78,
+     "of": 132
+    }
+   }
+  },
+  "10_fold_x20": {
+   "solo_constante": {
+    "deviance": 9787.691328665025,
+    "deviance_without_madrid": 3709.1854523127304,
+    "median_abs_pct_error_10_or_more": 50.92516019064462
+   },
+   "controles": {
+    "deviance": 6016.591311559977,
+    "deviance_without_madrid": 1510.978964977599,
+    "median_abs_pct_error_10_or_more": 21.012292311495536
+   },
+   "controles_tope_real": {
+    "deviance": 1654.7225908800744,
+    "deviance_without_madrid": 1350.4110608279066,
+    "median_abs_pct_error_10_or_more": 17.243716667134834
+   },
+   "controles_900_igual": {
+    "deviance": 1648.0344392294996,
+    "deviance_without_madrid": 1233.7873989117609,
+    "median_abs_pct_error_10_or_more": 21.92716479563387
+   },
+   "controles_ambas": {
+    "deviance": 1692.288048390044,
+    "deviance_without_madrid": 1192.393489263483,
+    "median_abs_pct_error_10_or_more": 18.594826929231637
+   }
+  },
+  "10_fold_x20_share_of_repeats_better_than_controls": {
+   "solo_constante": 0.0,
+   "controles": 0.0,
+   "controles_tope_real": 1.0,
+   "controles_900_igual": 1.0,
+   "controles_ambas": 1.0
+  }
+ },
+ "B_bono_2022_to_ayudas_jovenes_2023": {
+  "n_municipalities": 132,
+  "requests_2023": 11993,
+  "solo_constante": {
+   "deviance": 1159.9750316238415,
+   "deviance_without_madrid": 982.57686712928,
+   "median_abs_pct_error_10_or_more": 29.940537870469264,
+   "spearman_rate": null,
+   "refit_in_sample_deviance": 1159.9750316238415
+  },
+  "controles": {
+   "deviance": 519.1610411099941,
+   "deviance_without_madrid": 501.34009720964605,
+   "median_abs_pct_error_10_or_more": 24.851790968178168,
+   "spearman_rate": 0.3239737222886421,
+   "refit_in_sample_deviance": 436.90333689853924
+  },
+  "controles_tope_real": {
+   "deviance": 451.69213693057964,
+   "deviance_without_madrid": 440.33697588863436,
+   "median_abs_pct_error_10_or_more": 23.575256458759807,
+   "spearman_rate": 0.38474945181697073,
+   "refit_in_sample_deviance": 375.34747330812843,
+   "gain_vs_controls": {
+    "deviance": 67.46890417941452,
+    "se": 36.36503797237504,
+    "deviance_without_madrid": 61.003121321011726,
+    "se_without_madrid": 35.867668316896896,
+    "municipalities_better": 72,
+    "of": 132
+   }
+  },
+  "controles_900_igual": {
+   "deviance": 408.84824733820614,
+   "deviance_without_madrid": 404.8253570574868,
+   "median_abs_pct_error_10_or_more": 21.122516717743533,
+   "spearman_rate": 0.35959799510480933,
+   "refit_in_sample_deviance": 366.21581194166,
+   "gain_vs_controls": {
+    "deviance": 110.31279377178801,
+    "se": 46.637210009112096,
+    "deviance_without_madrid": 96.51474015215923,
+    "se_without_madrid": 44.7721856883363,
+    "municipalities_better": 69,
+    "of": 132
+   }
+  },
+  "controles_ambas": {
+   "deviance": 380.6971037198471,
+   "deviance_without_madrid": 377.37381775896847,
+   "median_abs_pct_error_10_or_more": 20.762643138255534,
+   "spearman_rate": 0.4589827761296696,
+   "refit_in_sample_deviance": 333.22171039066563,
+   "gain_vs_controls": {
+    "deviance": 138.46393739014698,
+    "se": 52.94089481866786,
+    "deviance_without_madrid": 123.96627945067763,
+    "se_without_madrid": 51.17862711130683,
+    "municipalities_better": 77,
+    "of": 132
+   }
+  }
+ }
+}

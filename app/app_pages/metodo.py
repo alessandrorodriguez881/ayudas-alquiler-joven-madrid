@@ -9,6 +9,8 @@ fake = result("exploratorio_topes_falsos")
 cap_only = fake["real_cap_and_uniform_900"]["real_cap"]
 income = result("requisito_ingresos")["h1_with_income_rule_control"]["h1_plus_elig"]
 rooms = result("habitaciones")["h1_with_room_contracts"]
+oos = result("validacion_fuera_muestra")
+cv, ay = oos["A_bono_2022_cross_validation"]["leave_one_out"], oos["B_bono_2022_to_ayudas_jovenes_2023"]
 
 st.title("Método y datos")
 st.subheader("Lo que probamos, con la regla escrita antes de mirar")
@@ -22,7 +24,15 @@ st.markdown(
     f"- **Después, como exploratorio:** con el límite de ingresos (3 × IPREM) como control, el efecto queda en un "
     f"{es(-income['pct_per_10_points'], 1)} % menos. Contando los contratos de habitación de tres jóvenes que comparten "
     f"piso, el efecto sigue siendo negativo y el modelo ajusta mejor (desviación {es(rooms['mix_flat_and_3_sharers_rooms']['1.0']['deviance'])}, "
-    f"frente a {es(rooms['real_cap']['deviance'])} con el tope del piso): es una pista, no una prueba."
+    f"frente a {es(rooms['real_cap']['deviance'])} con el tope del piso): es una pista, no una prueba.\n"
+    f"- **Con municipios que el modelo no ha visto** (exploratorio): saber qué parte del alquiler pasa del tope baja el "
+    f"error típico de las solicitudes del {es(cv['controles']['median_abs_pct_error_10_or_more'])} % al "
+    f"{es(cv['controles_tope_real']['median_abs_pct_error_10_or_more'])} % (dejando fuera un municipio cada vez). Y el "
+    f"modelo del simulador, con el tope y los 900 € juntos, entrenado con el Bono 2022 predice las Ayudas para jóvenes de "
+    f"2023, otro programa y otro año, con un {es(100 * (1 - ay['controles_ambas']['deviance'] / ay['controles']['deviance']))} % "
+    f"menos de desviación que sin esas dos partes (correlación de {es(ay['controles']['spearman_rate'], 2)} a "
+    f"{es(ay['controles_ambas']['spearman_rate'], 2)}). El umbral de 900 € igual para todos también predice bien: el "
+    f"alquiler caro frena por sí solo."
 )
 st.image(str(RES / "figuras" / "contraste_todas_las_pruebas.png"),
          alt="Todas las estimaciones del efecto del tope, también las que no salieron, con sus intervalos")
