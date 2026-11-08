@@ -50,7 +50,8 @@ DATASETS = [
      "Todo lo que usa el proyecto, por municipio de la Comunidad de Madrid, en un solo fichero SQLite: población, renta, "
      "paro, hogares de alquiler e índice de necesidad; cada convocatoria del Bono Alquiler Joven, de las Ayudas al "
      "alquiler para jóvenes y del Plan Estatal de Vivienda 2026-2030 con su tope en cada municipio; solicitudes por "
-     "programa y año; alquiler del SERPAVI de 2011 a 2024; y el reparto simulado con cada regla. Con diccionario de "
+     "programa y año; alquiler del SERPAVI de 2011 a 2024, por municipio y en los 21 distritos de Madrid capital; y el "
+     "reparto simulado con cada regla. Con diccionario de "
      "cada columna. La crea scripts/base_datos.py.", ("2011-01-01", "2024-12-31"),
      [("data/bono_alquiler_joven.sqlite", "SQLite", None, "application/vnd.sqlite3")]),
     ("indicadores-municipios-2024", "Indicadores por municipio de la Comunidad de Madrid, 2024",

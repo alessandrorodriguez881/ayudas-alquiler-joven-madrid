@@ -6,15 +6,17 @@ data/bono_alquiler_joven.sqlite, read by the app and meant for the MCP server. T
   topes             cap of the flat and of the room per municipality and rule (EUR/month)
   solicitudes       requests, accepted and rejected per municipality, programme and call year (open data portal)
   alquiler_serpavi  SERPAVI 2011-2024: rented dwellings and monthly rent (median, p25, p75) per municipality and year
+  alquiler_distritos_madrid  the same for Madrid city's 21 districts (SERPAVI's 'Distritos' sheet), named as on the
+                    portal's boundaries (scripts/distritos_madrid.py)
   simulacion        each scenario of the simulator (central beta): cap, expected requests, bonos and share above the cap
   fuentes           every dataset used, with its licence and address
   diccionario       every column of every table: type, unit, meaning and source (the script fails if one is missing)
   metadatos         when and from which commit the file was built
 and the view ficha_municipio (today's, the Plan's and the proposal's caps next to the 2024 rent).
 Nothing is computed here that the scripts do not already compute: values come from data/interim/ (preparar_datos.py,
-necesidad_2024.py, requisito_ingresos.py, topes_convocatorias.py), the raw portal files, scripts/reglas_bono.py and
-scripts/simulador.py, and verify() checks them against those files after building. data/DICCIONARIO_BASE_DE_DATOS.md
-is written from the same dictionary.
+necesidad_2024.py, requisito_ingresos.py, topes_convocatorias.py, distritos_madrid.py), the raw portal files,
+scripts/reglas_bono.py and scripts/simulador.py, and verify() checks them against those files after building.
+data/DICCIONARIO_BASE_DE_DATOS.md is written from the same dictionary.
 Usage:  python -P scripts/base_datos.py   (after the scripts above)"""
 import datetime
 import json
@@ -114,6 +116,20 @@ SCHEMA = {
         "p25": ("REAL", "€/mes", "Percentil 25 del alquiler mensual", "SERPAVI (MIVAU)"),
         "p75": ("REAL", "€/mes", "Percentil 75 del alquiler mensual", "SERPAVI (MIVAU)"),
     }),
+    "alquiler_distritos_madrid": ("Alquiler de vivienda colectiva en los 21 distritos de Madrid capital, por año, 2011-2024",
+                                  ["distrito", "anio"], {
+        "distrito": ("TEXT", "", "Código del distrito: municipio y distrito, de 07901 (Centro) a 07921 (Barajas); es el "
+                     "CUDIS del SERPAVI sin la provincia", "SERPAVI (MIVAU), hoja Distritos"),
+        "ine": ("TEXT", "", "Código INE del municipio (079, Madrid)", ""),
+        "nombre": ("TEXT", "", "Nombre del distrito", "covid19_tia_muni_y_distritos (límites de municipios y distritos de "
+                   "Madrid, 2020; scripts/distritos_madrid.py)"),
+        "anio": ("INTEGER", "año", "Año", ""),
+        "viviendas": ("INTEGER", "viviendas", "Viviendas colectivas en alquiler con declaración del IRPF",
+                      "SERPAVI (MIVAU), hoja Distritos"),
+        "mediana": ("REAL", "€/mes", "Alquiler mensual mediano", "SERPAVI (MIVAU), hoja Distritos"),
+        "p25": ("REAL", "€/mes", "Percentil 25 del alquiler mensual", "SERPAVI (MIVAU), hoja Distritos"),
+        "p75": ("REAL", "€/mes", "Percentil 75 del alquiler mensual", "SERPAVI (MIVAU), hoja Distritos"),
+    }),
     "simulacion": ("Escenarios del simulador de reparto con el β central (−0,54) y 31,8 M€", ["ine", "escenario"], {
         "ine": ("TEXT", "", "Código INE del municipio", ""),
         "escenario": ("TEXT", "", "Regla del simulador (scripts/simulador.py, rules)", ""),
@@ -142,11 +158,12 @@ SCHEMA = {
     }),
 }
 FOREIGN = {"topes": [("ine", "municipios"), ("regla", "reglas")], "solicitudes": [("ine", "municipios")],
-           "alquiler_serpavi": [("ine", "municipios")], "simulacion": [("ine", "municipios")]}
+           "alquiler_serpavi": [("ine", "municipios")], "alquiler_distritos_madrid": [("ine", "municipios")],
+           "simulacion": [("ine", "municipios")]}
 SOURCES = [("spacm_bono_alquiler_joven_2022", RAW), ("spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos", RAW),
            ("poblacion_censada_por_edad_nacionalidad_y_sexo", RAW), ("censo_2021_viviendas_familiares_por_tenencia", RAW),
            ("irpf_indicador_renta", NEW), ("paro_registrado_edad_municipio", NEW), ("irpf_declaraciones_por_tramo", NEW),
-           ("serpavi_mivau", RAW)]
+           ("serpavi_mivau", RAW), ("covid19_tia_muni_y_distritos", ROOT / "data" / "raw_2026-11-07")]
 CALLS = {2022: "BDNS 654786", 2023: "BDNS 721190", 2024: "BDNS 793423", 2025: "BDNS 864406"}
 
 
@@ -226,6 +243,18 @@ def serpavi():
     t = pd.read_csv(INTERIM / "serpavi_madrid_municipios.csv", dtype={"ine": str})
     return pd.DataFrame({"ine": t["ine"], "anio": t["year"], "viviendas": t["n"].round().astype("Int64"),
                          "mediana": t["med"], "p25": t["p25"], "p75": t["p75"]})
+
+
+def districts():
+    """Madrid city's districts in SERPAVI's 'Distritos' sheet, with the names of the portal's boundaries."""
+    t = pd.read_csv(INTERIM / "serpavi_madrid_distritos.csv", dtype={"ine": str})
+    t = t[t["ine"] == "079"]
+    code = "079" + t["cudis"].astype("int64").astype(str).str[-2:]  # 2807901 -> '07901', as in the app's map
+    g = json.loads((INTERIM / "distritos_madrid_wgs84.geojson").read_text(encoding="utf-8"))
+    names = {f["properties"]["ine"]: f["properties"]["nombre"] for f in g["features"]}
+    return pd.DataFrame({"distrito": code, "ine": t["ine"], "nombre": code.map(names), "anio": t["year"],
+                         "viviendas": t["n"].round().astype("Int64"), "mediana": t["med"], "p25": t["p25"],
+                         "p75": t["p75"]})
 
 
 def simulation():
@@ -322,6 +351,11 @@ def verify(con, m):
     assert all(abs(v - simulador.BUDGET_EUR / simulador.BONO_EUR) < 1e-6 for _, v in total), total
     p75 = pd.read_sql("SELECT ine, p75 FROM alquiler_serpavi WHERE anio = 2024", con).set_index("ine")["p75"]
     assert np.allclose(p75, m.set_index("ine").loc[p75.index, "serpavi_p75_2024"], equal_nan=True)
+    assert q("SELECT COUNT(DISTINCT distrito), COUNT(DISTINCT nombre) FROM alquiler_distritos_madrid") == [(21, 21)]
+    # the two sheets of the SERPAVI count the same rentals: the 21 districts add up to the city
+    city = q("SELECT d.anio, SUM(d.viviendas), a.viviendas FROM alquiler_distritos_madrid d JOIN alquiler_serpavi a "
+             "ON a.ine = d.ine AND a.anio = d.anio GROUP BY d.anio")
+    assert len(city) == 14 and all(s == v for _, s, v in city), city
     documented = {(t, c) for t, c in q("SELECT tabla, columna FROM diccionario")}
     real = {(t, c[1]) for t in SCHEMA for c in q(f"PRAGMA table_info({t})")}
     assert documented == real, documented ^ real
@@ -330,7 +364,8 @@ def verify(con, m):
 
 def markdown(counts, meta):
     lines = ["# Diccionario de `data/bono_alquiler_joven.sqlite`", "",
-             "Una sola base SQLite con todo lo que usa el proyecto, por municipio. La genera `scripts/base_datos.py` (este "
+             "Una sola base SQLite con todo lo que usa el proyecto, por municipio (y el alquiler de Madrid capital también "
+             "por distrito). La genera `scripts/base_datos.py` (este "
              "fichero también, con el mismo diccionario que va dentro de la base, en la tabla `diccionario`). La leen la app "
              "y, más adelante, el servidor MCP.", "",
              f"Hecha el {meta['creada']} desde el commit `{meta['commit']}`. Clave de municipio: `ine` (3 cifras). "
@@ -356,7 +391,8 @@ def main():
     con.execute("PRAGMA foreign_keys = ON")
     create(con)
     for table, df in [("municipios", m), ("reglas", rules()), ("topes", caps(m)), ("solicitudes", req),
-                      ("alquiler_serpavi", serpavi()), ("simulacion", simulation()), ("fuentes", sources()),
+                      ("alquiler_serpavi", serpavi()), ("alquiler_distritos_madrid", districts()),
+                      ("simulacion", simulation()), ("fuentes", sources()),
                       ("diccionario", dictionary()),
                       ("metadatos", pd.DataFrame({"clave": list(meta), "valor": [str(v) for v in meta.values()]}))]:
         insert(con, table, df)

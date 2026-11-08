@@ -113,12 +113,9 @@ def shapes(name="municipios_wgs84.geojson"):
 def madrid_districts():
     """Madrid city's 21 districts ('07901' Centro ... '07921' Barajas, as on the map) with their SERPAVI 2024 rents, in
     the columns of municipalities()."""
-    s = pd.read_csv(INTERIM / "serpavi_madrid_distritos.csv", dtype={"ine": str})
-    s = s[(s["ine"] == "079") & (s["year"] == 2024)]
-    names = {f["ine"]: f["nombre"] for f in shapes(DISTRICTS)}
-    return pd.DataFrame({"ine": "079" + s["cudis"].astype("int64").astype(str).str[-2:],  # 2807901 -> '07901'
-                         "serpavi_n_2024": s["n"], "serpavi_med_2024": s["med"], "serpavi_p25_2024": s["p25"],
-                         "serpavi_p75_2024": s["p75"]}).assign(distrito=lambda d: d["ine"].map(names))
+    return query("SELECT distrito AS ine, nombre AS distrito, viviendas AS serpavi_n_2024, mediana AS serpavi_med_2024, "
+                 "p25 AS serpavi_p25_2024, p75 AS serpavi_p75_2024 FROM alquiler_distritos_madrid WHERE anio = 2024 "
+                 "ORDER BY distrito")
 
 
 @st.cache_data(show_spinner=False)

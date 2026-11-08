@@ -1,8 +1,8 @@
 # Diccionario de `data/bono_alquiler_joven.sqlite`
 
-Una sola base SQLite con todo lo que usa el proyecto, por municipio. La genera `scripts/base_datos.py` (este fichero también, con el mismo diccionario que va dentro de la base, en la tabla `diccionario`). La leen la app y, más adelante, el servidor MCP.
+Una sola base SQLite con todo lo que usa el proyecto, por municipio (y el alquiler de Madrid capital también por distrito). La genera `scripts/base_datos.py` (este fichero también, con el mismo diccionario que va dentro de la base, en la tabla `diccionario`). La leen la app y, más adelante, el servidor MCP.
 
-Hecha el 2026-11-08 desde el commit `e737b44`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
+Hecha el 2026-11-08 desde el commit `f4510d7 (con cambios sin commit)`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
 
 ```sql
 SELECT municipio, tope_hoy, tope_plan, tope_propuesta, alquiler_p75_2024
@@ -92,6 +92,21 @@ Alquiler de vivienda colectiva por municipio y año, 2011-2024. Clave: `ine, ani
 | `p25` | REAL | €/mes | Percentil 25 del alquiler mensual | SERPAVI (MIVAU) |
 | `p75` | REAL | €/mes | Percentil 75 del alquiler mensual | SERPAVI (MIVAU) |
 
+## `alquiler_distritos_madrid` (294 filas)
+
+Alquiler de vivienda colectiva en los 21 distritos de Madrid capital, por año, 2011-2024. Clave: `distrito, anio`.
+
+| Columna | Tipo | Unidad | Qué es | Fuente |
+|---|---|---|---|---|
+| `distrito` | TEXT |  | Código del distrito: municipio y distrito, de 07901 (Centro) a 07921 (Barajas); es el CUDIS del SERPAVI sin la provincia | SERPAVI (MIVAU), hoja Distritos |
+| `ine` | TEXT |  | Código INE del municipio (079, Madrid) |  |
+| `nombre` | TEXT |  | Nombre del distrito | covid19_tia_muni_y_distritos (límites de municipios y distritos de Madrid, 2020; scripts/distritos_madrid.py) |
+| `anio` | INTEGER | año | Año |  |
+| `viviendas` | INTEGER | viviendas | Viviendas colectivas en alquiler con declaración del IRPF | SERPAVI (MIVAU), hoja Distritos |
+| `mediana` | REAL | €/mes | Alquiler mensual mediano | SERPAVI (MIVAU), hoja Distritos |
+| `p25` | REAL | €/mes | Percentil 25 del alquiler mensual | SERPAVI (MIVAU), hoja Distritos |
+| `p75` | REAL | €/mes | Percentil 75 del alquiler mensual | SERPAVI (MIVAU), hoja Distritos |
+
 ## `simulacion` (1320 filas)
 
 Escenarios del simulador de reparto con el β central (−0,54) y 31,8 M€. Clave: `ine, escenario`.
@@ -106,7 +121,7 @@ Escenarios del simulador de reparto con el β central (−0,54) y 31,8 M€. Cla
 | `bonos` | REAL | bonos | Bonos que recibiría (5.300 en total) | simulador.py |
 | `parte_por_encima` | REAL | proporción | Parte de los alquileres de 2024 por encima del tope | simulador.py |
 
-## `fuentes` (8 filas)
+## `fuentes` (9 filas)
 
 Datos usados, con su licencia. Clave: `fuente`.
 
@@ -120,7 +135,7 @@ Datos usados, con su licencia. Clave: `fuente`.
 | `actualizado` | TEXT |  | Fecha de la última actualización según la fuente |  |
 | `carpeta` | TEXT |  | Carpeta del repositorio con la copia y su metadata.json |  |
 
-## `diccionario` (70 filas)
+## `diccionario` (78 filas)
 
 Cada columna de cada tabla. Clave: `tabla, columna`.
 

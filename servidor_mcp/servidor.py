@@ -103,8 +103,8 @@ def reglas() -> list[dict]:
 @mcp.tool()
 def diccionario(tabla: str = "") -> list[dict]:
     """Qué es cada columna de la base de datos (tipo, unidad, descripción y fuente). Tablas: municipios, reglas, topes,
-    solicitudes, alquiler_serpavi, simulacion, fuentes, diccionario y metadatos; también la vista ficha_municipio.
-    Sin tabla, todas."""
+    solicitudes, alquiler_serpavi, alquiler_distritos_madrid (los 21 distritos de Madrid capital), simulacion, fuentes,
+    diccionario y metadatos; también la vista ficha_municipio. Sin tabla, todas."""
     with explained():
         return q.diccionario(tabla or None)
 

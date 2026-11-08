@@ -107,6 +107,7 @@ st.markdown(
     "en cada municipio\n"
     "- `solicitudes`: Bono 2022 y Ayudas 2022-2023 por municipio\n"
     "- `alquiler_serpavi`: el alquiler de 2011 a 2024\n"
+    "- `alquiler_distritos_madrid`: el mismo alquiler en los 21 distritos de Madrid capital\n"
     "- `simulacion`: cada escenario del simulador\n"
     "- `fuentes`, `diccionario` y `metadatos`")
 st.code("SELECT municipio, tope_hoy, tope_plan, tope_propuesta, alquiler_p75_2024\nFROM ficha_municipio\n"
