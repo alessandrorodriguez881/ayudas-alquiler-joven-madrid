@@ -66,6 +66,7 @@ for name in ["Madrid", "Majadahonda", "Acebeda (La)"]:  # Acebeda: 7 young peopl
     ok(at, f"ficha: {name}")
 
 at.switch_page("app_pages/simular.py").run()
+assert "recibe 5,4 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # PLAN, 7-nov
 ok(at, "simulador: propuesta")
 at.segmented_control(key="cuantia").set_value("La del Plan: hasta 300 €, sin pasar del 60 % del alquiler").run()
 assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount

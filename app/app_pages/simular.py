@@ -76,6 +76,11 @@ madrid = (s["ine"] == simulador.MADRID).to_numpy()
 small = (s["pob_total_2024"] <= 10000).to_numpy()
 # money that gives today's share of requests an aid (31.8 M EUR for 5,300 bonos), with this rule's cost per aid
 same_chance = bonos0.sum() / req0.sum() * (req * 24 * aid).sum() / 1e6
+groups = s["grupo_necesidad"].to_numpy()
+high = lambda b: 1000 * b[groups == "resto, necesidad alta"].sum() / young[groups == "resto, necesidad alta"].sum()  # noqa: E731
+st.info(f"**Con esta regla, el tercio de municipios con más necesidad recibe {es(high(bonos), 1)} ayudas por cada 1.000 "
+        f"jóvenes** (hoy, {es(high(bonos0), 1)}). De cada 100 que la piden, la consiguen unos "
+        f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())}).", icon=":material/insights:")
 m1, m2, m3, m4, m5 = st.columns(5)
 m1.metric("Solicitudes esperadas", es(req.sum()), delta=es(req.sum() - req0.sum()), delta_color="off", border=True,
           height="stretch")
@@ -84,21 +89,20 @@ m2.metric("Solicitudes por bono", es(req.sum() / bonos.sum(), 1), delta=es(req.s
 m3.metric("Alquiler por encima del tope", pct(np.average(sh, weights=young)),
           delta=es(100 * (np.average(sh, weights=young) - np.average(sh0, weights=young)), 1) + " puntos",
           delta_color="inverse", border=True, height="stretch", help="Alquileres de 2024 (SERPAVI), pesando por jóvenes.")
-m4.metric("Ídem, municipios de 10.000 hab. o menos", pct(np.average(sh[small], weights=young[small])),
+m4.metric("Ídem, en los pueblos", pct(np.average(sh[small], weights=young[small])),
           delta=es(100 * (np.average(sh[small], weights=young[small]) - np.average(sh0[small], weights=young[small])), 1)
-          + " puntos", delta_color="inverse", border=True, height="stretch")
-m5.metric("Dinero para la misma probabilidad que hoy", es(same_chance, 1) + " M€",
+          + " puntos", delta_color="inverse", border=True, height="stretch",
+          help="Municipios de 10.000 habitantes o menos, donde el Plan pone el tope en 500 €.")
+m5.metric("Dinero para igualar a hoy", es(same_chance, 1) + " M€",
           delta=es(same_chance - simulador.BUDGET_EUR / 1e6, 1) + " M€", delta_color="inverse", border=True,
           height="stretch", help="Presupuesto que mantendría las solicitudes por bono de hoy (31,8 M€ para 5.300 bonos).")
 st.caption(f"Con {es(budget, 1)} M€ y esta cuantía salen {es(bonos.sum())} ayudas de {es(np.average(aid, weights=req))} € "
-           f"al mes de media durante 2 años (hoy, 5.300 de 250 €). De cada 100 que la piden, la consiguen unos "
-           f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())})."
+           f"al mes de media durante 2 años (hoy, 5.300 de 250 €)."
            + (" Con las reglas del Plan, los cupos «× límite de ingresos» usan el suyo (5 × IPREM de la persona), y las "
               "solicitudes son las de 2022 más las de quienes entran nuevos, según el control de arriba (exploratorio: "
               "sale de las declaraciones del IRPF de todas las edades)." if plan_rules else ""))
 
-groups = s["grupo_necesidad"].to_numpy()
-ORDER = ["Madrid capital", "resto, necesidad alta", "resto, necesidad media", "resto, necesidad baja"]
+ORDER =["Madrid capital", "resto, necesidad alta", "resto, necesidad media", "resto, necesidad baja"]
 rows = []
 for label, b in (("Hoy", bonos0), ("Tu regla", bonos)):
     for g in ORDER:
