@@ -1965,5 +1965,80 @@
     "mean_share_above_cap_weighted_by_young": 0.284
    }
   }
+ },
+ "plan_amount": {
+  "note": "Cuantía del Plan (art. 137); el límite de ingresos del Plan (5 x IPREM de la persona) no se simula",
+  "plan_estatal": {
+   "mean_monthly_aid_weighted_by_requests": 299.76,
+   "aids": 4420,
+   "requests_per_aid": 12.2048,
+   "meur_same_success_rate_as_today": 40.102,
+   "aids_per_1000_young_by_group": {
+    "Madrid capital": 4.2052,
+    "resto, necesidad alta": 3.0462,
+    "resto, necesidad baja": 1.8576,
+    "resto, necesidad media": 2.9789
+   }
+  },
+  "plan_o_p75_local": {
+   "mean_monthly_aid_weighted_by_requests": 299.77,
+   "aids": 4420,
+   "requests_per_aid": 13.0807,
+   "meur_same_success_rate_as_today": 42.9801,
+   "aids_per_1000_young_by_group": {
+    "Madrid capital": 4.2988,
+    "resto, necesidad alta": 2.8601,
+    "resto, necesidad baja": 1.8829,
+    "resto, necesidad media": 2.8247
+   }
+  },
+  "plan_p75_hasta_1000": {
+   "mean_monthly_aid_weighted_by_requests": 299.75,
+   "aids": 4420,
+   "requests_per_aid": 12.2631,
+   "meur_same_success_rate_as_today": 40.2936,
+   "aids_per_1000_young_by_group": {
+    "Madrid capital": 4.1852,
+    "resto, necesidad alta": 3.0508,
+    "resto, necesidad baja": 1.9146,
+    "resto, necesidad media": 2.9926
+   }
+  },
+  "necesidad_plan_o_p75_local": {
+   "mean_monthly_aid_weighted_by_requests": 299.77,
+   "aids": 4424,
+   "requests_per_aid": 13.0686,
+   "meur_same_success_rate_as_today": 42.9801,
+   "aids_per_1000_young_by_group": {
+    "Madrid capital": 3.905,
+    "resto, necesidad alta": 3.7975,
+    "resto, necesidad baja": 1.9783,
+    "resto, necesidad media": 3.0839
+   }
+  },
+  "necesidad_plan_p75_hasta_1000": {
+   "mean_monthly_aid_weighted_by_requests": 299.75,
+   "aids": 4424,
+   "requests_per_aid": 12.2524,
+   "meur_same_success_rate_as_today": 40.2936,
+   "aids_per_1000_young_by_group": {
+    "Madrid capital": 3.905,
+    "resto, necesidad alta": 3.7975,
+    "resto, necesidad baja": 1.9783,
+    "resto, necesidad media": 3.0839
+   }
+  },
+  "necesidad_requisito_plan_p75_hasta_1000": {
+   "mean_monthly_aid_weighted_by_requests": 299.75,
+   "aids": 4427,
+   "requests_per_aid": 12.2453,
+   "meur_same_success_rate_as_today": 40.2936,
+   "aids_per_1000_young_by_group": {
+    "Madrid capital": 3.6908,
+    "resto, necesidad alta": 4.5379,
+    "resto, necesidad baja": 1.7295,
+    "resto, necesidad media": 3.2422
+   }
+  }
  }
 }

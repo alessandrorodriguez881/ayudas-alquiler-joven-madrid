@@ -43,6 +43,10 @@ for name in ["Madrid", "Majadahonda", "Acebeda (La)"]:  # Acebeda: 7 young peopl
 
 at.switch_page("app_pages/simular.py").run()
 ok(at, "simulador: propuesta")
+at.segmented_control(key="cuantia").set_value("La del Plan: hasta 300 €, sin pasar del 60 % del alquiler").run()
+assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount
+ok(at, "simulador: propuesta con la cuantía del Plan")
+at.segmented_control(key="cuantia").set_value("250 € (hoy)").run()
 at.segmented_control(key="tope").set_value("Hoy (600 / 900 €)").run()
 at.segmented_control(key="reparto").set_value("Orden de llegada (hoy)").run()
 assert {m.delta for m in at.metric} <= {"0", "0,0", "0,0 puntos", "0,0 M€"}, [m.delta for m in at.metric]

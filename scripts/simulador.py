@@ -13,6 +13,11 @@ is WHERE the 5,300 bonos go. Each rule sets a cap per municipality and an alloca
 Plan Estatal 2026-2030 (RD 326/2026, art. 133.1.e): cap 1,000 EUR, or 500 EUR in municipalities of 10,000 people or
 fewer (also in small "núcleos" inside bigger ones, which municipal data cannot see); art. 135 lets the region raise it
 with an updated rent study, which is what the "o p75 local" rules do (never below the Plan's cap).
+The Plan also pays more per aid (art. 137: up to 300 EUR a month, never more than 60 % of the rent) and lets in more
+people (art. 133.1.d: 5 x IPREM of the person, not 3 x IPREM of the household). Added 8-Nov: "plan_amount" redoes the
+Plan rules with the Plan's aid, min(300, 60 % of the median rent capped at the cap) per municipality, so the same money
+gives fewer aids (allocate_money). The wider income limit is NOT simulated: requests start from the 2022 ones, made
+under 3 x IPREM, so with the Plan's rules more people would ask than this shows.
 Outputs per rule: requests, requests per bono, share of the rental market above the cap (weighted by young people),
 extra money to keep the success rate of the current rule, bonos per 1,000 young people by need group (Madrid city
 apart, the rest in thirds of young people by need; also the old thirds of municipalities), and the municipalities that
@@ -123,6 +128,41 @@ def allocate(req, weights, n_bonos):
     return out
 
 
+def allocate_money(req, weights, budget_eur, monthly_aid, months=24):
+    """allocate() in euros, for aids that cost a different amount in each municipality: weights stay per aid (a request
+    for "llegada", a quota per young person otherwise) and each aid costs months x its monthly amount. With the same
+    amount everywhere it gives exactly allocate(req, weights, budget / cost)."""
+    cost = months * np.broadcast_to(np.asarray(monthly_aid, dtype=float), np.shape(req))
+    return allocate(req * cost, np.nan_to_num(np.asarray(weights, dtype=float)) * cost, budget_eur) / cost
+
+
+def plan_aid(s, caps):
+    """RD 326/2026, art. 137 (flat): min(300, 60 % of the rent), with the rent of a typical applicant taken as the median
+    of 2024, or the cap where the median is above it (who asks pays at most the cap)."""
+    return np.minimum(300.0, 0.6 * np.minimum(s["serpavi_med_2024"].to_numpy(float), caps))
+
+
+def plan_amount(s, beta, req_now, bonos_now):
+    """The Plan's rules with the Plan's aid instead of 250 EUR (central beta): aids, requests per aid and the money that
+    would keep today's share of requests that get an aid."""
+    success_now = bonos_now.sum() / req_now.sum()
+    out = {"note": "Cuantía del Plan (art. 137); el límite de ingresos del Plan (5 x IPREM de la persona) no se simula"}
+    for name, (caps, how) in rules(s).items():
+        if "plan" not in name:
+            continue
+        req, _ = requests(s, caps, beta)
+        aid = plan_aid(s, caps)
+        bonos = allocate_money(req, req if how == "llegada" else need_weights(s, how), BUDGET_EUR, aid)
+        young = s["jovenes_20_34_2024"].to_numpy()
+        out[name] = {"mean_monthly_aid_weighted_by_requests": round(float(np.average(aid, weights=req)), 2),
+                     "aids": round(float(bonos.sum())), "requests_per_aid": round(float(req.sum() / bonos.sum()), 4),
+                     "meur_same_success_rate_as_today": round(float(success_now * (req * 24 * aid).sum() / 1e6), 4),
+                     "aids_per_1000_young_by_group": {g: round(float(1000 * bonos[k].sum() / young[k].sum()), 4) for g, k in
+                                                      ((g, (s["grupo_necesidad"] == g).to_numpy())
+                                                       for g in sorted(s["grupo_necesidad"].unique()))}}
+    return out
+
+
 def summarise(s, req, bonos, sh, req_now):
     young = s["jovenes_20_34_2024"].to_numpy()
     by = pd.DataFrame({"t": s["tercil_necesidad"], "young": young, "bonos": bonos, "req": req}).groupby("t", observed=True).sum()
@@ -212,6 +252,7 @@ def main():
                 per_muni[f"tope_{name}"] = caps
                 per_muni[f"solicitudes_{name}"] = req.round(1)
                 per_muni[f"bonos_{name}"] = bonos.round(1)
+    out["plan_amount"] = plan_amount(s, betas["central"], now["central"], bonos_now)
     text = json.dumps(out, indent=1, ensure_ascii=False, default=float)
     (ROOT / "resultados" / "simulador_reparto.json").write_text(text, encoding="utf-8")
     per_muni.to_csv(INTERIM / "simulador_municipios.csv", index=False, encoding="utf-8")

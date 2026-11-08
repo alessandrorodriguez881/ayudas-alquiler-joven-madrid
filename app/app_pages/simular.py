@@ -21,6 +21,7 @@ CAPS = {"Hoy (600 / 900 €)": s["tope_2024"].to_numpy(float), "Plan 2026-2030":
         "Plan o alquiler local (máx. 1.000 €)": rules["plan_p75_hasta_1000"][0], "Un tope único": None}
 ALLOC = {"Orden de llegada (hoy)": "llegada", "Cupos: jóvenes × necesidad": ("necesidad", 1),
          "Cupos: jóvenes × necesidad × límite de ingresos": ("necesidad", 1, "requisito")}
+AID = {"250 € (hoy)": "hoy", "La del Plan: hasta 300 €, sin pasar del 60 % del alquiler": "plan"}
 
 with st.container(border=True):
     with st.container(horizontal=True, vertical_alignment="bottom"):
@@ -30,6 +31,10 @@ with st.container(border=True):
             single = st.slider("Tope único (€ al mes)", 400, 1500, 900, step=50, key="tope_unico", width=280)
     alloc_name = st.segmented_control("Cómo se reparten los bonos", list(ALLOC),
                                       default="Cupos: jóvenes × necesidad × límite de ingresos", key="reparto") or "Orden de llegada (hoy)"
+    aid_name = st.segmented_control(
+        "Cuánto da cada ayuda al mes", list(AID), default="250 € (hoy)", key="cuantia",
+        help="Plan 2026-2030, art. 137: hasta 300 € al mes (habitación, 200 €) y nunca más del 60 % del alquiler. Aquí, "
+             "con el alquiler mediano de 2024 del municipio, o el tope si el mediano pasa del tope.") or "250 € (hoy)"
     left, right = st.columns(2, gap="large", vertical_alignment="bottom")
     with left:
         beta_name = st.segmented_control(
@@ -45,14 +50,16 @@ beta = BETAS[beta_name]
 caps = CAPS[cap_name] if cap_name != "Un tope único" else np.full(len(s), float(single))
 how = ALLOC[alloc_name]
 req, sh = simulador.requests(s, caps, beta)
-bonos = simulador.allocate(req, req if how == "llegada" else simulador.need_weights(s, how), budget * 1e6 / simulador.BONO_EUR)
+aid = simulador.plan_aid(s, caps) if AID[aid_name] == "plan" else np.full(len(s), simulador.BONO_EUR / 24)
+bonos = simulador.allocate_money(req, req if how == "llegada" else simulador.need_weights(s, how), budget * 1e6, aid)
 req0, sh0 = simulador.requests(s, s["tope_2024"].to_numpy(float), beta)
 bonos0 = simulador.allocate(req0, req0, simulador.BUDGET_EUR / simulador.BONO_EUR)
 
 young = s["jovenes_20_34_2024"].to_numpy(float)
 madrid = (s["ine"] == simulador.MADRID).to_numpy()
 small = (s["pob_total_2024"] <= 10000).to_numpy()
-same_chance = simulador.BUDGET_EUR / 1e6 * req.sum() / req0.sum()
+# money that gives today's share of requests an aid (31.8 M EUR for 5,300 bonos), with this rule's cost per aid
+same_chance = bonos0.sum() / req0.sum() * (req * 24 * aid).sum() / 1e6
 m1, m2, m3, m4, m5 = st.columns(5)
 m1.metric("Solicitudes esperadas", es(req.sum()), delta=es(req.sum() - req0.sum()), delta_color="off", border=True,
           height="stretch")
@@ -67,6 +74,11 @@ m4.metric("Ídem, municipios de 10.000 hab. o menos", pct(np.average(sh[small], 
 m5.metric("Dinero para la misma probabilidad que hoy", es(same_chance, 1) + " M€",
           delta=es(same_chance - simulador.BUDGET_EUR / 1e6, 1) + " M€", delta_color="inverse", border=True,
           height="stretch", help="Presupuesto que mantendría las solicitudes por bono de hoy (31,8 M€ para 5.300 bonos).")
+st.caption(f"Con {es(budget, 1)} M€ y esta cuantía salen {es(bonos.sum())} ayudas de {es(np.average(aid, weights=req))} € "
+           f"al mes de media durante 2 años (hoy, 5.300 de 250 €)."
+           + (" El Plan también sube el límite de ingresos a 5 × IPREM de la persona (hoy, 3 × IPREM del hogar). Eso no "
+              "está simulado: las solicitudes salen de las de 2022, así que con esas reglas pedirían más jóvenes."
+              if AID[aid_name] == "plan" else ""))
 
 groups = s["grupo_necesidad"].to_numpy()
 ORDER = ["Madrid capital", "resto, necesidad alta", "resto, necesidad media", "resto, necesidad baja"]
