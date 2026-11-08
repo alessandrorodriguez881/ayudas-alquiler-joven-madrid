@@ -5,6 +5,7 @@ toolbarMode = "minimal"  # no developer menu or "Deploy" button for visitors
 
 [theme]
 font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+headingFontSizes = ["2.4rem", "1.6rem", "1.3rem"]  # a bit smaller than the default: titles fit in two lines on a phone
 headingFontWeights = [800, 700, 650]
 metricValueFontWeight = 700
 baseRadius = "0.75rem"

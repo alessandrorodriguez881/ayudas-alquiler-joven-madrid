@@ -51,6 +51,8 @@ streamlit run app/streamlit_app.py        # la app, en http://localhost:8501
 python app/probar_app.py                  # prueba todas las páginas de la app sin navegador
 ```
 
+Para publicar la app en Streamlit Community Cloud, el fichero principal es `app/streamlit_app.py`. Usa `app/requirements.txt`, que solo tiene lo que necesita la app (Streamlit, pandas, NumPy y Altair, en las versiones con las que se ha probado), y el aspecto de `.streamlit/config.toml`.
+
 Dos pasos que no hace falta repetir, porque su resultado ya está en el repositorio:
 - `scripts/codigos_municipios.py` y `scripts/topes_convocatorias.py` sacan los códigos INE y los topes de 600 / 900 € de cada convocatoria (29 municipios en 2022, 55 en 2024) de los PDF oficiales, que no se suben: sus enlaces y huellas están en [docs_oficiales/FUENTES.md](docs_oficiales/FUENTES.md). Con los PDF en `docs_oficiales/`, regeneran `data/interim/topes_900_convocatorias.csv` idéntico.
 - Las simulaciones de potencia con datos inventados tardan unos 13 minutos. Las del preregistro se hicieron con `python scripts/contraste.py --sintetico --sims 200 --betas 0 -0.5 --sin-ensayo` y `--sims 100 --betas -1.1 --sin-ensayo` (cada una escribe su `resultados/potencia_sintetica_<sims>x199.json`).

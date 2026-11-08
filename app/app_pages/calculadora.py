@@ -21,9 +21,8 @@ for key, value in {"calc_municipio": "Parla", "calc_precio": 750, "calc_ingresos
     st.session_state.setdefault(key, value)
 
 st.title("¿Puedo pedir la ayuda al alquiler?")
-st.caption("Responde y te decimos si cumples los requisitos con la regla de hoy (Bono Alquiler Joven 2024), con el Plan "
-           "Estatal de Vivienda 2026-2030 y con nuestra propuesta, y cuánto cobrarías. Es orientativo: quien decide es la "
-           "Comunidad de Madrid. No se guarda nada de lo que escribes.")
+st.caption("Te decimos si cumples los requisitos hoy, con el Plan 2026-2030 y con nuestra propuesta, y cuánto cobrarías. "
+           "Es orientativo y no se guarda nada de lo que escribes.")  # short: on a phone the answer is right below
 
 with st.container(border=True):
     st.subheader("Tu caso")
