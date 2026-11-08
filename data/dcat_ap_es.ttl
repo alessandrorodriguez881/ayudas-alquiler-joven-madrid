@@ -24,7 +24,7 @@
 <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos> a dcat:Dataset ;
     dct:accessRights <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
     dct:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/ANNUAL> ;
-    dct:description "Todo lo que usa el proyecto, por municipio de la Comunidad de Madrid, en un solo fichero SQLite: población, renta, paro, hogares de alquiler e índice de necesidad; cada convocatoria del Bono Alquiler Joven, de las Ayudas al alquiler para jóvenes y del Plan Estatal de Vivienda 2026-2030 con su tope en cada municipio; solicitudes por programa y año; alquiler del SERPAVI de 2011 a 2024; y el reparto simulado con cada regla. Con diccionario de cada columna. La crea scripts/base_datos.py. Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: reutilización permitida citando la fuente."@es ;
+    dct:description "Todo lo que usa el proyecto, por municipio de la Comunidad de Madrid, en un solo fichero SQLite: población, renta, paro, hogares de alquiler e índice de necesidad; cada convocatoria del Bono Alquiler Joven, de las Ayudas al alquiler para jóvenes y del Plan Estatal de Vivienda 2026-2030 con su tope en cada municipio; solicitudes por programa y año; alquiler del SERPAVI de 2011 a 2024, por municipio y en los 21 distritos de Madrid capital; y el reparto simulado con cada regla. Con diccionario de cada columna. La crea scripts/base_datos.py. Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: reutilización permitida citando la fuente."@es ;
     dct:issued "2026-11-08"^^xsd:date ;
     dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
     dct:modified "2026-11-08"^^xsd:date ;
@@ -60,9 +60,9 @@
     dct:title "Bono Alquiler Joven y alquiler por municipio: base de datos del proyecto (SQLite)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "d63ee6966f917f30d5a69a5cf6afd47640ad12e2"^^xsd:hexBinary ] ;
+            spdx:checksumValue "a9a1a4f353a119171844233de2c6f64cf46bbf9e"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/data/bono_alquiler_joven.sqlite> ;
-    dcat:byteSize "528384"^^xsd:nonNegativeInteger ;
+    dcat:byteSize "561152"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/data/bono_alquiler_joven.sqlite> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/application/vnd.sqlite3> .
 
