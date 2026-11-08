@@ -62,6 +62,10 @@ else:
                f"{es(1.5 * r['tope_2024'])} € (3 × {es(r['tope_2024'] / 2)} €). Con ese límite queda fuera el "
                f"{pct(r['fuera_3_comparten_hoy'])} de los alquileres de 2024, si la habitación cuesta el alquiler del piso "
                f"entre tres (el caso optimista).")
+    if r["ine"] == "079":  # one cap for the whole city, but rents go from Puente de Vallecas to Chamberí
+        st.page_link("app_pages/donde.py", icon=":material/explore:",
+                     label="Madrid tiene 21 distritos y el alquiler cambia mucho entre ellos: míralos uno a uno en "
+                           "«¿Dónde me llega?»")
 
 left, right = st.columns([3, 2], gap="large")
 with left:
