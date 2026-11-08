@@ -81,7 +81,7 @@ at.switch_page("app_pages/simular.py").run()  # opens with the proposal and the 
 assert "recibe 4,3 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # plan_amount
 assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount
 ok(at, "simulador: propuesta con la cuantía del Plan")
-assert [m.value for m in at.metric][5:] == ["63 municipios", "46 de 63", "40.681"], [m.value for m in at.metric][5:]
+assert [m.value for m in at.metric][5:] == ["63 pueblos", "46 de 63", "40.681"], [m.value for m in at.metric][5:]
 assert "40,3 M€" in at.caption[-2].value, at.caption[-2].value  # estudio_art135.json, sensitivity (last: the footer)
 ok(at, "simulador: la base del estudio del art. 135")
 at.segmented_control(key="mas_gente").set_value("Y todos los que entran nuevos").run()

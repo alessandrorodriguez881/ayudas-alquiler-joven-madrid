@@ -81,21 +81,24 @@ high = lambda b: 1000 * b[groups == "resto, necesidad alta"].sum() / young[group
 st.info(f"**Con esta regla, el tercio de municipios con más necesidad recibe {es(high(bonos), 1)} ayudas por cada 1.000 "
         f"jóvenes** (hoy, {es(high(bonos0), 1)}). De cada 100 que la piden, la consiguen unos "
         f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())}).", icon=":material/insights:")
-m1, m2, m3, m4, m5 = st.columns(5)
-m1.metric("Solicitudes esperadas", es(req.sum()), delta=es(req.sum() - req0.sum()), delta_color="off", border=True,
-          height="stretch")
-m2.metric("Solicitudes por bono", es(req.sum() / bonos.sum(), 1), delta=es(req.sum() / bonos.sum() - req0.sum() / bonos0.sum(), 1),
-          delta_color="inverse", border=True, height="stretch")
-m3.metric("Alquiler por encima del tope", pct(np.average(sh, weights=young)),
-          delta=es(100 * (np.average(sh, weights=young) - np.average(sh0, weights=young)), 1) + " puntos",
-          delta_color="inverse", border=True, height="stretch", help="Alquileres de 2024 (SERPAVI), pesando por jóvenes.")
-m4.metric("Ídem, en los pueblos", pct(np.average(sh[small], weights=young[small])),
-          delta=es(100 * (np.average(sh[small], weights=young[small]) - np.average(sh0[small], weights=young[small])), 1)
-          + " puntos", delta_color="inverse", border=True, height="stretch",
-          help="Municipios de 10.000 habitantes o menos, donde el Plan pone el tope en 500 €.")
-m5.metric("Dinero para igualar a hoy", es(same_chance, 1) + " M€",
-          delta=es(same_chance - simulador.BUDGET_EUR / 1e6, 1) + " M€", delta_color="inverse", border=True,
-          height="stretch", help="Presupuesto que mantendría las solicitudes por bono de hoy (31,8 M€ para 5.300 bonos).")
+with st.container(horizontal=True):  # wraps on a narrow screen instead of cutting «40,3 M€» (a laptop at 125 % zoom)
+    st.metric("Solicitudes esperadas", es(req.sum()), delta=es(req.sum() - req0.sum()), delta_color="off", border=True,
+              height="stretch")
+    st.metric("Solicitudes por bono", es(req.sum() / bonos.sum(), 1),
+              delta=es(req.sum() / bonos.sum() - req0.sum() / bonos0.sum(), 1), delta_color="inverse", border=True,
+              height="stretch")
+    st.metric("Alquiler por encima del tope", pct(np.average(sh, weights=young)),
+              delta=es(100 * (np.average(sh, weights=young) - np.average(sh0, weights=young)), 1) + " puntos",
+              delta_color="inverse", border=True, height="stretch",
+              help="Alquileres de 2024 (SERPAVI), pesando por jóvenes.")
+    st.metric("Ídem, en los pueblos", pct(np.average(sh[small], weights=young[small])),
+              delta=es(100 * (np.average(sh[small], weights=young[small]) - np.average(sh0[small], weights=young[small])),
+                       1) + " puntos", delta_color="inverse", border=True, height="stretch",
+              help="Municipios de 10.000 habitantes o menos, donde el Plan pone el tope en 500 €.")
+    st.metric("Dinero para igualar a hoy", es(same_chance, 1) + " M€",
+              delta=es(same_chance - simulador.BUDGET_EUR / 1e6, 1) + " M€", delta_color="inverse", border=True,
+              height="stretch",
+              help="Presupuesto que mantendría las solicitudes por bono de hoy (31,8 M€ para 5.300 bonos).")
 st.caption(f"Con {es(budget, 1)} M€ y esta cuantía salen {es(bonos.sum())} ayudas de {es(np.average(aid, weights=req))} € "
            f"al mes de media durante 2 años (hoy, 5.300 de 250 €)."
            + (" Con las reglas del Plan, los cupos «× límite de ingresos» usan el suyo (5 × IPREM de la persona), y las "
@@ -157,8 +160,8 @@ st.caption("El Plan deja que la Comunidad suba el tope de 500 € si lo justific
            f"Comunidad de Madrid, un {es(cpi['rise_pct'], 1)} % de 2019 a 2024). Lo medimos en cada municipio donde la "
            "propuesta sube el tope.")
 STUDY = [  # short label, value, what it means (in sight: metric labels are cut to one line on a phone)
-    ("Sube el tope", f"{up['municipalities']} municipios",
-     "pequeños: de 500 € a su percentil 75 del alquiler, como mucho 1.000 €"),
+    ("Sube el tope", f"{up['municipalities']} pueblos",  # «municipios» did not fit at 1,024 px
+     "municipios pequeños: de 500 € a su percentil 75 del alquiler, como mucho 1.000 €"),
     ("Se puede justificar", f"{up['some_case']} de {up['municipalities']}",
      f"por el supuesto b), con la mediana del SERPAVI: el alquiler ha subido más del {es(cpi['threshold_b_pct'], 1)} %. "
      "El a) no se cumple en ninguno: con la renta media del hogar, el alquiler no llega al 30 %"),
