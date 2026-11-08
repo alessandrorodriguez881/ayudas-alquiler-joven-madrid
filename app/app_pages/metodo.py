@@ -63,8 +63,9 @@ st.markdown(
 st.subheader("Para quién es y cuánto cuesta mantenerlo")
 st.markdown(
     "- **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado "
-    "de la oferta de alquiler (art. 135). Este proyecto es ese estudio, repetible con un comando, y el simulador le deja "
-    "probar topes y cupos antes de sacar la convocatoria, con su coste.\n"
+    "de la oferta de alquiler (art. 135). Este proyecto le da la base de ese estudio, repetible con un comando (de los 63 "
+    "municipios pequeños donde proponemos subir el tope de 500 €, en 46 se puede justificar con los datos), y el "
+    "simulador le deja probar topes y cupos antes de sacar la convocatoria, con su coste.\n"
     "- **Ayuntamientos y oficinas de juventud:** la ficha de cada municipio, «¿Dónde me llega la ayuda?» y la calculadora, "
     "para orientar a quien pregunta.\n"
     "- **Los jóvenes:** saber en dos minutos si pueden pedirla, cuánto cobrarían y dónde les llega.\n"
@@ -84,8 +85,9 @@ st.table({
                "Base de Datos Nacional de Subvenciones"],
     "Qué usamos": ["Bono Alquiler Joven 2022 (solicitudes, aceptadas y rechazadas por municipio); Ayudas al alquiler para "
                    "jóvenes; población por edad; renta disponible; declaraciones del IRPF por tramo; paro registrado por "
-                   "edad; Censo 2021 (viviendas en alquiler); alquiler medio; límites municipales",
-                   "Alquiler mediano, p25 y p75 por municipio, de 2011 a 2024",
+                   "edad; Censo 2021 (viviendas en alquiler); alquiler medio; límites de los municipios y de los "
+                   "distritos de Madrid",
+                   "Alquiler mediano, p25 y p75 por municipio, de 2011 a 2024, y por distrito de Madrid (2024)",
                    "Municipios con tope de 900 € en cada convocatoria: 29 hasta 2023 y 55 desde 2024"],
     "Licencia": ["CC BY 4.0", "Reutilización permitida citando la fuente", "Textos oficiales publicados"],
 }, alt="Datos que usa el proyecto, su fuente y su licencia")

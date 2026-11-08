@@ -54,10 +54,22 @@ assert at.error and "límite de ingresos" in at.error[0].value, [e.value for e i
 ok(at, "dónde me llega: 30.000 € no cumple el límite de hoy (25.200 €)")
 at.segmented_control(key="donde_como").set_value("Solo o sola").run()
 at.number_input(key="donde_ingresos").set_value(18000).run()
+districts = lambda: next(m.value for m in at.markdown if "distritos**" in m.value)  # noqa: E731
+assert "**11 de los 21 distritos**, desde el 26 % de Chamberí hasta el 88 % de Puente de Vallecas" in districts(), \
+    districts()
+at.selectbox(key="donde_municipio").select("Madrid · Puente de Vallecas").run()
+# SERPAVI 2024 median 700 EUR, Madrid's cap of 900 EUR: you pay 700 - 250, 30 % of 1,500 EUR a month
+assert card() == ["88 %", "700 €", "450 €", "900 €", "250 €", "30 %"], card()
+ok(at, "dónde me llega: Madrid, distrito de Puente de Vallecas")
+at.segmented_control(key="donde_regla").set_value("plan").run()
+assert "**14 de los 21 distritos**, desde el 35 % de Chamberí hasta el 95 % de Puente de Vallecas" in districts(), \
+    districts()
+ok(at, "dónde me llega: los distritos de Madrid con el tope del Plan (1.000 €)")
+at.segmented_control(key="donde_regla").set_value("hoy").run()
 at.button(key="donde_ir").click().run()
-assert (at.selectbox(key="calc_municipio").value, at.number_input(key="calc_precio").value) == ("Parla", 650)
+assert (at.selectbox(key="calc_municipio").value, at.number_input(key="calc_precio").value) == ("Madrid", 700)
 assert [m.value for m in at.metric][:2] == ["250 €", "6.000 €"], [m.value for m in at.metric]
-ok(at, "dónde me llega -> calculadora con Parla y 650 €")
+ok(at, "dónde me llega -> calculadora con Madrid y 700 €")
 
 at.switch_page("app_pages/ficha.py").run()
 ok(at, "ficha: Parla")

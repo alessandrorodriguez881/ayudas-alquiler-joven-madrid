@@ -20,6 +20,7 @@ from comun import INTERIM, share_above  # noqa: E402
 
 RES = ROOT / "resultados"
 DB = ROOT / "data" / "bono_alquiler_joven.sqlite"  # scripts/base_datos.py
+DISTRICTS = "distritos_madrid_wgs84.geojson"  # scripts/distritos_madrid.py
 MIN_YOUNG = 500  # as in graficos.py: the rate of a village with 1 or 2 bonos is noise
 PROPOSAL = "necesidad_requisito_plan_p75_hasta_1000"
 # Reference palette of the dataviz method, the same as the figures (scripts/graficos.py)
@@ -80,10 +81,11 @@ def municipalities():
 
 
 @st.cache_data(show_spinner=False)
-def shapes():
+def shapes(name="municipios_wgs84.geojson"):
     """Municipal boundaries (WGS84) on a grid of 0.001 degrees (about 100 m), without repeated points: 50,000 points
-    instead of 160,000, and neighbours still share their borders because both snap to the same grid."""
-    g = json.loads((INTERIM / "municipios_wgs84.geojson").read_text(encoding="utf-8"))
+    instead of 160,000, and neighbours still share their borders because both snap to the same grid. With DISTRICTS,
+    Madrid city's 21 districts, which fit the municipalities around them on the same grid."""
+    g = json.loads((INTERIM / name).read_text(encoding="utf-8"))
 
     def ring(r):
         out = []
@@ -102,8 +104,21 @@ def shapes():
             rings = [ring(r) for r in poly]
             if rings[0] is not None:
                 kept.append([r for r in rings if r is not None])
-        feats.append({"ine": f["properties"]["ine"], "geometry": {"type": "MultiPolygon", "coordinates": kept}})
+        feats.append({"ine": f["properties"]["ine"], "nombre": f["properties"].get("nombre"),
+                      "geometry": {"type": "MultiPolygon", "coordinates": kept}})
     return feats
+
+
+@st.cache_data(show_spinner=False)
+def madrid_districts():
+    """Madrid city's 21 districts ('07901' Centro ... '07921' Barajas, as on the map) with their SERPAVI 2024 rents, in
+    the columns of municipalities()."""
+    s = pd.read_csv(INTERIM / "serpavi_madrid_distritos.csv", dtype={"ine": str})
+    s = s[(s["ine"] == "079") & (s["year"] == 2024)]
+    names = {f["ine"]: f["nombre"] for f in shapes(DISTRICTS)}
+    return pd.DataFrame({"ine": "079" + s["cudis"].astype("int64").astype(str).str[-2:],  # 2807901 -> '07901'
+                         "serpavi_n_2024": s["n"], "serpavi_med_2024": s["med"], "serpavi_p25_2024": s["p25"],
+                         "serpavi_p75_2024": s["p75"]}).assign(distrito=lambda d: d["ine"].map(names))
 
 
 @st.cache_data(show_spinner=False)
@@ -126,12 +141,13 @@ def result(name):
     return json.loads((RES / f"{name}.json").read_text(encoding="utf-8"))
 
 
-def choropleth(values, names, bins, colors, title, fmt, height=520):
-    """Altair map of one measure (threshold colour scale, grey where there is no figure); click selects a municipality."""
+def choropleth(values, names, bins, colors, title, fmt, height=520, areas=None):
+    """Altair map of one measure (threshold colour scale, grey where there is no figure); click selects a municipality.
+    areas: the shapes to draw, the municipalities by default."""
     feats = [{"type": "Feature", "geometry": f["geometry"],
               "properties": {"ine": f["ine"], "municipio": names.get(f["ine"], f["ine"]),
                              "valor": None if pd.isna(values.get(f["ine"])) else float(values.get(f["ine"]))}}
-             for f in shapes()]
+             for f in (shapes() if areas is None else areas)]
     pick = alt.selection_point(fields=["ine"], name="municipio", on="click", clear="dblclick")
     color = (alt.when("datum.valor === null").then(alt.value(NO_DATA))
              .otherwise(alt.Color("valor:Q", title=title, scale=alt.Scale(type="threshold", domain=bins, range=colors),

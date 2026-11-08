@@ -120,8 +120,8 @@ def outline(shapes):
     return [list(k) for k, n in count.items() if n == 1]
 
 
-def geojson(shapes, out):
-    """WGS84 GeoJSON for the app: 4 decimals (about 10 m), consecutive repeats dropped."""
+def geojson(shapes, out, names=None):
+    """WGS84 GeoJSON for the app: 4 decimals (about 10 m), consecutive repeats dropped; a "nombre" if names are given."""
     to_wgs = Transformer.from_crs(25830, 4326, always_xy=True)
 
     def ring(pts):
@@ -137,7 +137,8 @@ def geojson(shapes, out):
             g = s.__geo_interface__
             for p in ([g["coordinates"]] if g["type"] == "Polygon" else g["coordinates"]):
                 polys.append([ring(rg) for rg in p])
-        feats.append({"type": "Feature", "id": ine, "properties": {"ine": ine},
+        props = {"ine": ine} if names is None else {"ine": ine, "nombre": names[ine]}
+        feats.append({"type": "Feature", "id": ine, "properties": props,
                       "geometry": {"type": "MultiPolygon", "coordinates": polys}})
     out.write_text(json.dumps({"type": "FeatureCollection", "features": feats}, separators=(",", ":")), encoding="utf-8")
     return len(feats)
