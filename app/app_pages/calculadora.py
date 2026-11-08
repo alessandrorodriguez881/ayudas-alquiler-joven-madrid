@@ -15,7 +15,10 @@ DISABILITY = {"no": "No", "33": "Discapacidad del 33 % o más, o hijo o hija de 
 
 t = municipalities().set_index("municipio")
 options = sorted(t.index, key=str.lower)
-st.session_state.setdefault("calc_municipio", "Parla")
+# defaults through session state, not value=: «¿Dónde te llega?» fills these keys before switching to this page
+for key, value in {"calc_municipio": "Parla", "calc_precio": 750, "calc_ingresos": 18000, "calc_tipo": "Piso entero",
+                   "calc_n": 2}.items():
+    st.session_state.setdefault(key, value)
 
 st.title("¿Puedo pedir la ayuda al alquiler?")
 st.caption("Responde y te decimos si cumples los requisitos con la regla de hoy (Bono Alquiler Joven 2024), con el Plan "
@@ -27,11 +30,11 @@ with st.container(border=True):
     a, b, c = st.columns(3)
     name = a.selectbox("Municipio", options, key="calc_municipio")
     age = b.number_input("Edad", min_value=14, max_value=60, value=27, key="calc_edad")
-    kind = c.segmented_control("¿Qué alquilas?", ["Piso entero", "Habitación"], default="Piso entero", key="calc_tipo")
+    kind = c.segmented_control("¿Qué alquilas?", ["Piso entero", "Habitación"], key="calc_tipo")
     kind = "habitacion" if kind == "Habitación" else "piso"
 
     a, b, c = st.columns(3, vertical_alignment="bottom")
-    price = a.number_input("Precio al mes del contrato (€)", min_value=0, max_value=10000, value=750, step=10,
+    price = a.number_input("Precio al mes del contrato (€)", min_value=0, max_value=10000, step=10,
                            key="calc_precio", help="Si compartís piso y firmáis todos el contrato, el precio del piso entero.")
     includes = b.selectbox("¿Qué incluye ese precio?", list(INCLUDES), format_func=INCLUDES.get, key="calc_incluye",
                            help="Si el contrato no separa el garaje o el trastero, la norma cuenta como alquiler el 80 %, "
@@ -45,8 +48,7 @@ with st.container(border=True):
         a, b = st.columns([2, 1])
         living = a.radio("¿Con quién vives?", list(LIVING), format_func=LIVING.get, key="calc_convivencia")
         if living == "jovenes":
-            sharers = b.number_input("¿Cuántos firmáis y la pedís, contándote?", min_value=2, max_value=8, value=2,
-                                     key="calc_n")
+            sharers = b.number_input("¿Cuántos firmáis y la pedís, contándote?", min_value=2, max_value=8, key="calc_n")
         elif living == "otros":
             others = b.number_input("Ingresos al año de los demás que viven en el piso (€)", min_value=0,
                                     max_value=1000000, value=0, step=1000, key="calc_otros",
@@ -55,7 +57,7 @@ with st.container(border=True):
 
     a, b, c = st.columns(3, vertical_alignment="bottom")
     income = a.number_input("Tus ingresos del último año declarado (€ al año)", min_value=0, max_value=1000000,
-                            value=18000, step=500, key="calc_ingresos",
+                            step=500, key="calc_ingresos",
                             help="Los del último año con la declaración de la renta ya cerrada: la Comunidad los mira en "
                                  "Hacienda.")
     disability = b.selectbox("¿Alguna de estas situaciones?", list(DISABILITY), format_func=DISABILITY.get,

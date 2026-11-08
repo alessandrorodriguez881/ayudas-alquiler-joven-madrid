@@ -35,6 +35,28 @@ at.selectbox(key="calc_municipio").select("Acebeda (La)").run()  # small, no SER
 at.multiselect(key="calc_exclusiones").select("vivienda_conviviente").run()
 ok(at, "calculadora: habitación en Acebeda, con una exclusión")
 
+at.switch_page("app_pages/donde.py").run()
+assert not at.error, [e.value for e in at.error]
+card = lambda: [m.value for m in at.metric][3:]  # noqa: E731  (the three tiles, then the card, column by column)
+# Parla (SERPAVI 2024 median 650 EUR): inside the cap, median, you pay | cap, aid, share of your income
+assert card() == ["93 %", "650 €", "400 €", "900 €", "250 €", "27 %"], card()
+ok(at, "dónde me llega: Parla, sola, 18.000 €")
+at.segmented_control(key="donde_como").set_value("Compartiendo piso").run()
+at.number_input(key="donde_n").set_value(3).run()
+at.segmented_control(key="donde_regla").set_value("plan").run()
+assert (card()[4], card()[2]) == ("130 €", "87 €"), card()  # Plan: 60 % of 650 / 3 each; each pays 217 - 130
+ok(at, "dónde me llega: con el Plan, compartiendo entre 3")
+at.number_input(key="donde_ingresos").set_value(30000).run()
+at.segmented_control(key="donde_regla").set_value("hoy").run()
+assert at.error and "límite de ingresos" in at.error[0].value, [e.value for e in at.error]
+ok(at, "dónde me llega: 30.000 € no cumple el límite de hoy (25.200 €)")
+at.segmented_control(key="donde_como").set_value("Solo o sola").run()
+at.number_input(key="donde_ingresos").set_value(18000).run()
+at.button(key="donde_ir").click().run()
+assert (at.selectbox(key="calc_municipio").value, at.number_input(key="calc_precio").value) == ("Parla", 650)
+assert [m.value for m in at.metric][:2] == ["250 €", "6.000 €"], [m.value for m in at.metric]
+ok(at, "dónde me llega -> calculadora con Parla y 650 €")
+
 at.switch_page("app_pages/ficha.py").run()
 ok(at, "ficha: Parla")
 for name in ["Madrid", "Majadahonda", "Acebeda (La)"]:  # Acebeda: 7 young people and no SERPAVI rents

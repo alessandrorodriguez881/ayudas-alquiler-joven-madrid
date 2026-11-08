@@ -4,7 +4,32 @@ from datos import BLUE, ORANGE, SOURCE, es, map_spec, municipalities, pct, resul
 
 st.title("Donde el alquiler supera el tope, los jóvenes piden menos el Bono")
 st.caption("Bono Alquiler Joven de la Comunidad de Madrid: 250 € al mes durante 2 años, solo para alquileres de hasta "
-           "600 o 900 € (habitación: 300 o 450 €). Haz clic en un municipio para ver sus cifras.")
+           "600 o 900 € (habitación: 300 o 450 €). No es un buscador de pisos: medimos si la ayuda llega a quien más la "
+           "necesita y proponemos cómo hacer que llegue.")
+
+h1 = result("contraste_real")["H1"]
+sim = result("simulador_reparto")
+high = lambda rule: sim["plan_amount"][rule]["aids_per_1000_young_by_group"]["resto, necesidad alta"]  # noqa: E731
+k1, k2, k3 = st.columns(3)
+k1.metric("Menos solicitudes por cada 10 puntos de alquiler por encima del tope", f"{es(h1['pct_per_10_points'], 1)} %",
+          border=True, help="Contraste registrado antes de ver los datos, con los 159 municipios del Bono 2022.")
+k2.metric("Alquiler por encima del tope del Plan 2026-2030 en los municipios pequeños",
+          pct(sim["gap_above_cap"]["2024_rents_plan_estatal"]["10000_or_fewer"]), border=True,
+          help="Municipios de 10.000 habitantes o menos, donde el Plan pone el tope en 500 €. Hoy, el "
+               f"{pct(sim['gap_above_cap']['2024_rents_2024_list']['10000_or_fewer'])}.")
+k3.metric("Más ayudas donde más falta con nuestra propuesta, frente al Plan",
+          "+" + pct(high("necesidad_requisito_plan_p75_hasta_1000") / high("plan_estatal") - 1), border=True,
+          help="Ayudas por cada 1.000 jóvenes en el tercio de municipios con más necesidad (sin Madrid capital), con el "
+               "mismo dinero y las reglas del Plan. Cuesta 0,2 M€ más.")
+with st.container(horizontal=True):
+    if st.button("¿Puedo pedirla?", icon=":material/checklist:", type="primary"):
+        st.switch_page("app_pages/calculadora.py")
+    if st.button("¿Dónde me llega la ayuda?", icon=":material/explore:", type="primary"):
+        st.switch_page("app_pages/donde.py")
+    if st.button("Simular el reparto (para la Consejería)", icon=":material/tune:"):
+        st.switch_page("app_pages/simular.py")
+st.divider()
+st.caption("Haz clic en un municipio para ver sus cifras.")
 
 t = municipalities()
 names = dict(zip(t["ine"], t["municipio"]))
