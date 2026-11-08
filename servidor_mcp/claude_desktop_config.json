@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bono-alquiler-joven": {
+      "command": "python",
+      "args": ["C:/ruta/al/repositorio/servidor_mcp/servidor.py"]
+    }
+  }
+}
