@@ -37,5 +37,17 @@
    "aids_per_1000_young_high_need": 4.2949,
    "meur_same_chance_as_today": 40.2846
   }
+ },
+ "measure_check": {
+  "municipalities": 51,
+  "median_rise_pct": {
+   "serpavi_median": 21.6,
+   "portal_index": 11.1
+  },
+  "case_b_met": {
+   "serpavi_median": 33,
+   "portal_index": 0
+  },
+  "spearman": 0.684
  }
 }

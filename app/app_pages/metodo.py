@@ -75,8 +75,10 @@ st.markdown(
     "cambia (`probar_app.py`, `probar_reglas.py`, `probar_servidor.py`). La app puede funcionar en un servicio gratuito "
     "como Streamlit Community Cloud, y la base de datos es un solo fichero de medio megabyte.\n\n"
     "**Límites:** el SERPAVI solo ve los alquileres declarados en el IRPF y llega hasta 2024; el efecto del tope sobre las "
-    "solicitudes es una asociación entre municipios, no un experimento; y la parte de la gente por debajo del límite de "
-    "ingresos sale de declaraciones de todas las edades."
+    "solicitudes es una asociación entre municipios, no un experimento; la parte de la gente por debajo del límite de "
+    "ingresos sale de declaraciones de todas las edades; y en la base del estudio del art. 135, el supuesto b) depende de "
+    "medir la subida con la mediana del SERPAVI: con el índice de precios del alquiler del portal no se cumpliría en "
+    "ninguno de los municipios grandes que lo tienen."
 )
 
 st.subheader("Datos")
@@ -85,8 +87,8 @@ st.table({
                "Base de Datos Nacional de Subvenciones"],
     "Qué usamos": ["Bono Alquiler Joven 2022 (solicitudes, aceptadas y rechazadas por municipio); Ayudas al alquiler para "
                    "jóvenes; población por edad; renta disponible; declaraciones del IRPF por tramo; paro registrado por "
-                   "edad; Censo 2021 (viviendas en alquiler); alquiler medio; límites de los municipios y de los "
-                   "distritos de Madrid",
+                   "edad; Censo 2021 (viviendas en alquiler); alquiler medio e índices de precios del alquiler (para "
+                   "comprobar el SERPAVI, también por distritos); límites de los municipios y de los distritos de Madrid",
                    "Alquiler mediano, p25 y p75 por municipio, de 2011 a 2024, y por distrito de Madrid (2024)",
                    "Municipios con tope de 900 € en cada convocatoria: 29 hasta 2023 y 55 desde 2024"],
     "Licencia": ["CC BY 4.0", "Reutilización permitida citando la fuente", "Textos oficiales publicados"],

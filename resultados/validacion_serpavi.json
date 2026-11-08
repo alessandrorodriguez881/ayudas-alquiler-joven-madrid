@@ -32,5 +32,25 @@
    "without_madrid_city": 0.209
   }
  },
- "note": "SERPAVI: median rent of collective rented dwellings; portal: average rent of rented homes (level) and rental price index base 2015 (change). Pearson and Spearman by municipality."
+ "districts_change_2019_2024": {
+  "n": 21,
+  "pearson": 0.72,
+  "spearman": 0.77,
+  "median_ratio_serpavi_over_portal": 1.923,
+  "median_growth_pct": {
+   "serpavi": 18.5,
+   "portal_index": 10.2
+  }
+ },
+ "districts_change_2022_2024": {
+  "n": 21,
+  "pearson": 0.754,
+  "spearman": 0.697,
+  "median_ratio_serpavi_over_portal": 1.707,
+  "median_growth_pct": {
+   "serpavi": 10.3,
+   "portal_index": 5.8
+  }
+ },
+ "note": "SERPAVI: median rent of collective rented dwellings; portal: average rent of rented homes (level) and rental price index base 2015 (change). Pearson and Spearman by municipality, and by district of Madrid city in districts_change_*."
 }

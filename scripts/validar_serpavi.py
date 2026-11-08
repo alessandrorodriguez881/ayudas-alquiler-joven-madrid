@@ -6,6 +6,9 @@ portal has two rent sources of its own, and this script checks the SERPAVI again
      2024 (dataset alquiler_medio_mensual_..._municipios_mas_20000) against the SERPAVI median of the same year
   2. Change: rental price index (base 2015), municipalities over 10,000 people (dataset 1934445), growth 2022 -> 2024,
      against the growth of the SERPAVI median over the same years
+  3. The same for Madrid city's 21 districts, which the app shows one by one: rental price index by district (dataset
+     1934430; the district is only named in the text of «Concepto»), growth 2019 -> 2024 (the years of the art. 135
+     study) and 2022 -> 2024, against the SERPAVI district medians (run distritos_madrid.py first: district names)
 Usage:  python -P scripts/validar_serpavi.py   -> resultados/validacion_serpavi.json
 """
 import json
@@ -52,6 +55,21 @@ def gap_sensitivity(s, growth):
             "portal_growth": {"all": avg(alt, ok), "without_madrid_city": avg(alt, ok & ~mad)}}
 
 
+def districts():
+    """SERPAVI median and portal rental price index of Madrid city's 21 districts, by district name and year."""
+    d = leer_csv(next((RAW / "1934430").glob("*.csv")))
+    d["nombre"] = d["Concepto"].str.extract(r"en el distrito (?:de )?(.+) del municipio de Madrid")[0]
+    idx = d.pivot_table(index="nombre", columns="Año", values="Valor")
+    g = json.loads((INTERIM / "distritos_madrid_wgs84.geojson").read_text(encoding="utf-8"))
+    names = {f["properties"]["ine"]: f["properties"]["nombre"] for f in g["features"]}
+    s = pd.read_csv(INTERIM / "serpavi_madrid_distritos.csv", dtype={"ine": str})
+    s = s[s["ine"] == "079"]
+    s = s.assign(nombre=("079" + s["cudis"].astype("int64").astype(str).str[-2:]).map(names))  # 2807901 -> Centro
+    med = s.pivot_table(index="nombre", columns="year", values="med")
+    assert sorted(idx.index) == sorted(med.index), set(idx.index) ^ set(med.index)
+    return med, idx
+
+
 def main():
     s = pd.read_csv(INTERIM / "serpavi_madrid_municipios.csv", dtype={"ine": str})
     med = s.pivot_table(index="ine", columns="year", values="med")
@@ -67,8 +85,16 @@ def main():
     both = pd.concat([growth_s, growth_p], axis=1).dropna()
     out["change_2022_2024"]["median_growth_pct"] = {k: round(100 * float(both[k].median() - 1), 1) for k in both}
     out["gap_2024_with_portal_growth"] = gap_sensitivity(s, growth_p)
+    med_d, idx_d = districts()
+    for first in (2019, 2022):
+        both = pd.concat([(med_d[2024] / med_d[first]).rename("serpavi"),
+                          (idx_d[2024] / idx_d[first]).rename("portal_index")], axis=1)
+        out[f"districts_change_{first}_2024"] = compare(both["serpavi"] - 1, both["portal_index"] - 1)
+        out[f"districts_change_{first}_2024"]["median_growth_pct"] = {k: round(100 * float(both[k].median() - 1), 1)
+                                                                      for k in both}
     out["note"] = ("SERPAVI: median rent of collective rented dwellings; portal: average rent of rented homes (level) "
-                   "and rental price index base 2015 (change). Pearson and Spearman by municipality.")
+                   "and rental price index base 2015 (change). Pearson and Spearman by municipality, and by district "
+                   "of Madrid city in districts_change_*.")
     print(json.dumps(out, indent=1, ensure_ascii=False))
     (ROOT / "resultados" / "validacion_serpavi.json").write_text(json.dumps(out, indent=1, ensure_ascii=False),
                                                                encoding="utf-8")

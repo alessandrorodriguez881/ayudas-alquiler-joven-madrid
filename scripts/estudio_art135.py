@@ -10,7 +10,8 @@ It only gives evidence: the decision, the official study and the agreement with 
 are the Comunidad's. Our proposal only lifts the Plan's 500 EUR in municipalities of 10,000 people or fewer, up to their
 p75 and never above 1,000 EUR (scripts/simulador.py, rules), so the report is about them.
 Reads the database (run scripts/base_datos.py first), the 2021 census files in data/raw/ and the CPI in
-data/raw/ine_ipc_madrid/. Offline.
+data/raw/ine_ipc_madrid/; and, to show how much the measure of the rise matters, the portal's rental price index of
+the municipalities over 10,000 people (data/raw/1934445/). Offline.
 Usage:  python -P scripts/estudio_art135.py   -> resultados/estudio_art135.csv, resultados/estudio_art135.json and
                                                  data/ESTUDIO_ART135.md
 """
@@ -123,6 +124,22 @@ def summary(m, rise, cpi_mean):
     }
 
 
+def measure_check(m, rise):
+    """Case b) measured with the portal's rental price index (base 2015, dataset 1934445) instead of the SERPAVI median,
+    where the portal has one: municipalities over 10,000 people. The small ones, where the proposal raises the cap, have
+    no index, so this does not change the base: it says how much the choice of measure matters."""
+    d = leer_csv(next((RAW / "1934445").glob("*.csv")))
+    d = d[d["Tipo territorio"] == "Municipios"].copy()
+    d["ine"] = d["Código territorio"].map(cm_to_ine)
+    d["Valor"] = pd.to_numeric(d["Valor"], errors="coerce")  # "-" = protected by statistical secrecy
+    idx = d.pivot_table(index="ine", columns="Año", values="Valor")
+    both = pd.DataFrame({"serpavi_median": m.set_index("ine")["subida_alquiler_pct"],
+                         "portal_index": 100 * (idx[LAST] / idx[FIRST] - 1)}).dropna()
+    return {"municipalities": len(both), "median_rise_pct": {k: round(float(both[k].median()), 1) for k in both},
+            "case_b_met": {k: int((both[k] >= rise + EXTRA_POINTS).sum()) for k in both},
+            "spearman": round(float(both["serpavi_median"].corr(both["portal_index"], method="spearman")), 3)}
+
+
 def only_where_justified(m):
     """The proposal again (the Plan's aid, central beta), but lifting the 500 EUR only where the study can justify it:
     if the figures hold, the proposal does not rest on caps nobody could defend."""
@@ -150,7 +167,7 @@ def es(x, d=0):
 
 
 def report(m, s):
-    up, w = m[m["sube_tope"]], s["where_proposal_raises_cap"]
+    up, w, k = m[m["sube_tope"]], s["where_proposal_raises_cap"], s["measure_check"]
     rows = []
     for _, r in up.iterrows():
         pct = lambda v: "—" if pd.isna(v) else es(100 * v) + " %"  # noqa: E731
@@ -181,7 +198,7 @@ Lo genera `scripts/estudio_art135.py`. **No es el estudio oficial:** es la base 
 ## Resultado
 - La propuesta sube el tope en **{w['municipalities']} municipios pequeños**, donde viven **{es(w['young_20_34_2024'])} jóvenes** de 20 a 34 años
 - Con el tope de 500 € del Plan, en la mitad de ellos queda fuera **más del {es(100 * w['median_share_above_plan_cap'])} %** del alquiler
-- **Se puede justificar con datos en {w['some_case']} de ellos** ({es(w['young_in_some_case'])} jóvenes):
+- **Se puede justificar con datos en {w['some_case']} de ellos** ({es(w['young_in_some_case'])} jóvenes), midiendo la subida con la mediana del SERPAVI. Con un índice de precios saldrían muchos menos: en los municipios grandes que lo tienen, el supuesto b) no se cumpliría en ninguno (ver «Límites»):
   - solo con el supuesto a): {w['a_only']}
   - solo con el b): {w['b_only']}
   - con los dos: {w['a_and_b']}
@@ -199,6 +216,7 @@ Lo genera `scripts/estudio_art135.py`. **No es el estudio oficial:** es la base 
 - La renta del hogar es una estimación: renta por habitante de 2024 por las personas por hogar de 2021
 - En los municipios pequeños hay pocos contratos, así que la mediana de un año a otro se mueve mucho. Por eso pedimos al menos {s['min_rentals']} viviendas
 - Sin los gastos y suministros, el supuesto a) se queda corto: la cifra real de municipios que lo cumplen es igual o mayor
+- **La medida importa, y mucho.** El portal tiene un índice de precios del alquiler (base 2015) en {k['municipalities']} municipios de más de 10.000 habitantes con datos del SERPAVI. Allí, de 2019 a 2024, la mediana del SERPAVI subió un {es(k['median_rise_pct']['serpavi_median'], 1)} % y el índice, un {es(k['median_rise_pct']['portal_index'], 1)} %, menos que el IPC ({es(c['rise_pct'], 1)} %). Con la mediana, el supuesto b) se cumple en {k['case_b_met']['serpavi_median']} de esos {k['municipalities']}; con el índice, en {k['case_b_met']['portal_index'] or 'ninguno'}. Las dos medidas ordenan parecido los municipios (correlación de rangos de {es(k['spearman'], 2)}), pero miden cosas distintas: la mediana de cada año depende también de qué contratos se declaran ese año. Los municipios pequeños no tienen índice. Qué medida vale para el art. 135 lo tendría que justificar la Comunidad ante el Ministerio
 
 Todos los datos, por municipio, en `resultados/estudio_art135.csv`.
 """
@@ -208,7 +226,8 @@ def main():
     m, rise, cpi_mean = build()
     s = summary(m, rise, cpi_mean)
     s["sensitivity"] = only_where_justified(m)
-    cols = ["ine", "municipio", "pob_total_2024", "hasta_10000_hab", "jovenes_20_34_2024", "tope_plan", "tope_propuesta",
+    s["measure_check"] = measure_check(m, rise)
+    cols =["ine", "municipio", "pob_total_2024", "hasta_10000_hab", "jovenes_20_34_2024", "tope_plan", "tope_propuesta",
             "sube_tope", f"viviendas_{LAST}", f"mediana_{LAST}", f"p25_{LAST}", f"p75_{LAST}", "parte_por_encima_tope_plan",
             "parte_por_encima_tope_propuesta", "personas_por_hogar_2021", "renta_pc_2024", "renta_hogar_2024",
             "esfuerzo_alquiler_hogar", "cumple_a", f"viviendas_{FIRST}", f"mediana_{FIRST}", "subida_alquiler_pct",

@@ -149,7 +149,8 @@ st.caption("Supuestos: las solicitudes por joven de 2022 cambian con exp(β × c
 st.divider()
 st.subheader("Para la Consejería: la base del estudio del art. 135")
 study = result("estudio_art135")
-up, cpi, sens = study["where_proposal_raises_cap"], study["cpi"], study["sensitivity"]
+up, cpi, sens, measure = (study["where_proposal_raises_cap"], study["cpi"], study["sensitivity"],
+                          study["measure_check"])
 st.caption("El Plan deja que la Comunidad suba el tope de 500 € si lo justifica con un estudio actualizado del alquiler "
            "(art. 135). El estudio puede apoyarse en dos supuestos de la Ley de Vivienda (art. 18.3): a) que el alquiler "
            "pase del 30 % de la renta del hogar; b) que en cinco años haya subido al menos 3 puntos más que el IPC (en la "
@@ -159,8 +160,8 @@ STUDY = [  # short label, value, what it means (in sight: metric labels are cut 
     ("Sube el tope", f"{up['municipalities']} municipios",
      "pequeños: de 500 € a su percentil 75 del alquiler, como mucho 1.000 €"),
     ("Se puede justificar", f"{up['some_case']} de {up['municipalities']}",
-     f"por el supuesto b): el alquiler ha subido más del {es(cpi['threshold_b_pct'], 1)} %. El a) no se cumple en "
-     "ninguno: con la renta media del hogar, el alquiler no llega al 30 %"),
+     f"por el supuesto b), con la mediana del SERPAVI: el alquiler ha subido más del {es(cpi['threshold_b_pct'], 1)} %. "
+     "El a) no se cumple en ninguno: con la renta media del hogar, el alquiler no llega al 30 %"),
     ("Jóvenes que viven ahí", es(up["young_in_some_case"]), f"de 20 a 34 años, en esos {up['some_case']} municipios"),
 ]
 for col, (label, value, note) in zip(st.columns(3), STUDY):
@@ -188,5 +189,9 @@ with st.container(horizontal=True):
 st.caption(f"Si el tope solo sube donde se puede justificar, la propuesta da lo mismo: "
            f"{es(sens['proposal_only_where_justified']['aids_per_1000_young_high_need'], 1)} ayudas por cada 1.000 jóvenes "
            f"en el tercio con más necesidad y {es(sens['proposal_only_where_justified']['meur_same_chance_as_today'], 1)} M€ "
-           "para la misma probabilidad que hoy. Es una base con datos abiertos, no el estudio oficial: decidirlo y "
+           "para la misma probabilidad que hoy. Ojo con la medida: en los "
+           f"{measure['municipalities']} municipios grandes donde el portal tiene un índice de precios del alquiler, el "
+           f"supuesto b) se cumple en {measure['case_b_met']['serpavi_median']} con la mediana del SERPAVI y en "
+           + (f"{measure['case_b_met']['portal_index']}" if measure["case_b_met"]["portal_index"] else "ninguno")
+           + " con el índice. Es una base con datos abiertos, no el estudio oficial: decidirlo, elegir la medida y "
            "acordarlo con el Ministerio le toca a la Comunidad. Método y límites en el informe (scripts/estudio_art135.py).")

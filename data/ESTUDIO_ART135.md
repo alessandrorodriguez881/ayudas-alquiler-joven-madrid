@@ -18,7 +18,7 @@ Lo genera `scripts/estudio_art135.py`. **No es el estudio oficial:** es la base 
 ## Resultado
 - La propuesta sube el tope en **63 municipios pequeños**, donde viven **46.458 jóvenes** de 20 a 34 años
 - Con el tope de 500 € del Plan, en la mitad de ellos queda fuera **más del 58 %** del alquiler
-- **Se puede justificar con datos en 46 de ellos** (40.681 jóvenes):
+- **Se puede justificar con datos en 46 de ellos** (40.681 jóvenes), midiendo la subida con la mediana del SERPAVI. Con un índice de precios saldrían muchos menos: en los municipios grandes que lo tienen, el supuesto b) no se cumpliría en ninguno (ver «Límites»):
   - solo con el supuesto a): 0
   - solo con el b): 46
   - con los dos: 0
@@ -98,5 +98,6 @@ Lo genera `scripts/estudio_art135.py`. **No es el estudio oficial:** es la base 
 - La renta del hogar es una estimación: renta por habitante de 2024 por las personas por hogar de 2021
 - En los municipios pequeños hay pocos contratos, así que la mediana de un año a otro se mueve mucho. Por eso pedimos al menos 30 viviendas
 - Sin los gastos y suministros, el supuesto a) se queda corto: la cifra real de municipios que lo cumplen es igual o mayor
+- **La medida importa, y mucho.** El portal tiene un índice de precios del alquiler (base 2015) en 51 municipios de más de 10.000 habitantes con datos del SERPAVI. Allí, de 2019 a 2024, la mediana del SERPAVI subió un 21,6 % y el índice, un 11,1 %, menos que el IPC (16,5 %). Con la mediana, el supuesto b) se cumple en 33 de esos 51; con el índice, en ninguno. Las dos medidas ordenan parecido los municipios (correlación de rangos de 0,68), pero miden cosas distintas: la mediana de cada año depende también de qué contratos se declaran ese año. Los municipios pequeños no tienen índice. Qué medida vale para el art. 135 lo tendría que justificar la Comunidad ante el Ministerio
 
 Todos los datos, por municipio, en `resultados/estudio_art135.csv`.
