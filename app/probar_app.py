@@ -18,6 +18,23 @@ for option in ["Cobertura del Bono", "Alquiler por encima del tope", "Con el Pla
     at.segmented_control(key="medida").set_value(option).run()
     ok(at, f"mapa: {option}")
 
+at.switch_page("app_pages/calculadora.py").run()
+money = lambda: [m.value for m in at.metric]  # noqa: E731  (per rule: aid a month, aid in 24 months)
+assert money() == ["250 €", "6.000 €", "300 €", "7.200 €", "300 €", "7.200 €"], money()
+ok(at, "calculadora: piso de 750 € en Parla, 18.000 € al año")
+at.number_input(key="calc_precio").set_value(950).run()
+assert money()[:4] == ["0 €", "0 €", "300 €", "7.200 €"], money()  # above today's 900 EUR, inside the Plan's 1,000 EUR
+ok(at, "calculadora: piso de 950 €")
+at.radio(key="calc_convivencia").set_value("jovenes").run()
+at.number_input(key="calc_n").set_value(3).run()
+at.number_input(key="calc_precio").set_value(900).run()
+assert money()[:4] == ["250 €", "6.000 €", "180 €", "4.320 €"], money()  # Plan: 60 % of 300 EUR each
+ok(at, "calculadora: tres jóvenes en un piso de 900 €")
+at.segmented_control(key="calc_tipo").set_value("Habitación").run()
+at.selectbox(key="calc_municipio").select("Acebeda (La)").run()  # small, no SERPAVI rents: the proposal keeps the Plan
+at.multiselect(key="calc_exclusiones").select("vivienda_conviviente").run()
+ok(at, "calculadora: habitación en Acebeda, con una exclusión")
+
 at.switch_page("app_pages/ficha.py").run()
 ok(at, "ficha: Parla")
 for name in ["Madrid", "Majadahonda", "Acebeda (La)"]:  # Acebeda: 7 young people and no SERPAVI rents

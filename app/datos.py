@@ -12,6 +12,7 @@ import streamlit as st
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+import reglas_bono as rb  # noqa: E402,F401  (the calculator's rules, one function per article)
 import simulador  # noqa: E402
 from comun import INTERIM, share_above  # noqa: E402
 
