@@ -65,10 +65,8 @@ for name in ["Madrid", "Majadahonda", "Acebeda (La)"]:  # Acebeda: 7 young peopl
     at.selectbox(key="municipio").select(name).run()
     ok(at, f"ficha: {name}")
 
-at.switch_page("app_pages/simular.py").run()
-assert "recibe 5,4 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # PLAN, 7-nov
-ok(at, "simulador: propuesta")
-at.segmented_control(key="cuantia").set_value("La del Plan: hasta 300 €, sin pasar del 60 % del alquiler").run()
+at.switch_page("app_pages/simular.py").run()  # opens with the proposal and the Plan's aid, as on the cover
+assert "recibe 4,3 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # plan_amount
 assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount
 ok(at, "simulador: propuesta con la cuantía del Plan")
 at.segmented_control(key="mas_gente").set_value("Y todos los que entran nuevos").run()
@@ -76,6 +74,8 @@ assert at.metric[4].value == "58,1 M€", at.metric[4].value  # plan_income_limi
 ok(at, "simulador: propuesta con el Plan y todos los que entran nuevos por su límite de ingresos")
 at.segmented_control(key="mas_gente").set_value("Los mismos que en 2022").run()
 at.segmented_control(key="cuantia").set_value("250 € (hoy)").run()
+assert "recibe 5,4 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # PLAN, 7-nov
+ok(at, "simulador: propuesta con los 250 € de hoy")
 at.segmented_control(key="tope").set_value("Hoy (600 / 900 €)").run()
 at.segmented_control(key="reparto").set_value("Orden de llegada (hoy)").run()
 assert {m.delta for m in at.metric} <= {"0", "0,0", "0,0 puntos", "0,0 M€"}, [m.delta for m in at.metric]

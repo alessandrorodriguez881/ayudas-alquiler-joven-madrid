@@ -33,8 +33,8 @@ with st.container(border=True):
             single = st.slider("Tope único (€ al mes)", 400, 1500, 900, step=50, key="tope_unico", width=280)
     alloc_name = st.segmented_control("Cómo se reparten los bonos", list(ALLOC),
                                       default="Cupos: jóvenes × necesidad × límite de ingresos", key="reparto") or "Orden de llegada (hoy)"
-    aid_name = st.segmented_control(
-        "Cuánto da cada ayuda al mes", list(AID), default="250 € (hoy)", key="cuantia",
+    aid_name = st.segmented_control(  # opens with the Plan's aid: the same figures as the cover and the slides
+        "Cuánto da cada ayuda al mes", list(AID), default=list(AID)[1], key="cuantia",
         help="Plan 2026-2030, art. 137: hasta 300 € al mes (habitación, 200 €) y nunca más del 60 % del alquiler. Aquí, "
              "con el alquiler mediano de 2024 del municipio, o el tope si el mediano pasa del tope.") or "250 € (hoy)"
     plan_rules = AID[aid_name] == "plan"
