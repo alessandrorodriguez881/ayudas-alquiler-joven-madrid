@@ -1,7 +1,7 @@
 """Download the open datasets used by the DataMad 2026 project from the Comunidad de Madrid CKAN portal.
 
-Each dataset goes to data/raw/<dataset_id>/ together with its metadata (metadata.json: title, licence, source URL).
-Only CSV resources are downloaded; files over MAX_MB are skipped and reported.
+Each dataset goes to data/raw/<dataset_id>/datos.csv together with its metadata (metadata.json: title, licence, source
+URL and the file's original name). Only CSV resources are downloaded; files over MAX_MB are skipped and reported.
 Usage:  python scripts/descargar.py [--destino=data/raw_YYYY-MM-DD] [dataset_id ...]   (no ids = all of DATASETS)
         --destino keeps the frozen snapshot in data/raw untouched (the preregistered test reads that one)
 """
@@ -64,16 +64,18 @@ def main():
         keep["portal_url"] = f"https://datos.comunidad.madrid/dataset/{meta.get('name')}"
         keep["resources"] = [{k: r.get(k) for k in ("name", "format", "url", "size", "last_modified")} for r in meta.get("resources", [])]
         (out / "metadata.json").write_text(json.dumps(keep, ensure_ascii=False, indent=2), encoding="utf-8")
+        n_csv = 0
         for res in meta.get("resources", []):
             if (res.get("format") or "").upper() != "CSV":
                 continue
+            n_csv += 1
             size = res.get("size") or 0
             if size and size > MAX_MB * 2**20:
                 summary.append(f"{ds}: skipped {res['url']} ({size / 2**20:.0f} MB)")
                 continue
-            # Windows: keep the full path under 260 chars and drop trailing dots ("...-de-20..csv")
-            stem = pathlib.Path(urllib.parse.urlparse(res["url"]).path).stem.rstrip(".")[:80].rstrip(".")
-            fname = out / f"{stem}.csv"
+            # Short fixed name: the portal's names reach 100 characters and, inside the folder, passed the 260-character
+            # limit of Windows when cloning or unzipping the repository. The original name and URL stay in metadata.json
+            fname = out / ("datos.csv" if n_csv == 1 else f"datos_{n_csv}.csv")
             try:
                 data = get(res["url"])
                 fname.write_bytes(data)

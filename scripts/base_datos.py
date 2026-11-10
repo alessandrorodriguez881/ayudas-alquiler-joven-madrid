@@ -11,12 +11,14 @@ data/bono_alquiler_joven.sqlite, read by the app and meant for the MCP server. T
   simulacion        each scenario of the simulator (central beta): cap, expected requests, bonos and share above the cap
   fuentes           every dataset used, with its licence and address
   diccionario       every column of every table: type, unit, meaning and source (the script fails if one is missing)
-  metadatos         when and from which commit the file was built
+  metadatos         when and from which commit the data last changed
 and the view ficha_municipio (today's, the Plan's and the proposal's caps next to the 2024 rent).
 Nothing is computed here that the scripts do not already compute: values come from data/interim/ (preparar_datos.py,
 necesidad_2024.py, requisito_ingresos.py, topes_convocatorias.py, distritos_madrid.py), the raw portal files,
 scripts/reglas_bono.py and scripts/simulador.py, and verify() checks them against those files after building.
 data/DICCIONARIO_BASE_DE_DATOS.md is written from the same dictionary.
+Reproducible: if a rebuild gives the same data, the existing file (and its date and commit) stays as it is, byte for byte,
+so scripts/ficha_dcat.py and scripts/rehacer_todo.py --comprobar see no change.
 Usage:  python -P scripts/base_datos.py   (after the scripts above)"""
 import datetime
 import json
@@ -380,14 +382,31 @@ def markdown(counts, meta):
     return "\n".join(lines)
 
 
+STAMP = ("creada", "commit")  # change on every run; the data do not
+
+
+def content(path):
+    """Schema and every row of every table, without the build stamp: tells whether a rebuild changed any data."""
+    con = sqlite3.connect(path)
+    try:
+        out = {"schema": con.execute("SELECT type, name, sql FROM sqlite_master ORDER BY name").fetchall()}
+        for (t,) in con.execute("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name").fetchall():
+            rows = con.execute(f'SELECT * FROM "{t}"').fetchall()
+            out[t] = [r for r in rows if not (t == "metadatos" and r[0] in STAMP)]
+    finally:
+        con.close()
+    return out
+
+
 def main():
     m = municipalities()
     req, outside = requests(set(m["ine"]))
     meta = {"creada": datetime.date.today().isoformat(), "commit": commit(), "script": "scripts/base_datos.py",
             "licencia_datos": "Cada dato conserva la licencia de su fuente (tabla fuentes)", **outside}
-    if DB.exists():
-        DB.unlink()
-    con = sqlite3.connect(DB)
+    tmp = DB.with_name(DB.stem + ".nueva.sqlite")  # built aside, then compared with the current file
+    if tmp.exists():
+        tmp.unlink()
+    con = sqlite3.connect(tmp)
     con.execute("PRAGMA foreign_keys = ON")
     create(con)
     for table, df in [("municipios", m), ("reglas", rules()), ("topes", caps(m)), ("solicitudes", req),
@@ -400,6 +419,11 @@ def main():
     counts = verify(con, m)
     con.execute("VACUUM")
     con.close()
+    if DB.exists() and DOC.exists() and content(DB) == content(tmp):
+        tmp.unlink()
+        print("ok", DB.relative_to(ROOT), "same data: the existing file and its dictionary stay as they are", counts)
+        return
+    tmp.replace(DB)
     DOC.write_text(markdown(counts, meta), encoding="utf-8")
     print("ok", DB.relative_to(ROOT), f"{DB.stat().st_size / 1e6:.2f} MB", counts)
 

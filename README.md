@@ -3,6 +3,12 @@
 Proyecto para **DataMad 2026** (URJC, UCM y Comunidad de Madrid), sobre el **Bono Alquiler Joven** en la Comunidad de Madrid.
 **En desarrollo:** el periodo de desarrollo va del 7 al 26 de noviembre de 2026.
 
+## En 30 segundos
+- **El hallazgo: −7,6 % de solicitudes por cada 10 puntos de alquiler por encima del tope.** Donde más pisos pasan del tope del Bono, menos jóvenes lo piden. Es un contraste registrado antes de ver los datos; no decimos que el tope sea la única causa (abajo, lo que no salió).
+- **Lo que viene: 58 % del alquiler, fuera.** El Plan Estatal 2026-2030 pone el tope en 500 € en los municipios de 10.000 habitantes o menos. Allí quedaría por encima el 58 % del alquiler; hoy, el 26 %.
+- **La propuesta: +41 % de ayudas donde más falta.** Topes según el alquiler de cada municipio, con la base del estudio que permite el art. 135 del Plan, y cupos por necesidad en vez de por orden de llegada. Frente al Plan tal cual, el tercio de municipios con más necesidad recibe un 41 % más de ayudas, y cuesta 0,2 M€ más.
+- **Para usarlo hoy:** una app («¿Puedo pedirla?», «¿Dónde me llega la ayuda?», la ficha de cada municipio y un simulador para la Consejería), la [base del estudio del art. 135](data/ESTUDIO_ART135.md), una base SQLite con su diccionario, una ficha DCAT-AP-ES y un servidor MCP. **Todo se rehace con un comando:** `python scripts/rehacer_todo.py`.
+
 ## La pregunta
 El Bono Alquiler Joven (RD 42/2022) da 250 € al mes, pero solo si el alquiler no pasa de **600 €**, o de **900 €** en los 29 municipios del Anexo II del Acuerdo del Consejo de Gobierno de 14-sep-2022.
 
@@ -27,10 +33,18 @@ El nuevo Plan Estatal de Vivienda 2026-2030 (RD 326/2026, art. 133.1.e) pone el 
 - Las notas internas de planificación (`PLAN.md`, `IDEAS.md`) no están en el repositorio.
 
 ## Cómo repetirlo
-Python 3.11 o posterior.
+Python 3.12 (probado con 3.12.10). `requirements.txt` fija las versiones exactas con las que se ha probado todo; NumPy 1.26 no tiene versión para Python 3.13 o posterior.
+
+Todo, en orden y con un comando. Si un paso falla, se para y enseña el error; con `--comprobar`, al final dice si algún resultado del repositorio ha cambiado:
 
 ```bash
 pip install -r requirements.txt
+python scripts/rehacer_todo.py --comprobar
+```
+
+Son estos pasos, que también se pueden lanzar uno a uno:
+
+```bash
 python scripts/preparar_datos.py          # data/interim/municipios.csv (159 municipios)
 python scripts/potencia_umbral.py         # tabla de potencia del preregistro, con las simulaciones guardadas
 python scripts/contraste.py               # contraste real (a partir del 7-nov-2026)
@@ -54,13 +68,13 @@ streamlit run app/streamlit_app.py        # la app, en http://localhost:8501
 python app/probar_app.py                  # prueba todas las páginas de la app sin navegador
 ```
 
-Para publicar la app en Streamlit Community Cloud, el fichero principal es `app/streamlit_app.py`. Usa `app/requirements.txt`, que solo tiene lo que necesita la app (Streamlit, pandas, NumPy y Altair, en las versiones con las que se ha probado), y el aspecto de `.streamlit/config.toml`.
+Para publicar la app en Streamlit Community Cloud, el fichero principal es `app/streamlit_app.py`, y en «Advanced settings» hay que elegir Python 3.12. Usa `app/requirements.txt`, que solo tiene lo que necesita la app (Streamlit, pandas, NumPy, Altair y PyArrow, en las versiones con las que se ha probado), y el aspecto de `.streamlit/config.toml`. `python app/probar_app.py` prueba todas sus páginas en un entorno instalado solo con ese fichero.
 
 Dos pasos que no hace falta repetir, porque su resultado ya está en el repositorio:
 - `scripts/codigos_municipios.py` y `scripts/topes_convocatorias.py` sacan los códigos INE y los topes de 600 / 900 € de cada convocatoria (29 municipios en 2022, 55 en 2024) de los PDF oficiales, que no se suben: sus enlaces y huellas están en [docs_oficiales/FUENTES.md](docs_oficiales/FUENTES.md). Con los PDF en `docs_oficiales/`, regeneran `data/interim/topes_900_convocatorias.csv` idéntico.
 - Las simulaciones de potencia con datos inventados tardan unos 13 minutos. Las del preregistro se hicieron con `python scripts/contraste.py --sintetico --sims 200 --betas 0 -0.5 --sin-ensayo` y `--sims 100 --betas -1.1 --sin-ensayo` (cada una escribe su `resultados/potencia_sintetica_<sims>x199.json`).
 
-Los CSV del portal que usamos están en `data/raw/`, tal y como se descargaron. El portal cambia sus ficheros: entre el 21-oct y el 5-nov pasó de Latin-1 a UTF-8 y añadió años. `scripts/verificar_descargas.py` lo comprueba (resultado en [data/VERIFICACION.md](data/VERIFICACION.md)) y `scripts/descargar.py` los vuelve a bajar.
+Los CSV del portal que usamos están en `data/raw/`, tal y como se descargaron. Cada uno se llama `datos.csv` dentro de la carpeta de su conjunto, para que las rutas no pasen del límite de Windows al clonar o descomprimir el repositorio; el nombre y la dirección originales están en su `metadata.json`. El portal cambia sus ficheros: entre el 21-oct y el 5-nov pasó de Latin-1 a UTF-8 y añadió años. `scripts/verificar_descargas.py` lo comprueba (resultado en [data/VERIFICACION.md](data/VERIFICACION.md)) y `scripts/descargar.py` los vuelve a bajar.
 
 ## Para quién es y cuánto cuesta mantenerlo
 - **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado de la oferta de alquiler (art. 135). Este proyecto le da la base de ese estudio, repetible con un comando ([data/ESTUDIO_ART135.md](data/ESTUDIO_ART135.md)): de los 63 municipios pequeños donde proponemos subir el tope de 500 €, en 46 se puede justificar con los datos, y el simulador le deja probar topes y cupos antes de la convocatoria, con su coste.

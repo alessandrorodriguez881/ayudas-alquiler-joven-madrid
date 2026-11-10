@@ -1,13 +1,18 @@
-pandas>=2.2
-numpy>=1.26
-statsmodels>=0.14
-openpyxl>=3.1
-pypdf>=4
-matplotlib>=3.8
-pyshp>=2.3
-pyproj>=3.6
-streamlit>=1.57
-altair>=5.4
-mcp>=1.2
-rdflib>=7
-pyshacl>=0.26
+# Exact versions everything was tested with, on Python 3.12 (3.12.10): with them, `python scripts/rehacer_todo.py
+# --comprobar` gives the results in the repository. NumPy 1.26 has no wheels for Python 3.13 or later.
+pandas==2.2.1
+numpy==1.26.4
+scipy==1.16.2
+statsmodels==0.14.6
+openpyxl==3.1.2
+pypdf==6.19.0
+matplotlib==3.8.4
+pillow==10.3.0
+pyshp==3.1.6
+pyproj==3.8.0
+streamlit==1.66.1
+altair==6.3.0
+pyarrow==17.0.0
+mcp==2.3.0
+rdflib==7.6.0
+pyshacl==0.40.2

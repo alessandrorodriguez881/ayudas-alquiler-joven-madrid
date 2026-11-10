@@ -16,3 +16,6 @@ __pycache__/
 *.pyc
 .env
 .venv/
+
+# Temporary copy that scripts/base_datos.py builds before comparing it with the current database
+data/*.nueva.sqlite

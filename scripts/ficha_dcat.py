@@ -10,7 +10,6 @@ Choices the norm leaves to the publisher, said here:
   - licence CC BY 4.0, as the portal's data; the SERPAVI columns keep the MIVAU legal notice (said in each description)
   - no dct:format for the SQLite file (the EU file-type list has no SQLite entry): its IANA media type says what it is
 Usage:  python -P scripts/ficha_dcat.py   (needs rdflib and pyshacl; downloads the shapes once, at a fixed commit)"""
-import datetime
 import hashlib
 import json
 import pathlib
@@ -94,7 +93,6 @@ def build():
                   ("xsd", XSD)]:
         g.bind(p, ns)
     cat = URIRef(REPO + "#catalogo")
-    today = datetime.date.today().isoformat()
     g.add((TEAM, RDF.type, FOAF.Agent))
     g.add((TEAM, FOAF.name, Literal("Equipo del proyecto «¿Llegan las ayudas al alquiler a quien más las necesita?» "
                                     "(DataMad 2026)", lang="es")))
@@ -108,10 +106,10 @@ def build():
     g.add((cat, FOAF.homepage, URIRef(REPO)))
     g.add((cat, DCAT.themeTaxonomy, URIRef(SECTOR)))
     g.add((cat, DCT.issued, lit_date("2026-11-08")))
-    g.add((cat, DCT.modified, lit_date(today)))
     g.add((cat, DCT.language, URIRef(EU + "language/SPA")))
     g.add((cat, DCT.license, LICENCE))
     g.add((cat, DCT.spatial, MADRID))
+    modified = []
     for slug, title, desc, (start, end), files in DATASETS:
         ds = URIRef(f"{REPO}#{slug}")
         g.add((cat, DCAT.dataset, ds))
@@ -166,7 +164,10 @@ def build():
             if path.endswith(".sqlite"):
                 g.add((dist, DCT.conformsTo, URIRef(BLOB + "data/DICCIONARIO_BASE_DE_DATOS.md")))
         g.add((ds, DCT.issued, lit_date(min(issued))))
-        g.add((ds, DCT.modified, lit_date(max(dates(p)[1] for p, *_ in files))))
+        modified.append(max(dates(p)[1] for p, *_ in files))
+        g.add((ds, DCT.modified, lit_date(modified[-1])))
+    # when the data last changed (git), not the day the script ran: a rebuild with the same data gives the same file
+    g.add((cat, DCT.modified, lit_date(max(modified))))
     return g
 
 

@@ -1,6 +1,9 @@
 # Only what the app needs (Streamlit Community Cloud reads this file before the one at the root, which also has
-# the analysis libraries). Same versions as the ones the app was tested with.
+# the analysis libraries). Same versions as the ones the app was tested with, on Python 3.12.
+# pyarrow is pinned too: Streamlit needs it for tables, and recent versions need NumPy 2 (a clean install on
+# 10-nov-2026 brought pyarrow 26.0.1, and the home page failed with "pyarrow requires NumPy 2.0 or newer").
 streamlit==1.66.1
 pandas==2.2.1
 numpy==1.26.4
 altair==6.3.0
+pyarrow==17.0.0
