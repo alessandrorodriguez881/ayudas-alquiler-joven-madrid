@@ -51,6 +51,45 @@
      "municipalities_better": 78,
      "of": 132
     }
+   },
+   "controles_habitaciones": {
+    "deviance": 1831.7779702935968,
+    "deviance_without_madrid": 1036.1529972902845,
+    "median_abs_pct_error_10_or_more": 16.45792840527276,
+    "gain_vs_controls": {
+     "deviance": 3930.473088164824,
+     "se": 3440.619924998954,
+     "deviance_without_madrid": 490.0933837568839,
+     "se_without_madrid": 165.47704893300403,
+     "municipalities_better": 83,
+     "of": 132
+    }
+   },
+   "controles_1350_igual": {
+    "deviance": 2367.5744236937207,
+    "deviance_without_madrid": 1079.448427229421,
+    "median_abs_pct_error_10_or_more": 20.62047085533245,
+    "gain_vs_controls": {
+     "deviance": 3394.6766347647003,
+     "se": 2948.864931495503,
+     "deviance_without_madrid": 446.7979538177474,
+     "se_without_madrid": 160.97836820909794,
+     "municipalities_better": 68,
+     "of": 132
+    }
+   },
+   "controles_habitaciones_y_1350": {
+    "deviance": 1776.5725284036002,
+    "deviance_without_madrid": 1030.3701363629302,
+    "median_abs_pct_error_10_or_more": 17.491457278821223,
+    "gain_vs_controls": {
+     "deviance": 3985.678530054821,
+     "se": 3490.2296246438914,
+     "deviance_without_madrid": 495.8762446842381,
+     "se_without_madrid": 171.43577971434902,
+     "municipalities_better": 83,
+     "of": 132
+    }
    }
   },
   "10_fold_x20": {
@@ -78,6 +117,21 @@
     "deviance": 1692.288048390044,
     "deviance_without_madrid": 1192.393489263483,
     "median_abs_pct_error_10_or_more": 18.594826929231637
+   },
+   "controles_habitaciones": {
+    "deviance": 2222.9300436542635,
+    "deviance_without_madrid": 1050.5589028058425,
+    "median_abs_pct_error_10_or_more": 16.182539191206025
+   },
+   "controles_1350_igual": {
+    "deviance": 2693.7389470737344,
+    "deviance_without_madrid": 1084.0223927011389,
+    "median_abs_pct_error_10_or_more": 20.07635358522208
+   },
+   "controles_habitaciones_y_1350": {
+    "deviance": 2152.9481023210838,
+    "deviance_without_madrid": 1044.2259823572615,
+    "median_abs_pct_error_10_or_more": 17.57578545584577
    }
   },
   "10_fold_x20_share_of_repeats_better_than_controls": {
@@ -85,7 +139,10 @@
    "controles": 0.0,
    "controles_tope_real": 1.0,
    "controles_900_igual": 1.0,
-   "controles_ambas": 1.0
+   "controles_ambas": 1.0,
+   "controles_habitaciones": 1.0,
+   "controles_1350_igual": 1.0,
+   "controles_habitaciones_y_1350": 1.0
   }
  },
  "B_bono_2022_to_ayudas_jovenes_2023": {
@@ -147,6 +204,51 @@
     "deviance_without_madrid": 123.96627945067763,
     "se_without_madrid": 51.17862711130683,
     "municipalities_better": 77,
+    "of": 132
+   }
+  },
+  "controles_habitaciones": {
+   "deviance": 356.9917018128199,
+   "deviance_without_madrid": 356.8935542754292,
+   "median_abs_pct_error_10_or_more": 22.658594612947912,
+   "spearman_rate": 0.44027572793193126,
+   "refit_in_sample_deviance": 302.478107829735,
+   "gain_vs_controls": {
+    "deviance": 162.1693392971743,
+    "se": 56.96206072083112,
+    "deviance_without_madrid": 144.44654293421686,
+    "se_without_madrid": 54.48504316615295,
+    "municipalities_better": 72,
+    "of": 132
+   }
+  },
+  "controles_1350_igual": {
+   "deviance": 364.82293981275325,
+   "deviance_without_madrid": 364.72332958275194,
+   "median_abs_pct_error_10_or_more": 19.331440506359556,
+   "spearman_rate": 0.3773918680069816,
+   "refit_in_sample_deviance": 315.6783850746898,
+   "gain_vs_controls": {
+    "deviance": 154.33810129724094,
+    "se": 54.02797885956658,
+    "deviance_without_madrid": 136.61676762689413,
+    "se_without_madrid": 51.39071363706601,
+    "municipalities_better": 70,
+    "of": 132
+   }
+  },
+  "controles_habitaciones_y_1350": {
+   "deviance": 344.00221754124533,
+   "deviance_without_madrid": 343.86863627507574,
+   "median_abs_pct_error_10_or_more": 21.72180464439729,
+   "spearman_rate": 0.44728369605733226,
+   "refit_in_sample_deviance": 289.4860105718331,
+   "gain_vs_controls": {
+    "deviance": 175.15882356874874,
+    "se": 58.17248947812879,
+    "deviance_without_madrid": 157.47146093457027,
+    "se_without_madrid": 55.78938160622629,
+    "municipalities_better": 73,
     "of": 132
    }
   }

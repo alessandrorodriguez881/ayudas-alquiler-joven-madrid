@@ -23,6 +23,15 @@ Written before running:
   - A: both shares together do not beat the better single share by much out of sample (one more parameter)
   - B: the Bono's slopes with the real cap predict the Ayudas 2023 better than the slopes without it, by less than in A
     (another programme, with other conditions, and the 2023 SERPAVI change matched the portal's rents poorly)
+Added 12-Nov-2026, written before running them: three models with the room route of habitaciones.py, which fitted best
+in-sample but was found after seeing the data (deviance 805, against 1,023 with the real cap and 850 with a uniform
+1,350 EUR). Room route = share of the rents above 1.5 x the cap: the most three young people sharing a flat on room
+contracts can pay (3 x 300 = 900 EUR outside Annex II, 3 x 450 = 1,350 EUR in it). Models: + room route; + uniform
+1,350 EUR; + both. The earlier models and their numbers do not change (same folds, same fits).
+  - A: + room route predicts held-out municipalities better than + real cap, with Madrid and without it, and about as
+    well as + uniform 1,350 EUR; both together do not beat the room route alone by much (one more parameter)
+  - B: + room route also predicts the Ayudas 2023 better than + real cap; against the uniform 1,350 EUR, no guess.
+    The Ayudas 5.1 have the same flat caps; RD 42/2022 sets the same room caps (300 / 450 EUR), not checked in their texts
 Usage:  python -P scripts/validacion_fuera_muestra.py   -> resultados/validacion_fuera_muestra.json"""
 import json
 import pathlib
@@ -35,11 +44,22 @@ from scipy.stats import spearmanr
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))  # python -P drops the script folder
 from comun import RAW, ROOT, leer_csv  # noqa: E402
-from contraste import CONTROLS, MADRID, load  # noqa: E402
+from contraste import CONTROLS, MADRID, load, shares  # noqa: E402
 
 MODELS = {"solo_constante": None, "controles": [], "controles_tope_real": ["share_above_cap"],
-          "controles_900_igual": ["share_above_900"], "controles_ambas": ["share_above_cap", "share_above_900"]}
+          "controles_900_igual": ["share_above_900"], "controles_ambas": ["share_above_cap", "share_above_900"],
+          # added 12-Nov (docstring): the room route of habitaciones.py, a uniform 1,350 EUR, and both
+          "controles_habitaciones": ["share_above_rooms3"], "controles_1350_igual": ["share_above_1350"],
+          "controles_habitaciones_y_1350": ["share_above_rooms3", "share_above_1350"]}
 BASE = "controles"
+
+
+def with_room_shares(m):
+    """The room-route and uniform 1,350 EUR shares of 2022 and 2023, as habitaciones.py computes them for 2022."""
+    for year in (2022, 2023):
+        m[f"share_above_rooms3_{year}"] = shares(m, 1.5 * m["cap"].to_numpy(float), year)
+        m[f"share_above_1350_{year}"] = shares(m, np.full(len(m), 1350.0), year)
+    return m
 
 
 def design(m, shares, year):
@@ -115,7 +135,8 @@ def ayudas_2023(m):
 
 
 def part_b(m):
-    t = m.dropna(subset=["serpavi_med_2023", "share_above_cap_2023", "share_above_900_2023"]).reset_index(drop=True)
+    t = m.dropna(subset=["serpavi_med_2023", "share_above_cap_2023", "share_above_900_2023", "share_above_rooms3_2023",
+                         "share_above_1350_2023"]).reset_index(drop=True)
     y_bono, off = t["bono_solicitudes"].to_numpy(float), np.log(t["jovenes_20_34_2022"].to_numpy(float))
     y = ayudas_2023(t)
     madrid = (t["ine"] == MADRID).to_numpy()
@@ -139,7 +160,7 @@ def part_b(m):
 
 
 def main():
-    m = load()
+    m = with_room_shares(load())
     a = part_a(m)
     b = part_b(m)
     out = {"note": "EXPLORATORIO: no preregistrado, hecho tras el contraste real; lo esperado está en el docstring",

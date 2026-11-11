@@ -1,0 +1,26 @@
+{
+  "name": "municipio_comunidad_madrid",
+  "title": "Municipios de la Comunidad de Madrid",
+  "notes": "Municipios de la Comunidad de Madrid con información sobre zonas estadísticas a las que pertenecen, codigos y denominación, así como superficie y densidad de población. Las zonas estadísticas se corresponden con el nivel NUTS4 europeo y los municipios con el nivel NUTS5. Los datos proceden de la última explotación de los padrones municipales a 1 de enero. La explotación completa y de años anteriores se puede consultar en www.madrid.org/iestadis.",
+  "license_title": "Creative Commons Attribution",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+  "metadata_modified": "2025-02-07T09:24:54.568094",
+  "url": "",
+  "portal_url": "https://datos.comunidad.madrid/dataset/municipio_comunidad_madrid",
+  "resources": [
+    {
+      "name": "Municipios de la Comunidad de Madrid",
+      "format": "CSV",
+      "url": "https://datos.comunidad.madrid/dataset/0781c37e-bc64-4143-8029-18865bedbc3d/resource/48010e29-caa0-46c5-ab6e-f498b2dc042f/download/municipio_comunidad_madrid.csv",
+      "size": 10778,
+      "last_modified": "2024-06-03T11:27:08.426814"
+    },
+    {
+      "name": "Municipios de la Comunidad de Madrid",
+      "format": "JSON",
+      "url": "https://datos.comunidad.madrid/dataset/0781c37e-bc64-4143-8029-18865bedbc3d/resource/17feaf92-8749-44e4-a81c-6abee0df52e4/download/municipio_comunidad_madrid.json",
+      "size": 49824,
+      "last_modified": "2024-06-03T11:27:12.957451"
+    }
+  ]
+}

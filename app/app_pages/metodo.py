@@ -11,6 +11,13 @@ income = result("requisito_ingresos")["h1_with_income_rule_control"]["h1_plus_el
 rooms = result("habitaciones")["h1_with_room_contracts"]
 oos = result("validacion_fuera_muestra")
 cv, ay = oos["A_bono_2022_cross_validation"]["leave_one_out"], oos["B_bono_2022_to_ayudas_jovenes_2023"]
+geo = result("espacial")
+less = lambda new, old: es(100 * (1 - new / old))  # noqa: E731  (% less deviance)
+room_cv = less(cv["controles_habitaciones"]["deviance_without_madrid"], cv["controles_tope_real"]["deviance_without_madrid"])
+room_ay = less(ay["controles_habitaciones"]["deviance"], ay["controles_tope_real"]["deviance"])
+mor, h1_geo = geo["moran_pearson_residuals"], geo["beta_share_above_real_cap"]["M1"]
+zone_out = geo["spatial_cv"]["leave_one_zone_out"]
+ci_pct = lambda block: f"del {es(-block['pct_per_10_points_ci95'][1], 1)} % al {es(-block['pct_per_10_points_ci95'][0], 1)} %"  # noqa: E731
 
 st.title("Método y datos")
 st.subheader("Lo que probamos, con la regla escrita antes de mirar")
@@ -23,8 +30,10 @@ st.markdown(
     f"del tope es un {es(-pct10(cap_only['beta']), 1)} % menos por cada 10 puntos: es la que usa el simulador.\n"
     f"- **Después, como exploratorio:** con el límite de ingresos (3 × IPREM) como control, el efecto queda en un "
     f"{es(-income['pct_per_10_points'], 1)} % menos. Contando los contratos de habitación de tres jóvenes que comparten "
-    f"piso, el efecto sigue siendo negativo y el modelo ajusta mejor (desviación {es(rooms['mix_flat_and_3_sharers_rooms']['1.0']['deviance'])}, "
-    f"frente a {es(rooms['real_cap']['deviance'])} con el tope del piso): es una pista, no una prueba.\n"
+    f"piso (hasta 900 €, o 1.350 € donde el tope es de 900 €), el efecto sigue siendo negativo y el modelo ajusta mejor "
+    f"(desviación {es(rooms['mix_flat_and_3_sharers_rooms']['1.0']['deviance'])}, frente a "
+    f"{es(rooms['real_cap']['deviance'])} con el tope del piso). Lo vimos después de mirar los datos, así que lo "
+    f"comprobamos con municipios que el modelo no ha visto (abajo).\n"
     f"- **Con municipios que el modelo no ha visto** (exploratorio): saber qué parte del alquiler pasa del tope baja el "
     f"error típico de las solicitudes del {es(cv['controles']['median_abs_pct_error_10_or_more'])} % al "
     f"{es(cv['controles_tope_real']['median_abs_pct_error_10_or_more'])} % (dejando fuera un municipio cada vez). Y el "
@@ -32,7 +41,20 @@ st.markdown(
     f"2023, otro programa y otro año, con un {es(100 * (1 - ay['controles_ambas']['deviance'] / ay['controles']['deviance']))} % "
     f"menos de desviación que sin esas dos partes (correlación de {es(ay['controles']['spearman_rate'], 2)} a "
     f"{es(ay['controles_ambas']['spearman_rate'], 2)}). El umbral de 900 € igual para todos también predice bien: el "
-    f"alquiler caro frena por sí solo."
+    f"alquiler caro frena por sí solo. La medida de las habitaciones es la que mejor predice: frente al tope del piso, "
+    f"la desviación baja un {room_cv} % en los municipios que el modelo no ha visto (sin contar Madrid capital: cuando la "
+    f"dejamos fuera, esta medida la predice peor) y un {room_ay} % en las Ayudas de 2023. También gana a un umbral de "
+    f"1.350 € igual para todos.\n"
+    f"- **Los vecinos y las zonas** (exploratorio): los municipios vecinos piden de forma parecida (I de Moran de "
+    f"{es(mor['requests_per_young_log']['I'], 2)}; p = {es(mor['requests_per_young_log']['p_one_sided'], 3)}), pero lo que el "
+    f"modelo no explica ya no se parece entre vecinos ({es(mor['M1']['I'], 2)}; p = {es(mor['M1']['p_one_sided'], 2)}). "
+    f"Si dejamos que los errores de los municipios a menos de 30 km se parezcan (errores de Conley), el intervalo va "
+    f"{ci_pct(h1_geo['conley_30km'])} menos, casi el mismo que el registrado ({ci_pct(h1_geo['hc1'])}). Comparando solo "
+    f"municipios de la misma zona estadística (las 11 "
+    f"del portal), el efecto es algo mayor: un {es(-h1_geo['zone_fixed_effects']['pct_per_10_points'], 1)} % menos. Y "
+    f"dejando fuera una zona entera cada vez, saber qué parte del alquiler pasa del tope sigue mejorando la predicción "
+    f"(sin Madrid capital, la desviación baja de {es(zone_out['controles']['deviance_without_madrid'])} a "
+    f"{es(zone_out['controles_tope_real']['deviance_without_madrid'])})."
 )
 st.image(str(RES / "figuras" / "contraste_todas_las_pruebas.png"),
          alt="Todas las estimaciones del efecto del tope, también las que no salieron, con sus intervalos")

@@ -1,0 +1,572 @@
+{
+ "note": "EXPLORATORIO: no preregistrado, hecho después del contraste real; lo esperado está en el docstring",
+ "geography": {
+  "municipalities_in_map": 179,
+  "touching_pairs": 471,
+  "in_model": 132,
+  "touching_pairs_in_model": 329,
+  "mean_neighbours_in_model": 4.98,
+  "without_neighbours_in_model": [
+   "Lozoya",
+   "Montejo de la Sierra"
+  ],
+  "median_km_to_touching_neighbours": 7.6,
+  "zones_in_model": {
+   "Sudeste Comunidad": 23,
+   "Sudoeste Comunidad": 17,
+   "Sierra Central": 17,
+   "Sierra Norte": 13,
+   "Sur Metropolitano": 12,
+   "Oeste Metropolitano": 11,
+   "Nordeste Comunidad": 11,
+   "Este Metropolitano": 10,
+   "Sierra Sur": 10,
+   "Norte Metropolitano": 7,
+   "Municipio de Madrid": 1
+  }
+ },
+ "moran_pearson_residuals": {
+  "requests_per_young_log": {
+   "I": 0.1508,
+   "expected_without_autocorrelation": -0.0076,
+   "p_one_sided": 0.0047,
+   "z_permutation": 2.75
+  },
+  "M0": {
+   "I": 0.0166,
+   "expected_without_autocorrelation": -0.0076,
+   "p_one_sided": 0.3217,
+   "z_permutation": 0.44
+  },
+  "M1": {
+   "I": 0.0314,
+   "expected_without_autocorrelation": -0.0076,
+   "p_one_sided": 0.239,
+   "z_permutation": 0.68
+  },
+  "M3": {
+   "I": -0.0337,
+   "expected_without_autocorrelation": -0.0076,
+   "p_one_sided": 0.6671,
+   "z_permutation": -0.45
+  },
+  "MR": {
+   "I": 0.0376,
+   "expected_without_autocorrelation": -0.0076,
+   "p_one_sided": 0.2115,
+   "z_permutation": 0.78
+  }
+ },
+ "spatial_filter": {
+  "candidates": 30,
+  "steps": [
+   {
+    "eigenvectors": 0,
+    "residual_moran": {
+     "I": 0.0314,
+     "expected_without_autocorrelation": -0.0076,
+     "p_one_sided": 0.2518,
+     "z_permutation": 0.66
+    }
+   }
+  ]
+ },
+ "beta_share_above_real_cap": {
+  "M1": {
+   "beta": -0.7855,
+   "pct_per_10_points": -7.55,
+   "hc1": {
+    "se": 0.1974,
+    "ci95": [
+     -1.1725,
+     -0.3986
+    ],
+    "pct_per_10_points_ci95": [
+     -11.06,
+     -3.91
+    ]
+   },
+   "conley_15km": {
+    "se": 0.1941,
+    "ci95": [
+     -1.166,
+     -0.4051
+    ],
+    "pct_per_10_points_ci95": [
+     -11.01,
+     -3.97
+    ]
+   },
+   "conley_30km": {
+    "se": 0.1882,
+    "ci95": [
+     -1.1544,
+     -0.4167
+    ],
+    "pct_per_10_points_ci95": [
+     -10.9,
+     -4.08
+    ]
+   },
+   "conley_50km": {
+    "se": 0.1627,
+    "ci95": [
+     -1.1045,
+     -0.4666
+    ],
+    "pct_per_10_points_ci95": [
+     -10.46,
+     -4.56
+    ]
+   },
+   "zone_fixed_effects": {
+    "beta": -0.8569,
+    "pct_per_10_points": -8.21,
+    "hc1": {
+     "se": 0.2422,
+     "ci95": [
+      -1.3316,
+      -0.3822
+     ],
+     "pct_per_10_points_ci95": [
+      -12.47,
+      -3.75
+     ]
+    },
+    "conley_15km": {
+     "se": 0.2176,
+     "ci95": [
+      -1.2834,
+      -0.4304
+     ],
+     "pct_per_10_points_ci95": [
+      -12.04,
+      -4.21
+     ]
+    },
+    "conley_30km": {
+     "se": 0.2014,
+     "ci95": [
+      -1.2517,
+      -0.4621
+     ],
+     "pct_per_10_points_ci95": [
+      -11.77,
+      -4.52
+     ]
+    },
+    "conley_50km": {
+     "se": 0.1743,
+     "ci95": [
+      -1.1986,
+      -0.5152
+     ],
+     "pct_per_10_points_ci95": [
+      -11.3,
+      -5.02
+     ]
+    },
+    "residual_moran": {
+     "I": -0.0044,
+     "expected_without_autocorrelation": -0.0076,
+     "p_one_sided": 0.4574,
+     "z_permutation": 0.07
+    }
+   },
+   "spatial_filter": {
+    "eigenvectors": 0,
+    "beta": -0.7855,
+    "pct_per_10_points": -7.55,
+    "hc1": {
+     "se": 0.1974,
+     "ci95": [
+      -1.1725,
+      -0.3986
+     ],
+     "pct_per_10_points_ci95": [
+      -11.06,
+      -3.91
+     ]
+    },
+    "conley_15km": {
+     "se": 0.1941,
+     "ci95": [
+      -1.166,
+      -0.4051
+     ],
+     "pct_per_10_points_ci95": [
+      -11.01,
+      -3.97
+     ]
+    },
+    "conley_30km": {
+     "se": 0.1882,
+     "ci95": [
+      -1.1544,
+      -0.4167
+     ],
+     "pct_per_10_points_ci95": [
+      -10.9,
+      -4.08
+     ]
+    },
+    "conley_50km": {
+     "se": 0.1627,
+     "ci95": [
+      -1.1045,
+      -0.4666
+     ],
+     "pct_per_10_points_ci95": [
+      -10.46,
+      -4.56
+     ]
+    },
+    "residual_moran": {
+     "I": 0.0314,
+     "expected_without_autocorrelation": -0.0076,
+     "p_one_sided": 0.2464,
+     "z_permutation": 0.68
+    }
+   }
+  },
+  "M3": {
+   "beta": -0.5446,
+   "pct_per_10_points": -5.3,
+   "hc1": {
+    "se": 0.1759,
+    "ci95": [
+     -0.8894,
+     -0.1999
+    ],
+    "pct_per_10_points_ci95": [
+     -8.51,
+     -1.98
+    ]
+   },
+   "conley_15km": {
+    "se": 0.1645,
+    "ci95": [
+     -0.867,
+     -0.2222
+    ],
+    "pct_per_10_points_ci95": [
+     -8.3,
+     -2.2
+    ]
+   },
+   "conley_30km": {
+    "se": 0.1726,
+    "ci95": [
+     -0.883,
+     -0.2063
+    ],
+    "pct_per_10_points_ci95": [
+     -8.45,
+     -2.04
+    ]
+   },
+   "conley_50km": {
+    "se": 0.1414,
+    "ci95": [
+     -0.8217,
+     -0.2675
+    ],
+    "pct_per_10_points_ci95": [
+     -7.89,
+     -2.64
+    ]
+   },
+   "zone_fixed_effects": {
+    "beta": -0.6372,
+    "pct_per_10_points": -6.17,
+    "hc1": {
+     "se": 0.1897,
+     "ci95": [
+      -1.0089,
+      -0.2654
+     ],
+     "pct_per_10_points_ci95": [
+      -9.6,
+      -2.62
+     ]
+    },
+    "conley_15km": {
+     "se": 0.168,
+     "ci95": [
+      -0.9663,
+      -0.308
+     ],
+     "pct_per_10_points_ci95": [
+      -9.21,
+      -3.03
+     ]
+    },
+    "conley_30km": {
+     "se": 0.1667,
+     "ci95": [
+      -0.9639,
+      -0.3104
+     ],
+     "pct_per_10_points_ci95": [
+      -9.19,
+      -3.06
+     ]
+    },
+    "conley_50km": {
+     "se": 0.1575,
+     "ci95": [
+      -0.9458,
+      -0.3285
+     ],
+     "pct_per_10_points_ci95": [
+      -9.02,
+      -3.23
+     ]
+    },
+    "residual_moran": {
+     "I": -0.0536,
+     "expected_without_autocorrelation": -0.0076,
+     "p_one_sided": 0.7839,
+     "z_permutation": -0.79
+    }
+   },
+   "spatial_filter": {
+    "eigenvectors": 0,
+    "beta": -0.5446,
+    "pct_per_10_points": -5.3,
+    "hc1": {
+     "se": 0.1759,
+     "ci95": [
+      -0.8894,
+      -0.1999
+     ],
+     "pct_per_10_points_ci95": [
+      -8.51,
+      -1.98
+     ]
+    },
+    "conley_15km": {
+     "se": 0.1645,
+     "ci95": [
+      -0.867,
+      -0.2222
+     ],
+     "pct_per_10_points_ci95": [
+      -8.3,
+      -2.2
+     ]
+    },
+    "conley_30km": {
+     "se": 0.1726,
+     "ci95": [
+      -0.883,
+      -0.2063
+     ],
+     "pct_per_10_points_ci95": [
+      -8.45,
+      -2.04
+     ]
+    },
+    "conley_50km": {
+     "se": 0.1414,
+     "ci95": [
+      -0.8217,
+      -0.2675
+     ],
+     "pct_per_10_points_ci95": [
+      -7.89,
+      -2.64
+     ]
+    },
+    "residual_moran": {
+     "I": -0.0337,
+     "expected_without_autocorrelation": -0.0076,
+     "p_one_sided": 0.6704,
+     "z_permutation": -0.47
+    }
+   }
+  }
+ },
+ "spatial_cv": {
+  "leave_one_zone_out": {
+   "solo_constante": {
+    "deviance": 10016.03227659945,
+    "deviance_without_madrid": 3944.8633679775617,
+    "median_abs_pct_error_10_or_more": 52.71889357042541
+   },
+   "controles": {
+    "deviance": 6242.266946014981,
+    "deviance_without_madrid": 2006.2622686037282,
+    "median_abs_pct_error_10_or_more": 21.100644247293744
+   },
+   "controles_tope_real": {
+    "deviance": 1996.512508609311,
+    "deviance_without_madrid": 1775.9140531403077,
+    "median_abs_pct_error_10_or_more": 15.934126844551933,
+    "gain_vs_controls": {
+     "deviance": 4245.75443740567,
+     "se": 4015.113895103148,
+     "deviance_without_madrid": 230.34821546342008,
+     "se_without_madrid": 108.49564111098034,
+     "municipalities_better": 72,
+     "of": 132
+    }
+   },
+   "controles_900_igual": {
+    "deviance": 1663.4858879471938,
+    "deviance_without_madrid": 1406.3369727754257,
+    "median_abs_pct_error_10_or_more": 22.777326717689807,
+    "gain_vs_controls": {
+     "deviance": 4578.781058067788,
+     "se": 3981.1428089166857,
+     "deviance_without_madrid": 599.9252958283023,
+     "se_without_madrid": 233.73081701525305,
+     "municipalities_better": 70,
+     "of": 132
+    }
+   },
+   "controles_ambas": {
+    "deviance": 1876.1685582888827,
+    "deviance_without_madrid": 1374.4576049474413,
+    "median_abs_pct_error_10_or_more": 18.260332041796048,
+    "gain_vs_controls": {
+     "deviance": 4366.098387726098,
+     "se": 3736.3603869975123,
+     "deviance_without_madrid": 631.8046636562867,
+     "se_without_madrid": 226.80295994897523,
+     "municipalities_better": 81,
+     "of": 132
+    }
+   },
+   "controles_habitaciones": {
+    "deviance": 1817.2872717879986,
+    "deviance_without_madrid": 1021.6622987846861,
+    "median_abs_pct_error_10_or_more": 16.898276165996794,
+    "gain_vs_controls": {
+     "deviance": 4424.979674226982,
+     "se": 3452.515091119463,
+     "deviance_without_madrid": 984.599969819042,
+     "se_without_madrid": 367.8523269934132,
+     "municipalities_better": 80,
+     "of": 132
+    }
+   },
+   "controles_1350_igual": {
+    "deviance": 2746.755724841875,
+    "deviance_without_madrid": 1458.6297283775752,
+    "median_abs_pct_error_10_or_more": 20.637763901330498,
+    "gain_vs_controls": {
+     "deviance": 3495.511221173106,
+     "se": 2959.040463729232,
+     "deviance_without_madrid": 547.6325402261527,
+     "se_without_madrid": 300.9421547088428,
+     "municipalities_better": 68,
+     "of": 132
+    }
+   },
+   "controles_habitaciones_y_1350": {
+    "deviance": 2095.4383406489005,
+    "deviance_without_madrid": 1349.2359486082305,
+    "median_abs_pct_error_10_or_more": 18.60773524565502,
+    "gain_vs_controls": {
+     "deviance": 4146.8286053660795,
+     "se": 3497.98485225923,
+     "deviance_without_madrid": 657.0263199954977,
+     "se_without_madrid": 303.58563094560026,
+     "municipalities_better": 78,
+     "of": 132
+    }
+   }
+  },
+  "leave_one_out_with_neighbours_out": {
+   "solo_constante": {
+    "deviance": 9351.038737187888,
+    "deviance_without_madrid": 3272.741220754162,
+    "median_abs_pct_error_10_or_more": 45.29203894317024
+   },
+   "controles": {
+    "deviance": 10947.939990507955,
+    "deviance_without_madrid": 1816.0633738818792,
+    "median_abs_pct_error_10_or_more": 20.85895149292036
+   },
+   "controles_tope_real": {
+    "deviance": 3424.8144962964116,
+    "deviance_without_madrid": 1621.451302990362,
+    "median_abs_pct_error_10_or_more": 17.50441639045701,
+    "gain_vs_controls": {
+     "deviance": 7523.125494211543,
+     "se": 7327.6830184801765,
+     "deviance_without_madrid": 194.6120708915173,
+     "se_without_madrid": 97.99022449034098,
+     "municipalities_better": 75,
+     "of": 132
+    }
+   },
+   "controles_900_igual": {
+    "deviance": 1840.7563940065102,
+    "deviance_without_madrid": 1397.244151391289,
+    "median_abs_pct_error_10_or_more": 22.35658392565797,
+    "gain_vs_controls": {
+     "deviance": 9107.183596501443,
+     "se": 8687.276279875588,
+     "deviance_without_madrid": 418.81922249058994,
+     "se_without_madrid": 191.41735577752428,
+     "municipalities_better": 71,
+     "of": 132
+    }
+   },
+   "controles_ambas": {
+    "deviance": 6407.847977320003,
+    "deviance_without_madrid": 1351.7975304203965,
+    "median_abs_pct_error_10_or_more": 17.909427402237277,
+    "gain_vs_controls": {
+     "deviance": 4540.092013187951,
+     "se": 4077.3775248390275,
+     "deviance_without_madrid": 464.2658434614824,
+     "se_without_madrid": 203.7840639128756,
+     "municipalities_better": 79,
+     "of": 132
+    }
+   },
+   "controles_habitaciones": {
+    "deviance": 1220.2196141040563,
+    "deviance_without_madrid": 1060.8287266149384,
+    "median_abs_pct_error_10_or_more": 14.861920368030956,
+    "gain_vs_controls": {
+     "deviance": 9727.720376403899,
+     "se": 8972.56483105048,
+     "deviance_without_madrid": 755.2346472669406,
+     "se_without_madrid": 323.8021191529072,
+     "municipalities_better": 83,
+     "of": 132
+    }
+   },
+   "controles_1350_igual": {
+    "deviance": 1675.4448331524977,
+    "deviance_without_madrid": 1675.159654826818,
+    "median_abs_pct_error_10_or_more": 20.45860591656732,
+    "gain_vs_controls": {
+     "deviance": 9272.495157355457,
+     "se": 9149.476060789742,
+     "deviance_without_madrid": 140.9037190550609,
+     "se_without_madrid": 588.7384205380821,
+     "municipalities_better": 71,
+     "of": 132
+    }
+   },
+   "controles_habitaciones_y_1350": {
+    "deviance": 1871.498263814462,
+    "deviance_without_madrid": 1713.0207612814565,
+    "median_abs_pct_error_10_or_more": 17.924957185872938,
+    "gain_vs_controls": {
+     "deviance": 9076.441726693492,
+     "se": 8994.510710964934,
+     "deviance_without_madrid": 103.04261260042233,
+     "se_without_madrid": 627.2720761540334,
+     "municipalities_better": 77,
+     "of": 132
+    }
+   }
+  }
+ }
+}
