@@ -111,4 +111,5 @@ ok(at, "simulador: tope único de 1.200 €, sin efecto, 10 M€")
 
 at.switch_page("app_pages/metodo.py").run()
 assert any("I de Moran" in m.value and "Conley" in m.value for m in at.markdown), "método: falta lo de vecinos y zonas"
+assert any("entre un 31 % y un 52 % más" in m.value for m in at.markdown), "método: falta el +41 % con otras medidas"
 ok(at, "método y datos")

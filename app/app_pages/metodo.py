@@ -64,6 +64,9 @@ more = limit["returns_let_in_vs_3iprem"]["by_group_weighted_by_young"]
 plan = result("simulador_reparto")["plan_income_limit"]
 chance = lambda p: es(100 * plan[p]["plan_estatal"]["chance_of_aid"])  # noqa: E731
 high = lambda p, rule: es(plan[p][rule]["aids_per_1000_young_by_group"]["resto, necesidad alta"], 1)  # noqa: E731
+rulers = result("robustez_indice")["rulers"]
+other = [r["change_pct"] for k, r in rulers.items() if k != "indice_del_proyecto"]
+madrid_change = rulers["indice_del_proyecto"]["aids_per_1000_young_by_group"]["Madrid capital"]["change_pct"]
 st.subheader("Lo que cambia con el Plan 2026-2030 (simulación, con 31,8 M€)")
 st.markdown(
     f"- **Paga más por ayuda:** hasta 300 € al mes y nunca más del 60 % del alquiler (art. 137). Con el mismo dinero "
@@ -79,7 +82,12 @@ st.markdown(
     f"van un poco hacia los municipios ricos: el tercio de más necesidad baja de {high('p_0', 'plan_estatal')} a "
     f"{high('p_1', 'plan_estatal')} ayudas por cada 1.000 jóvenes.\n"
     f"- **Con cupos por necesidad (la propuesta),** ese tercio recibe {high('p_0', 'necesidad_requisito_plan_p75_hasta_1000')} "
-    f"pida quien pida: los cupos no dependen de quién llega antes."
+    f"pida quien pida: los cupos no dependen de quién llega antes.\n"
+    f"- **¿Y si la necesidad se mide de otra forma?** (exploratorio) Los cupos usan nuestro índice, y la ganancia se mide "
+    f"con él. Dejando la propuesta igual y eligiendo el tercio con más necesidad de otras {len(other)} formas (cada parte "
+    f"del índice por separado u otras fórmulas), ese tercio recibe siempre más que con el Plan: entre un "
+    f"{es(min(other))} % y un {es(max(other))} % más. Lo que gana sale sobre todo de Madrid capital, que recibe un "
+    f"{es(-madrid_change)} % menos."
 )
 
 st.subheader("Para quién es y cuánto cuesta mantenerlo")

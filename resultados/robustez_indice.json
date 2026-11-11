@@ -1,0 +1,339 @@
+{
+ "note": "EXPLORATORIO: la propuesta no cambia (sus cupos siguen usando nuestro índice); solo cambia con qué se elige el tercio con más necesidad. Lo esperado está en el docstring",
+ "beta": -0.5446185552468725,
+ "rulers": {
+  "indice_del_proyecto": {
+   "spearman_with_index": 1.0,
+   "municipalities_in_top_third": 36,
+   "young_in_top_third": 225245,
+   "municipalities_also_in_index_top_third": 36,
+   "aids_per_1000_young": {
+    "plan": 3.05,
+    "propuesta": 4.29
+   },
+   "change_pct": 41.0,
+   "aids": {
+    "plan": 686,
+    "propuesta": 967
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 3.05,
+     "propuesta": 4.29,
+     "change_pct": 41.0
+    },
+    "resto, necesidad media": {
+     "plan": 2.98,
+     "propuesta": 3.22,
+     "change_pct": 8.3
+    },
+    "resto, necesidad baja": {
+     "plan": 1.86,
+     "propuesta": 1.8,
+     "change_pct": -2.9
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "solo_esfuerzo_alquiler_2024": {
+   "spearman_with_index": 0.44,
+   "municipalities_in_top_third": 11,
+   "young_in_top_third": 199588,
+   "municipalities_also_in_index_top_third": 7,
+   "aids_per_1000_young": {
+    "plan": 2.91,
+    "propuesta": 3.99
+   },
+   "change_pct": 37.2,
+   "aids": {
+    "plan": 581,
+    "propuesta": 797
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 2.91,
+     "propuesta": 3.99,
+     "change_pct": 37.2
+    },
+    "resto, necesidad media": {
+     "plan": 2.99,
+     "propuesta": 3.36,
+     "change_pct": 12.4
+    },
+    "resto, necesidad baja": {
+     "plan": 2.04,
+     "propuesta": 2.18,
+     "change_pct": 6.8
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "solo_paro25_por_1000_15_24_2024": {
+   "spearman_with_index": 0.66,
+   "municipalities_in_top_third": 51,
+   "young_in_top_third": 199389,
+   "municipalities_also_in_index_top_third": 26,
+   "aids_per_1000_young": {
+    "plan": 2.81,
+    "propuesta": 4.26
+   },
+   "change_pct": 51.6,
+   "aids": {
+    "plan": 560,
+    "propuesta": 850
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 2.81,
+     "propuesta": 4.26,
+     "change_pct": 51.6
+    },
+    "resto, necesidad media": {
+     "plan": 3.15,
+     "propuesta": 3.35,
+     "change_pct": 6.3
+    },
+    "resto, necesidad baja": {
+     "plan": 2.0,
+     "propuesta": 1.94,
+     "change_pct": -3.4
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "solo_pct_alquiler_2021": {
+   "spearman_with_index": 0.494,
+   "municipalities_in_top_third": 55,
+   "young_in_top_third": 202947,
+   "municipalities_also_in_index_top_third": 26,
+   "aids_per_1000_young": {
+    "plan": 2.64,
+    "propuesta": 3.46
+   },
+   "change_pct": 31.0,
+   "aids": {
+    "plan": 536,
+    "propuesta": 703
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 2.64,
+     "propuesta": 3.46,
+     "change_pct": 31.0
+    },
+    "resto, necesidad media": {
+     "plan": 2.94,
+     "propuesta": 3.18,
+     "change_pct": 7.8
+    },
+    "resto, necesidad baja": {
+     "plan": 2.38,
+     "propuesta": 2.93,
+     "change_pct": 23.0
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "sin_esfuerzo_alquiler_2024": {
+   "spearman_with_index": 0.796,
+   "municipalities_in_top_third": 71,
+   "young_in_top_third": 194352,
+   "municipalities_also_in_index_top_third": 33,
+   "aids_per_1000_young": {
+    "plan": 3.0,
+    "propuesta": 4.14
+   },
+   "change_pct": 38.3,
+   "aids": {
+    "plan": 582,
+    "propuesta": 805
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 3.0,
+     "propuesta": 4.14,
+     "change_pct": 38.3
+    },
+    "resto, necesidad media": {
+     "plan": 2.87,
+     "propuesta": 3.35,
+     "change_pct": 16.5
+    },
+    "resto, necesidad baja": {
+     "plan": 2.05,
+     "propuesta": 2.02,
+     "change_pct": -1.5
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "sin_paro25_por_1000_15_24_2024": {
+   "spearman_with_index": 0.773,
+   "municipalities_in_top_third": 31,
+   "young_in_top_third": 196741,
+   "municipalities_also_in_index_top_third": 24,
+   "aids_per_1000_young": {
+    "plan": 3.08,
+    "propuesta": 4.03
+   },
+   "change_pct": 30.9,
+   "aids": {
+    "plan": 606,
+    "propuesta": 793
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 3.08,
+     "propuesta": 4.03,
+     "change_pct": 30.9
+    },
+    "resto, necesidad media": {
+     "plan": 3.01,
+     "propuesta": 3.6,
+     "change_pct": 19.6
+    },
+    "resto, necesidad baja": {
+     "plan": 1.83,
+     "propuesta": 1.89,
+     "change_pct": 3.2
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "sin_pct_alquiler_2021": {
+   "spearman_with_index": 0.78,
+   "municipalities_in_top_third": 15,
+   "young_in_top_third": 209901,
+   "municipalities_also_in_index_top_third": 12,
+   "aids_per_1000_young": {
+    "plan": 3.01,
+    "propuesta": 4.25
+   },
+   "change_pct": 40.9,
+   "aids": {
+    "plan": 633,
+    "propuesta": 892
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 3.01,
+     "propuesta": 4.25,
+     "change_pct": 40.9
+    },
+    "resto, necesidad media": {
+     "plan": 2.92,
+     "propuesta": 3.34,
+     "change_pct": 14.3
+    },
+    "resto, necesidad baja": {
+     "plan": 2.01,
+     "propuesta": 1.91,
+     "change_pct": -5.1
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "zscores": {
+   "spearman_with_index": 0.96,
+   "municipalities_in_top_third": 25,
+   "young_in_top_third": 197319,
+   "municipalities_also_in_index_top_third": 24,
+   "aids_per_1000_young": {
+    "plan": 3.0,
+    "propuesta": 4.34
+   },
+   "change_pct": 44.9,
+   "aids": {
+    "plan": 591,
+    "propuesta": 857
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 3.0,
+     "propuesta": 4.34,
+     "change_pct": 44.9
+    },
+    "resto, necesidad media": {
+     "plan": 3.14,
+     "propuesta": 3.39,
+     "change_pct": 8.1
+    },
+    "resto, necesidad baja": {
+     "plan": 1.82,
+     "propuesta": 1.82,
+     "change_pct": 0.0
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  },
+  "media_geometrica": {
+   "spearman_with_index": 0.91,
+   "municipalities_in_top_third": 34,
+   "young_in_top_third": 198055,
+   "municipalities_also_in_index_top_third": 29,
+   "aids_per_1000_young": {
+    "plan": 3.21,
+    "propuesta": 4.26
+   },
+   "change_pct": 32.6,
+   "aids": {
+    "plan": 636,
+    "propuesta": 843
+   },
+   "aids_per_1000_young_by_group": {
+    "resto, necesidad alta": {
+     "plan": 3.21,
+     "propuesta": 4.26,
+     "change_pct": 32.6
+    },
+    "resto, necesidad media": {
+     "plan": 2.91,
+     "propuesta": 3.45,
+     "change_pct": 18.7
+    },
+    "resto, necesidad baja": {
+     "plan": 1.82,
+     "propuesta": 1.83,
+     "change_pct": 0.5
+    },
+    "Madrid capital": {
+     "plan": 4.21,
+     "propuesta": 3.75,
+     "change_pct": -10.7
+    }
+   }
+  }
+ }
+}
