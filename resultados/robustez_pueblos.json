@@ -1,0 +1,45 @@
+{
+ "note": "EXPLORATORIO: parte del alquiler de 2024 por encima del tope en los municipios de 10.000 habitantes o menos, ponderada por jóvenes de 20 a 34 años; lo esperado está en el docstring",
+ "variants": {
+  "base__todos": {
+   "municipalities": 78,
+   "young": 53817,
+   "hoy": 0.255,
+   "plan": 0.581,
+   "propuesta": 0.214
+  },
+  "base__al_menos_30_contratos": {
+   "municipalities": 64,
+   "young": 50224,
+   "hoy": 0.254,
+   "plan": 0.59,
+   "propuesta": 0.216
+  },
+  "base__al_menos_100_contratos": {
+   "municipalities": 37,
+   "young": 37568,
+   "hoy": 0.277,
+   "plan": 0.649,
+   "propuesta": 0.219
+  },
+  "lognormal_tres_cuartiles__todos": {
+   "municipalities": 78,
+   "young": 53817,
+   "hoy": 0.257,
+   "plan": 0.583,
+   "propuesta": 0.217
+  },
+  "a_tramos_entre_cuartiles__todos": {
+   "municipalities": 78,
+   "young": 53817,
+   "hoy": 0.258,
+   "plan": 0.583,
+   "propuesta": 0.214
+  }
+ },
+ "plan_range": [
+  0.581,
+  0.649
+ ],
+ "plan_at_least_doubles_today_everywhere": true
+}

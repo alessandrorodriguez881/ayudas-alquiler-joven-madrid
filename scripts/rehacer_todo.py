@@ -27,6 +27,7 @@ STEPS = [
     "scripts/simulador.py",                 # allocation of the aid under each rule
     "scripts/espacial.py",                  # neighbours and zones: Moran's I, Conley errors, spatial validation
     "scripts/robustez_indice.py",           # the proposal's +41 %, with need measured eight other ways
+    "scripts/robustez_pueblos.py",          # the 58 % of the small municipalities, with rents read other ways
     "scripts/probar_reglas.py",             # the calculator's rules against hand-made cases
     "scripts/distritos_madrid.py",
     "scripts/base_datos.py",                # SQLite database and its dictionary
