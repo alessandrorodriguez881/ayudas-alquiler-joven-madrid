@@ -1,3 +1,5 @@
+import math
+
 import streamlit as st
 
 from datos import BLUE, ORANGE, SOURCE, es, map_spec, municipalities, pct, result
@@ -14,10 +16,12 @@ group = lambda rule, g: sim["plan_amount"][rule]["aids_per_1000_young_by_group"]
 high = lambda rule: group(rule, "resto, necesidad alta")  # noqa: E731
 capital = lambda rule: group(rule, "Madrid capital")  # noqa: E731
 gap = sim["gap_above_cap"]
+# the cap's own part, without expensive rent as such (exploratory; the simulator's beta): the summary of the form says it
+cap_part = 100 * (math.exp(0.1 * result("exploratorio_topes_falsos")["real_cap_and_uniform_900"]["real_cap"]["beta"]) - 1)
 KPIS = [  # short label, value, what it means (in sight: metric labels are cut to one line)
     ("Menos solicitudes", f"{es(h1['pct_per_10_points'], 1)} %",
-     f"por cada 10 puntos de alquiler por encima del tope. Contraste registrado antes de hacerlo "
-     f"({test['n_municipalities']} municipios con todos los datos)"),
+     f"por cada 10 % más de alquileres por encima del tope; la parte del propio tope, {es(cap_part, 1)} %. Contraste "
+     f"registrado antes de hacerlo ({test['n_municipalities']} municipios con todos los datos)"),
     ("Alquiler fuera del tope", pct(gap["2024_rents_plan_estatal"]["10000_or_fewer"]),
      f"en los municipios pequeños con el Plan 2026-2030, que les pone 500 € (hoy, "
      f"{pct(gap['2024_rents_2024_list']['10000_or_fewer'])})"),

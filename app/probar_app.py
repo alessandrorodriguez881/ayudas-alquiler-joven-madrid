@@ -17,6 +17,8 @@ assert (es(-0.3), es(-0.04, 1), es(1.4447, 2)) == ("0", "0,0", "1,44"), "es(): Â
 at = AppTest.from_file(str(APP), default_timeout=120).run()
 assert any("fuera de Madrid capital" in c.value and "baja un 11 %" in c.value for c in at.caption), \
     "portada: el +41 % sin decir que es fuera de Madrid capital, que baja un 11 %"
+assert any("la parte del propio tope, -5,3 %" in c.value for c in at.caption), \
+    "portada: la cifra 1 sin la parte del propio tope (resumen A, elegido el 12-nov)"
 ok(at, "mapa")
 for option in ["Cobertura del Bono", "Alquiler por encima del tope", "Con el Plan 2026-2030"]:
     at.segmented_control(key="medida").set_value(option).run()
