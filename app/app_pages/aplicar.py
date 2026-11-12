@@ -15,8 +15,9 @@ st.title("¿Cómo se aplica?")
 st.caption("Para la Consejería: la propuesta en una convocatoria abierta todo el año, como pide el Plan Estatal "
            "2026-2030 (art. 138), con el mismo dinero, y quién pierde. Es una propuesta de diseño, no un informe "
            "jurídico: decidirlo y comprobar que encaja en la norma les toca a la Comunidad y a sus servicios jurídicos.")
-KPIS = [("Tercio con más necesidad", f"{signed(ch['resto, necesidad alta'])} %",
-         "ayudas por cada 1.000 jóvenes, frente al Plan tal cual"),
+KPIS = [("Municipios con más necesidad", f"{signed(ch['resto, necesidad alta'])} %",
+         "fuera de Madrid capital (los que suman un tercio de sus jóvenes): ayudas por cada 1.000 jóvenes, frente al "
+         "Plan tal cual"),
         ("Madrid capital", f"{signed(ch['Madrid capital'])} %",
          f"{es(-w['aids_delta_by_group']['Madrid capital'])} ayudas menos que con el Plan tal cual"),
         ("Municipios que pierden", f"{w['municipalities_losing']} de {o['municipalities']}",

@@ -15,6 +15,8 @@ from datos import es  # noqa: E402  (the app's number format)
 assert (es(-0.3), es(-0.04, 1), es(1.4447, 2)) == ("0", "0,0", "1,44"), "es(): «-0» o doble redondeo"
 
 at = AppTest.from_file(str(APP), default_timeout=120).run()
+assert any("fuera de Madrid capital" in c.value and "baja un 11 %" in c.value for c in at.caption), \
+    "portada: el +41 % sin decir que es fuera de Madrid capital, que baja un 11 %"
 ok(at, "mapa")
 for option in ["Cobertura del Bono", "Alquiler por encima del tope", "Con el Plan 2026-2030"]:
     at.segmented_control(key="medida").set_value(option).run()
@@ -89,8 +91,10 @@ for name in ["Madrid", "Majadahonda", "Acebeda (La)"]:  # Acebeda: 7 young peopl
     at.selectbox(key="municipio").select(name).run()
     ok(at, f"ficha: {name}")
 # the base of the art. 135 study, in each of its three cases (resultados/estudio_art135.csv)
-for name, says in [("Hoyo de Manzanares", "lo justifica: el alquiler mediano del SERPAVI subió un 24,7 %"),
-                   ("Rascafría", "no lo justifica: el alquiler mediano del SERPAVI subió un 14,3 %"),
+for name, says in [("Hoyo de Manzanares", "lo apoya: con el tope del Plan queda fuera el 93 % del alquiler de 2024"),
+                   ("Hoyo de Manzanares", "y el alquiler mediano del SERPAVI subió un 24,7 %"),
+                   ("Rascafría", "no lo apoya: con el tope del Plan queda fuera el 31 % del alquiler de 2024, menos de la "
+                                 "mitad, y el alquiler mediano del SERPAVI subió un 14,3 %"),
                    ("Garganta de los Montes", "faltan datos")]:
     at.selectbox(key="municipio").select(name).run()
     boxes = [b.value for b in [*at.success, *at.info]]
@@ -98,10 +102,12 @@ for name, says in [("Hoyo de Manzanares", "lo justifica: el alquiler mediano del
     ok(at, f"ficha: {name}, art. 135")
 
 at.switch_page("app_pages/simular.py").run()  # opens with the proposal and the Plan's aid, as on the cover
-assert "recibe 4,3 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # plan_amount
+assert "reciben 4,3 ayudas por cada 1.000 jóvenes** (hoy, 3,7); Madrid capital, 3,8 (hoy, 5,0)" in at.info[0].value, \
+    at.info[0].value  # plan_amount; Madrid capital in sight next to the +41 % (second adversarial jury, 12-nov)
+assert "para comparar ayuda con ayuda" in at.info[0].value, at.info[0].value  # 250 EUR today, up to 300 with the Plan
 assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount
 ok(at, "simulador: propuesta con la cuantía del Plan")
-assert [m.value for m in at.metric][5:] == ["63 pueblos", "46 de 63", "40.681"], [m.value for m in at.metric][5:]
+assert [m.value for m in at.metric][5:] == ["63 pueblos", "49 de 63", "42.485"], [m.value for m in at.metric][5:]
 assert "40,3 M€" in at.caption[-2].value, at.caption[-2].value  # estudio_art135.json, sensitivity (last: the footer)
 ok(at, "simulador: la base del estudio del art. 135")
 at.segmented_control(key="mas_gente").set_value("Y todos los que entran nuevos").run()
@@ -109,7 +115,8 @@ assert at.metric[4].value == "58,1 M€", at.metric[4].value  # plan_income_limi
 ok(at, "simulador: propuesta con el Plan y todos los que entran nuevos por su límite de ingresos")
 at.segmented_control(key="mas_gente").set_value("Los mismos que en 2022").run()
 at.segmented_control(key="cuantia").set_value("250 € (hoy)").run()
-assert "recibe 5,4 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # PLAN, 7-nov
+assert "reciben 5,4 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # PLAN, 7-nov
+assert "para comparar ayuda con ayuda" not in at.info[0].value, at.info[0].value  # same aid as today: no warning
 ok(at, "simulador: propuesta con los 250 € de hoy")
 at.segmented_control(key="tope").set_value("Hoy (600 / 900 €)").run()
 at.segmented_control(key="reparto").set_value("Orden de llegada (hoy)").run()

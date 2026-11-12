@@ -116,7 +116,7 @@ Todos son datos abiertos oficiales, cada uno en su carpeta de `data/raw/` con su
 ## Código y recursos previos que se reutilizan (para declararlos)
 - Los 10 scripts de `scripts/` (21 y 27-oct, 2 y 5-nov), descritos arriba, y el preregistro
 - Método de trabajo propio de competiciones anteriores (fijar reglas antes de mirar los datos, validar con datos reservados): es una forma de trabajar, no código
-- Ningún código de otros hackathones (Airwallex, PayPal, SAS, Name That LLM, NFL) se usa en DataMad
+- Ningún código de otras competiciones se usa en DataMad
 
 ## Uso de IA
 - Claude (Anthropic), con supervisión del participante, para: buscar y comprobar fuentes oficiales, descargar los datos, escribir los scripts de exploración y redactar estos documentos

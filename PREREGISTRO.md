@@ -56,7 +56,7 @@
 ## Qué se cuenta según el resultado (escrito antes)
 - **Si H1 se confirma:** titular «Donde el alquiler supera el tope, los jóvenes ni piden el Bono». El impacto se calcula con β₁ y su intervalo: cuántas solicitudes más habría con un tope indexado al alquiler local. Siempre con el intervalo y aclarando que es un efecto **por municipio**, no por persona
 - **Si H1 no se confirma:** no se dice que el tope disuade. La historia pasa a la **cobertura**: el dinero se agotó (BOCM, nov-2023) y las ayudas por cada 1.000 jóvenes cambian mucho entre municipios con la misma necesidad. El producto propone cómo repartir mejor el mismo presupuesto, sin afirmar un efecto del tope
-- **En los dos casos** se enseña lo que no salió (réplica, topes falsos), como pide el PLAYBOOK: mejor contarlo nosotros que que lo encuentre el jurado
+- **En los dos casos** se enseña lo que no salió (réplica, topes falsos): contarlo es parte del método *(12-nov-2026: cambiada la redacción de esta línea, que citaba una nota interna de trabajo; no cambia ninguna regla)*
 
 ## Potencia (datos inventados, antes de ver datos reales; 2-nov)
 Hecho con `scripts/contraste.py --sintetico`. Se usan las **covariables reales** de los 132 municipios y un **resultado inventado** con efectos conocidos, escalado a unas 48.000 solicitudes. Hay dos niveles de ruido por municipio (DE 0,2 y 0,4 en el logaritmo de la tasa) y 199 permutaciones por simulación. Detalle en `resultados/potencia_sintetica_*.json`.

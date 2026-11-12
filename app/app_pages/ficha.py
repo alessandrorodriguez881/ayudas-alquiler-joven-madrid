@@ -78,16 +78,25 @@ if r["ine"] in study.index and study.loc[r["ine"], "sube_tope"]:  # a village wh
     a, threshold = study.loc[r["ine"]], result("estudio_art135")["cpi"]["threshold_b_pct"]
     lift = f"La propuesta sube aquí el tope de {es(a['tope_plan'])} € a {es(a['tope_propuesta'])} €"
     rise = f"el alquiler mediano del SERPAVI subió un {es(a['subida_alquiler_pct'], 1)} % de 2019 a 2024"
-    if a["justificacion"] in ("a", "b", "a y b"):
-        why = (f"{rise}, más que el IPC + 3 puntos ({es(threshold, 1)} %)" if "b" in a["justificacion"] else
-               "el alquiler pasa del 30 % de la renta del hogar")
-        st.success(f"{lift}, y la base del estudio del art. 135 lo justifica: {why}.", icon=":material/gavel:")
+    # art. 135 asks for a study of the rental offer, which "podrá fundamentarse" on the cases of Ley 12/2023, art. 18.3
+    offer = (None if pd.isna(a["parte_por_encima_tope_plan"]) else
+             f"con el tope del Plan queda fuera el {pct(a['parte_por_encima_tope_plan'])} del alquiler de 2024")
+    met_offer = str(a["cumple_oferta"]) == "True"  # True, False or empty in the CSV
+    reasons = [f"{offer}, más de la mitad (es la oferta, lo que pide el artículo)"] if met_offer else []
+    if a["justificacion"] in ("b", "a y b"):
+        reasons.append(f"{rise}, más que el IPC + 3 puntos ({es(threshold, 1)} %; Ley 12/2023, art. 18.3 b)")
+    if a["justificacion"] in ("a", "a y b"):
+        reasons.append("el alquiler pasa del 30 % de la renta del hogar (Ley 12/2023, art. 18.3 a)")
+    if reasons:
+        st.success(f"{lift}, y la base del estudio del art. 135 lo apoya: {'; y '.join(reasons)}. Decidirlo y "
+                   "acordarlo con el Ministerio le toca a la Comunidad.", icon=":material/gavel:")
     elif a["justificacion"] == "ninguno":
-        st.info(f"{lift}, pero con estos datos el art. 135 no lo justifica: {rise} (hacía falta un "
-                f"{es(threshold, 1)} %) y no pasa del 30 % de la renta del hogar.", icon=":material/gavel:")
+        st.info(f"{lift}, pero con estos datos la base del estudio del art. 135 no lo apoya: {offer}, menos de la "
+                f"mitad, y {rise} (hacía falta un {es(threshold, 1)} %).", icon=":material/gavel:")
     else:
-        st.info(f"{lift}. Para justificarlo por el art. 135 faltan datos: el SERPAVI tiene aquí menos de 30 viviendas "
-                "en alquiler en 2019 o en 2024.", icon=":material/gavel:")
+        st.info(f"{lift}. Para apoyarlo en el art. 135 faltan datos: el SERPAVI tiene aquí menos de 30 viviendas en "
+                "alquiler en 2019 o en 2024" + (f" ({offer}, menos de la mitad)." if offer else "."),
+                icon=":material/gavel:")
 
 left, right = st.columns([3, 2], gap="large")
 with left:

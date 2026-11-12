@@ -10,7 +10,9 @@ st.caption("Bono Alquiler Joven de la Comunidad de Madrid: 250 € al mes durant
 test = result("contraste_real")
 h1 = test["H1"]
 sim = result("simulador_reparto")
-high = lambda rule: sim["plan_amount"][rule]["aids_per_1000_young_by_group"]["resto, necesidad alta"]  # noqa: E731
+group = lambda rule, g: sim["plan_amount"][rule]["aids_per_1000_young_by_group"][g]  # noqa: E731
+high = lambda rule: group(rule, "resto, necesidad alta")  # noqa: E731
+capital = lambda rule: group(rule, "Madrid capital")  # noqa: E731
 gap = sim["gap_above_cap"]
 KPIS = [  # short label, value, what it means (in sight: metric labels are cut to one line)
     ("Menos solicitudes", f"{es(h1['pct_per_10_points'], 1)} %",
@@ -20,7 +22,9 @@ KPIS = [  # short label, value, what it means (in sight: metric labels are cut t
      f"en los municipios pequeños con el Plan 2026-2030, que les pone 500 € (hoy, "
      f"{pct(gap['2024_rents_2024_list']['10000_or_fewer'])})"),
     ("Más ayudas donde más falta", "+" + pct(high("necesidad_requisito_plan_p75_hasta_1000") / high("plan_estatal") - 1),
-     "con nuestra propuesta frente al Plan, con el mismo dinero (31,8 M€)"),
+     "en los municipios con más necesidad fuera de Madrid capital, con nuestra propuesta frente al Plan y el mismo "
+     "dinero (31,8 M€). Madrid capital, que hoy recibe más ayudas por joven que el resto, baja un "
+     f"{pct(1 - capital('necesidad_requisito_plan_p75_hasta_1000') / capital('plan_estatal'))}"),
 ]
 for col, (label, value, note) in zip(st.columns(3), KPIS):
     with col.container(border=True, height="stretch"):

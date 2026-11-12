@@ -10,6 +10,7 @@ cap_only = fake["real_cap_and_uniform_900"]["real_cap"]
 income = result("requisito_ingresos")["h1_with_income_rule_control"]["h1_plus_elig"]
 rooms = result("habitaciones")["h1_with_room_contracts"]
 oos = result("validacion_fuera_muestra")
+art135 = result("estudio_art135")["where_proposal_raises_cap"]
 cv, ay = oos["A_bono_2022_cross_validation"]["leave_one_out"], oos["B_bono_2022_to_ayudas_jovenes_2023"]
 geo = result("espacial")
 less = lambda new, old: es(100 * (1 - new / old))  # noqa: E731  (% less deviance)
@@ -93,8 +94,9 @@ st.markdown(
 st.subheader("Para quién es y cuánto cuesta mantenerlo")
 st.markdown(
     "- **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado "
-    "de la oferta de alquiler (art. 135). Este proyecto le da la base de ese estudio, repetible con un comando (de los 63 "
-    "municipios pequeños donde proponemos subir el tope de 500 €, en 46 se puede justificar con los datos), y el "
+    "de la oferta de alquiler (art. 135). Este proyecto le da la base de ese estudio, repetible con un comando (de los "
+    f"{art135['municipalities']} municipios pequeños donde proponemos subir el tope de 500 €, hay base en los datos en "
+    f"{art135['with_base']}: en {art135['offer_case']}, con 500 € queda fuera más de la mitad del alquiler), y el "
     "simulador le deja probar topes y cupos antes de sacar la convocatoria, con su coste.\n"
     "- **Ayuntamientos y oficinas de juventud:** la ficha de cada municipio, «¿Dónde me llega la ayuda?» y la calculadora, "
     "para orientar a quien pregunta.\n"

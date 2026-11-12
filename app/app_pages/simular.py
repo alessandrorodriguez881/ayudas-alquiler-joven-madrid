@@ -78,9 +78,14 @@ small = (s["pob_total_2024"] <= 10000).to_numpy()
 same_chance = bonos0.sum() / req0.sum() * (req * 24 * aid).sum() / 1e6
 groups = s["grupo_necesidad"].to_numpy()
 high = lambda b: 1000 * b[groups == "resto, necesidad alta"].sum() / young[groups == "resto, necesidad alta"].sum()  # noqa: E731
-st.info(f"**Con esta regla, el tercio de municipios con más necesidad recibe {es(high(bonos), 1)} ayudas por cada 1.000 "
-        f"jóvenes** (hoy, {es(high(bonos0), 1)}). De cada 100 que la piden, la consiguen unos "
-        f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())}).", icon=":material/insights:")
+capital = lambda b: 1000 * b[madrid].sum() / young[madrid].sum()  # noqa: E731
+st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman un tercio de sus "
+        f"jóvenes) reciben {es(high(bonos), 1)} ayudas por cada 1.000 jóvenes** (hoy, {es(high(bonos0), 1)}); Madrid "
+        f"capital, {es(capital(bonos), 1)} (hoy, {es(capital(bonos0), 1)}). De cada 100 que la piden, la consiguen unos "
+        f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())})."
+        + (" Ojo: hoy cada ayuda es de 250 € y con el Plan, de hasta 300 €: para comparar ayuda con ayuda, elige "
+           "«250 € (hoy)»." if plan_rules else ""),
+        icon=":material/insights:")
 with st.container(horizontal=True):  # wraps on a narrow screen instead of cutting «40,3 M€» (a laptop at 125 % zoom)
     st.metric("Solicitudes esperadas", es(req.sum()), delta=es(req.sum() - req0.sum()), delta_color="off", border=True,
               height="stretch")
@@ -154,18 +159,20 @@ st.subheader("Para la Consejería: la base del estudio del art. 135")
 study = result("estudio_art135")
 up, cpi, sens, measure = (study["where_proposal_raises_cap"], study["cpi"], study["sensitivity"],
                           study["measure_check"])
-st.caption("El Plan deja que la Comunidad suba el tope de 500 € si lo justifica con un estudio actualizado del alquiler "
-           "(art. 135). El estudio puede apoyarse en dos supuestos de la Ley de Vivienda (art. 18.3): a) que el alquiler "
-           "pase del 30 % de la renta del hogar; b) que en cinco años haya subido al menos 3 puntos más que el IPC (en la "
+st.caption("El Plan deja que la Comunidad suba el tope de 500 € si lo justifica con «estudios actualizados de oferta de "
+           "vivienda» en alquiler (art. 135). Así que miramos, primero, qué parte del alquiler deja fuera el tope del Plan. "
+           "El estudio puede apoyarse también en dos supuestos de la Ley de Vivienda (art. 18.3): a) que el alquiler pase "
+           "del 30 % de la renta del hogar; b) que en cinco años haya subido al menos 3 puntos más que el IPC (en la "
            f"Comunidad de Madrid, un {es(cpi['rise_pct'], 1)} % de 2019 a 2024). Lo medimos en cada municipio donde la "
            "propuesta sube el tope.")
 STUDY = [  # short label, value, what it means (in sight: metric labels are cut to one line on a phone)
     ("Sube el tope", f"{up['municipalities']} pueblos",  # «municipios» did not fit at 1,024 px
      "municipios pequeños: de 500 € a su percentil 75 del alquiler, como mucho 1.000 €"),
-    ("Se puede justificar", f"{up['some_case']} de {up['municipalities']}",
-     f"por el supuesto b), con la mediana del SERPAVI: el alquiler ha subido más del {es(cpi['threshold_b_pct'], 1)} %. "
-     "El a) no se cumple en ninguno: con la renta media del hogar, el alquiler no llega al 30 %"),
-    ("Jóvenes que viven ahí", es(up["young_in_some_case"]), f"de 20 a 34 años, en esos {up['some_case']} municipios"),
+    ("Con base en los datos", f"{up['with_base']} de {up['municipalities']}",
+     f"en {up['offer_case']}, el tope del Plan deja fuera más de la mitad del alquiler (la oferta); en otros "
+     f"{up['only_18_3']}, el alquiler subió más del {es(cpi['threshold_b_pct'], 1)} % (supuesto b, con la mediana del "
+     "SERPAVI). El a) no se cumple en ninguno"),
+    ("Jóvenes que viven ahí", es(up["young_with_base"]), f"de 20 a 34 años, en esos {up['with_base']} municipios"),
 ]
 for col, (label, value, note) in zip(st.columns(3), STUDY):
     with col.container(border=True, height="stretch"):
@@ -173,25 +180,30 @@ for col, (label, value, note) in zip(st.columns(3), STUDY):
         st.caption(note)
 table = pd.read_csv(RES / "estudio_art135.csv", dtype={"ine": str})
 table = table[table["sube_tope"]].assign(parte=lambda d: 100 * d["parte_por_encima_tope_plan"])
-st.dataframe(table[["municipio", "jovenes_20_34_2024", "mediana_2024", "tope_propuesta", "parte", "subida_alquiler_pct",
-                    "justificacion"]], hide_index=True,
+table["oferta"] = table["cumple_oferta"].map({True: "sí", False: "no", "True": "sí", "False": "no"}).fillna("—")
+st.dataframe(table[["municipio", "jovenes_20_34_2024", "mediana_2024", "tope_propuesta", "parte", "oferta",
+                    "subida_alquiler_pct", "justificacion"]], hide_index=True,
              column_config={"municipio": "Municipio",
                             "jovenes_20_34_2024": st.column_config.NumberColumn("Jóvenes", format="%d"),
                             "mediana_2024": st.column_config.NumberColumn("Alquiler mediano", format="%.0f €"),
                             "tope_propuesta": st.column_config.NumberColumn("Tope propuesto", format="%.0f €"),
                             "parte": st.column_config.ProgressColumn("Fuera con 500 €", format="%.0f %%", min_value=0,
                                                                      max_value=100),
+                            "oferta": st.column_config.TextColumn("Más de la mitad fuera",
+                                                                  help="La oferta, lo que pide el art. 135"),
                             "subida_alquiler_pct": st.column_config.NumberColumn("Subida 2019-2024", format="%.0f %%"),
-                            "justificacion": "Supuesto"},
-             alt="Municipios pequeños donde la propuesta sube el tope, con el alquiler, la subida y el supuesto que lo justifica")
+                            "justificacion": st.column_config.TextColumn("Supuesto (Ley 12/2023)")},
+             alt="Municipios pequeños donde la propuesta sube el tope, con el alquiler, la parte que queda fuera del tope "
+                 "del Plan, la subida y el supuesto de la Ley 12/2023 que se cumple")
 with st.container(horizontal=True):
     st.download_button("Descargar la tabla (CSV)", (RES / "estudio_art135.csv").read_bytes(), "estudio_art135.csv",
                        "text/csv", icon=":material/download:")
     st.download_button("Descargar el informe", (DB.parent / "ESTUDIO_ART135.md").read_bytes(), "estudio_art135.md",
                        "text/markdown", icon=":material/description:")
-st.caption(f"Si el tope solo sube donde se puede justificar, la propuesta da lo mismo: "
+st.caption(f"Si el tope solo sube donde hay base, la propuesta da lo mismo: "
            f"{es(sens['proposal_only_where_justified']['aids_per_1000_young_high_need'], 1)} ayudas por cada 1.000 jóvenes "
-           f"en el tercio con más necesidad y {es(sens['proposal_only_where_justified']['meur_same_chance_as_today'], 1)} M€ "
+           "en los municipios con más necesidad fuera de Madrid capital y "
+           f"{es(sens['proposal_only_where_justified']['meur_same_chance_as_today'], 1)} M€ "
            "para la misma probabilidad que hoy. Ojo con la medida: en los "
            f"{measure['municipalities']} municipios grandes donde el portal tiene un índice de precios del alquiler, el "
            f"supuesto b) se cumple en {measure['case_b_met']['serpavi_median']} con la mediana del SERPAVI y en "
