@@ -11,7 +11,7 @@
     dct:issued "2026-11-08"^^xsd:date ;
     dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
-    dct:modified "2026-11-08"^^xsd:date ;
+    dct:modified "2026-11-12"^^xsd:date ;
     dct:publisher <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo> ;
     dct:spatial <http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Comunidad-Madrid> ;
     dct:title "Datos del proyecto sobre el Bono Alquiler Joven en la Comunidad de Madrid"@es ;
@@ -72,7 +72,7 @@
     dct:description "Una fila por municipio (179): topes del Bono Alquiler Joven 2022 y 2024, población, renta, paro juvenil, hogares de alquiler, alquiler del SERPAVI de 2023 y 2024, parte del alquiler por encima de cada tope e índice de necesidad. La crea scripts/necesidad_2024.py. Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: reutilización permitida citando la fuente."@es ;
     dct:issued "2026-11-07"^^xsd:date ;
     dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
-    dct:modified "2026-11-07"^^xsd:date ;
+    dct:modified "2026-11-12"^^xsd:date ;
     dct:publisher <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo> ;
     dct:spatial <http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Comunidad-Madrid> ;
     dct:temporal [ a dct:PeriodOfTime ;
@@ -101,13 +101,13 @@
     dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
     dct:issued "2026-11-07"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
-    dct:modified "2026-11-07"^^xsd:date ;
+    dct:modified "2026-11-12"^^xsd:date ;
     dct:title "Indicadores por municipio de la Comunidad de Madrid, 2024 (CSV)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "c05110cbc0c7c03545124a12b7720f47d6019879"^^xsd:hexBinary ] ;
+            spdx:checksumValue "6ce3ad0240dc4c245d6a1b9f2f8c6c8b6b8a0f64"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/data/interim/municipios_2024.csv> ;
-    dcat:byteSize "59395"^^xsd:nonNegativeInteger ;
+    dcat:byteSize "59215"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/data/interim/municipios_2024.csv> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> .
 
@@ -117,7 +117,7 @@
     dct:description "Solicitudes esperadas y bonos por municipio con la regla de hoy, el Plan Estatal 2026-2030 y la propuesta del proyecto (presupuesto fijo de 31,8 millones de euros), y el resumen de cada regla. Es una simulación con supuestos escritos en scripts/simulador.py, no una predicción. Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: reutilización permitida citando la fuente."@es ;
     dct:issued "2026-11-07"^^xsd:date ;
     dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
-    dct:modified "2026-11-08"^^xsd:date ;
+    dct:modified "2026-11-12"^^xsd:date ;
     dct:publisher <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo> ;
     dct:spatial <http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Comunidad-Madrid> ;
     dct:temporal [ a dct:PeriodOfTime ;
@@ -147,13 +147,13 @@
     dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
     dct:issued "2026-11-07"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
-    dct:modified "2026-11-08"^^xsd:date ;
+    dct:modified "2026-11-12"^^xsd:date ;
     dct:title "Reparto simulado del Bono Alquiler Joven con distintos topes y criterios (CSV)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "cf7ec222e3c705fbc0f1ab1e4c892ce1462127f9"^^xsd:hexBinary ] ;
+            spdx:checksumValue "8aa9566b3108ee837078a550b3a840bfc4ba81ef"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/data/interim/simulador_municipios.csv> ;
-    dcat:byteSize "37660"^^xsd:nonNegativeInteger ;
+    dcat:byteSize "37527"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/data/interim/simulador_municipios.csv> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> .
 
@@ -163,13 +163,13 @@
     dct:format <http://publications.europa.eu/resource/authority/file-type/JSON> ;
     dct:issued "2026-11-07"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
-    dct:modified "2026-11-08"^^xsd:date ;
+    dct:modified "2026-11-12"^^xsd:date ;
     dct:title "Reparto simulado del Bono Alquiler Joven con distintos topes y criterios (JSON)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "64fdf2977d221601088afb1d5f15883dae547705"^^xsd:hexBinary ] ;
+            spdx:checksumValue "32f9e689ca97bead0e2d06422879a9e99f3ed4d9"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/resultados/simulador_reparto.json> ;
-    dcat:byteSize "57806"^^xsd:nonNegativeInteger ;
+    dcat:byteSize "55654"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/resultados/simulador_reparto.json> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/application/json> .
 
