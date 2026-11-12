@@ -2,7 +2,7 @@
 Run:  streamlit run app/streamlit_app.py"""
 import streamlit as st
 
-st.set_page_config(page_title="El tope del Bono Alquiler Joven", page_icon=":material/home_work:", layout="wide")
+st.set_page_config(page_title="Los invisibles del Bono", page_icon=":material/home_work:", layout="wide")
 
 page = st.navigation(
     [

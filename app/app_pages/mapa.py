@@ -4,10 +4,12 @@ import streamlit as st
 
 from datos import BLUE, ORANGE, SOURCE, es, map_spec, municipalities, pct, result
 
+st.caption("**Los invisibles del Bono** · DataMad 2026")
 st.title("Donde el alquiler supera el tope, los jóvenes piden menos el Bono")
 st.caption("Bono Alquiler Joven de la Comunidad de Madrid: 250 € al mes durante 2 años, solo para alquileres de hasta "
-           "600 o 900 € (habitación: 300 o 450 €). No es un buscador de pisos: medimos si la ayuda llega a quien más la "
-           "necesita y proponemos cómo hacer que llegue.")
+           "600 o 900 € (habitación: 300 o 450 €). Si su alquiler pasa del tope, el joven ni la pide y no sale en las "
+           "estadísticas: son los invisibles del Bono. No es un buscador de pisos: medimos si la ayuda llega a quien más "
+           "la necesita y proponemos cómo hacer que llegue.")
 
 test = result("contraste_real")
 h1 = test["H1"]

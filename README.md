@@ -1,4 +1,8 @@
-# ¿Llegan las ayudas al alquiler a quien más las necesita?
+# Los invisibles del Bono
+
+**¿Llegan las ayudas al alquiler a quien más las necesita?** Los invisibles son los jóvenes que ni piden el Bono Alquiler Joven porque su alquiler pasa del tope: no salen en sus estadísticas, ni siquiera entre los rechazados. Si en 2022 el tope hubiera cubierto todo el alquiler, estimamos que se habrían hecho unas 9.300 solicitudes más, sobre 48.300 (de 3.200 a 16.300; `resultados/simulador_reparto.json`).
+
+**La app:** [invisibles-del-bono.streamlit.app](https://invisibles-del-bono.streamlit.app), publicada el 12-nov-2026.
 
 Proyecto para **DataMad 2026** (URJC, UCM y Comunidad de Madrid), sobre el **Bono Alquiler Joven** en la Comunidad de Madrid.
 **En desarrollo:** el periodo de desarrollo va del 7 al 26 de noviembre de 2026.
@@ -7,7 +11,7 @@ Proyecto para **DataMad 2026** (URJC, UCM y Comunidad de Madrid), sobre el **Bon
 - **El hallazgo: −7,6 % de solicitudes por cada 10 % más de alquileres por encima del tope; la parte del propio tope, −5,3 %.** Donde más pisos pasan del tope del Bono, menos jóvenes lo piden. Es un contraste registrado antes de hacerlo (una primera mirada descriptiva, del 27-oct, está declarada en el preregistro). No decimos que el tope sea la única causa: separando el alquiler caro en sí (un análisis hecho después), la parte del tope es un −5,3 %, la que usa el simulador (abajo, lo que no salió).
 - **Lo que viene: 58 % del alquiler, fuera.** El Plan Estatal 2026-2030 pone el tope en 500 € en los municipios de 10.000 habitantes o menos. Allí quedaría por encima el 58 % del alquiler; hoy, el 26 %.
 - **La propuesta: +41 % de ayudas donde más falta.** Topes según el alquiler de cada municipio, con la base del estudio que permite el art. 135 del Plan, y el dinero repartido por necesidad, no solo por orden de llegada. Con el mismo dinero, los municipios con más necesidad fuera de Madrid capital (36, que suman un tercio de sus jóvenes) reciben un 41 % más de ayudas que con el Plan tal cual. Madrid capital, que hoy recibe más ayudas por joven que el resto y también tiene mucha necesidad, recibe un 11 % menos. El +41 % sale del reparto: subir los topes no lo cambia, pero deja que los jóvenes de 63 pueblos puedan volver a pedirla. Y para que pedirla tenga la misma probabilidad que hoy, la propuesta necesita solo 0,2 M€ más que el Plan. Cabe en las convocatorias abiertas todo el año que pide el Plan (art. 138): el dinero se reparte en 4 bolsas por necesidad y, dentro de cada una, por orden de llegada ([cómo se aplica](data/COMO_SE_APLICA.md)).
-- **Para usarlo hoy:** una app («¿Puedo pedirla?», «¿Dónde me llega la ayuda?», la ficha de cada municipio y un simulador para la Consejería), la [base del estudio del art. 135](data/ESTUDIO_ART135.md), una base SQLite con su diccionario, una ficha DCAT-AP-ES y un servidor MCP. **Todo se rehace con un comando:** `python scripts/rehacer_todo.py`.
+- **Para usarlo hoy:** una [app](https://invisibles-del-bono.streamlit.app) («¿Puedo pedirla?», «¿Dónde me llega la ayuda?», la ficha de cada municipio y un simulador para la Consejería), la [base del estudio del art. 135](data/ESTUDIO_ART135.md), una base SQLite con su diccionario, una ficha DCAT-AP-ES y un servidor MCP. **Todo se rehace con un comando:** `python scripts/rehacer_todo.py`.
 
 ## La pregunta
 El Bono Alquiler Joven (RD 42/2022) da 250 € al mes, pero solo si el alquiler no pasa de **600 €**, o de **900 €** en los 29 municipios del Anexo II del Acuerdo del Consejo de Gobierno de 14-sep-2022.
@@ -78,7 +82,7 @@ streamlit run app/streamlit_app.py        # la app, en http://localhost:8501
 python app/probar_app.py                  # prueba todas las páginas de la app sin navegador
 ```
 
-Para publicar la app en Streamlit Community Cloud, el fichero principal es `app/streamlit_app.py`, y en «Advanced settings» hay que elegir Python 3.12. Usa `app/requirements.txt`, que solo tiene lo que necesita la app (Streamlit, pandas, NumPy, Altair y PyArrow, en las versiones con las que se ha probado), y el aspecto de `.streamlit/config.toml`. `python app/probar_app.py` prueba todas sus páginas en un entorno instalado solo con ese fichero.
+La app está publicada en Streamlit Community Cloud desde el 12-nov-2026: [invisibles-del-bono.streamlit.app](https://invisibles-del-bono.streamlit.app). Para publicarla de nuevo, el fichero principal es `app/streamlit_app.py`, y en «Advanced settings» hay que elegir Python 3.12. Usa `app/requirements.txt`, que solo tiene lo que necesita la app (Streamlit, pandas, NumPy, Altair y PyArrow, en las versiones con las que se ha probado), y el aspecto de `.streamlit/config.toml`. `python app/probar_app.py` prueba todas sus páginas en un entorno instalado solo con ese fichero.
 
 Dos pasos que no hace falta repetir, porque su resultado ya está en el repositorio:
 - `scripts/codigos_municipios.py` y `scripts/topes_convocatorias.py` sacan los códigos INE y los topes de 600 / 900 € de cada convocatoria (29 municipios en 2022, 55 en 2024) de los PDF oficiales, que no se suben: sus enlaces y huellas están en [docs_oficiales/FUENTES.md](docs_oficiales/FUENTES.md). Con los PDF en `docs_oficiales/`, regeneran `data/interim/topes_900_convocatorias.csv` idéntico.
@@ -87,12 +91,12 @@ Dos pasos que no hace falta repetir, porque su resultado ya está en el reposito
 Los CSV del portal que usamos están en `data/raw/`, tal y como se descargaron. Cada uno se llama `datos.csv` dentro de la carpeta de su conjunto, para que las rutas no pasen del límite de Windows al clonar o descomprimir el repositorio; el nombre y la dirección originales están en su `metadata.json`. El portal cambia sus ficheros: entre el 21-oct y el 5-nov pasó de Latin-1 a UTF-8 y añadió años. `scripts/verificar_descargas.py` lo comprueba (resultado en [data/VERIFICACION.md](data/VERIFICACION.md)) y `scripts/descargar.py` los vuelve a bajar. Lo que se bajó después del contraste está en carpetas con la fecha de descarga, para no tocar los ficheros del contraste: `data/raw_2026-11-06/` (renta, IRPF y paro con años nuevos), `data/raw_2026-11-07/` (los límites municipales) y `data/raw_2026-11-12/` (las zonas estadísticas, con `python scripts/descargar.py --destino=data/raw_2026-11-12 municipio_comunidad_madrid`).
 
 ## Para quién es y cuánto cuesta mantenerlo
-- **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado de la oferta de alquiler (art. 135). Este proyecto le da la base de ese estudio, repetible con un comando ([data/ESTUDIO_ART135.md](data/ESTUDIO_ART135.md)): de los 63 municipios pequeños donde proponemos subir el tope de 500 €, en 46 se puede justificar con los datos, y el simulador le deja probar topes y cupos antes de la convocatoria, con su coste.
+- **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado de la oferta de alquiler (art. 135). Este proyecto le da la base de ese estudio, repetible con un comando ([data/ESTUDIO_ART135.md](data/ESTUDIO_ART135.md)): de los 63 municipios pequeños donde proponemos subir el tope de 500 €, en 49 hay base en los datos (en 33, por la oferta de alquiler), y el simulador le deja probar topes y cupos antes de la convocatoria, con su coste.
 - **Ayuntamientos y oficinas de juventud:** la ficha de cada municipio, «¿Dónde me llega la ayuda?» y la calculadora, para orientar a quien pregunta.
 - **Los jóvenes:** saber en dos minutos si pueden pedirla, cuánto cobrarían y dónde les llega.
 - **Asistentes de IA:** el servidor MCP responde con nuestras cifras y cita la fuente de cada una.
 
-Mantenerlo cuesta casi nada: código abierto (MIT), datos públicos, un comando por cada año nuevo de datos y pruebas automáticas que avisan si algo cambia. La app puede funcionar en un servicio gratuito como Streamlit Community Cloud (el aspecto está en `.streamlit/config.toml`), y la base de datos es un solo fichero de medio megabyte.
+Mantenerlo cuesta casi nada: código abierto (MIT), datos públicos, un comando por cada año nuevo de datos y pruebas automáticas que avisan si algo cambia. La app funciona en un servicio gratuito, Streamlit Community Cloud (el aspecto está en `.streamlit/config.toml`), y la base de datos es un solo fichero de medio megabyte.
 
 ## Datos
 Solo datos agregados por municipio: **ningún dato personal**.
