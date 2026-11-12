@@ -1,0 +1,269 @@
+{
+ "note": "EXPLORATORIO: la propuesta en una convocatoria abierta todo el año (RD 326/2026, art. 138): 4 bolsas de dinero por necesidad, orden de llegada dentro de cada una y el sobrante a las demás; supuestos en el docstring de scripts/como_se_aplica.py",
+ "budget_meur": 31.8,
+ "beta": -0.5446185552468725,
+ "municipalities": 132,
+ "scenarios": {
+  "plan_tal_cual": "el Plan tal cual (una sola bolsa, por orden de llegada)",
+  "cupos_por_municipio": "la propuesta con un cupo para cada municipio (scripts/simulador.py)",
+  "bolsas": "la propuesta con 4 bolsas y orden de llegada dentro de cada una"
+ },
+ "by_group": {
+  "plan_tal_cual": {
+   "resto, necesidad alta": {
+    "young": 225245,
+    "requests": 8374,
+    "aids": 686.1,
+    "aids_per_1000_young": 3.0462,
+    "chance_of_aid": 0.0819,
+    "meur": 4.934
+   },
+   "resto, necesidad media": {
+    "young": 174043,
+    "requests": 6328,
+    "aids": 518.5,
+    "aids_per_1000_young": 2.9789,
+    "chance_of_aid": 0.0819,
+    "meur": 3.726
+   },
+   "resto, necesidad baja": {
+    "young": 181759,
+    "requests": 4121,
+    "aids": 337.6,
+    "aids_per_1000_young": 1.8576,
+    "chance_of_aid": 0.0819,
+    "meur": 2.419
+   },
+   "Madrid capital": {
+    "young": 684390,
+    "requests": 35126,
+    "aids": 2878.0,
+    "aids_per_1000_young": 4.2052,
+    "chance_of_aid": 0.0819,
+    "meur": 20.722
+   }
+  },
+  "cupos_por_municipio": {
+   "resto, necesidad alta": {
+    "young": 225245,
+    "requests": 8427,
+    "aids": 967.4,
+    "aids_per_1000_young": 4.2948,
+    "chance_of_aid": 0.1148,
+    "meur": 6.946
+   },
+   "resto, necesidad media": {
+    "young": 174043,
+    "requests": 6387,
+    "aids": 561.2,
+    "aids_per_1000_young": 3.2248,
+    "chance_of_aid": 0.0879,
+    "meur": 4.024
+   },
+   "resto, necesidad baja": {
+    "young": 181759,
+    "requests": 4267,
+    "aids": 327.8,
+    "aids_per_1000_young": 1.8034,
+    "chance_of_aid": 0.0768,
+    "meur": 2.332
+   },
+   "Madrid capital": {
+    "young": 684390,
+    "requests": 35126,
+    "aids": 2569.2,
+    "aids_per_1000_young": 3.754,
+    "chance_of_aid": 0.0731,
+    "meur": 18.498
+   }
+  },
+  "bolsas": {
+   "resto, necesidad alta": {
+    "young": 225245,
+    "requests": 8427,
+    "aids": 965.9,
+    "aids_per_1000_young": 4.2884,
+    "chance_of_aid": 0.1146,
+    "meur": 6.946
+   },
+   "resto, necesidad media": {
+    "young": 174043,
+    "requests": 6387,
+    "aids": 560.2,
+    "aids_per_1000_young": 3.2187,
+    "chance_of_aid": 0.0877,
+    "meur": 4.026
+   },
+   "resto, necesidad baja": {
+    "young": 181759,
+    "requests": 4267,
+    "aids": 325.5,
+    "aids_per_1000_young": 1.7906,
+    "chance_of_aid": 0.0763,
+    "meur": 2.331
+   },
+   "Madrid capital": {
+    "young": 684390,
+    "requests": 35126,
+    "aids": 2569.1,
+    "aids_per_1000_young": 3.7538,
+    "chance_of_aid": 0.0731,
+    "meur": 18.497
+   }
+  }
+ },
+ "bolsas": {
+  "resto, necesidad alta": {
+   "reserve_meur": 6.946,
+   "reserve_share": 0.2184,
+   "money_meur": 6.946
+  },
+  "resto, necesidad media": {
+   "reserve_meur": 4.026,
+   "reserve_share": 0.1266,
+   "money_meur": 4.026
+  },
+  "resto, necesidad baja": {
+   "reserve_meur": 2.331,
+   "reserve_share": 0.0733,
+   "money_meur": 2.331
+  },
+  "Madrid capital": {
+   "reserve_meur": 18.497,
+   "reserve_share": 0.5817,
+   "money_meur": 18.497
+  }
+ },
+ "released_between_bolsas_meur": 0.0,
+ "change_vs_plan_pct": {
+  "cupos_por_municipio": {
+   "resto, necesidad alta": 40.99,
+   "resto, necesidad media": 8.25,
+   "resto, necesidad baja": -2.92,
+   "Madrid capital": -10.73
+  },
+  "bolsas": {
+   "resto, necesidad alta": 40.78,
+   "resto, necesidad media": 8.05,
+   "resto, necesidad baja": -3.61,
+   "Madrid capital": -10.73
+  }
+ },
+ "who_loses_vs_plan": {
+  "aids_delta_by_group": {
+   "resto, necesidad alta": 279.8,
+   "resto, necesidad media": 41.7,
+   "resto, necesidad baja": -12.2,
+   "Madrid capital": -308.9
+  },
+  "municipalities_losing": 29,
+  "young_in_losing": 838782,
+  "young_share_in_losing": 0.6628,
+  "young_share_in_losing_outside_madrid": 0.122,
+  "municipalities_losing_outside_madrid": 28,
+  "lose_most": [
+   {
+    "municipio": "Madrid",
+    "grupo": "Madrid capital",
+    "indice_necesidad": 70.833,
+    "plan": 2878.0,
+    "bolsas": 2569.1,
+    "delta": -308.9
+   },
+   {
+    "municipio": "Alcobendas",
+    "grupo": "Tercio con menos necesidad",
+    "indice_necesidad": 39.461,
+    "plan": 54.0,
+    "bolsas": 50.3,
+    "delta": -3.7
+   },
+   {
+    "municipio": "Rivas-Vaciamadrid",
+    "grupo": "Tercio con menos necesidad",
+    "indice_necesidad": 45.833,
+    "plan": 38.5,
+    "bolsas": 35.8,
+    "delta": -2.7
+   },
+   {
+    "municipio": "Rozas de Madrid (Las)",
+    "grupo": "Tercio con menos necesidad",
+    "indice_necesidad": 34.559,
+    "plan": 29.3,
+    "bolsas": 27.2,
+    "delta": -2.0
+   },
+   {
+    "municipio": "Tres Cantos",
+    "grupo": "Tercio con menos necesidad",
+    "indice_necesidad": 34.069,
+    "plan": 22.9,
+    "bolsas": 21.3,
+    "delta": -1.6
+   }
+  ],
+  "gain_most": [
+   {
+    "municipio": "Alcalá de Henares",
+    "grupo": "Tercio con más necesidad",
+    "indice_necesidad": 66.912,
+    "plan": 122.8,
+    "bolsas": 171.7,
+    "delta": 49.0
+   },
+   {
+    "municipio": "Móstoles",
+    "grupo": "Tercio con más necesidad",
+    "indice_necesidad": 61.52,
+    "plan": 108.1,
+    "bolsas": 151.2,
+    "delta": 43.1
+   },
+   {
+    "municipio": "Torrejón de Ardoz",
+    "grupo": "Tercio con más necesidad",
+    "indice_necesidad": 72.549,
+    "plan": 78.2,
+    "bolsas": 109.3,
+    "delta": 31.2
+   },
+   {
+    "municipio": "Fuenlabrada",
+    "grupo": "Tercio con más necesidad",
+    "indice_necesidad": 63.971,
+    "plan": 73.6,
+    "bolsas": 103.0,
+    "delta": 29.4
+   },
+   {
+    "municipio": "Parla",
+    "grupo": "Tercio con más necesidad",
+    "indice_necesidad": 80.147,
+    "plan": 52.4,
+    "bolsas": 73.3,
+    "delta": 20.9
+   }
+  ]
+ },
+ "more_need_half_of_each_third": {
+  "resto, necesidad alta": {
+   "young": 87181,
+   "plan_tal_cual": 3.0098,
+   "cupos_por_municipio": 4.8095,
+   "bolsas": 4.2277
+  },
+  "resto, necesidad media": {
+   "young": 82339,
+   "plan_tal_cual": 3.2662,
+   "cupos_por_municipio": 3.5103,
+   "bolsas": 3.5056
+  },
+  "resto, necesidad baja": {
+   "young": 86651,
+   "plan_tal_cual": 2.1361,
+   "cupos_por_municipio": 2.3564,
+   "bolsas": 2.0755
+  }
+ }
+}

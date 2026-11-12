@@ -15,8 +15,9 @@ DISABILITY = {"no": "No", "33": "Discapacidad del 33 % o más, o hijo o hija de 
 
 t = municipalities().set_index("municipio")
 options = sorted(t.index, key=str.lower)
-# defaults through session state, not value=: «¿Dónde te llega?» fills these keys before switching to this page
-for key, value in {"calc_municipio": "Parla", "calc_precio": 750, "calc_ingresos": 18000, "calc_tipo": "Piso entero",
+# defaults through session state, not value=: «¿Dónde te llega?» fills these keys before switching to this page.
+# It opens with the case of the pitch: 750 EUR in Hoyo de Manzanares (cap 600 EUR today, 500 with the Plan, 900 with ours)
+for key, value in {"calc_municipio": "Hoyo de Manzanares", "calc_precio": 750, "calc_ingresos": 18000, "calc_tipo": "Piso entero",
                    "calc_n": 2}.items():
     st.session_state.setdefault(key, value)
 
@@ -98,9 +99,11 @@ if today.eligible:
                f"{today.months} meses ({euros(today.monthly * today.months)} en total).", icon=":material/check_circle:")
 else:
     why = next(ch.text for ch in today.checks if not ch.ok)
-    better = [n for k, n in (("plan", "el Plan 2026-2030"), ("propuesta", "nuestra propuesta")) if results[k].eligible]
-    st.error(f"**Hoy no cumples los requisitos del Bono.** {why}." + (f" Con {' y con '.join(better)}, sí." if better
-                                                                       else ""), icon=":material/cancel:")
+    plan_ok, ours_ok = results["plan"].eligible, results["propuesta"].eligible
+    tail = (" Con el Plan 2026-2030 y con nuestra propuesta, sí." if plan_ok and ours_ok else
+            " Con el Plan 2026-2030, sí." if plan_ok else
+            " Con el Plan 2026-2030, tampoco. Con nuestra propuesta, sí." if ours_ok else "")
+    st.error(f"**Hoy no cumples los requisitos del Bono.** {why}.{tail}", icon=":material/cancel:")
 
 st.subheader(f"En {name}")
 SUBTITLE = {"hoy": "Convocatoria abierta desde el 3-feb-2025: 250 € al mes durante 2 años",

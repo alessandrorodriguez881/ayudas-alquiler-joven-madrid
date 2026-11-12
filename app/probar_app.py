@@ -20,6 +20,13 @@ for option in ["Cobertura del Bono", "Alquiler por encima del tope", "Con el Pla
 
 at.switch_page("app_pages/calculadora.py").run()
 money = lambda: [m.value for m in at.metric]  # noqa: E731  (per rule: aid a month, aid in 24 months)
+# it opens with the pitch's case: 750 EUR in Hoyo de Manzanares, caps of 600 EUR today, 500 with the Plan, 900 with ours
+assert money() == ["0 €", "0 €", "0 €", "0 €", "300 €", "7.200 €"], money()
+assert "Con el Plan 2026-2030, tampoco. Con nuestra propuesta, sí" in at.error[0].value, at.error[0].value
+assert [c.value for c in at.caption if c.value.startswith("Tope del alquiler")] == [
+    f"Tope del alquiler aquí: {v} € (piso entero)." for v in (600, 500, 900)], [c.value for c in at.caption]
+ok(at, "calculadora: piso de 750 € en Hoyo de Manzanares (hoy no, con el Plan tampoco, con la propuesta sí)")
+at.selectbox(key="calc_municipio").select("Parla").run()
 assert money() == ["250 €", "6.000 €", "300 €", "7.200 €", "300 €", "7.200 €"], money()
 assert "Hoy cumples" in at.success[0].value, at.success[0].value
 ok(at, "calculadora: piso de 750 € en Parla, 18.000 € al año")
@@ -108,6 +115,11 @@ at.slider(key="tope_unico").set_value(1200).run()
 at.segmented_control(key="beta").set_value("Sin efecto (0)").run()
 at.slider(key="presupuesto").set_value(10.0).run()
 ok(at, "simulador: tope único de 1.200 €, sin efecto, 10 M€")
+
+at.switch_page("app_pages/aplicar.py").run()  # resultados/como_se_aplica.json and data/COMO_SE_APLICA.md
+assert [m.value for m in at.metric] == ["+41 %", "−11 %", "29 de 132"], [m.value for m in at.metric]
+assert any("forma continuada y permanente" in m.value and "1.503.067,85 €" in m.value for m in at.markdown),     "cómo se aplica: falta la norma o el precedente de Andalucía"
+ok(at, "cómo se aplica: 4 bolsas en una convocatoria abierta")
 
 at.switch_page("app_pages/metodo.py").run()
 assert any("I de Moran" in m.value and "Conley" in m.value for m in at.markdown), "método: falta lo de vecinos y zonas"

@@ -198,3 +198,5 @@ st.caption(f"Si el tope solo sube donde se puede justificar, la propuesta da lo 
            + (f"{measure['case_b_met']['portal_index']}" if measure["case_b_met"]["portal_index"] else "ninguno")
            + " con el índice. Es una base con datos abiertos, no el estudio oficial: decidirlo, elegir la medida y "
            "acordarlo con el Ministerio le toca a la Comunidad. Método y límites en el informe (scripts/estudio_art135.py).")
+st.page_link("app_pages/aplicar.py", label="¿Cómo se aplica en una convocatoria abierta todo el año? Las 4 bolsas y "
+             "quién pierde", icon=":material/gavel:")

@@ -11,6 +11,7 @@ page = st.navigation(
         st.Page("app_pages/donde.py", title="¿Dónde me llega?", icon=":material/explore:"),
         st.Page("app_pages/ficha.py", title="Tu municipio", icon=":material/location_city:"),
         st.Page("app_pages/simular.py", title="Simulador", icon=":material/tune:"),
+        st.Page("app_pages/aplicar.py", title="¿Cómo se aplica?", icon=":material/gavel:"),
         st.Page("app_pages/metodo.py", title="Método y datos", icon=":material/fact_check:"),
     ],
     position="top",
