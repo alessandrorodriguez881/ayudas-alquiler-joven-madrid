@@ -3,6 +3,9 @@
 Run:  python scripts/rehacer_todo.py               stops at the first step that fails and shows its error
       python scripts/rehacer_todo.py --comprobar   also lists, with git, the tracked files whose content changed
 
+Text files are stored with LF line endings (.gitattributes), so git compares their content, not their line endings, on
+Windows, Mac and Linux. The figures (PNG) are listed apart: their pixels depend on the fonts of each system.
+
 It downloads nothing: it starts from the CSV files in data/raw/ and the SERPAVI cut in data/interim/. Two steps are left
 out on purpose, as the README explains: reading the official PDF files (not in the repository; their result is in
 data/interim/topes_900_convocatorias.csv) and the synthetic power simulations (about 13 minutes; results in resultados/).
@@ -69,10 +72,17 @@ def main():
         changed = changed_files()
         if changed is None:
             print("git is not available: nothing to compare.")
-        elif changed:
-            print(f"{len(changed)} tracked files changed:\n  " + "\n  ".join(changed))
         else:
-            print("No tracked file changed: the results in the repository are the ones the code gives.")
+            figures = [f for f in changed if f.startswith("resultados/figuras/") and f.endswith(".png")]
+            rest = [f for f in changed if f not in figures]
+            if rest:
+                print(f"{len(rest)} tracked files changed:\n  " + "\n  ".join(rest))
+            else:
+                print("No tracked file changed: the results in the repository are the ones the code gives.")
+            if figures:
+                print(f"{len(figures)} figures changed (PNG). The figures use the font Segoe UI, or DejaVu Sans where it "
+                      "is missing, so their pixels change from one system to another; they are drawn from the results "
+                      "above:\n  " + "\n  ".join(figures))
 
 
 if __name__ == "__main__":

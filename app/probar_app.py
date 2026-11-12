@@ -118,7 +118,8 @@ ok(at, "simulador: tope único de 1.200 €, sin efecto, 10 M€")
 
 at.switch_page("app_pages/aplicar.py").run()  # resultados/como_se_aplica.json and data/COMO_SE_APLICA.md
 assert [m.value for m in at.metric] == ["+41 %", "−11 %", "29 de 132"], [m.value for m in at.metric]
-assert any("forma continuada y permanente" in m.value and "1.503.067,85 €" in m.value for m in at.markdown),     "cómo se aplica: falta la norma o el precedente de Andalucía"
+assert any("forma continuada y permanente" in m.value and "1.503.067,85 €" in m.value for m in at.markdown), \
+    "cómo se aplica: falta la norma o el precedente de Andalucía"
 ok(at, "cómo se aplica: 4 bolsas en una convocatoria abierta")
 
 at.switch_page("app_pages/metodo.py").run()

@@ -117,7 +117,8 @@ def sensitivity(t, top=20):
 
 def main():
     t, months = build()
-    t.to_csv(INTERIM / "municipios_2024.csv", index=False, encoding="utf-8")
+    # LF on every system: the DCAT file (ficha_dcat.py) records the size and SHA-1 of this file as committed
+    t.to_csv(INTERIM / "municipios_2024.csv", index=False, encoding="utf-8", lineterminator="\n")
     full = t["indice_necesidad"].notna()
     print(f"municipios_2024.csv: {len(t)} municipalities | need index: {full.sum()} "
           f"({t.loc[full, 'jovenes_20_34_2024'].sum() / t['jovenes_20_34_2024'].sum():.1%} of young people 20-34)")

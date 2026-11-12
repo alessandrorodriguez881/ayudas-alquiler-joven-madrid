@@ -1,0 +1,13 @@
+# Text files: stored and checked out with LF on every system, so «python scripts/rehacer_todo.py --comprobar» compares
+# content, not line endings, on Windows, Mac and Linux
+* text=auto eol=lf
+# Downloaded files stay byte for byte as they came: their hashes are compared with the portal's (verificar_descargas.py)
+data/raw/** -text
+data/raw_*/** -text
+# Binary files
+*.png binary
+*.sqlite binary
+*.zip binary
+*.pdf binary
+*.pptx binary
+*.xlsx binary

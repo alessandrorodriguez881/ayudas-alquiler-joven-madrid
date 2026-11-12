@@ -46,6 +46,8 @@ pip install -r requirements.txt
 python scripts/rehacer_todo.py --comprobar
 ```
 
+Da lo mismo en Windows, Mac y Linux: los ficheros de texto se guardan con finales de línea LF (`.gitattributes`), así que la comparación mira el contenido, no los finales de línea. Los datos descargados (`data/raw*/`) se guardan byte a byte, como vinieron, porque sus huellas se comparan con las del portal. Las figuras (PNG) salen aparte: usan la fuente Segoe UI, o DejaVu Sans donde no está, así que sus píxeles cambian de un sistema a otro.
+
 Son estos pasos, que también se pueden lanzar uno a uno:
 
 ```bash

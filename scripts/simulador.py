@@ -301,8 +301,9 @@ def main():
     out["plan_amount"] = plan_amount(s, betas["central"], now["central"], bonos_now)
     out["plan_income_limit"] = plan_income_limit(s, betas["central"], now["central"], bonos_now)
     text = json.dumps(out, indent=1, ensure_ascii=False, default=float)
-    (ROOT / "resultados" / "simulador_reparto.json").write_text(text, encoding="utf-8")
-    per_muni.to_csv(INTERIM / "simulador_municipios.csv", index=False, encoding="utf-8")
+    # LF on every system: the DCAT file (ficha_dcat.py) records the size and SHA-1 of these two files as committed
+    (ROOT / "resultados" / "simulador_reparto.json").write_text(text, encoding="utf-8", newline="\n")
+    per_muni.to_csv(INTERIM / "simulador_municipios.csv", index=False, encoding="utf-8", lineterminator="\n")
     print("coverage:", {k: round(v, 3) for k, v in cover.items()}, "| bonos:", n_bonos)
     print("share of the rental market above the cap:", json.dumps(out["gap_above_cap"], ensure_ascii=False))
     print("young people by group:", out["young_by_group"])
