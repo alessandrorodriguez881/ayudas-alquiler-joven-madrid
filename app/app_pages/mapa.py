@@ -14,13 +14,13 @@ high = lambda rule: sim["plan_amount"][rule]["aids_per_1000_young_by_group"]["re
 gap = sim["gap_above_cap"]
 KPIS = [  # short label, value, what it means (in sight: metric labels are cut to one line)
     ("Menos solicitudes", f"{es(h1['pct_per_10_points'], 1)} %",
-     f"por cada 10 puntos de alquiler por encima del tope. Contraste registrado antes de ver los datos "
+     f"por cada 10 puntos de alquiler por encima del tope. Contraste registrado antes de hacerlo "
      f"({test['n_municipalities']} municipios con todos los datos)"),
     ("Alquiler fuera del tope", pct(gap["2024_rents_plan_estatal"]["10000_or_fewer"]),
      f"en los municipios pequeños con el Plan 2026-2030, que les pone 500 € (hoy, "
      f"{pct(gap['2024_rents_2024_list']['10000_or_fewer'])})"),
     ("Más ayudas donde más falta", "+" + pct(high("necesidad_requisito_plan_p75_hasta_1000") / high("plan_estatal") - 1),
-     "con nuestra propuesta frente al Plan, con el mismo dinero: cuesta solo 0,2 M€ más"),
+     "con nuestra propuesta frente al Plan, con el mismo dinero (31,8 M€)"),
 ]
 for col, (label, value, note) in zip(st.columns(3), KPIS):
     with col.container(border=True, height="stretch"):

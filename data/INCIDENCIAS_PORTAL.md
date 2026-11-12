@@ -1,6 +1,6 @@
 # Incidencias en los datos abiertos que usamos
 
-Para devolverlas al Portal de Datos Abiertos de la Comunidad de Madrid. Generado por `scripts/incidencias_portal.py`: cada una se comprueba con los ficheros, así que no depende de lo que digamos nosotros. Ninguna cambia nuestros resultados: todas tienen su solución en el código.
+Para devolverlas al Portal de Datos Abiertos de la Comunidad de Madrid. Generado por `scripts/incidencias_portal.py`: cada una se comprueba con los ficheros, así que no depende de lo que digamos nosotros. Ninguna cambia nuestros resultados: todas tienen su solución en el código. Las 6 se enviaron a la Comunidad el 8-nov-2026, por su canal de atención al ciudadano (012), para el equipo del portal.
 
 | # | Tipo | Conjunto | Qué pasa | Propuesta | Comprobado |
 |---|---|---|---|---|---|

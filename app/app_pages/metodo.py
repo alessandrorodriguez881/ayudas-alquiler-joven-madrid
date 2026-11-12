@@ -20,7 +20,7 @@ zone_out = geo["spatial_cv"]["leave_one_zone_out"]
 ci_pct = lambda block: f"del {es(-block['pct_per_10_points_ci95'][1], 1)} % al {es(-block['pct_per_10_points_ci95'][0], 1)} %"  # noqa: E731
 
 st.title("Método y datos")
-st.subheader("Lo que probamos, con la regla escrita antes de mirar")
+st.subheader("Lo que probamos, con la regla escrita antes de hacerlo")
 st.markdown(
     f"- **Hipótesis principal, confirmada:** donde más parte del alquiler supera el tope, menos jóvenes piden el Bono. "
     f"Por cada 10 puntos más, un **{es(-h1['pct_per_10_points'], 1)} % menos** de solicitudes por joven "
