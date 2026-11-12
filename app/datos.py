@@ -60,14 +60,16 @@ def municipalities():
     t["cobertura_2022"] = 1000 * t["bono_aceptadas"] / young22
     s, _ = simulation_base()
     rules = simulador.rules(s)
-    caps = {"plan": simulador.plan_cap(s), "propuesta": rules[PROPOSAL][0]}
-    extra = s[["ine", "grupo_necesidad", simulador.BONO_INCOME, simulador.PLAN_INCOME]].copy()
+    # caps and shares for all 179 municipalities, not only the simulator's 132: the card of a town outside the simulator
+    # (no need index or no 2022 requests) showed «sin dato €» for the Plan and the proposal (execution review, 12-nov)
+    caps = {"plan": simulador.plan_cap(t), "propuesta": simulador.rules(t)[PROPOSAL][0]}
     for k, c in caps.items():
-        extra[f"tope_{k}"] = c
-        extra[f"fuera_{k}"] = [share_above(v, a, z) for v, a, z in zip(c, s["serpavi_p25_2024"], s["serpavi_p75_2024"])]
+        t[f"tope_{k}"] = c
+        t[f"fuera_{k}"] = [share_above(v, a, z) for v, a, z in zip(c, t["serpavi_p25_2024"], t["serpavi_p75_2024"])]
     # three young people sharing a flat on room contracts: the flat may cost 3 x the room cap (habitaciones.py)
-    extra["fuera_3_comparten_hoy"] = [share_above(1.5 * v, a, z) for v, a, z in
-                                      zip(s["tope_2024"], s["serpavi_p25_2024"], s["serpavi_p75_2024"])]
+    t["fuera_3_comparten_hoy"] = [share_above(1.5 * v, a, z) for v, a, z in
+                                  zip(t["tope_2024"], t["serpavi_p25_2024"], t["serpavi_p75_2024"])]
+    extra = s[["ine", "grupo_necesidad", simulador.BONO_INCOME, simulador.PLAN_INCOME]].copy()
     # bonos recomputed here, not read from simulador_municipios.csv: that file keeps 1 decimal, and rounding it again
     # turned Parla's 64.48 bonos into 65
     beta = result("exploratorio_topes_falsos")["real_cap_and_uniform_900"]["real_cap"]["beta"]

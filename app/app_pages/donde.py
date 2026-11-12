@@ -96,9 +96,10 @@ for r in t.dropna(subset=["entra"]).itertuples():
                    regular_income=True, nationality=True, disability="no", exclusions=frozenset(), other_rent_aid=False)
     res = rb.evaluate(case, rule, float(r.tope), float(r.tope_habitacion))
     aid = res.monthly if res.eligible else 0.0
+    pay = max(rent / n - aid, 0.0)  # the aid is never above the rent; rounding the rent to cents gave «-0 €» (12-nov)
     rows.append({"ine": r.ine, "lugar": r.lugar, "municipio": r.municipio, "distrito": r.distrito, "entra": r.entra,
-                 "mediana": r.serpavi_med_2024, "tope": r.tope, "alquiler": rent, "ayuda": aid, "pagas": rent / n - aid,
-                 "esfuerzo": (rent / n - aid) / (income / 12) if income else np.nan, "res": res})
+                 "mediana": r.serpavi_med_2024, "tope": r.tope, "alquiler": rent, "ayuda": aid, "pagas": pay,
+                 "esfuerzo": pay / (income / 12) if income else np.nan, "res": res})
 d = pd.DataFrame(rows).sort_values(["entra", "pagas"], ascending=[False, True])
 towns = d[d["distrito"].isna()]  # the tiles count municipalities, Madrid once
 failed = [ch for ch in d["res"].iloc[0].checks if not ch.ok]  # all else is set to pass: only income can fail

@@ -145,9 +145,9 @@ def income_plan(c, x):
 
 def rent_cap(c, x):
     cap = x.room_cap if c.kind == "habitacion" else x.flat_cap
-    what = "la habitación" if c.kind == "habitacion" else "el piso entero"
+    what = "de la habitación" if c.kind == "habitacion" else "del piso entero"
     adjusted = "" if x.rent == c.price else f" (de un precio de {eur(c.price)}, sin garaje, trastero ni gastos)"
-    return x.rent <= cap, f"El alquiler de {what} cuenta {eur(x.rent)}{adjusted}, y el tope es {eur(cap)}"
+    return x.rent <= cap, f"El alquiler {what} cuenta {eur(x.rent)}{adjusted}, y el tope es {eur(cap)}"
 
 
 def exclusions_today(c, x):
