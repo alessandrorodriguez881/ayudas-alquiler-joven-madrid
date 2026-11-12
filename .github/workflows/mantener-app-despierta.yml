@@ -1,0 +1,42 @@
+name: mantener la app despierta
+
+# Streamlit Community Cloud duerme las apps gratuitas que pasan 12 horas sin visitas, y después tardan cerca de un
+# minuto en despertar. Esto abre la app cada 6 horas (y la despierta si duerme), para que quien la abra desde el
+# formulario o el README no se encuentre la página de «app dormida». Es el mismo flujo que usan las demos de los
+# otros proyectos de Alessandro.
+on:
+  schedule:
+    - cron: "47 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  despertar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install playwright==1.48.0 && python -m playwright install --with-deps chromium
+      - name: Abrir la app, y despertarla si duerme
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+
+          URL = "https://invisibles-del-bono.streamlit.app"
+          with sync_playwright() as p:
+              navegador = p.chromium.launch()
+              pagina = navegador.new_page()
+              pagina.goto(URL, timeout=120_000)
+              pagina.wait_for_timeout(5_000)
+              boton = pagina.get_by_role("button", name="Yes, get this app back up!")
+              if boton.count():
+                  boton.click()
+                  print("La app dormía: despertada")
+              pagina.wait_for_timeout(90_000)  # lo bastante para que cargue y cuente como visita
+              print("Hecho:", pagina.title())
+              navegador.close()
+          PY
