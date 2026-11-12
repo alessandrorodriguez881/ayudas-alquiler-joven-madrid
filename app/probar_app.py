@@ -11,6 +11,8 @@ def ok(at, where):
     assert not at.exception, f"{where}: {at.exception[0].message}"
     print("ok", where)
 
+from datos import es  # noqa: E402  (the app's number format)
+assert (es(-0.3), es(-0.04, 1), es(1.4447, 2)) == ("0", "0,0", "1,44"), "es(): «-0» o doble redondeo"
 
 at = AppTest.from_file(str(APP), default_timeout=120).run()
 ok(at, "mapa")
@@ -60,6 +62,9 @@ at.segmented_control(key="donde_regla").set_value("hoy").run()
 assert at.error and "límite de ingresos" in at.error[0].value, [e.value for e in at.error]
 ok(at, "dónde me llega: 30.000 € no cumple el límite de hoy (25.200 €)")
 at.segmented_control(key="donde_como").set_value("Solo o sola").run()
+at.number_input(key="donde_ingresos").set_value(1000).run()
+assert card()[5] == "más del 100 %", card()  # was «480.000 %» with 1 EUR a year
+ok(at, "dónde me llega: con 1.000 € al año, el alquiler se lleva más del 100 %")
 at.number_input(key="donde_ingresos").set_value(18000).run()
 districts = lambda: next(m.value for m in at.markdown if "distritos**" in m.value)  # noqa: E731
 assert "**11 de los 21 distritos**, desde el 26 % de Chamberí hasta el 88 % de Puente de Vallecas" in districts(), \

@@ -34,7 +34,7 @@ with st.container(border=True):
     kind = "habitacion" if kind == "Habitación" else "piso"
 
     a, b = st.columns(2)
-    price = a.number_input("Precio al mes del contrato (€)", min_value=0, max_value=10000, step=10,
+    price = a.number_input("Precio al mes del contrato (€)", min_value=1, max_value=10000, step=10,
                            key="calc_precio", help="Si compartís piso y firmáis todos el contrato, el precio del piso entero.")
     income = b.number_input("Tus ingresos del último año declarado (€ al año)", min_value=0, max_value=1000000,
                             step=500, key="calc_ingresos",

@@ -152,7 +152,7 @@ with right:
         a.metric("Pagarías tú al mes", es(r["pagas"]) + " €",
                  help=f"Con un alquiler de {es(r['alquiler'])} € (el mediano, o el tope si el mediano pasa del tope)"
                       + (f", repartido entre {n}" if n > 1 else "") + ", menos la ayuda.")
-        b.metric("De tus ingresos", pct(r["esfuerzo"]) if income else "sin dato",
+        b.metric("De tus ingresos", ("más del 100 %" if r["esfuerzo"] > 1 else pct(r["esfuerzo"])) if income else "sin dato",
                  help="Lo que pagarías tú, sobre tus ingresos brutos de un mes (los del año entre 12). Por encima del "
                       "30 %, el alquiler pesa demasiado.")
         if st.button("Comprobar mi caso aquí, requisito a requisito", icon=":material/checklist:", type="primary",
@@ -179,7 +179,7 @@ if len(dis):
 
 st.subheader("Todos los municipios y los distritos de Madrid")
 st.dataframe(d.drop(columns=["ine", "municipio", "distrito", "res", "alquiler"])
-             .assign(entra=100 * d["entra"], esfuerzo=100 * d["esfuerzo"]),
+             .assign(entra=100 * d["entra"], esfuerzo=(100 * d["esfuerzo"]).clip(upper=100)),  # 100: all or more
              hide_index=True, width="stretch", height=380,
              column_config={"lugar": "Municipio o distrito",
                             "entra": st.column_config.ProgressColumn("Alquileres dentro del tope", format="%.0f %%",
@@ -188,7 +188,9 @@ st.dataframe(d.drop(columns=["ine", "municipio", "distrito", "res", "alquiler"])
                             "tope": st.column_config.NumberColumn("Tope", format="%d €"),
                             "ayuda": st.column_config.NumberColumn("Ayuda al mes", format="%d €"),
                             "pagas": st.column_config.NumberColumn("Pagarías tú", format="%d €"),
-                            "esfuerzo": st.column_config.NumberColumn("De tus ingresos", format="%.0f %%")},
+                            "esfuerzo": st.column_config.NumberColumn("De tus ingresos", format="%.0f %%",
+                                                                      help="100 %: el alquiler se lleva todos tus "
+                                                                           "ingresos, o más")},
              alt="Tabla de municipios y distritos de Madrid con la parte de los alquileres que entran en el tope, la "
                  "ayuda y lo que pagarías")
 st.caption("Suponemos que cumples lo demás (edad, nacionalidad, no tener otra vivienda…): compruébalo en «¿Puedo "

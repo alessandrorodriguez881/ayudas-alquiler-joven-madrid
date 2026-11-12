@@ -71,7 +71,7 @@ def share_below(table, year, times=3):
 
 def wavg(v, w):
     ok = v.notna() & w.notna()
-    return round(float((v[ok] * w[ok]).sum() / w[ok].sum()), 3)
+    return round(float((v[ok] * w[ok]).sum() / w[ok].sum()), 4)  # 4 decimals: 1.4447, not 1.445 (shown as «1,45»)
 
 
 def describe(s, elig):

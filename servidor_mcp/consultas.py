@@ -7,6 +7,7 @@ import pathlib
 import re
 import sqlite3
 import sys
+import time
 from contextlib import closing
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -16,6 +17,7 @@ import reglas_bono as rb  # noqa: E402
 from comun import norm, share_above  # noqa: E402
 
 MAX_ROWS = 500
+SQL_SECONDS = 5  # consulta_sql stops a query that runs longer than this
 RULE_IN_DB = {"hoy": "bono_2024", "plan": "plan_2026_2030", "propuesta": "propuesta"}
 CAP_RULES = ("bono_2022", "bono_2024", "plan_2026_2030", "propuesta")
 SIM = {"hoy": "actual_2024_55", "plan": "plan_estatal", "propuesta": "necesidad_requisito_plan_p75_hasta_1000"}
@@ -39,12 +41,19 @@ def sources(*names):
     return rows(f"SELECT fuente, titulo, publica, licencia, url FROM fuentes WHERE fuente IN ({marks})", names)
 
 
+def matches(text, name):
+    """The text is inside the name, or each of its words starts a word of the name: «las rozas» finds «Rozas de Madrid
+    (Las)» and not «Rozas de Puerto Real». Accents, articles and order do not matter (comun.norm)."""
+    key, words = norm(text), norm(name).split()
+    return key in norm(name) or all(any(w.startswith(k) for w in words) for k in key.split())
+
+
 def resolve(municipio):
     """One municipality from a name (accents, articles and order do not matter) or a 3-digit INE code."""
     every = rows("SELECT ine, municipio FROM municipios")
     key = norm(municipio)
     exact = [m for m in every if m["ine"] == str(municipio).strip() or norm(m["municipio"]) == key]
-    found = exact or [m for m in every if key and key in norm(m["municipio"])]
+    found = exact or [m for m in every if key and matches(municipio, m["municipio"])]
     if len(found) != 1:
         hint = ", ".join(m["municipio"] for m in found[:10]) or "ninguno"
         raise ValueError(f"«{municipio}» no identifica un solo municipio de la Comunidad de Madrid (coincidencias: {hint})")
@@ -52,9 +61,8 @@ def resolve(municipio):
 
 
 def buscar_municipio(texto):
-    key = norm(texto)
     return [m for m in rows("SELECT ine, municipio, pob_total_2024 FROM municipios ORDER BY municipio")
-            if key in norm(m["municipio"])]
+            if matches(texto, m["municipio"])]
 
 
 def ficha_municipio(municipio):
@@ -103,6 +111,17 @@ def puedo_pedirla(municipio, edad, precio, ingresos, tipo="piso", con_quien="sol
                   ingresos_otros=0.0, incluye="vivienda", gastos_sin_separar=False, fuente_regular_de_ingresos=True,
                   nacionalidad_o_residencia=True, discapacidad="no", exclusiones=(), otra_ayuda_al_alquiler=False,
                   iprem_anual=rb.IPREM_YEAR_2024):
+    wrong = [why for good, why in [
+        (0 <= int(edad) <= 120, "edad, de 0 a 120"), (float(precio) > 0, "precio, más de 0 €"),
+        (float(ingresos) >= 0, "ingresos, 0 € o más"), (float(ingresos_otros) >= 0, "ingresos_otros, 0 € o más"),
+        (1 <= int(jovenes_que_firman) <= 20, "jovenes_que_firman, de 1 a 20"),
+        (tipo in ("piso", "habitacion"), "tipo, «piso» o «habitacion»"),
+        (con_quien in ("solo", "jovenes", "otros"), "con_quien, «solo», «jovenes» u «otros»"),
+        (incluye in rb.ANNEX_SHARE, f"incluye, uno de {sorted(rb.ANNEX_SHARE)}"),
+        (str(discapacidad) in ("no", "33", "65"), "discapacidad, «no», «33» o «65»"),
+        (float(iprem_anual) > 0, "iprem_anual, más de 0 €")] if not good]
+    if wrong:
+        raise ValueError("Datos que no valen: " + "; ".join(wrong))
     m = resolve(municipio)
     case = rb.Case(age=int(edad), kind=tipo, price=float(precio), includes=incluye, expenses_included=bool(gastos_sin_separar),
                    living=con_quien, sharers=int(jovenes_que_firman), income=float(ingresos),
@@ -135,13 +154,20 @@ def diccionario(tabla=None):
 
 
 def consulta_sql(sql):
-    """One SELECT (or WITH ... SELECT) on the read-only database; at most MAX_ROWS rows."""
+    """One SELECT (or WITH ... SELECT) on the read-only database; at most MAX_ROWS rows and SQL_SECONDS seconds."""
     text = sql.strip().rstrip(";").strip()
     if not re.match(r"(?is)^(select|with)\b", text) or ";" in text:
         raise ValueError("Solo se admite una consulta SELECT (o WITH … SELECT), sin «;» en medio")
     with closing(sqlite3.connect(DB.as_uri() + "?mode=ro", uri=True)) as con:
         con.execute("PRAGMA query_only = ON")
-        cur = con.execute(text)
-        cols = [d[0] for d in cur.description]
-        got = cur.fetchmany(MAX_ROWS + 1)
+        deadline = time.monotonic() + SQL_SECONDS
+        con.set_progress_handler(lambda: time.monotonic() > deadline, 10_000)  # True stops the query
+        try:
+            cur = con.execute(text)
+            cols = [d[0] for d in cur.description]
+            got = cur.fetchmany(MAX_ROWS + 1)
+        except sqlite3.OperationalError as e:
+            if "interrupted" not in str(e):
+                raise
+            raise ValueError(f"La consulta tardaba más de {SQL_SECONDS} s y se ha parado: acótala (con WHERE o LIMIT)") from e
     return {"columnas": cols, "filas": [list(x) for x in got[:MAX_ROWS]], "recortado": len(got) > MAX_ROWS}

@@ -49,6 +49,9 @@ async def main():
             found = content(await call("buscar_municipio", texto="parla"))
             assert [m["ine"] for m in found] == ["106"], found
             ok("buscar_municipio: parla -> 106")
+            found = content(await call("buscar_municipio", texto="las rozas"))
+            assert [m["municipio"] for m in found] == ["Rozas de Madrid (Las)"], found
+            ok("buscar_municipio: las rozas -> Las Rozas de Madrid (y no Rozas de Puerto Real)")
 
             card = content(await call("ficha_municipio", municipio="Parla"))
             caps = {c["regla"]: c["tope_piso"] for c in card["topes"]}
@@ -87,6 +90,16 @@ async def main():
             r = await call("consulta_sql", sql="DELETE FROM municipios")
             assert "Solo se admite" in why(r), why(r)
             ok("los errores esperados llegan con su explicación (nombre ambiguo, escritura)")
+            r = await call("consulta_sql", sql="WITH RECURSIVE x(n) AS (SELECT 1 UNION ALL SELECT n + 1 FROM x) "
+                                               "SELECT COUNT(*) FROM x")
+            assert attr(r, "is_error", "isError") and "se ha parado" in why(r), why(r)
+            ok("consulta_sql: una consulta que no acaba se para a los 5 s")
+            for args, word in (({"con_quien": "jovenes", "jovenes_que_firman": 0}, "jovenes_que_firman"),
+                               ({"precio": -1}, "precio")):
+                r = await call("puedo_pedirla", **{"municipio": "Parla", "edad": 27, "precio": 750, "ingresos": 18000,
+                                                   **args})
+                assert attr(r, "is_error", "isError") and word in why(r), why(r)
+            ok("puedo_pedirla: 0 jóvenes que firman o un precio negativo dan un error explicado")
 
 
 if __name__ == "__main__":

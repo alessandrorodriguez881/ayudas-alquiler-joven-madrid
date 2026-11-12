@@ -36,6 +36,7 @@ def es(x, decimals=0):
     if x is None or (isinstance(x, float) and np.isnan(x)):
         return "sin dato"
     q = Decimal(str(float(x))).quantize(Decimal(1).scaleb(-decimals), rounding=ROUND_HALF_UP)
+    q = q.copy_abs() if q.is_zero() else q  # -0.3 rounds to «0», not «-0»
     return f"{q:,.{decimals}f}".replace(",", "_").replace(".", ",").replace("_", ".")
 
 
