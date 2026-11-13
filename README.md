@@ -109,7 +109,7 @@ Solo datos agregados por municipio: **ningún dato personal**.
 | [INE: IPC de la Comunidad de Madrid](https://www.ine.es/jaxiT3/Tabla.htm?t=50913) | Índice general de 2019 a 2024 (serie IPC256325), para comparar la subida del alquiler en la base del estudio del art. 135 (`data/raw/ine_ipc_madrid/`) | [Condiciones de uso del INE](https://www.ine.es/aviso_legal): reutilización permitida citando la fuente |
 | [BOE: Real Decreto 326/2026, Plan Estatal de Vivienda 2026-2030](https://www.boe.es/buscar/act.php?id=BOE-A-2026-8872) | Requisitos, topes y cuantía de la ayuda a jóvenes (arts. 8, 133 a 137), para la calculadora y el simulador | Textos oficiales publicados |
 
-**Qué hace cada conjunto del portal de la Comunidad** (si se actualiza uno, se vuelven a ejecutar los scripts y cambia lo de la última columna):
+**Qué hace cada uno de los 12 conjuntos del portal de la Comunidad que usamos** (son 10 filas porque la del alquiler medio y los índices de precios junta 3). Si se actualiza uno, se vuelven a ejecutar los scripts y cambia lo de la última columna. Hay otros 6 conjuntos del portal en `data/raw/` que descargamos para explorar o como contexto; no entran en los resultados.
 
 | Conjunto del portal | Para qué lo usamos | Qué depende de él |
 |---|---|---|
