@@ -139,4 +139,6 @@ ok(at, "cómo se aplica: 4 bolsas en una convocatoria abierta")
 at.switch_page("app_pages/metodo.py").run()
 assert any("I de Moran" in m.value and "Conley" in m.value for m in at.markdown), "método: falta lo de vecinos y zonas"
 assert any("entre un 31 % y un 52 % más" in m.value for m in at.markdown), "método: falta el +41 % con otras medidas"
+assert any("Madrid capital por distritos" in m.value and "8,7 % más que con el Plan" in m.value
+           and "Calculado después de verlo" in m.value for m in at.markdown), "método: falta Madrid por distritos (13-nov)"
 ok(at, "método y datos")

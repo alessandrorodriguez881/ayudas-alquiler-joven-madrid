@@ -68,6 +68,11 @@ high = lambda p, rule: es(plan[p][rule]["aids_per_1000_young_by_group"]["resto, 
 rulers = result("robustez_indice")["rulers"]
 other = [r["change_pct"] for k, r in rulers.items() if k != "indice_del_proyecto"]
 madrid_change = rulers["indice_del_proyecto"]["aids_per_1000_young_by_group"]["Madrid capital"]["change_pct"]
+# Madrid capital by districts: exploratory, pre-registered in PREREGISTRO_DISTRITOS.md (13-nov); scripts/distritos_cifra3.py
+dist = result("distritos_cifra3")
+d_top, d_after = dist["by_third"]["necesidad alta"], dist["D_added_after_results"]
+d_rulers = [r["change_C_vs_A_pct"] for k, r in dist["rulers"].items() if k != "indice_del_proyecto"]
+d_sub = d_after["madrid_subthirds"]
 st.subheader("Lo que cambia con el Plan 2026-2030 (simulación, con 31,8 M€)")
 st.markdown(
     f"- **Paga más por ayuda:** hasta 300 € al mes y nunca más del 60 % del alquiler (art. 137). Con el mismo dinero "
@@ -88,7 +93,24 @@ st.markdown(
     f"con él. Dejando la propuesta igual y eligiendo el tercio con más necesidad de otras {len(other)} formas (cada parte "
     f"del índice por separado u otras fórmulas), ese tercio recibe siempre más que con el Plan: entre un "
     f"{es(min(other))} % y un {es(max(other))} % más. Lo que gana sale sobre todo de Madrid capital, que recibe un "
-    f"{es(-madrid_change)} % menos."
+    f"{es(-madrid_change)} % menos.\n"
+    f"- **¿Y Madrid capital por distritos?** (exploratorio, con la regla y lo que esperábamos escritos antes de "
+    f"calcular) Partimos Madrid capital en sus 21 distritos, con datos de apoyo del Ayuntamiento de Madrid y del INE "
+    f"ajustados a las cifras de Madrid de este proyecto. Las solicitudes por distrito no existen: las de Madrid se "
+    f"reparten con el modelo. Con los distritos en las mismas tres bolsas que los municipios, el tercio con más "
+    f"necesidad ({d_top['districts']} distritos y {d_top['units'] - d_top['districts']} municipios) recibe un "
+    f"{es(d_top['change_C_3_bolsas_vs_A_pct'], 1)} % más que con el Plan (entre un {es(min(d_rulers), 1)} % y un "
+    f"{es(max(d_rulers), 1)} % más midiendo la necesidad de las otras formas), y Madrid entera, un "
+    f"{es(dist['madrid_city']['change_C_3_bolsas_vs_A_pct'], 1)} % más. Es menos de lo que esperábamos (entre un 10 % "
+    f"y un 30 %): con el Plan, los distritos ya reciben muchas ayudas, y al compartir bolsa con ellos los municipios con "
+    f"más necesidad de fuera ganan solo un "
+    f"{es(dist['outside_madrid_by_third']['necesidad alta']['change_C_3_bolsas_vs_A_pct'], 1)} %. **Calculado después "
+    f"de verlo:** con las cuatro bolsas de «¿Cómo se aplica?» y la de Madrid repartida por la necesidad de sus distritos, "
+    f"esos municipios siguen ganando un "
+    f"{es(d_after['outside_madrid_by_third_change_vs_A_pct']['resto, necesidad alta'], 1)} %, Madrid entera sigue "
+    f"perdiendo un {es(-d_after['madrid_city_change_vs_A_pct'], 1)} % y sus distritos con más necesidad pasan a ganar un "
+    f"{es(d_sub['necesidad alta']['change_vs_A_pct'], 1)} %; los de menos necesidad pierden un "
+    f"{es(-d_sub['necesidad baja']['change_vs_A_pct'], 1)} %. Detalle en data/DISTRITOS_CIFRA3.md del repositorio."
 )
 
 st.subheader("Para quién es y cuánto cuesta mantenerlo")
@@ -116,17 +138,21 @@ st.markdown(
 st.subheader("Datos")
 st.table({
     "Fuente": ["Portal de Datos Abiertos de la Comunidad de Madrid", "SERPAVI, Ministerio de Vivienda y Agenda Urbana",
-               "Base de Datos Nacional de Subvenciones"],
+               "Base de Datos Nacional de Subvenciones", "Ayuntamiento de Madrid e INE (solo para Madrid por distritos)"],
     "Qué usamos": ["Bono Alquiler Joven 2022 (solicitudes, aceptadas y rechazadas por municipio); Ayudas al alquiler para "
                    "jóvenes; población por edad; renta disponible; declaraciones del IRPF por tramo; paro registrado por "
                    "edad; Censo 2021 (viviendas en alquiler); alquiler medio e índices de precios del alquiler (para "
                    "comprobar el SERPAVI, también por distritos); límites de los municipios y de los distritos de Madrid",
                    "Alquiler mediano, p25 y p75 por municipio, de 2011 a 2024, y por distrito de Madrid (2024)",
-                   "Municipios con tope de 900 € en cada convocatoria: 29 hasta 2023 y 55 desde 2024"],
-    "Licencia": ["CC BY 4.0", "Reutilización permitida citando la fuente", "Textos oficiales publicados"],
+                   "Municipios con tope de 900 € en cada convocatoria: 29 hasta 2023 y 55 desde 2024",
+                   "Padrón municipal a 1-1-2024 y panel de indicadores de distritos (renta y paro de 16 a 24 años) del "
+                   "Ayuntamiento; Censo 2021 por secciones del INE (hogares en alquiler). Exploratorio"],
+    "Licencia": ["CC BY 4.0", "Reutilización permitida citando la fuente", "Textos oficiales publicados",
+                 "CC BY 4.0 (Ayuntamiento); reutilización permitida citando la fuente (INE)"],
 }, alt="Datos que usa el proyecto, su fuente y su licencia")
-st.caption("Todo es estadística agregada por municipio: ningún dato personal. Las licencias y las huellas de cada "
-           "descarga están en el README y en data/VERIFICACION.md del repositorio.")
+st.caption("Todo es estadística agregada por municipio o por distrito: ningún dato personal. Las licencias y las huellas "
+           "de cada descarga están en el README y en data/VERIFICACION.md del repositorio (las de los distritos, en "
+           "data/raw_2026-11-13/metadata.json).")
 
 st.subheader("La base de datos")
 tables = query("SELECT tabla, COUNT(*) AS columnas FROM diccionario GROUP BY tabla")
