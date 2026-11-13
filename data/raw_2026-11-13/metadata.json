@@ -1,0 +1,38 @@
+{
+ "descargado": "2026-11-13",
+ "nota": "Datos de apoyo para la cifra 3 por distritos (PREREGISTRO_DISTRITOS.md). Los ficheros grandes no van al repositorio; se rehacen con estas direcciones",
+ "ficheros": {
+  "padron_ayto_202401/padron_202401.csv": {
+   "titulo": "Padrón municipal. Histórico. 2024. Enero (Ayuntamiento de Madrid, conjunto 209163)",
+   "url": "https://datos.madrid.es/dataset/209163-0-padron-municipal-historico/resource/209163-202-padron-municipal-historico-csv/download/209163-202-padron-municipal-historico-csv.csv",
+   "pagina": "https://datos.madrid.es/dataset/209163-0-padron-municipal-historico",
+   "licencia": "CC BY 4.0",
+   "bytes": 34017598,
+   "sha256": "58d42bbe86c035ab525606b6d42628df5863e0625d8dd7d650203008cf730bd0"
+  },
+  "panel_indicadores_ayto/acumulado.csv": {
+   "titulo": "Panel de indicadores de distritos y barrios de Madrid. Estudio sociodemográfico (Ayuntamiento de Madrid, conjunto 300087), fichero acumulado de las ediciones 2020-2026",
+   "url": "https://datos.madrid.es/dataset/300087-0-indicadores-distritos/resource/300087-0-indicadores-distritos-csv/download/acumulado.csv",
+   "pagina": "https://datos.madrid.es/dataset/300087-0-indicadores-distritos",
+   "licencia": "CC BY 4.0",
+   "bytes": 36060277,
+   "sha256": "11a758e6249d81ede44a6fad9e4456dee8145e459464a3419929c579262ac6fc"
+  },
+  "ine_censo2021_secciones/C2021_Indicadores.csv": {
+   "titulo": "INE, Censos de Población y Viviendas 2021: indicadores por secciones censales",
+   "url": "https://www.ine.es/censos2021/C2021_Indicadores.csv",
+   "pagina": "https://www.ine.es/uc/Kpj8DYAg",
+   "licencia": "Condiciones de uso del INE (reutilización permitida citando la fuente)",
+   "bytes": 8049871,
+   "sha256": "f1749637f2b14da34b80f845accd5d13468905e7bddc166aaf333855524391d8"
+  },
+  "ine_censo2021_secciones/indicadores_seccen_c2021.xlsx": {
+   "titulo": "INE, relación de indicadores del fichero anterior",
+   "url": "https://www.ine.es/censos2021/indicadores_seccen_c2021.xlsx",
+   "pagina": "https://www.ine.es/uc/Kpj8DYAg",
+   "licencia": "Condiciones de uso del INE (reutilización permitida citando la fuente)",
+   "bytes": 26045,
+   "sha256": "9b9905d8a2a914d41b6a51c3ee990d900edc0349584b13d71e94f0d8aeba4e92"
+  }
+ }
+}

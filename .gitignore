@@ -20,3 +20,6 @@ __pycache__/
 
 # Temporary copy that scripts/base_datos.py builds before comparing it with the current database
 data/*.nueva.sqlite
+
+# Ficheros grandes de apoyo para los distritos (78 MB): scripts/distritos_cifra3.py los baja con data/raw_2026-11-13/metadata.json
+data/raw_2026-11-13/*/

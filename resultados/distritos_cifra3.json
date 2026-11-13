@@ -1,0 +1,549 @@
+{
+ "note": "EXPLORATORIO, preregistrado en PREREGISTRO_DISTRITOS.md (commit a74873e, 13-nov 15:34): la cifra 3 con Madrid capital en sus 21 distritos; supuestos en el docstring de scripts/distritos_cifra3.py",
+ "beta": -0.5446185552468725,
+ "units": 152,
+ "check_madrid_whole_top_third_pct": 40.78,
+ "requests": {
+  "plan_madrid_districts": 35196,
+  "proposal_madrid_districts": 35196
+ },
+ "city_values_in_sources": {
+  "renta_panel_2023": 19632.0,
+  "paro16_24_panel_2024": 3.005,
+  "pct_alquiler_2021_ine": 24.021226816242145,
+  "requests_plan_madrid_as_one": 35125.51573359997
+ },
+ "by_third": {
+  "necesidad alta": {
+   "young": 425404,
+   "units": 27,
+   "districts": 8,
+   "young_share_in_madrid": 0.7067,
+   "aids_A_plan_tal_cual": 1791.6,
+   "aids_B_cupos_por_unidad": 1948.7,
+   "aids_C_3_bolsas": 1947.8,
+   "per1000_A_plan_tal_cual": 4.2116,
+   "per1000_B_cupos_por_unidad": 4.5807,
+   "per1000_C_3_bolsas": 4.5787,
+   "change_B_cupos_por_unidad_vs_A_pct": 8.76,
+   "change_C_3_bolsas_vs_A_pct": 8.72
+  },
+  "necesidad media": {
+   "young": 447758,
+   "units": 49,
+   "districts": 7,
+   "young_share_in_madrid": 0.5143,
+   "aids_A_plan_tal_cual": 1554.0,
+   "aids_B_cupos_por_unidad": 1562.3,
+   "aids_C_3_bolsas": 1559.7,
+   "per1000_A_plan_tal_cual": 3.4706,
+   "per1000_B_cupos_por_unidad": 3.4891,
+   "per1000_C_3_bolsas": 3.4833,
+   "change_B_cupos_por_unidad_vs_A_pct": 0.53,
+   "change_C_3_bolsas_vs_A_pct": 0.37
+  },
+  "necesidad baja": {
+   "young": 392276,
+   "units": 76,
+   "districts": 6,
+   "young_share_in_madrid": 0.3912,
+   "aids_A_plan_tal_cual": 1074.6,
+   "aids_B_cupos_por_unidad": 915.0,
+   "aids_C_3_bolsas": 912.6,
+   "per1000_A_plan_tal_cual": 2.7394,
+   "per1000_B_cupos_por_unidad": 2.3325,
+   "per1000_C_3_bolsas": 2.3265,
+   "change_B_cupos_por_unidad_vs_A_pct": -14.86,
+   "change_C_3_bolsas_vs_A_pct": -15.07
+  }
+ },
+ "madrid_city": {
+  "young": 684390,
+  "units": 21,
+  "districts": 21,
+  "young_share_in_madrid": 1.0,
+  "aids_A_plan_tal_cual": 2880.0,
+  "aids_B_cupos_por_unidad": 2518.9,
+  "aids_C_3_bolsas": 2910.3,
+  "per1000_A_plan_tal_cual": 4.2081,
+  "per1000_B_cupos_por_unidad": 3.6806,
+  "per1000_C_3_bolsas": 4.2524,
+  "change_B_cupos_por_unidad_vs_A_pct": -12.54,
+  "change_C_3_bolsas_vs_A_pct": 1.05
+ },
+ "outside_madrid_by_third": {
+  "necesidad alta": {
+   "young": 124763,
+   "units": 19,
+   "districts": 0,
+   "young_share_in_madrid": 0.0,
+   "aids_A_plan_tal_cual": 393.7,
+   "aids_B_cupos_por_unidad": 584.3,
+   "aids_C_3_bolsas": 428.9,
+   "per1000_A_plan_tal_cual": 3.1557,
+   "per1000_B_cupos_por_unidad": 4.683,
+   "per1000_C_3_bolsas": 3.4381,
+   "change_B_cupos_por_unidad_vs_A_pct": 48.4,
+   "change_C_3_bolsas_vs_A_pct": 8.95
+  },
+  "necesidad media": {
+   "young": 217481,
+   "units": 42,
+   "districts": 0,
+   "young_share_in_madrid": 0.0,
+   "aids_A_plan_tal_cual": 630.4,
+   "aids_B_cupos_por_unidad": 809.9,
+   "aids_C_3_bolsas": 636.9,
+   "per1000_A_plan_tal_cual": 2.8987,
+   "per1000_B_cupos_por_unidad": 3.7241,
+   "per1000_C_3_bolsas": 2.9284,
+   "change_B_cupos_por_unidad_vs_A_pct": 28.47,
+   "change_C_3_bolsas_vs_A_pct": 1.02
+  },
+  "necesidad baja": {
+   "young": 238803,
+   "units": 70,
+   "districts": 0,
+   "young_share_in_madrid": 0.0,
+   "aids_A_plan_tal_cual": 516.1,
+   "aids_B_cupos_por_unidad": 512.7,
+   "aids_C_3_bolsas": 444.0,
+   "per1000_A_plan_tal_cual": 2.1611,
+   "per1000_B_cupos_por_unidad": 2.1471,
+   "per1000_C_3_bolsas": 1.8594,
+   "change_B_cupos_por_unidad_vs_A_pct": -0.65,
+   "change_C_3_bolsas_vs_A_pct": -13.96
+  }
+ },
+ "bolsas_money_meur": {
+  "necesidad alta": 14.02,
+  "necesidad media": 11.22,
+  "necesidad baja": 6.56
+ },
+ "D_added_after_results": {
+  "note": "AÑADIDO DESPUÉS DE VER LOS RESULTADOS (no preregistrado): las 4 bolsas de hoy (con sus reservas) y, dentro de la de Madrid, 3 subbolsas por la necesidad de sus distritos",
+  "outside_madrid_by_third_change_vs_A_pct": {
+   "resto, necesidad alta": 40.96,
+   "resto, necesidad media": 8.19,
+   "resto, necesidad baja": -3.48
+  },
+  "madrid_city_change_vs_A_pct": -10.8,
+  "madrid_subthirds": {
+   "necesidad alta": {
+    "districts": [
+     "Tetuán",
+     "Carabanchel",
+     "Usera",
+     "Puente de Vallecas",
+     "Villaverde",
+     "Villa de Vallecas",
+     "Vicálvaro"
+    ],
+    "young": 252788,
+    "per1000_A": 4.6419,
+    "per1000_D": 4.7422,
+    "change_vs_A_pct": 2.16
+   },
+   "necesidad media": {
+    "districts": [
+     "Centro",
+     "Arganzuela",
+     "Latina",
+     "Moratalaz",
+     "Ciudad Lineal",
+     "San Blas-Canillejas"
+    ],
+    "young": 213008,
+    "per1000_A": 4.281,
+    "per1000_D": 3.5937,
+    "change_vs_A_pct": -16.05
+   },
+   "necesidad baja": {
+    "districts": [
+     "Retiro",
+     "Salamanca",
+     "Chamartín",
+     "Chamberí",
+     "Fuencarral-El Pardo",
+     "Moncloa-Aravaca",
+     "Hortaleza",
+     "Barajas"
+    ],
+    "young": 218594,
+    "per1000_A": 3.6355,
+    "per1000_D": 2.7669,
+    "change_vs_A_pct": -23.89
+   }
+  }
+ },
+ "districts": [
+  {
+   "municipio": "Madrid - Puente de Vallecas",
+   "indice_necesidad": 93.382,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 53930.237,
+   "esfuerzo_alquiler_2024": 0.503,
+   "paro25_por_1000_15_24_2024": 44.863,
+   "pct_alquiler_2021": 22.827,
+   "plan": 261.977,
+   "bolsas": 284.648,
+   "per1000_plan": 4.858,
+   "per1000_bolsas": 5.278,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - Usera",
+   "indice_necesidad": 88.971,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 30445.695,
+   "esfuerzo_alquiler_2024": 0.52,
+   "paro25_por_1000_15_24_2024": 39.019,
+   "pct_alquiler_2021": 22.61,
+   "plan": 143.153,
+   "bolsas": 155.541,
+   "per1000_plan": 4.702,
+   "per1000_bolsas": 5.109,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - Villa de Vallecas",
+   "indice_necesidad": 88.235,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 22211.196,
+   "esfuerzo_alquiler_2024": 0.44,
+   "paro25_por_1000_15_24_2024": 42.929,
+   "pct_alquiler_2021": 22.095,
+   "plan": 103.34,
+   "bolsas": 112.283,
+   "per1000_plan": 4.653,
+   "per1000_bolsas": 5.055,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - Villaverde",
+   "indice_necesidad": 87.255,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 34202.6,
+   "esfuerzo_alquiler_2024": 0.491,
+   "paro25_por_1000_15_24_2024": 40.48,
+   "pct_alquiler_2021": 21.181,
+   "plan": 165.141,
+   "bolsas": 179.432,
+   "per1000_plan": 4.828,
+   "per1000_bolsas": 5.246,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - Carabanchel",
+   "indice_necesidad": 85.539,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 55595.008,
+   "esfuerzo_alquiler_2024": 0.471,
+   "paro25_por_1000_15_24_2024": 35.624,
+   "pct_alquiler_2021": 23.792,
+   "plan": 263.878,
+   "bolsas": 286.713,
+   "per1000_plan": 4.746,
+   "per1000_bolsas": 5.157,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - Vicálvaro",
+   "indice_necesidad": 74.51,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 17073.133,
+   "esfuerzo_alquiler_2024": 0.437,
+   "paro25_por_1000_15_24_2024": 34.851,
+   "pct_alquiler_2021": 20.014,
+   "plan": 76.313,
+   "bolsas": 82.917,
+   "per1000_plan": 4.47,
+   "per1000_bolsas": 4.857,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - Tetuán",
+   "indice_necesidad": 73.039,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 39329.979,
+   "esfuerzo_alquiler_2024": 0.395,
+   "paro25_por_1000_15_24_2024": 24.15,
+   "pct_alquiler_2021": 31.542,
+   "plan": 159.622,
+   "bolsas": 173.435,
+   "per1000_plan": 4.059,
+   "per1000_bolsas": 4.41,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - Latina",
+   "indice_necesidad": 72.549,
+   "tercio": "necesidad alta",
+   "jovenes_20_34_2024": 47852.947,
+   "esfuerzo_alquiler_2024": 0.431,
+   "paro25_por_1000_15_24_2024": 31.499,
+   "pct_alquiler_2021": 20.854,
+   "plan": 224.474,
+   "bolsas": 243.9,
+   "per1000_plan": 4.691,
+   "per1000_bolsas": 5.097,
+   "change_pct": 8.654
+  },
+  {
+   "municipio": "Madrid - San Blas-Canillejas",
+   "indice_necesidad": 65.686,
+   "tercio": "necesidad media",
+   "jovenes_20_34_2024": 32057.046,
+   "esfuerzo_alquiler_2024": 0.417,
+   "paro25_por_1000_15_24_2024": 25.397,
+   "pct_alquiler_2021": 20.025,
+   "plan": 141.57,
+   "bolsas": 141.45,
+   "per1000_plan": 4.416,
+   "per1000_bolsas": 4.412,
+   "change_pct": -0.084
+  },
+  {
+   "municipio": "Madrid - Ciudad Lineal",
+   "indice_necesidad": 64.706,
+   "tercio": "necesidad media",
+   "jovenes_20_34_2024": 45841.43,
+   "esfuerzo_alquiler_2024": 0.38,
+   "paro25_por_1000_15_24_2024": 21.658,
+   "pct_alquiler_2021": 22.886,
+   "plan": 198.431,
+   "bolsas": 198.264,
+   "per1000_plan": 4.329,
+   "per1000_bolsas": 4.325,
+   "change_pct": -0.084
+  },
+  {
+   "municipio": "Madrid - Centro",
+   "indice_necesidad": 62.5,
+   "tercio": "necesidad media",
+   "jovenes_20_34_2024": 40020.558,
+   "esfuerzo_alquiler_2024": 0.373,
+   "paro25_por_1000_15_24_2024": 17.361,
+   "pct_alquiler_2021": 37.876,
+   "plan": 153.627,
+   "bolsas": 153.497,
+   "per1000_plan": 3.839,
+   "per1000_bolsas": 3.835,
+   "change_pct": -0.084
+  },
+  {
+   "municipio": "Madrid - Arganzuela",
+   "indice_necesidad": 58.824,
+   "tercio": "necesidad media",
+   "jovenes_20_34_2024": 30283.491,
+   "esfuerzo_alquiler_2024": 0.362,
+   "paro25_por_1000_15_24_2024": 16.329,
+   "pct_alquiler_2021": 24.022,
+   "plan": 117.416,
+   "bolsas": 117.317,
+   "per1000_plan": 3.877,
+   "per1000_bolsas": 3.874,
+   "change_pct": -0.084
+  },
+  {
+   "municipio": "Madrid - Moratalaz",
+   "indice_necesidad": 56.618,
+   "tercio": "necesidad media",
+   "jovenes_20_34_2024": 16952.694,
+   "esfuerzo_alquiler_2024": 0.401,
+   "paro25_por_1000_15_24_2024": 30.21,
+   "pct_alquiler_2021": 16.783,
+   "plan": 76.372,
+   "bolsas": 76.307,
+   "per1000_plan": 4.505,
+   "per1000_bolsas": 4.501,
+   "change_pct": -0.084
+  },
+  {
+   "municipio": "Madrid - Chamberí",
+   "indice_necesidad": 54.657,
+   "tercio": "necesidad media",
+   "jovenes_20_34_2024": 33179.844,
+   "esfuerzo_alquiler_2024": 0.35,
+   "paro25_por_1000_15_24_2024": 13.15,
+   "pct_alquiler_2021": 29.806,
+   "plan": 116.04,
+   "bolsas": 115.942,
+   "per1000_plan": 3.497,
+   "per1000_bolsas": 3.494,
+   "change_pct": -0.084
+  },
+  {
+   "municipio": "Madrid - Hortaleza",
+   "indice_necesidad": 52.941,
+   "tercio": "necesidad media",
+   "jovenes_20_34_2024": 31941.463,
+   "esfuerzo_alquiler_2024": 0.376,
+   "paro25_por_1000_15_24_2024": 17.232,
+   "pct_alquiler_2021": 20.307,
+   "plan": 120.131,
+   "bolsas": 120.03,
+   "per1000_plan": 3.761,
+   "per1000_bolsas": 3.758,
+   "change_pct": -0.084
+  },
+  {
+   "municipio": "Madrid - Fuencarral-El Pardo",
+   "indice_necesidad": 51.471,
+   "tercio": "necesidad baja",
+   "jovenes_20_34_2024": 38828.799,
+   "esfuerzo_alquiler_2024": 0.37,
+   "paro25_por_1000_15_24_2024": 13.837,
+   "pct_alquiler_2021": 21.001,
+   "plan": 147.209,
+   "bolsas": 123.51,
+   "per1000_plan": 3.791,
+   "per1000_bolsas": 3.181,
+   "change_pct": -16.099
+  },
+  {
+   "municipio": "Madrid - Salamanca",
+   "indice_necesidad": 50.735,
+   "tercio": "necesidad baja",
+   "jovenes_20_34_2024": 34502.725,
+   "esfuerzo_alquiler_2024": 0.338,
+   "paro25_por_1000_15_24_2024": 10.27,
+   "pct_alquiler_2021": 29.282,
+   "plan": 121.1,
+   "bolsas": 101.604,
+   "per1000_plan": 3.51,
+   "per1000_bolsas": 2.945,
+   "change_pct": -16.099
+  },
+  {
+   "municipio": "Madrid - Barajas",
+   "indice_necesidad": 49.51,
+   "tercio": "necesidad baja",
+   "jovenes_20_34_2024": 7382.688,
+   "esfuerzo_alquiler_2024": 0.362,
+   "paro25_por_1000_15_24_2024": 11.259,
+   "pct_alquiler_2021": 20.628,
+   "plan": 29.277,
+   "bolsas": 24.563,
+   "per1000_plan": 3.966,
+   "per1000_bolsas": 3.327,
+   "change_pct": -16.099
+  },
+  {
+   "municipio": "Madrid - Retiro",
+   "indice_necesidad": 48.284,
+   "tercio": "necesidad baja",
+   "jovenes_20_34_2024": 20766.905,
+   "esfuerzo_alquiler_2024": 0.354,
+   "paro25_por_1000_15_24_2024": 12.892,
+   "pct_alquiler_2021": 21.357,
+   "plan": 74.671,
+   "bolsas": 62.649,
+   "per1000_plan": 3.596,
+   "per1000_bolsas": 3.017,
+   "change_pct": -16.099
+  },
+  {
+   "municipio": "Madrid - Moncloa-Aravaca",
+   "indice_necesidad": 44.608,
+   "tercio": "necesidad baja",
+   "jovenes_20_34_2024": 23790.495,
+   "esfuerzo_alquiler_2024": 0.328,
+   "paro25_por_1000_15_24_2024": 11.645,
+   "pct_alquiler_2021": 22.249,
+   "plan": 86.611,
+   "bolsas": 72.667,
+   "per1000_plan": 3.641,
+   "per1000_bolsas": 3.054,
+   "change_pct": -16.099
+  },
+  {
+   "municipio": "Madrid - Chamartín",
+   "indice_necesidad": 42.892,
+   "tercio": "necesidad baja",
+   "jovenes_20_34_2024": 28201.07,
+   "esfuerzo_alquiler_2024": 0.305,
+   "paro25_por_1000_15_24_2024": 9.368,
+   "pct_alquiler_2021": 26.853,
+   "plan": 99.657,
+   "bolsas": 83.613,
+   "per1000_plan": 3.534,
+   "per1000_bolsas": 2.965,
+   "change_pct": -16.099
+  }
+ ],
+ "rulers": {
+  "indice_del_proyecto": {
+   "spearman_with_index": 1.0,
+   "units_in_top_third": 27,
+   "districts_in_top_third": 8,
+   "per1000_A": 4.2116,
+   "change_C_vs_A_pct": 8.72,
+   "change_B_vs_A_pct": 8.76
+  },
+  "solo_esfuerzo_alquiler_2024": {
+   "spearman_with_index": 0.53,
+   "units_in_top_third": 18,
+   "districts_in_top_third": 6,
+   "per1000_A": 3.8568,
+   "change_C_vs_A_pct": 5.17,
+   "change_B_vs_A_pct": 15.5
+  },
+  "solo_paro25_por_1000_15_24_2024": {
+   "spearman_with_index": 0.614,
+   "units_in_top_third": 59,
+   "districts_in_top_third": 6,
+   "per1000_A": 3.7766,
+   "change_C_vs_A_pct": 7.12,
+   "change_B_vs_A_pct": 20.03
+  },
+  "solo_pct_alquiler_2021": {
+   "spearman_with_index": 0.506,
+   "units_in_top_third": 30,
+   "districts_in_top_third": 11,
+   "per1000_A": 4.093,
+   "change_C_vs_A_pct": 1.59,
+   "change_B_vs_A_pct": -8.2
+  },
+  "sin_esfuerzo_alquiler_2024": {
+   "spearman_with_index": 0.804,
+   "units_in_top_third": 51,
+   "districts_in_top_third": 9,
+   "per1000_A": 4.1977,
+   "change_C_vs_A_pct": 7.6,
+   "change_B_vs_A_pct": 6.61
+  },
+  "sin_paro25_por_1000_15_24_2024": {
+   "spearman_with_index": 0.775,
+   "units_in_top_third": 17,
+   "districts_in_top_third": 10,
+   "per1000_A": 4.3001,
+   "change_C_vs_A_pct": 6.58,
+   "change_B_vs_A_pct": 0.38
+  },
+  "sin_pct_alquiler_2021": {
+   "spearman_with_index": 0.782,
+   "units_in_top_third": 21,
+   "districts_in_top_third": 6,
+   "per1000_A": 3.8873,
+   "change_C_vs_A_pct": 7.12,
+   "change_B_vs_A_pct": 17.58
+  },
+  "zscores": {
+   "spearman_with_index": 0.958,
+   "units_in_top_third": 22,
+   "districts_in_top_third": 9,
+   "per1000_A": 4.2563,
+   "change_C_vs_A_pct": 7.92,
+   "change_B_vs_A_pct": 5.93
+  },
+  "media_geometrica": {
+   "spearman_with_index": 0.921,
+   "units_in_top_third": 25,
+   "districts_in_top_third": 8,
+   "per1000_A": 4.2194,
+   "change_C_vs_A_pct": 8.54,
+   "change_B_vs_A_pct": 8.27
+  }
+ }
+}
