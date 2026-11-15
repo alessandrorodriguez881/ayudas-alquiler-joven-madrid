@@ -20,6 +20,9 @@ with its main effects. Corrected model, also in the common rent range of H2 (the
 the placebo slope, where the band is below the cap):
   M1 controls + share above 900 + cap600 + band + band x cap600
 The joint model of exploratorio_topes_falsos.py is refitted with cap600 as well. Both versions stay in the JSON.
+Changed 15-Nov-2026, 23:58, after round 3: the same fit written with one slope per group, so the JSON gives the slope where the
+band is above the cap, the slope where it is below, and their difference (the interaction). The band is centred at
+its mean, so the group rate ratio is read where both groups have data, not at a band of 0.
 Usage:  python -P scripts/placebo_franja.py   -> resultados/placebo_franja.json
 """
 import json
@@ -68,13 +71,22 @@ def first_version(m):
 
 
 def corrected(m):
+    """M1 controls + share above 900 + cap600 + one slope of the (centred) band per group: the same fit as band +
+    band x cap600, written so that each slope and the difference come out directly."""
     band, cap600 = parts(m)
-    r = fit(m, Y, None, extra={"share_900": m["share_above_900_2022"], "cap600": cap600, "band": band,
-                               "band_x_cap600": band * cap600})
-    out = {"n": {"cap600": int(cap600.sum()), "cap900": int((1 - cap600).sum())},
-           "band_x_cap600": term(r, "band_x_cap600"), "band_where_below_cap": term(r, "band"),
-           "cap600_rate_ratio": float(np.exp(r.params["cap600"])), "deviance": r.deviance}
-    return out
+    bc = band - band.mean()
+    r = fit(m, Y, None, extra={"share_900": m["share_above_900_2022"], "cap600": cap600,
+                               "above": bc * cap600, "below": bc * (1 - cap600)})
+    cov = r.cov_params()
+    d = r.params["above"] - r.params["below"]
+    se = float(np.sqrt(cov.loc["above", "above"] + cov.loc["below", "below"] - 2 * cov.loc["above", "below"]))
+    return {"n": {"cap600": int(cap600.sum()), "cap900": int((1 - cap600).sum())},
+            "band_where_above_cap": term(r, "above"), "band_where_below_cap": term(r, "below"),
+            "difference_above_minus_below": {"beta": d, "ci95": [d - 1.96 * se, d + 1.96 * se], "z": d / se,
+                                             "pct_per_10_points": pct(d),
+                                             "pct_ci95": [pct(d - 1.96 * se), pct(d + 1.96 * se)]},
+            "cap600_rate_ratio_at_mean_band": float(np.exp(r.params["cap600"])), "parameters": len(r.params),
+            "deviance": r.deviance}
 
 
 def joint_with_cap600(m):
