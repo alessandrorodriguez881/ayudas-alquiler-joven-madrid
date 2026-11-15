@@ -3,13 +3,14 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-import simulador
-from datos import DB, RES, SLOT1, SLOT2, es, pct, result, simulation_base
+from datos import DB, RES, SLOT1, SLOT2, SLOT3, es, pct, result, simulation_base  # first: it puts scripts/ on sys.path
+import simulador  # noqa: E402  (after datos: opening /simular first on a fresh server failed with ModuleNotFoundError)
 
 st.title("¿Y si el tope fuera otro?")
 st.caption("Con un presupuesto fijo, subir el tope trae más solicitudes, no más bonos: lo que cambia es dónde van. "
            "Elige el tope, cómo se reparte y cuánto frena el tope, y compáralo con la regla de hoy (5.300 bonos, 31,8 M€, "
-           "por orden de llegada).")
+           "por orden de llegada) y, con la cuantía del Plan, con el Plan 2026-2030 tal cual (sus topes, por orden de "
+           "llegada y con el mismo presupuesto).")
 
 s, _ = simulation_base()
 rules = simulador.rules(s)
@@ -70,6 +71,11 @@ else:
 bonos = simulador.allocate_money(req, weights, budget * 1e6, aid)
 req0, sh0 = simulador.requests(s, s["tope_2024"].to_numpy(float), beta)
 bonos0 = simulador.allocate(req0, req0, simulador.BUDGET_EUR / simulador.BONO_EUR)
+bonosP = None  # the Plan as it is (its caps and aid, first come), same β, budget and people asking: the +41 % reference
+if plan_rules:  # only with the Plan's aid: with 250 € the rule would get more aids just because each one is smaller
+    capsP = rules["plan_estatal"][0]
+    reqP = simulador.requests(s, capsP, beta)[0] * simulador.more_eligible(s, MORE[more_name])
+    bonosP = simulador.allocate_money(reqP, reqP, budget * 1e6, simulador.plan_aid(s, capsP))
 
 young = s["jovenes_20_34_2024"].to_numpy(float)
 madrid = (s["ine"] == simulador.MADRID).to_numpy()
@@ -79,13 +85,24 @@ same_chance = bonos0.sum() / req0.sum() * (req * 24 * aid).sum() / 1e6
 groups = s["grupo_necesidad"].to_numpy()
 high = lambda b: 1000 * b[groups == "resto, necesidad alta"].sum() / young[groups == "resto, necesidad alta"].sum()  # noqa: E731
 capital = lambda b: 1000 * b[madrid].sum() / young[madrid].sum()  # noqa: E731
-st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman un tercio de sus "
-        f"jóvenes) reciben {es(high(bonos), 1)} ayudas por cada 1.000 jóvenes** (hoy, {es(high(bonos0), 1)}); Madrid "
-        f"capital, {es(capital(bonos), 1)} (hoy, {es(capital(bonos0), 1)}). De cada 100 que la piden, la consiguen unos "
-        f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())})."
-        + (" Ojo: hoy cada ayuda es de 250 € y con el Plan, de hasta 300 €: para comparar ayuda con ayuda, elige "
-           "«250 € (hoy)»." if plan_rules else ""),
-        icon=":material/insights:")
+if bonosP is not None:
+    def vs_plan(new, plan):  # «un +41 % frente al» / «un −11 % frente al» Plan, or «lo mismo que el» when it rounds to 0
+        v = 100 * (new / plan - 1)
+        return "lo mismo que el" if es(abs(v)) == "0" else f"un {'+' if v > 0 else '−'}{es(abs(v))} % frente al"
+    st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman un tercio de sus "
+            f"jóvenes) reciben {es(high(bonos), 1)} ayudas por cada 1.000 jóvenes: {vs_plan(high(bonos), high(bonosP))} "
+            f"Plan 2026-2030 tal cual ({es(high(bonosP), 1)}), con el mismo dinero.** Madrid capital, "
+            f"{es(capital(bonos), 1)}: {vs_plan(capital(bonos), capital(bonosP))} Plan ({es(capital(bonosP), 1)}). "
+            f"Hoy son {es(high(bonos0), 1)} y {es(capital(bonos0), 1)}. De cada 100 que la piden, la consiguen unos "
+            f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())}). Ojo: hoy cada ayuda es "
+            "de 250 € y con el Plan, de hasta 300 €: para comparar ayuda con ayuda con hoy, elige «250 € (hoy)».",
+            icon=":material/insights:")
+else:
+    st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman un tercio de sus "
+            f"jóvenes) reciben {es(high(bonos), 1)} ayudas por cada 1.000 jóvenes** (hoy, {es(high(bonos0), 1)}); Madrid "
+            f"capital, {es(capital(bonos), 1)} (hoy, {es(capital(bonos0), 1)}). De cada 100 que la piden, la consiguen unos "
+            f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())}). Para compararla con "
+            "el Plan 2026-2030, elige su cuantía.", icon=":material/insights:")
 with st.container(horizontal=True):  # wraps on a narrow screen instead of cutting «40,3 M€» (a laptop at 125 % zoom)
     st.metric("Solicitudes esperadas", es(req.sum()), delta=es(req.sum() - req0.sum()), delta_color="off", border=True,
               height="stretch")
@@ -112,7 +129,10 @@ st.caption(f"Con {es(budget, 1)} M€ y esta cuantía salen {es(bonos.sum())} ay
 
 ORDER =["Madrid capital", "resto, necesidad alta", "resto, necesidad media", "resto, necesidad baja"]
 rows = []
-for label, b in (("Hoy", bonos0), ("Tu regla", bonos)):
+# today blue, the Plan orange, the rule green: the same slots as the figures and slide 3 (scripts/graficos.py)
+SERIES = [("Hoy", bonos0, SLOT1)] + ([("Plan 2026-2030", bonosP, SLOT2)] if bonosP is not None else []) + \
+         [("Tu regla", bonos, SLOT3)]
+for label, b, _ in SERIES:
     for g in ORDER:
         k = groups == g
         rows.append({"grupo": g.capitalize(), "regla": label, "valor": 1000 * b[k].sum() / young[k].sum()})
@@ -121,18 +141,22 @@ chart = (alt.Chart(pd.DataFrame(rows))
          .mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4)
          .encode(x=alt.X("grupo:N", sort=[g.capitalize() for g in ORDER], title=None,
                          axis=alt.Axis(labelAngle=0, labelLimit=250)),
-                 xOffset=alt.XOffset("regla:N", sort=["Hoy", "Tu regla"]),
+                 xOffset=alt.XOffset("regla:N", sort=[name for name, _, _ in SERIES]),
                  y=alt.Y("valor:Q", title="Bonos por 1.000 jóvenes"),
-                 color=alt.Color("regla:N", scale=alt.Scale(domain=["Hoy", "Tu regla"], range=[SLOT1, SLOT2]),
+                 color=alt.Color("regla:N", scale=alt.Scale(domain=[name for name, _, _ in SERIES],
+                                                            range=[colour for _, _, colour in SERIES]),
                                  legend=alt.Legend(orient="top", title=None)),
                  tooltip=[alt.Tooltip("grupo:N", title="Grupo"), alt.Tooltip("regla:N", title="Regla"),
                           alt.Tooltip("valor:Q", title="Bonos por 1.000 jóvenes", format=".1f")])
          .properties(height=320))
 st.subheader("Bonos por cada 1.000 jóvenes, por grupo de necesidad")
-st.altair_chart(chart, alt="Barras de bonos por cada 1.000 jóvenes por grupo de necesidad, hoy y con la regla elegida")
+st.altair_chart(chart, alt="Barras de bonos por cada 1.000 jóvenes por grupo de necesidad, hoy, con el Plan 2026-2030 "
+                           "(con su cuantía) y con la regla elegida")
+plan_share = (f"con el Plan, el {pct(bonosP[madrid].sum() / bonosP.sum())}; " if bonosP is not None else "")
 st.caption(f"Madrid capital tiene el {pct(young[madrid].sum() / young.sum())} de los jóvenes; con tu regla recibe el "
-           f"{pct(bonos[madrid].sum() / bonos.sum())} de los bonos (hoy, el {pct(bonos0[madrid].sum() / bonos0.sum())}). "
-           "El resto de la Comunidad va en tres tercios de jóvenes según el índice de necesidad.")
+           f"{pct(bonos[madrid].sum() / bonos.sum())} de los bonos ({plan_share}hoy, el "
+           f"{pct(bonos0[madrid].sum() / bonos0.sum())}). El resto de la Comunidad va en tres tercios de jóvenes según el "
+           "índice de necesidad.")
 
 d = s[["municipio"]].assign(hoy=bonos0, regla=bonos, cambio=bonos - bonos0).sort_values("cambio")
 cfg = {"municipio": "Municipio", "hoy": st.column_config.NumberColumn("Hoy", format="%.0f"),

@@ -104,8 +104,9 @@ for name, says in [("Hoyo de Manzanares", "lo apoya: con el tope del Plan queda 
     ok(at, f"ficha: {name}, art. 135")
 
 at.switch_page("app_pages/simular.py").run()  # opens with the proposal and the Plan's aid, as on the cover
-assert "reciben 4,3 ayudas por cada 1.000 jóvenes** (hoy, 3,7); Madrid capital, 3,8 (hoy, 5,0)" in at.info[0].value, \
-    at.info[0].value  # plan_amount; Madrid capital in sight next to the +41 % (second adversarial jury, 12-nov)
+assert ("reciben 4,3 ayudas por cada 1.000 jóvenes: un +41 % frente al Plan 2026-2030 tal cual (3,0), con el mismo "
+        "dinero.** Madrid capital, 3,8: un −11 % frente al Plan (4,2). Hoy son 3,7 y 5,0.") in at.info[0].value, \
+    at.info[0].value  # plan_amount: the +41 % reproduced in the simulator, with Madrid capital in sight (14-nov)
 assert "para comparar ayuda con ayuda" in at.info[0].value, at.info[0].value  # 250 EUR today, up to 300 with the Plan
 assert at.metric[4].value == "40,3 M€", at.metric[4].value  # simulador_reparto.json, plan_amount
 ok(at, "simulador: propuesta con la cuantía del Plan")
@@ -119,7 +120,15 @@ at.segmented_control(key="mas_gente").set_value("Los mismos que en 2022").run()
 at.segmented_control(key="cuantia").set_value("250 € (hoy)").run()
 assert "reciben 5,4 ayudas por cada 1.000 jóvenes** (hoy, 3,7)" in at.info[0].value, at.info[0].value  # PLAN, 7-nov
 assert "para comparar ayuda con ayuda" not in at.info[0].value, at.info[0].value  # same aid as today: no warning
+assert "frente al Plan" not in at.info[0].value and "elige su cuantía" in at.info[0].value, at.info[0].value  # 250 vs 300
 ok(at, "simulador: propuesta con los 250 € de hoy")
+at.segmented_control(key="cuantia").set_value("La del Plan: hasta 300 €, sin pasar del 60 % del alquiler").run()
+at.segmented_control(key="tope").set_value("Plan 2026-2030").run()
+at.segmented_control(key="reparto").set_value("Orden de llegada (hoy)").run()
+assert "reciben 3,0 ayudas por cada 1.000 jóvenes: lo mismo que el Plan 2026-2030 tal cual (3,0)" in at.info[0].value, \
+    at.info[0].value
+ok(at, "simulador: el Plan tal cual da lo mismo que el Plan")
+at.segmented_control(key="cuantia").set_value("250 € (hoy)").run()
 at.segmented_control(key="tope").set_value("Hoy (600 / 900 €)").run()
 at.segmented_control(key="reparto").set_value("Orden de llegada (hoy)").run()
 assert {m.delta for m in at.metric[:5]} <= {"0", "0,0", "0,0 puntos", "0,0 M€"}, [m.delta for m in at.metric]

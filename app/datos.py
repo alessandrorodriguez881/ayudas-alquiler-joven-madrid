@@ -27,6 +27,7 @@ PROPOSAL = "necesidad_requisito_plan_p75_hasta_1000"
 BLUE = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
 ORANGE = ["#fde4d8", "#f9c2a8", "#f39a74", "#eb6834", "#c94f1f", "#9c3c17", "#6e2a10"]
 SLOT1, SLOT2, NO_DATA = "#2a78d6", "#eb6834", "#e1e0d9"
+SLOT3 = "#1baf7a"  # third categorical slot, validated all-pairs with the first two (scripts/graficos.py)
 SOURCE = ("Fuentes: Portal de Datos Abiertos de la Comunidad de Madrid (Bono Alquiler Joven 2022, población, renta, paro, "
           "IRPF por tramos, límites municipales; CC BY 4.0) y SERPAVI (Ministerio de Vivienda).")
 
