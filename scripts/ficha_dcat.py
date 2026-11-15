@@ -41,7 +41,7 @@ LICENCE = URIRef(EU + "licence/CC_BY_4_0")
 TEAM = URIRef(REPO + "#equipo")
 PLACEHOLDER = URIRef("http://datos.gob.es/recurso/sector-publico/org/Organismo/E00000000")  # DIR3 shape, not a body
 SERPAVI = ("Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: "
-           "reutilización permitida citando la fuente.")
+           "reutilización permitida citando la fuente y la fecha de actualización (9-jul-2026).")
 KEYWORDS = ["Bono Alquiler Joven", "alquiler", "jóvenes", "vivienda", "Plan Estatal de Vivienda 2026-2030", "SERPAVI",
             "municipios", "Comunidad de Madrid"]
 DATASETS = [
@@ -65,6 +65,19 @@ DATASETS = [
      [("data/interim/simulador_municipios.csv", "CSV", "CSV", "text/csv"),
       ("resultados/simulador_reparto.json", "JSON", "JSON", "application/json")]),
 ]
+# 15-Nov-2026, 23:58: where each dataset comes from (dct:source; DCAT-AP-ES only asks for an IRI), after the Q&A rehearsal
+PORTAL = "https://datos.comunidad.madrid/dataset/"
+SRC = {"bono": PORTAL + "spacm_bono_alquiler_joven_2022",
+       "ayudas": PORTAL + "spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos",
+       "poblacion": PORTAL + "poblacion_censada_por_edad_nacionalidad_y_sexo",
+       "renta": PORTAL + "irpf_indicador_renta", "irpf": PORTAL + "irpf_declaraciones_por_tramo",
+       "paro": PORTAL + "paro_registrado_edad_municipio",
+       "censo": PORTAL + "censo_2021_viviendas_familiares_por_tenencia",
+       "serpavi": "https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi",
+       "boe": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-8872", "bdns": "https://www.infosubvenciones.es/bdnstrans/"}
+SOURCES = {"base-de-datos": ["bono", "ayudas", "poblacion", "renta", "irpf", "paro", "censo", "serpavi", "boe", "bdns"],
+           "indicadores-municipios-2024": ["bono", "poblacion", "renta", "paro", "censo", "serpavi", "bdns"],
+           "reparto-simulado": ["bono", "poblacion", "renta", "irpf", "paro", "censo", "serpavi", "boe", "bdns"]}
 
 
 def git(*args):
@@ -129,6 +142,8 @@ def build():
         g.add((ds, DCT.language, URIRef(EU + "language/SPA")))
         g.add((ds, DCT.accrualPeriodicity, URIRef(EU + "frequency/ANNUAL")))
         g.add((ds, DCT.accessRights, URIRef(EU + "access-right/PUBLIC")))
+        for key in SOURCES[slug]:
+            g.add((ds, DCT.source, URIRef(SRC[key])))
         g.add((ds, DCAT.landingPage, URIRef(REPO)))
         contact = BNode()
         g.add((ds, DCAT.contactPoint, contact))
