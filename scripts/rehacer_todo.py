@@ -22,6 +22,7 @@ STEPS = [
     "scripts/potencia_umbral.py",           # power table of the preregistration, from the saved simulations
     "scripts/contraste.py",                 # the preregistered test
     "scripts/exploratorio_topes_falsos.py",
+    "scripts/placebo_franja.py",              # exploratory placebo: the 600-900 EUR band
     "scripts/necesidad_2024.py",            # 2024 table and need index
     "scripts/requisito_ingresos.py",
     "scripts/habitaciones.py",

@@ -1,4 +1,4 @@
-"""EXPLORATORY placebo (not pre-registered; written 15-Nov-2026, 23:5x, BEFORE running it; expectations below).
+"""EXPLORATORY placebo (not pre-registered; written 15-Nov-2026 BEFORE running it, in commit 5a970aa at 23:32; expectations below).
 
 Why: in the exploratory model with the real-cap share and the uniform-900 share together (exploratorio_topes_falsos.py),
 the real cap only differs from the 900 threshold in the 600-EUR-cap municipalities, by the share of rents between 600
