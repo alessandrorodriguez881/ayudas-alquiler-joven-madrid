@@ -22,7 +22,7 @@ gap = sim["gap_above_cap"]
 cap_part = 100 * (math.exp(0.1 * result("exploratorio_topes_falsos")["real_cap_and_uniform_900"]["real_cap"]["beta"]) - 1)
 KPIS = [  # short label, value, what it means (in sight: metric labels are cut to one line)
     ("Menos solicitudes", f"{es(h1['pct_per_10_points'], 1)} %",
-     f"por cada 10 % más de alquileres por encima del tope; la parte del propio tope, {es(cap_part, 1)} %. Contraste "
+     f"cuando 10 de cada 100 alquileres más pasan del tope; la parte del propio tope, {es(cap_part, 1)} %. Contraste "
      f"registrado antes de hacerlo ({test['n_municipalities']} municipios con todos los datos)"),
     ("Alquiler fuera del tope", pct(gap["2024_rents_plan_estatal"]["10000_or_fewer"]),
      f"en los municipios pequeños con el Plan 2026-2030, que les pone 500 € (hoy, "
