@@ -7,6 +7,8 @@
    "municipalities_in_top_third": 36,
    "young_in_top_third": 225245,
    "municipalities_also_in_index_top_third": 36,
+   "municipalities_changing_group": 0,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 3.05,
     "propuesta": 4.29
@@ -44,6 +46,8 @@
    "municipalities_in_top_third": 11,
    "young_in_top_third": 199588,
    "municipalities_also_in_index_top_third": 7,
+   "municipalities_changing_group": 61,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 2.91,
     "propuesta": 3.99
@@ -81,6 +85,8 @@
    "municipalities_in_top_third": 51,
    "young_in_top_third": 199389,
    "municipalities_also_in_index_top_third": 26,
+   "municipalities_changing_group": 57,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 2.81,
     "propuesta": 4.26
@@ -118,6 +124,8 @@
    "municipalities_in_top_third": 55,
    "young_in_top_third": 202947,
    "municipalities_also_in_index_top_third": 26,
+   "municipalities_changing_group": 70,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 2.64,
     "propuesta": 3.46
@@ -155,6 +163,8 @@
    "municipalities_in_top_third": 71,
    "young_in_top_third": 194352,
    "municipalities_also_in_index_top_third": 33,
+   "municipalities_changing_group": 49,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 3.0,
     "propuesta": 4.14
@@ -192,6 +202,8 @@
    "municipalities_in_top_third": 31,
    "young_in_top_third": 196741,
    "municipalities_also_in_index_top_third": 24,
+   "municipalities_changing_group": 38,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 3.08,
     "propuesta": 4.03
@@ -229,6 +241,8 @@
    "municipalities_in_top_third": 15,
    "young_in_top_third": 209901,
    "municipalities_also_in_index_top_third": 12,
+   "municipalities_changing_group": 54,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 3.01,
     "propuesta": 4.25
@@ -266,6 +280,8 @@
    "municipalities_in_top_third": 25,
    "young_in_top_third": 197319,
    "municipalities_also_in_index_top_third": 24,
+   "municipalities_changing_group": 18,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 3.0,
     "propuesta": 4.34
@@ -303,6 +319,8 @@
    "municipalities_in_top_third": 34,
    "young_in_top_third": 198055,
    "municipalities_also_in_index_top_third": 29,
+   "municipalities_changing_group": 24,
+   "municipalities_outside_madrid": 131,
    "aids_per_1000_young": {
     "plan": 3.21,
     "propuesta": 4.26

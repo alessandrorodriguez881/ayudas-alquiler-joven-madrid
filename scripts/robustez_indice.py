@@ -19,6 +19,8 @@ Written before running:
     any ruler gives a loss, it is said: the proposal moves aid away from that kind of need
 Added after the first run (every ruler gave from +31 % to +52 %): the other two thirds and Madrid city with each ruler,
 to see whether the gain goes to the top third or to every municipality outside Madrid city alike.
+Added 15-Nov-2026, 23:58, after the statistical Q&A rehearsal: how many of the municipalities outside Madrid city change
+group with each ruler, since a call with bags would publish the list of each bag.
 Usage:  python -P scripts/robustez_indice.py   (after simulador.py) -> resultados/robustez_indice.json
 """
 import json
@@ -92,6 +94,8 @@ def main():
             "spearman_with_index": round(float(score[rest].corr(s.loc[rest, "indice_necesidad"], method="spearman")), 3),
             "municipalities_in_top_third": int(top.sum()), "young_in_top_third": int(young[top].sum()),
             "municipalities_also_in_index_top_third": int((top & ours).sum()),
+            "municipalities_changing_group": int((groups[rest] != s.loc[rest, "grupo_necesidad"]).sum()),
+            "municipalities_outside_madrid": int(rest.sum()),
             "aids_per_1000_young": {k: round(float(v), 2) for k, v in per1000.items()},
             "change_pct": round(float(100 * (per1000["propuesta"] / per1000["plan"] - 1)), 1),
             "aids": {k: round(float(a[top].sum())) for k, a in aids.items()},
