@@ -1,0 +1,126 @@
+{
+ "note": "PREDICCIÓN escrita el 15-nov-2026, antes de que haya solicitudes de 2024 por municipio en el portal",
+ "n_moved": 26,
+ "beta_cap": -0.5446185552468725,
+ "beta_ci95": [
+  -0.8893596516932294,
+  -0.19987745880051572
+ ],
+ "simulated_requests": {
+  "caps_2022": 2118.7,
+  "caps_2024": 2745.9
+ },
+ "mean_share_points_removed": 50.0,
+ "predicted_extra_requests_per_young_pct": {
+  "central": 29.6,
+  "low": 10.0,
+  "high": 53.0
+ },
+ "moved": [
+  {
+   "ine": "002",
+   "municipio": "Ajalvir"
+  },
+  {
+   "ine": "010",
+   "municipio": "Alpedrete"
+  },
+  {
+   "ine": "013",
+   "municipio": "Aranjuez"
+  },
+  {
+   "ine": "014",
+   "municipio": "Arganda del Rey"
+  },
+  {
+   "ine": "023",
+   "municipio": "Boalo (El)"
+  },
+  {
+   "ine": "026",
+   "municipio": "Brunete"
+  },
+  {
+   "ine": "032",
+   "municipio": "Camarma de Esteruelas"
+  },
+  {
+   "ine": "040",
+   "municipio": "Ciempozuelos"
+  },
+  {
+   "ine": "041",
+   "municipio": "Cobeña"
+  },
+  {
+   "ine": "044",
+   "municipio": "Colmenarejo"
+  },
+  {
+   "ine": "045",
+   "municipio": "Colmenar Viejo"
+  },
+  {
+   "ine": "053",
+   "municipio": "Daganzo de Arriba"
+  },
+  {
+   "ine": "054",
+   "municipio": "Escorial (El)"
+  },
+  {
+   "ine": "059",
+   "municipio": "Fuente el Saz de Jarama"
+  },
+  {
+   "ine": "068",
+   "municipio": "Guadarrama"
+  },
+  {
+   "ine": "073",
+   "municipio": "Humanes de Madrid"
+  },
+  {
+   "ine": "084",
+   "municipio": "Mejorada del Campo"
+  },
+  {
+   "ine": "089",
+   "municipio": "Moraleja de Enmedio"
+  },
+  {
+   "ine": "090",
+   "municipio": "Moralzarzal"
+  },
+  {
+   "ine": "096",
+   "municipio": "Navalcarnero"
+  },
+  {
+   "ine": "104",
+   "municipio": "Paracuellos de Jarama"
+  },
+  {
+   "ine": "129",
+   "municipio": "San Agustín del Guadalix"
+  },
+  {
+   "ine": "131",
+   "municipio": "San Lorenzo de El Escorial"
+  },
+  {
+   "ine": "132",
+   "municipio": "San Martín de la Vega"
+  },
+  {
+   "ine": "144",
+   "municipio": "Soto del Real"
+  },
+  {
+   "ine": "167",
+   "municipio": "Velilla de San Antonio"
+  }
+ ],
+ "check_rule": "DiD Poisson 2022-2024, efectos de municipio y año, errores por municipio: se cumple si la razón de tasas es > 1 y su IC 95 % no toca el 1"
+}
