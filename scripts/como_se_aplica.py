@@ -211,7 +211,7 @@ Lo genera `scripts/como_se_aplica.py` con los datos del repositorio. **Es una pr
 ## La propuesta, paso a paso
 1. **Antes de convocar,** la Comunidad acuerda los topes nuevos con el Ministerio en la comisión de seguimiento (art. 135): el del Plan o, en los municipios de 10.000 habitantes o menos, el alquiler por debajo del cual quedan 3 de cada 4 contratos, sin pasar de 1.000 €
 2. **La convocatoria se abre y no se cierra** (art. 138)
-3. **El dinero se reparte en 4 bolsas,** que se publican con la convocatoria, con la lista de municipios de cada una: Madrid capital y tres grupos con el resto de municipios, cada uno con un tercio de sus jóvenes, de más a menos necesidad. Cada bolsa recibe según sus jóvenes de 20 a 34 años, su índice de necesidad, la parte de las declaraciones del IRPF por debajo del límite de ingresos del Plan y lo que cuesta allí cada ayuda
+3. **El dinero se reparte en 4 bolsas,** que se publican con la convocatoria, con la lista de municipios de cada una: Madrid capital y tres grupos con el resto de municipios, cada uno con cerca de un tercio de sus jóvenes (del 30 % al 39 %), de más a menos necesidad. Cada bolsa recibe según sus jóvenes de 20 a 34 años, su índice de necesidad, la parte de las declaraciones del IRPF por debajo del límite de ingresos del Plan y lo que cuesta allí cada ayuda
 4. **Dentro de cada bolsa, por orden de llegada,** como hoy. No hay que comparar solicitudes, así que la convocatoria puede seguir abierta
 5. **Lo que sobra no se pierde:** cada trimestre, el dinero que una bolsa no va a usar, porque no le quedan solicitudes esperando, pasa a las bolsas que sí tienen, en proporción a su reserva
 6. **Cada año, las bolsas se recalculan** con los datos nuevos, con un comando: `python scripts/rehacer_todo.py`

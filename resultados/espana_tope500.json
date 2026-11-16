@@ -1,0 +1,496 @@
+{
+  "creado": "2026-11-16T23:49",
+  "ambito": "comunidades donde se aplica el Plan: todas menos el País Vasco y Navarra (RD 326/2026, art. 1.5)",
+  "espana": {
+    "municipios_pequenos": 6883,
+    "con_datos_serpavi": 1590,
+    "habitantes_pequenos": 8835750,
+    "habitantes_con_datos": 6087406,
+    "parte_habitantes_con_datos": 0.689,
+    "alquileres_serpavi_con_datos": 151583,
+    "parte_alquiler_sobre_500": 0.325,
+    "parte_alquiler_sobre_600_referencia": 0.174,
+    "municipios_mas_de_la_mitad_sobre_500": 209,
+    "habitantes_en_ellos": 1132424,
+    "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 256
+  },
+  "espana_17_comunidades": {
+    "municipios_pequenos": 7351,
+    "con_datos_serpavi": 1774,
+    "habitantes_pequenos": 9544978,
+    "habitantes_con_datos": 6686344,
+    "parte_habitantes_con_datos": 0.701,
+    "alquileres_serpavi_con_datos": 167766,
+    "parte_alquiler_sobre_500": 0.359,
+    "parte_alquiler_sobre_600_referencia": 0.197,
+    "municipios_mas_de_la_mitad_sobre_500": 291,
+    "habitantes_en_ellos": 1483774,
+    "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 363
+  },
+  "por_comunidad": {
+    "Andalucía": {
+      "municipios_pequenos": 629,
+      "con_datos_serpavi": 166,
+      "habitantes_pequenos": 1615842,
+      "habitantes_con_datos": 880992,
+      "parte_habitantes_con_datos": 0.545,
+      "alquileres_serpavi_con_datos": 8159,
+      "parte_alquiler_sobre_500": 0.206,
+      "parte_alquiler_sobre_600_referencia": 0.107,
+      "municipios_mas_de_la_mitad_sobre_500": 7,
+      "habitantes_en_ellos": 42962,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 11
+    },
+    "Aragón": {
+      "municipios_pequenos": 716,
+      "con_datos_serpavi": 87,
+      "habitantes_pequenos": 385731,
+      "habitantes_con_datos": 219214,
+      "parte_habitantes_con_datos": 0.568,
+      "alquileres_serpavi_con_datos": 8059,
+      "parte_alquiler_sobre_500": 0.209,
+      "parte_alquiler_sobre_600_referencia": 0.069,
+      "municipios_mas_de_la_mitad_sobre_500": 1,
+      "habitantes_en_ellos": 4814,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 1
+    },
+    "Canarias": {
+      "municipios_pequenos": 46,
+      "con_datos_serpavi": 37,
+      "habitantes_pequenos": 224933,
+      "habitantes_con_datos": 208819,
+      "parte_habitantes_con_datos": 0.928,
+      "alquileres_serpavi_con_datos": 3358,
+      "parte_alquiler_sobre_500": 0.42,
+      "parte_alquiler_sobre_600_referencia": 0.202,
+      "municipios_mas_de_la_mitad_sobre_500": 7,
+      "habitantes_en_ellos": 42670,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 7
+    },
+    "Cantabria": {
+      "municipios_pequenos": 92,
+      "con_datos_serpavi": 49,
+      "habitantes_pequenos": 210332,
+      "habitantes_con_datos": 177148,
+      "parte_habitantes_con_datos": 0.842,
+      "alquileres_serpavi_con_datos": 5737,
+      "parte_alquiler_sobre_500": 0.292,
+      "parte_alquiler_sobre_600_referencia": 0.094,
+      "municipios_mas_de_la_mitad_sobre_500": 0,
+      "habitantes_en_ellos": 0,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 2
+    },
+    "Castilla y León": {
+      "municipios_pequenos": 2224,
+      "con_datos_serpavi": 186,
+      "habitantes_pequenos": 1025275,
+      "habitantes_con_datos": 528975,
+      "parte_habitantes_con_datos": 0.516,
+      "alquileres_serpavi_con_datos": 16804,
+      "parte_alquiler_sobre_500": 0.129,
+      "parte_alquiler_sobre_600_referencia": 0.033,
+      "municipios_mas_de_la_mitad_sobre_500": 0,
+      "habitantes_en_ellos": 0,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 1
+    },
+    "Castilla-La Mancha": {
+      "municipios_pequenos": 882,
+      "con_datos_serpavi": 153,
+      "habitantes_pequenos": 928817,
+      "habitantes_con_datos": 593725,
+      "parte_habitantes_con_datos": 0.639,
+      "alquileres_serpavi_con_datos": 10777,
+      "parte_alquiler_sobre_500": 0.261,
+      "parte_alquiler_sobre_600_referencia": 0.105,
+      "municipios_mas_de_la_mitad_sobre_500": 7,
+      "habitantes_en_ellos": 40603,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 7
+    },
+    "Catalunya": {
+      "municipios_pequenos": 817,
+      "con_datos_serpavi": 368,
+      "habitantes_pequenos": 1407309,
+      "habitantes_con_datos": 1202442,
+      "parte_habitantes_con_datos": 0.854,
+      "alquileres_serpavi_con_datos": 39533,
+      "parte_alquiler_sobre_500": 0.478,
+      "parte_alquiler_sobre_600_referencia": 0.284,
+      "municipios_mas_de_la_mitad_sobre_500": 112,
+      "habitantes_en_ellos": 537435,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 137
+    },
+    "Comunidad de Madrid": {
+      "municipios_pequenos": 125,
+      "con_datos_serpavi": 83,
+      "habitantes_pequenos": 378301,
+      "habitantes_con_datos": 348797,
+      "parte_habitantes_con_datos": 0.922,
+      "alquileres_serpavi_con_datos": 11857,
+      "parte_alquiler_sobre_500": 0.626,
+      "parte_alquiler_sobre_600_referencia": 0.378,
+      "municipios_mas_de_la_mitad_sobre_500": 33,
+      "habitantes_en_ellos": 205956,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 39
+    },
+    "Comunitat Valenciana": {
+      "municipios_pequenos": 437,
+      "con_datos_serpavi": 199,
+      "habitantes_pequenos": 879100,
+      "habitantes_con_datos": 747116,
+      "parte_habitantes_con_datos": 0.85,
+      "alquileres_serpavi_con_datos": 20614,
+      "parte_alquiler_sobre_500": 0.315,
+      "parte_alquiler_sobre_600_referencia": 0.167,
+      "municipios_mas_de_la_mitad_sobre_500": 20,
+      "habitantes_en_ellos": 123397,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 21
+    },
+    "Extremadura": {
+      "municipios_pequenos": 375,
+      "con_datos_serpavi": 51,
+      "habitantes_pequenos": 523108,
+      "habitantes_con_datos": 231430,
+      "parte_habitantes_con_datos": 0.442,
+      "alquileres_serpavi_con_datos": 2387,
+      "parte_alquiler_sobre_500": 0.02,
+      "parte_alquiler_sobre_600_referencia": 0.004,
+      "municipios_mas_de_la_mitad_sobre_500": 0,
+      "habitantes_en_ellos": 0,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 0
+    },
+    "Galicia": {
+      "municipios_pequenos": 257,
+      "con_datos_serpavi": 113,
+      "habitantes_pequenos": 780284,
+      "habitantes_con_datos": 541881,
+      "parte_habitantes_con_datos": 0.694,
+      "alquileres_serpavi_con_datos": 12932,
+      "parte_alquiler_sobre_500": 0.056,
+      "parte_alquiler_sobre_600_referencia": 0.012,
+      "municipios_mas_de_la_mitad_sobre_500": 0,
+      "habitantes_en_ellos": 0,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 0
+    },
+    "Illes Balears": {
+      "municipios_pequenos": 42,
+      "con_datos_serpavi": 32,
+      "habitantes_pequenos": 172991,
+      "habitantes_con_datos": 158463,
+      "parte_habitantes_con_datos": 0.916,
+      "alquileres_serpavi_con_datos": 4512,
+      "parte_alquiler_sobre_500": 0.746,
+      "parte_alquiler_sobre_600_referencia": 0.547,
+      "municipios_mas_de_la_mitad_sobre_500": 22,
+      "habitantes_en_ellos": 134587,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 30
+    },
+    "La Rioja": {
+      "municipios_pequenos": 169,
+      "con_datos_serpavi": 28,
+      "habitantes_pequenos": 109315,
+      "habitantes_con_datos": 82913,
+      "parte_habitantes_con_datos": 0.758,
+      "alquileres_serpavi_con_datos": 2689,
+      "parte_alquiler_sobre_500": 0.167,
+      "parte_alquiler_sobre_600_referencia": 0.048,
+      "municipios_mas_de_la_mitad_sobre_500": 0,
+      "habitantes_en_ellos": 0,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 0
+    },
+    "Navarra": {
+      "municipios_pequenos": 260,
+      "con_datos_serpavi": 69,
+      "habitantes_pequenos": 282873,
+      "habitantes_con_datos": 222061,
+      "parte_habitantes_con_datos": 0.785,
+      "alquileres_serpavi_con_datos": 4762,
+      "parte_alquiler_sobre_500": 0.369,
+      "parte_alquiler_sobre_600_referencia": 0.204,
+      "municipios_mas_de_la_mitad_sobre_500": 8,
+      "habitantes_en_ellos": 39278,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 11
+    },
+    "País Vasco": {
+      "municipios_pequenos": 208,
+      "con_datos_serpavi": 115,
+      "habitantes_pequenos": 426355,
+      "habitantes_con_datos": 376877,
+      "parte_habitantes_con_datos": 0.884,
+      "alquileres_serpavi_con_datos": 11421,
+      "parte_alquiler_sobre_500": 0.811,
+      "parte_alquiler_sobre_600_referencia": 0.503,
+      "municipios_mas_de_la_mitad_sobre_500": 74,
+      "habitantes_en_ellos": 312072,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 96
+    },
+    "Principado de Asturias": {
+      "municipios_pequenos": 59,
+      "con_datos_serpavi": 30,
+      "habitantes_pequenos": 145039,
+      "habitantes_con_datos": 121261,
+      "parte_habitantes_con_datos": 0.836,
+      "alquileres_serpavi_con_datos": 3676,
+      "parte_alquiler_sobre_500": 0.112,
+      "parte_alquiler_sobre_600_referencia": 0.029,
+      "municipios_mas_de_la_mitad_sobre_500": 0,
+      "habitantes_en_ellos": 0,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 0
+    },
+    "Región de Murcia": {
+      "municipios_pequenos": 13,
+      "con_datos_serpavi": 8,
+      "habitantes_pequenos": 49373,
+      "habitantes_con_datos": 44230,
+      "parte_habitantes_con_datos": 0.896,
+      "alquileres_serpavi_con_datos": 489,
+      "parte_alquiler_sobre_500": 0.092,
+      "parte_alquiler_sobre_600_referencia": 0.031,
+      "municipios_mas_de_la_mitad_sobre_500": 0,
+      "habitantes_en_ellos": 0,
+      "municipios_mas_de_la_mitad_sin_minimo_de_contratos": 0
+    }
+  },
+  "ranking_parte_sobre_500": [
+    {
+      "comunidad": "Illes Balears",
+      "parte": 0.746
+    },
+    {
+      "comunidad": "Comunidad de Madrid",
+      "parte": 0.626
+    },
+    {
+      "comunidad": "Catalunya",
+      "parte": 0.478
+    },
+    {
+      "comunidad": "Canarias",
+      "parte": 0.42
+    },
+    {
+      "comunidad": "Comunitat Valenciana",
+      "parte": 0.315
+    },
+    {
+      "comunidad": "Cantabria",
+      "parte": 0.292
+    },
+    {
+      "comunidad": "Castilla-La Mancha",
+      "parte": 0.261
+    },
+    {
+      "comunidad": "Aragón",
+      "parte": 0.209
+    },
+    {
+      "comunidad": "Andalucía",
+      "parte": 0.206
+    },
+    {
+      "comunidad": "La Rioja",
+      "parte": 0.167
+    },
+    {
+      "comunidad": "Castilla y León",
+      "parte": 0.129
+    },
+    {
+      "comunidad": "Principado de Asturias",
+      "parte": 0.112
+    },
+    {
+      "comunidad": "Galicia",
+      "parte": 0.056
+    },
+    {
+      "comunidad": "Extremadura",
+      "parte": 0.02
+    }
+  ],
+  "ranking_17_comunidades": [
+    {
+      "comunidad": "País Vasco",
+      "parte": 0.811
+    },
+    {
+      "comunidad": "Illes Balears",
+      "parte": 0.746
+    },
+    {
+      "comunidad": "Comunidad de Madrid",
+      "parte": 0.626
+    },
+    {
+      "comunidad": "Catalunya",
+      "parte": 0.478
+    },
+    {
+      "comunidad": "Canarias",
+      "parte": 0.42
+    },
+    {
+      "comunidad": "Navarra",
+      "parte": 0.369
+    },
+    {
+      "comunidad": "Comunitat Valenciana",
+      "parte": 0.315
+    },
+    {
+      "comunidad": "Cantabria",
+      "parte": 0.292
+    },
+    {
+      "comunidad": "Castilla-La Mancha",
+      "parte": 0.261
+    },
+    {
+      "comunidad": "Aragón",
+      "parte": 0.209
+    },
+    {
+      "comunidad": "Andalucía",
+      "parte": 0.206
+    },
+    {
+      "comunidad": "La Rioja",
+      "parte": 0.167
+    },
+    {
+      "comunidad": "Castilla y León",
+      "parte": 0.129
+    },
+    {
+      "comunidad": "Principado de Asturias",
+      "parte": 0.112
+    },
+    {
+      "comunidad": "Galicia",
+      "parte": 0.056
+    },
+    {
+      "comunidad": "Extremadura",
+      "parte": 0.02
+    }
+  ],
+  "madrid_comparacion": {
+    "ponderado_por_alquileres_serpavi": 0.626,
+    "ponderado_por_jovenes_robustez_pueblos": 0.58
+  },
+  "top_municipios_mas_poblados_sobre_500": [
+    {
+      "cumun": "08155",
+      "municipio": "Palafolls",
+      "ccaa": "Catalunya",
+      "pob": 9938.0,
+      "sobre_500": 0.674
+    },
+    {
+      "cumun": "08120",
+      "municipio": "Matadepera",
+      "ccaa": "Catalunya",
+      "pob": 9815.0,
+      "sobre_500": 0.962
+    },
+    {
+      "cumun": "46207",
+      "municipio": "Rafelbuñol/Rafelbunyol",
+      "ccaa": "Comunitat Valenciana",
+      "pob": 9710.0,
+      "sobre_500": 0.569
+    },
+    {
+      "cumun": "28141",
+      "municipio": "Sevilla la Nueva",
+      "ccaa": "Comunidad de Madrid",
+      "pob": 9657.0,
+      "sobre_500": 0.877
+    },
+    {
+      "cumun": "08068",
+      "municipio": "Cervelló",
+      "ccaa": "Catalunya",
+      "pob": 9647.0,
+      "sobre_500": 0.965
+    },
+    {
+      "cumun": "46237",
+      "municipio": "Tavernes Blanques",
+      "ccaa": "Comunitat Valenciana",
+      "pob": 9635.0,
+      "sobre_500": 0.529
+    },
+    {
+      "cumun": "28044",
+      "municipio": "Colmenarejo",
+      "ccaa": "Comunidad de Madrid",
+      "pob": 9623.0,
+      "sobre_500": 0.839
+    },
+    {
+      "cumun": "08267",
+      "municipio": "Sentmenat",
+      "ccaa": "Catalunya",
+      "pob": 9553.0,
+      "sobre_500": 0.865
+    },
+    {
+      "cumun": "28082",
+      "municipio": "Manzanares el Real",
+      "ccaa": "Comunidad de Madrid",
+      "pob": 9550.0,
+      "sobre_500": 0.75
+    },
+    {
+      "cumun": "08005",
+      "municipio": "Ametlla del Vallès, L'",
+      "ccaa": "Catalunya",
+      "pob": 9462.0,
+      "sobre_500": 0.866
+    },
+    {
+      "cumun": "08007",
+      "municipio": "Arenys de Munt",
+      "ccaa": "Catalunya",
+      "pob": 9458.0,
+      "sobre_500": 0.75
+    },
+    {
+      "cumun": "28144",
+      "municipio": "Soto del Real",
+      "ccaa": "Comunidad de Madrid",
+      "pob": 9441.0,
+      "sobre_500": 0.823
+    },
+    {
+      "cumun": "46204",
+      "municipio": "Puig",
+      "ccaa": "Comunitat Valenciana",
+      "pob": 9367.0,
+      "sobre_500": 0.676
+    },
+    {
+      "cumun": "03069",
+      "municipio": "Finestrat",
+      "ccaa": "Comunitat Valenciana",
+      "pob": 9352.0,
+      "sobre_500": 0.555
+    },
+    {
+      "cumun": "07051",
+      "municipio": "Sant Llorenç des Cardassar",
+      "ccaa": "Illes Balears",
+      "pob": 9331.0,
+      "sobre_500": 0.75
+    }
+  ],
+  "esperado": [
+    "- **Ojo:** las expectativas se escribieron para «toda España». Después de ver los resultados, un jurado ciego avisó de que el Plan no se aplica en el País Vasco ni en Navarra (RD 326/2026, art. 1.5), y así es. Cada expectativa se mide con las comunidades donde se aplica el Plan, y entre paréntesis, con las 17",
+    "- **E1** (España, del 25 % al 45 %): 32 % → ✅ (con las 17: 36 %)",
+    "- **E2** (Madrid entre las 3 primeras y por encima del 50 %; las otras dos, Illes Balears y Catalunya): Madrid es la 2.ª, con el 63 % → ✅. Las tres primeras son Illes Balears, Comunidad de Madrid, Catalunya → ✅. Con las 17, las tres primeras son País Vasco, Illes Balears, Comunidad de Madrid y Madrid es la 3.ª: suponía que el SERPAVI no tenía el País Vasco ni Navarra, y sí los tiene; acierta solo porque el Plan no se aplica allí",
+    "- **E3** (Madrid, a menos de 5 puntos del 58 %): 62,6 % → ✅",
+    "- **E4** (datos en menos de la mitad de los municipios pequeños, donde vive más del 60 % de su gente): 1.590 de 6.883, con el 69 % → ✅",
+    "- **E5** (de 200 a 600 municipios con más de la mitad fuera): 209 con 30 contratos o más, y 256 sin mínimo → ✅ (con las 17: 291)"
+  ]
+}

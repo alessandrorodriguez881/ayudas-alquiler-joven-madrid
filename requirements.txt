@@ -16,3 +16,4 @@ pyarrow==17.0.0
 mcp==2.3.0
 rdflib==7.6.0
 pyshacl==0.40.2
+jsonschema==4.25.1  # Smart Data Models validation (scripts/smart_data_models.py); altair needs it too

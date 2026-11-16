@@ -1,0 +1,15 @@
+{
+  "name": "smart_data_models",
+  "downloaded": "2026-11-16",
+  "license": "Smart Data Models: CC-BY-4.0 (modelos de datos)",
+  "files": {
+    "schema.json": {
+      "url": "https://raw.githubusercontent.com/smart-data-models/dataModel.KeyPerformanceIndicator/master/KeyPerformanceIndicator/schema.json",
+      "sha1": "6fbc3f47e7ab9d1c851513f0fc3d57b1b3e13c5a"
+    },
+    "common-schema.json": {
+      "url": "https://smart-data-models.github.io/data-models/common-schema.json",
+      "sha1": "054587aaf0aeefd41a17c12cfe87fddd648f8b5f"
+    }
+  }
+}

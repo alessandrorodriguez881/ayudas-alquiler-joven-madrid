@@ -23,3 +23,7 @@ data/*.nueva.sqlite
 
 # Ficheros grandes de apoyo para los distritos (78 MB): scripts/distritos_cifra3.py los baja con data/raw_2026-11-13/metadata.json
 data/raw_2026-11-13/*/
+
+# Población del INE de toda España (52 tablas, 17 MB): scripts/espana_tope500.py --descargar las baja; la columna que se usa
+# está en data/interim/ine_poblacion_municipios_2024.csv
+data/raw_2026-11-16/ine_cifras_oficiales_municipios/t*.json

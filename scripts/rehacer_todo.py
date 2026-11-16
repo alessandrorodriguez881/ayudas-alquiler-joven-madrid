@@ -33,12 +33,14 @@ STEPS = [
     "scripts/espacial.py",                  # neighbours and zones: Moran's I, Conley errors, spatial validation
     "scripts/robustez_indice.py",           # the proposal's +41 %, with need measured eight other ways
     "scripts/robustez_pueblos.py",          # the 58 % of the small municipalities, with rents read other ways
+    "scripts/espana_tope500.py",            # the Plan's 500 EUR cap in all of Spain (exploratory)
     "scripts/como_se_aplica.py",            # the proposal in a call open all year (RD 326/2026, art. 138)
     "scripts/probar_reglas.py",             # the calculator's rules against hand-made cases
     "scripts/distritos_madrid.py",
     "scripts/distritos_cifra3.py",          # figure 3 with Madrid city by districts (the first time, downloads 76 MB)
     "scripts/base_datos.py",                # SQLite database and its dictionary
     "scripts/ficha_dcat.py",                # DCAT-AP-ES file, validated with SHACL
+    "scripts/smart_data_models.py",         # the indicators as Smart Data Models (KeyPerformanceIndicator), validated
     "servidor_mcp/probar_servidor.py",      # starts the MCP server and tries its tools
     "scripts/graficos.py",                  # figures and the map of the app
     "scripts/validar_serpavi.py",

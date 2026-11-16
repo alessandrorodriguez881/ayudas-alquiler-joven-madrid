@@ -91,7 +91,7 @@ if bonosP is not None:
     def vs_plan(new, plan):  # «un +41 % frente al» / «un −11 % frente al» Plan, or «lo mismo que el» when it rounds to 0
         v = 100 * (new / plan - 1)
         return "lo mismo que el" if es(abs(v)) == "0" else f"un {'+' if v > 0 else '−'}{es(abs(v))} % frente al"
-    st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman un tercio de sus "
+    st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman el 39 % de sus "
             f"jóvenes) reciben {es(high(bonos), 1)} ayudas por cada 1.000 jóvenes: {vs_plan(high(bonos), high(bonosP))} "
             f"Plan 2026-2030 tal cual ({es(high(bonosP), 1)}), con el mismo dinero.** Madrid capital, "
             f"{es(capital(bonos), 1)}: {vs_plan(capital(bonos), capital(bonosP))} Plan ({es(capital(bonosP), 1)}). "
@@ -100,7 +100,7 @@ if bonosP is not None:
             "de 250 € y con el Plan, de hasta 300 €: para comparar ayuda con ayuda con hoy, elige «250 € (hoy)».",
             icon=":material/insights:")
 else:
-    st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman un tercio de sus "
+    st.info(f"**Con esta regla, los municipios con más necesidad fuera de Madrid capital (los que suman el 39 % de sus "
             f"jóvenes) reciben {es(high(bonos), 1)} ayudas por cada 1.000 jóvenes** (hoy, {es(high(bonos0), 1)}); Madrid "
             f"capital, {es(capital(bonos), 1)} (hoy, {es(capital(bonos0), 1)}). De cada 100 que la piden, la consiguen unos "
             f"{es(100 * bonos.sum() / req.sum())} (hoy, unos {es(100 * bonos0.sum() / req0.sum())}). Para compararla con "

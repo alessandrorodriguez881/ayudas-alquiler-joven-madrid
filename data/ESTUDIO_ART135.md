@@ -27,7 +27,7 @@ Lo genera `scripts/estudio_art135.py`. **No es el estudio oficial:** es la base 
   - sin datos suficientes para decirlo: 13
 - En toda la Comunidad, con datos en 112 municipios, el supuesto a) se cumple en 0 y el b) en 87. Con la renta media de los hogares, el alquiler solo no llega al 30 % en ningún municipio: con estos datos, la vía es el supuesto b)
 - **Con la oferta o con un supuesto, hay base en 49 de los 63** (42.485 jóvenes): en 16 solo por la subida del alquiler, y en 3 solo por la oferta
-- **La propuesta no depende de los municipios sin base.** Si el tope solo sube donde la hay (y en los demás se queda en 500 €), los municipios con más necesidad fuera de Madrid capital (los que suman un tercio de sus jóvenes) reciben 4,3 ayudas por cada 1.000 jóvenes (con la propuesta entera, 4,3), y que pedirla dé la misma probabilidad que hoy costaría 40,3 M€ (40,3 M€). Es la simulación de `scripts/simulador.py`, con la cuantía del Plan
+- **La propuesta no depende de los municipios sin base.** Si el tope solo sube donde la hay (y en los demás se queda en 500 €), los municipios con más necesidad fuera de Madrid capital (los que suman el 39 % de sus jóvenes) reciben 4,3 ayudas por cada 1.000 jóvenes (con la propuesta entera, 4,3), y que pedirla dé la misma probabilidad que hoy costaría 40,3 M€ (40,3 M€). Es la simulación de `scripts/simulador.py`, con la cuantía del Plan
 
 | Municipio | Habitantes (2024) | Jóvenes de 20 a 34 | Alquiler mediano (2024) | Tope: Plan → propuesta | Alquiler fuera del tope del Plan | Alquiler / renta del hogar | Subida 2019-2024 | Supuesto | Oferta: más de la mitad fuera |
 |---|---|---|---|---|---|---|---|---|---|

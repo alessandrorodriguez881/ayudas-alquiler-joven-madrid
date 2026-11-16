@@ -18,7 +18,7 @@ st.caption("Para la Consejería: la propuesta en una convocatoria abierta todo e
            "2026-2030 (art. 138), con el mismo dinero, y quién pierde. Es una propuesta de diseño, no un informe "
            "jurídico: decidirlo y comprobar que encaja en la norma les toca a la Comunidad y a sus servicios jurídicos.")
 KPIS = [("Municipios con más necesidad", f"{signed(ch['resto, necesidad alta'])} %",
-         "fuera de Madrid capital (los que suman un tercio de sus jóvenes): ayudas por cada 1.000 jóvenes, frente al "
+         "fuera de Madrid capital (los que suman el 39 % de sus jóvenes): ayudas por cada 1.000 jóvenes, frente al "
          "Plan tal cual"),
         ("Madrid capital", f"{signed(ch['Madrid capital'])} %",
          f"{es(-w['aids_delta_by_group']['Madrid capital'])} ayudas menos que con el Plan tal cual"),
