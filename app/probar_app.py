@@ -143,7 +143,10 @@ at.switch_page("app_pages/aplicar.py").run()  # resultados/como_se_aplica.json a
 assert [m.value for m in at.metric] == ["+41 %", "−11 %", "29 de 132"], [m.value for m in at.metric]
 assert any("forma continuada y permanente" in m.value and "1.503.067,85 €" in m.value for m in at.markdown), \
     "cómo se aplica: falta la norma o el precedente de Andalucía"
-ok(at, "cómo se aplica: 4 bolsas en una convocatoria abierta")
+# improvement 1 of the 15-nov jury (16-nov): Madrid city's bolsa by the need of its districts, said as calculated after
+assert any("+2,2 %" in i.value and "−23,9 %" in i.value and "(+41,0 %)" in i.value and "+8,7 %" in i.value
+           and "Lo calculamos después" in i.value for i in at.info), [i.value for i in at.info]
+ok(at, "cómo se aplica: 4 bolsas en una convocatoria abierta, y Madrid capital por distritos")
 
 at.switch_page("app_pages/metodo.py").run()
 assert any("I de Moran" in m.value and "Conley" in m.value for m in at.markdown), "método: falta lo de vecinos y zonas"
