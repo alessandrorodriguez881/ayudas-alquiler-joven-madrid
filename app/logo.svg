@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="40" viewBox="0 0 300 40" role="img" aria-label="Los invisibles del Bono">
+  <rect x="0" y="2" width="36" height="36" rx="9" fill="#256abf"/>
+  <path d="M8 20.5 L18 11.5 L28 20.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11 18.5 V30.5 H25 V18.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="18" cy="21.6" r="2.3" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="1.6 1.4"/>
+  <path d="M14.2 29.6 C14.6 25.8 21.4 25.8 21.8 29.6" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="1.6 1.4" stroke-linecap="round"/>
+  <text x="46" y="27" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#2f7fe0">Los invisibles del Bono</text>
+</svg>

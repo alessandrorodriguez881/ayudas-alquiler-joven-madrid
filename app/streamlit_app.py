@@ -1,8 +1,12 @@
 """App of the project: map, eligibility calculator, municipality card, allocation simulator and method.
 Run:  streamlit run app/streamlit_app.py"""
+import pathlib
+
 import streamlit as st
 
 st.set_page_config(page_title="Los invisibles del Bono", page_icon=":material/home_work:", layout="wide")
+# the project's mark, left of the menu on every page: a house with a dashed young person inside, «the invisible ones»
+st.logo(str(pathlib.Path(__file__).resolve().parent / "logo.svg"), size="large")
 
 page = st.navigation(
     [

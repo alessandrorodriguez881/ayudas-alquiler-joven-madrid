@@ -1,9 +1,10 @@
 """Calculator: does one young person meet the requirements today, with the Plan 2026-2030 and with our proposal, and how
 much would they get. All the rules live in scripts/reglas_bono.py, one function per article."""
+import altair as alt
 import pandas as pd
 import streamlit as st
 
-from datos import es, municipalities, query, rb
+from datos import SLOT1, SLOT2, SLOT3, es, municipalities, query, rb
 
 RULE_IN_DB = {"hoy": "bono_2024", "plan": "plan_2026_2030", "propuesta": "propuesta"}
 INCLUDES = {"vivienda": "Solo la vivienda", "garaje": "Vivienda y garaje", "trastero": "Vivienda y trastero",
@@ -104,6 +105,33 @@ else:
             " Con el Plan 2026-2030, sí." if plan_ok else
             " Con el Plan 2026-2030, tampoco. Con nuestra propuesta, sí." if ours_ok else "")
     st.error(f"**Hoy no cumples los requisitos del Bono.** {why}.{tail}", icon=":material/cancel:")
+
+# the pitch's story at a glance: the rent against each rule's cap (in Hoyo, 750 € against 600, 500 and 900 €)
+room = kind == "habitacion"
+SHORT = {"hoy": "Hoy (Bono 2024)", "plan": "Plan 2026-2030", "propuesta": "Nuestra propuesta"}  # fit at a phone's width
+caps_df = pd.DataFrame({"regla": [SHORT[r] for r in results],
+                        "tope": [res.room_cap if room else res.flat_cap for res in results.values()]})
+caps_df["etiqueta"] = [es(v) + " €" for v in caps_df["tope"]]
+rent = today.rent  # what counts as rent (art. 5): the price, or 75-95 % of it with garage, storage room or expenses
+ink = "#e6edf6" if st.context.theme.type == "dark" else "#18212f"  # the theme's text colour (.streamlit/config.toml)
+order = list(caps_df["regla"])
+y_rule = alt.Y("regla:N", sort=order, title=None, axis=alt.Axis(labelLimit=260, labelFontSize=13))
+x_eur = alt.X("tope:Q", title=None, scale=alt.Scale(domain=[0, 1.35 * max(caps_df["tope"].max(), rent)]),
+              axis=alt.Axis(format=",.0f", tickCount=4, labelExpr="replace(datum.label, ',', '.') + ' €'"))
+bars = alt.Chart(caps_df).mark_bar(cornerRadiusEnd=4, size=24).encode(
+    x=x_eur, y=y_rule, color=alt.Color("regla:N", scale=alt.Scale(domain=order, range=[SLOT1, SLOT2, SLOT3]), legend=None),
+    tooltip=[alt.Tooltip("regla:N", title="Regla"), alt.Tooltip("etiqueta:N", title="Tope del alquiler")])
+cap_labels = alt.Chart(caps_df).mark_text(align="left", dx=6, fontSize=13, fontWeight="bold", color=ink).encode(
+    x="tope:Q", y=y_rule, text="etiqueta:N")
+rent_line = alt.Chart(pd.DataFrame({"alquiler": [rent]})).mark_rule(strokeWidth=3, strokeDash=[6, 4], color=ink).encode(
+    x="alquiler:Q", tooltip=[alt.Tooltip("alquiler:Q", title="Tu alquiler (€ al mes)", format=".0f")])
+st.altair_chart(
+    # left padding: Vega measures the labels before the Inter font loads, and without it they come out cut
+    (bars + rent_line + cap_labels).properties(height=alt.Step(46), padding={"left": 24, "top": 4, "right": 4, "bottom": 4},
+                                               title=alt.TitleParams(
+        f"Tu alquiler: {es(rent)} € (la línea)", anchor="start", fontSize=15)),
+    alt=f"Tope del alquiler en {name} frente a tu alquiler de {es(rent)} €: "
+        + "; ".join(f"{r}, {e}" for r, e in zip(caps_df["regla"], caps_df["etiqueta"])))
 
 st.subheader(f"En {name}")
 SUBTITLE = {"hoy": "Convocatoria abierta desde el 3-feb-2025: 250 € al mes durante 2 años",
