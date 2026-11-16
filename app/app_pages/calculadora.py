@@ -31,7 +31,7 @@ with st.container(border=True):
     a, b, c = st.columns(3)
     name = a.selectbox("Municipio", options, key="calc_municipio")
     age = b.number_input("Edad", min_value=14, max_value=60, value=27, key="calc_edad")
-    kind = c.segmented_control("¿Qué alquilas?", ["Piso entero", "Habitación"], key="calc_tipo")
+    kind = c.segmented_control("¿Qué alquilas?", ["Piso entero", "Habitación"], key="calc_tipo", required=True, wrap=True)
     kind = "habitacion" if kind == "Habitación" else "piso"
 
     a, b = st.columns(2)
@@ -94,6 +94,7 @@ results = {rule: rb.evaluate(case, rule, float(caps.loc[key, "tope_piso"]), floa
            for rule, key in RULE_IN_DB.items()}
 
 euros = lambda x: es(x) + " €" if x % 1 == 0 else es(x, 2) + " €"  # noqa: E731
+nb = lambda s: s.replace(" €", " €")  # noqa: E731  (a figure and its € on one line: at 1,024 px «600 €» broke)
 today = results["hoy"]
 if today.eligible:
     st.success(f"**Hoy cumples los requisitos del Bono:** te darían {euros(today.monthly)} al mes durante "
@@ -104,7 +105,7 @@ else:
     tail = (" Con el Plan 2026-2030 y con nuestra propuesta, sí." if plan_ok and ours_ok else
             " Con el Plan 2026-2030, sí." if plan_ok else
             " Con el Plan 2026-2030, tampoco. Con nuestra propuesta, sí." if ours_ok else "")
-    st.error(f"**Hoy no cumples los requisitos del Bono.** {why}.{tail}", icon=":material/cancel:")
+    st.error(f"**Hoy no cumples los requisitos del Bono.** {nb(why)}.{tail}", icon=":material/cancel:")
 
 # the pitch's story at a glance: the rent against each rule's cap (in Hoyo, 750 € against 600, 500 and 900 €)
 room = kind == "habitacion"
@@ -114,6 +115,7 @@ caps_df = pd.DataFrame({"regla": [SHORT[r] for r in results],
 caps_df["etiqueta"] = [es(v) + " €" for v in caps_df["tope"]]
 rent = today.rent  # what counts as rent (art. 5): the price, or 75-95 % of it with garage, storage room or expenses
 ink = "#e6edf6" if st.context.theme.type == "dark" else "#18212f"  # the theme's text colour (.streamlit/config.toml)
+bg = "#0d1522" if st.context.theme.type == "dark" else "#ffffff"  # and its background, for the halo of the figures
 order = list(caps_df["regla"])
 y_rule = alt.Y("regla:N", sort=order, title=None, axis=alt.Axis(labelLimit=260, labelFontSize=13))
 x_eur = alt.X("tope:Q", title=None, scale=alt.Scale(domain=[0, 1.35 * max(caps_df["tope"].max(), rent)]),
@@ -121,13 +123,17 @@ x_eur = alt.X("tope:Q", title=None, scale=alt.Scale(domain=[0, 1.35 * max(caps_d
 bars = alt.Chart(caps_df).mark_bar(cornerRadiusEnd=4, size=24).encode(
     x=x_eur, y=y_rule, color=alt.Color("regla:N", scale=alt.Scale(domain=order, range=[SLOT1, SLOT2, SLOT3]), legend=None),
     tooltip=[alt.Tooltip("regla:N", title="Regla"), alt.Tooltip("etiqueta:N", title="Tope del alquiler")])
-cap_labels = alt.Chart(caps_df).mark_text(align="left", dx=6, fontSize=13, fontWeight="bold", color=ink).encode(
+label = dict(align="left", dx=6, fontSize=13, fontWeight="bold")
+# a halo in the background colour under each figure, so the dashed rent line never runs through it (16-nov: on a phone,
+# the 750 € line crossed «600 €» and «500 €»)
+halo = alt.Chart(caps_df).mark_text(**label, color=bg, stroke=bg, strokeWidth=12, strokeJoin="round").encode(
     x="tope:Q", y=y_rule, text="etiqueta:N")
+cap_labels = alt.Chart(caps_df).mark_text(**label, color=ink).encode(x="tope:Q", y=y_rule, text="etiqueta:N")
 rent_line = alt.Chart(pd.DataFrame({"alquiler": [rent]})).mark_rule(strokeWidth=3, strokeDash=[6, 4], color=ink).encode(
     x="alquiler:Q", tooltip=[alt.Tooltip("alquiler:Q", title="Tu alquiler (€ al mes)", format=".0f")])
 st.altair_chart(
     # left padding: Vega measures the labels before the Inter font loads, and without it they come out cut
-    (bars + rent_line + cap_labels).properties(height=alt.Step(46), padding={"left": 24, "top": 4, "right": 4, "bottom": 4},
+    (bars + rent_line + halo + cap_labels).properties(height=alt.Step(46), padding={"left": 24, "top": 4, "right": 4, "bottom": 4},
                                                title=alt.TitleParams(
         f"Tu alquiler: {es(rent)} € (la línea)", anchor="start", fontSize=15)),
     alt=f"Tope del alquiler en {name} frente a tu alquiler de {es(rent)} €: "
@@ -136,7 +142,7 @@ st.altair_chart(
 st.subheader(f"En {name}")
 SUBTITLE = {"hoy": "Convocatoria abierta desde el 3-feb-2025: 250 € al mes durante 2 años",
             "plan": "Lo que fija el Estado. La Comunidad aún no ha sacado su convocatoria y puede añadir requisitos",
-            "propuesta": "El Plan, con el tope subido al alquiler de cada municipio (hasta 1.000 €), como permite su art. 135"}
+            "propuesta": "El Plan, con el tope del piso subido al alquiler de cada municipio (hasta 1.000 €), como permite su art. 135, y el de la habitación en el 60 % del piso"}
 for col, (rule, res) in zip(st.columns(3), results.items()):
     with col.container(border=True, height="stretch"):
         st.markdown(f"**{rb.RULES[rule]}**")
@@ -152,11 +158,11 @@ for col, (rule, res) in zip(st.columns(3), results.items()):
         st.caption(f"Tope del alquiler aquí: {es(cap)} € ({'habitación' if kind == 'habitacion' else 'piso entero'}).")
         for ch in res.checks:  # what fails, in sight; everything, one click away
             if not ch.ok:
-                st.markdown(f":red[:material/close:] {ch.text}  \n:gray[{ch.article}]")
+                st.markdown(f":red[:material/close:] {nb(ch.text)}  \n:gray[{ch.article}]")
         with st.expander(f"Los {len(res.checks)} requisitos, uno a uno"):
             for ch in res.checks:
                 icon = ":green[:material/check:]" if ch.ok else ":red[:material/close:]"
-                st.markdown(f"{icon} {ch.text}  \n:gray[{ch.article}]")
+                st.markdown(f"{icon} {nb(ch.text)}  \n:gray[{ch.article}]")
 
 st.warning("Cumplir los requisitos no asegura la ayuda. Hoy se da por orden de llegada mientras queda dinero: en la "
            "convocatoria de 2022 se acabó el 6-nov-2023 y quien llegó después se quedó fuera.", icon=":material/info:")

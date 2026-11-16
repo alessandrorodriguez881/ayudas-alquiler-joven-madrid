@@ -29,19 +29,19 @@ let_in = result("simulador_reparto")["plan_income_limit"]["returns_let_in_vs_3ip
 with st.container(border=True):
     with st.container(horizontal=True, vertical_alignment="bottom"):
         cap_name = st.segmented_control("Tope del piso", list(CAPS), default="Plan o alquiler local (máx. 1.000 €)",
-                                        key="tope") or "Hoy (600 / 900 €)"
+                                        key="tope", required=True, wrap=True) or "Plan o alquiler local (máx. 1.000 €)"
         if cap_name == "Un tope único":
             single = st.slider("Tope único (€ al mes)", 400, 1500, 900, step=50, key="tope_unico", width=280)
     alloc_name = st.segmented_control("Cómo se reparten los bonos", list(ALLOC),
-                                      default="Cupos: jóvenes × necesidad × límite de ingresos", key="reparto") or "Orden de llegada (hoy)"
+                                      default="Cupos: jóvenes × necesidad × límite de ingresos", key="reparto", required=True, wrap=True) or "Cupos: jóvenes × necesidad × límite de ingresos"
     aid_name = st.segmented_control(  # opens with the Plan's aid: the same figures as the cover and the slides
-        "Cuánto da cada ayuda al mes", list(AID), default=list(AID)[1], key="cuantia",
+        "Cuánto da cada ayuda al mes", list(AID), default=list(AID)[1], key="cuantia", required=True, wrap=True,
         help="Plan 2026-2030, art. 137: hasta 300 € al mes (habitación, 200 €) y nunca más del 60 % del alquiler. Aquí, "
-             "con el alquiler mediano de 2024 del municipio, o el tope si el mediano pasa del tope.") or "250 € (hoy)"
+             "con el alquiler mediano de 2024 del municipio, o el tope si el mediano pasa del tope.") or list(AID)[1]
     plan_rules = AID[aid_name] == "plan"
     more_name = st.segmented_control(
         "Con el límite de ingresos del Plan, quién la pide", list(MORE), default="Los mismos que en 2022",
-        key="mas_gente", disabled=not plan_rules,
+        key="mas_gente", disabled=not plan_rules, required=True, wrap=True,
         help=f"El Plan deja pedirla con ingresos de hasta 5 × IPREM de la persona (42.000 € al año); hoy, 3 × IPREM del "
              f"hogar (25.200 €). En las declaraciones del IRPF, eso deja entrar a {es(let_in, 2)} veces más gente de "
              f"media, y más donde la renta es alta. «Todos» es el caso alto: los que entran nuevos ganan más y la "
@@ -49,13 +49,15 @@ with st.container(border=True):
     left, right = st.columns(2, gap="large", vertical_alignment="bottom")
     with left:
         beta_name = st.segmented_control(
-            "Cuánto frena el tope", list(BETAS), default=list(BETAS)[0], key="beta",
+            "Cuánto frena el tope", list(BETAS), default=list(BETAS)[0], key="beta", required=True, wrap=True,
             help="Central: solo la parte del efecto que se debe al tope (análisis exploratorio). Contraste: el efecto "
                  "del contraste preregistrado, que también recoge que el alquiler caro frena. Sin efecto: el tope no "
                  "cambia cuánta gente pide.") or list(BETAS)[0]
     with right:
-        budget = st.slider("Presupuesto (M€)", 10.0, 60.0, simulador.BUDGET_EUR / 1e6, step=0.1, key="presupuesto",
-                           format="%.1f M€")
+        # a list of values, so it can write «31,8 M€» with a comma (a slider wrote «31.8»)
+        budget = st.select_slider("Presupuesto", [round(10 + i / 10, 1) for i in range(501)],
+                                  value=round(simulador.BUDGET_EUR / 1e6, 1), key="presupuesto",
+                                  format_func=lambda v: es(v, 1) + " M€")
 
 beta = BETAS[beta_name]
 caps = CAPS[cap_name] if cap_name != "Un tope único" else np.full(len(s), float(single))

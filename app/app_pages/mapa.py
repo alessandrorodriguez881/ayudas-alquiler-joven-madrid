@@ -27,7 +27,7 @@ KPIS = [  # short label, value, what it means (in sight: metric labels are cut t
     ("Alquiler fuera del tope", pct(gap["2024_rents_plan_estatal"]["10000_or_fewer"]),
      f"en los municipios pequeños con el Plan 2026-2030, que les pone 500 € (hoy, "
      f"{pct(gap['2024_rents_2024_list']['10000_or_fewer'])})"),
-    ("Más ayudas donde más falta", "+" + pct(high("necesidad_requisito_plan_p75_hasta_1000") / high("plan_estatal") - 1),
+    ("Municipios con más necesidad", "+" + pct(high("necesidad_requisito_plan_p75_hasta_1000") / high("plan_estatal") - 1),
      "en los municipios con más necesidad fuera de Madrid capital, con nuestra propuesta frente al Plan y el mismo "
      "dinero (31,8 M€). Madrid capital, que hoy recibe más ayudas por joven que el resto, baja un "
      f"{pct(1 - capital('necesidad_requisito_plan_p75_hasta_1000') / capital('plan_estatal'))}"),
@@ -63,7 +63,7 @@ MEASURES = {
                               "Con los topes del Plan Estatal 2026-2030: 1.000 €, y 500 € en los municipios de 10.000 "
                               "habitantes o menos."),
 }
-choice = st.segmented_control("Qué mostrar", list(MEASURES), default="Necesidad", key="medida")
+choice = st.segmented_control("Qué mostrar", list(MEASURES), default="Necesidad", key="medida", required=True, wrap=True)
 col, bins, colors, title, fmt, note = MEASURES[choice or "Necesidad"]
 
 left, right = st.columns([3, 2], gap="large")

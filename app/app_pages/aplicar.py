@@ -63,14 +63,14 @@ with left:
                                                                                                        rows["etiqueta"])))
 with right:
     hi, lo = after["madrid_subthirds"]["necesidad alta"], after["madrid_subthirds"]["necesidad baja"]
-    st.info(f"Si la bolsa de Madrid capital se reparte en 3 subbolsas según la necesidad de sus distritos, los que más la "
+    st.info((f"Si la bolsa de Madrid capital se reparte en 3 subbolsas según la necesidad de sus distritos, los que más la "
             f"necesitan ({', '.join(hi['districts'])}) reciben un {sign1(hi['change_vs_A_pct'])} % de ayudas por joven "
             f"frente al Plan tal cual, en vez de perder; los que menos, un {sign1(lo['change_vs_A_pct'])} %. Fuera de "
             "Madrid capital, el +41 % se mantiene "
             f"({sign1(after['outside_madrid_by_third_change_vs_A_pct']['resto, necesidad alta'])} %). Lo calculamos "
             "después de ver el resultado preregistrado (con Madrid por distritos, el tercio con más necesidad gana un "
             f"{sign1(dist['by_third']['necesidad alta']['change_C_3_bolsas_vs_A_pct'])} %), y las solicitudes por "
-            "distrito no existen: son las de Madrid repartidas con nuestro modelo.",
+            "distrito no existen: son las de Madrid repartidas con nuestro modelo.").replace(" %", " %"),  # «+41 %» in one line
             title="Calculado después de verlo", icon=":material/science:")
 
 text = (ROOT / "data" / "COMO_SE_APLICA.md").read_text(encoding="utf-8")

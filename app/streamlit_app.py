@@ -7,6 +7,12 @@ import streamlit as st
 st.set_page_config(page_title="Los invisibles del Bono", page_icon=":material/home_work:", layout="wide")
 # the project's mark, left of the menu on every page: a house with a dashed young person inside, «the invisible ones»
 st.logo(str(pathlib.Path(__file__).resolve().parent / "logo.svg"), size="large")
+# the big figures shrink a little between a phone and a wide screen, and the labels go down a line instead of being
+# cut: at 1,024 px and below, «7.200 €» came out as «7.2…» and «Alquileres dentro del tope» as «Alquileres dentro d…»
+st.html("<style>@media (min-width: 640px) and (max-width: 1399px) {[data-testid='stMetricValue'], "
+        "[data-testid='stMetricValue'] * {font-size: clamp(1.15rem, 2.4vw, 2.25rem);}} "
+        "[data-testid='stMetricLabel'] [data-testid='stMarkdownContainer'], [data-testid='stMetricLabel'] p "
+        "{white-space: normal; overflow: visible; text-overflow: clip;}</style>")
 
 page = st.navigation(
     [

@@ -76,9 +76,9 @@ st.caption("Dinos cómo buscarías piso y te enseñamos en qué municipios, y en
 with st.container(border=True):
     a, b = st.columns(2, vertical_alignment="bottom")
     rule = a.segmented_control("Con qué regla", list(RULE_NAME), format_func=RULE_NAME.get, default="hoy",
-                               key="donde_regla") or "hoy"
+                               key="donde_regla", required=True, wrap=True) or "hoy"
     how = b.segmented_control("Cómo vivirías", ["Solo o sola", "Compartiendo piso"], default="Solo o sola",
-                              key="donde_como") or "Solo o sola"
+                              key="donde_como", required=True, wrap=True) or "Solo o sola"
     a, b = st.columns(2, vertical_alignment="bottom")
     income = a.number_input("Tus ingresos del último año (€ al año)", min_value=0, max_value=1000000, value=18000,
                             step=500, key="donde_ingresos")

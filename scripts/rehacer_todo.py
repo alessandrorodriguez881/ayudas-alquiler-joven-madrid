@@ -36,6 +36,7 @@ STEPS = [
     "scripts/como_se_aplica.py",            # the proposal in a call open all year (RD 326/2026, art. 138)
     "scripts/probar_reglas.py",             # the calculator's rules against hand-made cases
     "scripts/distritos_madrid.py",
+    "scripts/distritos_cifra3.py",          # figure 3 with Madrid city by districts (the first time, downloads 76 MB)
     "scripts/base_datos.py",                # SQLite database and its dictionary
     "scripts/ficha_dcat.py",                # DCAT-AP-ES file, validated with SHACL
     "servidor_mcp/probar_servidor.py",      # starts the MCP server and tries its tools
