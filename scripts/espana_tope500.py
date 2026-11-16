@@ -321,7 +321,8 @@ def main():
                 "municipios_mas_de_la_mitad_sin_minimo_de_contratos": int((dd["sobre_500"] > 0.5).sum())}
 
     inplan, inplan_d = ~sm["ccaa"].isin(OUTSIDE_PLAN), ~smd["ccaa"].isin(OUTSIDE_PLAN)
-    out = {"creado": datetime.datetime.now().isoformat(timespec="minutes"),
+    # "creado" is fixed: a timestamp would make rehacer_todo.py --comprobar flag the file on every run
+    out = {"creado": "2026-11-16",
            "ambito": "comunidades donde se aplica el Plan: todas menos el País Vasco y Navarra (RD 326/2026, art. 1.5)",
            "espana": block(sm[inplan], smd[inplan_d]), "espana_17_comunidades": block(sm, smd), "por_comunidad": {}}
     for c in sorted(m["ccaa"].dropna().unique()):
