@@ -12,6 +12,7 @@ Choices the norm leaves to the publisher, said here:
 Usage:  python -P scripts/ficha_dcat.py   (needs rdflib and pyshacl; downloads the shapes once, at a fixed commit)"""
 import hashlib
 import json
+import os
 import pathlib
 import subprocess
 import sys
@@ -87,6 +88,10 @@ def git(*args):
 def committed(path):
     """Bytes of the committed file (what the download address serves); stops if the working copy differs."""
     blob = git("cat-file", "blob", f"HEAD:{path}")
+    if os.environ.get("REHACER_EN_CI"):
+        # GitHub (Linux) rewrites some inputs with the last decimal changed (1e-16); the ficha describes the committed
+        # files, which is what the download address serves. scripts/comparar_con_tolerancia.py checks those changes
+        return blob
     assert (ROOT / path).read_bytes() == blob, f"{path} tiene cambios sin commit: haz commit antes de la ficha"
     return blob
 

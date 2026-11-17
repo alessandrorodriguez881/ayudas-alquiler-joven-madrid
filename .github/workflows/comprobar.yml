@@ -1,8 +1,9 @@
 name: comprobar que todo se rehace igual
 
 # En cada subida, GitHub rehace todos los resultados desde los datos del repositorio, en Linux y con las versiones de
-# requirements.txt, y falla si algún fichero de texto del repositorio cambia (las figuras PNG no cuentan: sus píxeles
-# dependen de las fuentes de cada sistema). Es el mismo comando que explica el README, en «Cómo repetirlo».
+# requirements.txt, y falla si algún resultado dice otra cosa. En Linux, algunos números cambian en el último decimal
+# (1e-16), así que se comparan con una tolerancia relativa de 1e-9 (scripts/comparar_con_tolerancia.py). Las figuras
+# PNG no cuentan: sus píxeles dependen de las fuentes de cada sistema. Es el mismo comando que explica el README, en «Cómo repetirlo».
 on:
   push:
     branches: [main]
@@ -23,26 +24,9 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Diagnóstico temporal - todos los pasos menos la ficha DCAT, y qué cambia
-        run: |
-          python - <<'PY2'
-          import subprocess, sys, os
-          sys.path.insert(0, "scripts")
-          from rehacer_todo import STEPS
-          env = {**os.environ, "PYTHONUTF8": "1"}
-          for s in STEPS:
-              if s.endswith("ficha_dcat.py"):
-                  continue
-              r = subprocess.run([sys.executable, s], env=env, capture_output=True, text=True)
-              print(s, "ok" if r.returncode == 0 else "FALLA " + r.stderr[-300:])
-          PY2
-          git update-index -q --refresh
-          git diff --numstat -- . ':(exclude)resultados/figuras/*.png' > diag.txt
-          git diff -U0 -- . ':(exclude)resultados/figuras/*.png' ':(exclude)*.sqlite' | grep '^[-+][^-+]' | cut -c1-160 | head -12 >> diag.txt
-          cat diag.txt
-          echo "::warning title=diagnóstico Linux::$(head -c 3500 diag.txt | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')"
-          git checkout -- . && git clean -fdq
       - name: Rehacer todo (python scripts/rehacer_todo.py --comprobar)
+        env:
+          REHACER_EN_CI: "1"
         run: |
           # si falla, el final de la salida va también como anotación del error, para verlo sin iniciar sesión
           python scripts/rehacer_todo.py --comprobar 2>&1 | tee salida.txt; estado=${PIPESTATUS[0]}
@@ -51,13 +35,5 @@ jobs:
             exit "$estado"
           fi
           rm salida.txt
-      - name: Ningún fichero de texto ha cambiado
-        run: |
-          git update-index -q --refresh
-          cambiados=$(git diff --name-only -- . ':(exclude)resultados/figuras/*.png')
-          if [ -n "$cambiados" ]; then
-            echo "Han cambiado estos ficheros:"; echo "$cambiados"
-            git diff --stat -- . ':(exclude)resultados/figuras/*.png'
-            exit 1
-          fi
-          echo "Ningún resultado ha cambiado: el repositorio da lo mismo que el código."
+      - name: Los resultados dicen lo mismo (números iguales hasta 1e-9)
+        run: python scripts/comparar_con_tolerancia.py
