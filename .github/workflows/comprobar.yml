@@ -23,6 +23,26 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Diagnóstico temporal - todos los pasos menos la ficha DCAT, y qué cambia
+        run: |
+          python - <<'PY2'
+          import subprocess, sys, os
+          sys.path.insert(0, "scripts")
+          from rehacer_todo import STEPS
+          env = {**os.environ, "PYTHONUTF8": "1"}
+          for s in STEPS:
+              if s.endswith("ficha_dcat.py"):
+                  continue
+              r = subprocess.run([sys.executable, s], env=env, capture_output=True, text=True)
+              print(s, "ok" if r.returncode == 0 else "FALLA " + r.stderr[-300:])
+          PY2
+          git update-index -q --refresh
+          git diff --numstat -- . ':(exclude)resultados/figuras/*.png' > diag.txt
+          git diff -U0 -- . ':(exclude)resultados/figuras/*.png' ':(exclude)*.sqlite' | grep '^[-+][^-+]' | cut -c1-160 | head -12 >> diag.txt
+          cat diag.txt
+          echo "::warning title=diagnóstico Linux::$(head -c 3500 diag.txt | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/
+/%0A/g')"
+          git checkout -- . && git clean -fdq
       - name: Rehacer todo (python scripts/rehacer_todo.py --comprobar)
         run: |
           # si falla, el final de la salida va también como anotación del error, para verlo sin iniciar sesión
