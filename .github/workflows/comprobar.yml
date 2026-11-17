@@ -37,8 +37,7 @@ jobs:
           fi
           rm salida.txt
       - name: Diferencias con los resultados del repositorio (informativo)
-        # En Linux salen diferencias pequeñas (17-nov): decimales lejanos, empates ordenados de otra forma, un optimizador
-        # que converge algo distinto y dos recuentos que cambian en 1. Las cifras del pitch no cambian. Se enseñan como
-        # aviso en la página de la ejecución, sin parar: lo que tiene que pasar es que todo se rehaga y pasen las pruebas
+        # En Linux (17-nov) solo cambian cuatro números de análisis exploratorios, a partir de la quinta cifra: el ajuste de
+        # las habitaciones y tres extremos de intervalos. Se enseñan como aviso en la página de la ejecución, sin parar
         continue-on-error: true
         run: python scripts/comparar_con_tolerancia.py
