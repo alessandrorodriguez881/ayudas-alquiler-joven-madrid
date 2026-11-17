@@ -24,7 +24,14 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - name: Rehacer todo (python scripts/rehacer_todo.py --comprobar)
-        run: python scripts/rehacer_todo.py --comprobar
+        run: |
+          # si falla, el final de la salida va también como anotación del error, para verlo sin iniciar sesión
+          python scripts/rehacer_todo.py --comprobar 2>&1 | tee salida.txt; estado=${PIPESTATUS[0]}
+          if [ "$estado" -ne 0 ]; then
+            echo "::error title=rehacer_todo.py falló::$(tail -c 2500 salida.txt | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')"
+            exit "$estado"
+          fi
+          rm salida.txt
       - name: Ningún fichero de texto ha cambiado
         run: |
           git update-index -q --refresh
