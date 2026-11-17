@@ -2,6 +2,7 @@
 numbers equal up to a relative tolerance of 1e-9 (Linux and Windows can differ in the last decimal, about 1e-16).
 The figures (PNG) do not count: their pixels depend on the fonts. The SQLite database is compared table by table.
 Exit code 1 if anything differs more than that.  Run:  python scripts/comparar_con_tolerancia.py   (used by GitHub, comprobar.yml)"""
+import json
 import math
 import os
 import re
@@ -31,8 +32,29 @@ def same_text(old, new):
     return all(close(a, b) for a, b in zip(NUM.findall(old), NUM.findall(new)))
 
 
+def json_paths(a, b, path=""):
+    """Keys of two JSON documents whose values differ beyond the tolerance."""
+    if isinstance(a, dict) and isinstance(b, dict):
+        out = [f"{path}/{k} (solo en uno)" for k in a.keys() ^ b.keys()]
+        for k in a.keys() & b.keys():
+            out += json_paths(a[k], b[k], f"{path}/{k}")
+        return out
+    if isinstance(a, list) and isinstance(b, list):
+        if len(a) != len(b):
+            return [f"{path} ({len(a)} -> {len(b)} elementos)"]
+        return [p for i, (x, y) in enumerate(zip(a, b)) for p in json_paths(x, y, f"{path}[{i}]")]
+    if isinstance(a, (int, float)) and isinstance(b, (int, float)) and not isinstance(a, bool):
+        return [] if close(a, b) else [f"{path}: {a} -> {b}"]
+    return [] if a == b else [f"{path}: {str(a)[:40]} -> {str(b)[:40]}"]
+
+
 def first_difference(old, new):
     """Where the two texts first differ beyond the tolerance (for the error message)."""
+    try:
+        paths = json_paths(json.loads(old), json.loads(new))
+        return f"{len(paths)} claves: " + "; ".join(paths[:6])
+    except ValueError:
+        pass
     a, b = NUM.split(old), NUM.split(new)
     if a != b:
         i = len(os.path.commonprefix([old, new]))
@@ -89,7 +111,7 @@ def main():
             bad.append(f + ("" if f.endswith(".sqlite") else ": " + first_difference(
                 old.decode("utf-8"), (ROOT / f).read_bytes().decode("utf-8").replace("\r\n", "\n"))))
     if bad and os.environ.get("GITHUB_ACTIONS"):  # visible on the run page without signing in
-        print("::error title=Distinto más allá de 1e-9::" + " | ".join(bad)[:3000].replace("%", "%25").replace("\n", " "))
+        print("::error title=Distinto más allá de 1e-9::" + " | ".join(bad)[:6000].replace("%", "%25").replace("\n", " "))
     print(f"{len(changed)} ficheros con cambios; {len(bad)} distintos más allá de {REL:g} (relativo).")
     sys.exit(1 if bad else 0)
 
