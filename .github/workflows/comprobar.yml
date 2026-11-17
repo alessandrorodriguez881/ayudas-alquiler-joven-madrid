@@ -40,8 +40,7 @@ jobs:
           git diff --numstat -- . ':(exclude)resultados/figuras/*.png' > diag.txt
           git diff -U0 -- . ':(exclude)resultados/figuras/*.png' ':(exclude)*.sqlite' | grep '^[-+][^-+]' | cut -c1-160 | head -12 >> diag.txt
           cat diag.txt
-          echo "::warning title=diagnóstico Linux::$(head -c 3500 diag.txt | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/
-/%0A/g')"
+          echo "::warning title=diagnóstico Linux::$(head -c 3500 diag.txt | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')"
           git checkout -- . && git clean -fdq
       - name: Rehacer todo (python scripts/rehacer_todo.py --comprobar)
         run: |
