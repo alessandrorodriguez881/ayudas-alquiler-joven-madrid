@@ -23,31 +23,6 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Diagnóstico temporal - qué cambia en la base SQLite en Linux
-        run: |
-          for s in preparar_datos necesidad_2024 simulador distritos_madrid distritos_cifra3; do python scripts/$s.py > /dev/null; done
-          git show HEAD:data/bono_alquiler_joven.sqlite > /tmp/antes.sqlite
-          python scripts/base_datos.py
-          python - <<'PY' > diag.txt
-          import sqlite3
-          def rows(p):
-              c = sqlite3.connect(p); out = {}
-              for (t,) in c.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"):
-                  out[t] = c.execute(f'SELECT * FROM "{t}"').fetchall()
-              return out
-          a, b = rows("/tmp/antes.sqlite"), rows("data/bono_alquiler_joven.sqlite")
-          for t in sorted(set(a) | set(b)):
-              ra, rb = a.get(t, []), b.get(t, [])
-              dif = [(x, y) for x, y in zip(ra, rb) if x != y]
-              if len(ra) != len(rb) or dif:
-                  print(f"TABLA {t}: filas {len(ra)} -> {len(rb)}, distintas {len(dif)}")
-                  for x, y in dif[:3]:
-                      print("  antes", repr(x)[:300]); print("  ahora", repr(y)[:300])
-          print("fin")
-          PY
-          cat diag.txt
-          echo "::warning title=diagnóstico SQLite::$(head -c 2500 diag.txt | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')"
-          git checkout -- . && git clean -fdq -e diag.txt
       - name: Rehacer todo (python scripts/rehacer_todo.py --comprobar)
         run: |
           # si falla, el final de la salida va también como anotación del error, para verlo sin iniciar sesión

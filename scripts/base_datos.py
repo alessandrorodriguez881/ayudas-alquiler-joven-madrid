@@ -273,7 +273,9 @@ def simulation():
                                  "cupos: " + " × ".join(["jóvenes", "necesidad" + ("²" if how[1] == 2 else ""),
                                                           *(["límite de ingresos"] if "requisito" in how else [])]),
                                  "tope_piso": cap, "solicitudes": req, "bonos": bonos, "parte_por_encima": sh}))
-    return pd.concat(out, ignore_index=True)
+    # 9 decimals: Windows and Linux differ in the last bit of some of these (1e-16), and the database has to be the same
+    # file on every system (seen 17-nov with .github/workflows/comprobar.yml); 9 decimals change nothing that is shown
+    return pd.concat(out, ignore_index=True).round({"solicitudes": 9, "bonos": 9, "parte_por_encima": 9})
 
 
 def sources():
