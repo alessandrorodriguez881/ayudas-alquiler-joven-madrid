@@ -30,6 +30,7 @@ STEPS = [
     "scripts/validacion_fuera_muestra.py",
     "scripts/simulador.py",                 # allocation of the aid under each rule
     "scripts/prediccion_2024.py",           # prediction for 2024, written before the data exist
+    "scripts/tendencias_2024.py",           # before the 2024 change: placebo 2022-2023 and power (exploratory)
     "scripts/espacial.py",                  # neighbours and zones: Moran's I, Conley errors, spatial validation
     "scripts/robustez_indice.py",           # the proposal's +41 %, with need measured eight other ways
     "scripts/robustez_pueblos.py",          # the 58 % of the small municipalities, with rents read other ways

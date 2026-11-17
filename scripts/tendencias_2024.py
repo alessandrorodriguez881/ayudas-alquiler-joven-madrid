@@ -21,6 +21,7 @@ Usage:  python -P scripts/tendencias_2024.py   (after panel_ayudas.py and simula
 import json
 import math
 import pathlib
+import sqlite3
 import sys
 
 import numpy as np
@@ -36,6 +37,7 @@ OUT = ROOT / "resultados" / "tendencias_2024.json"
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8")  # the expectations print ✅ / ❌
     sim = pd.read_csv(INTERIM / "simulador_municipios.csv", dtype={"ine": str})
     moved = set(sim.loc[(sim["tope_2022"] == 600) & (sim["tope_2024"] == 900), "ine"])
     kept = set(sim.loc[(sim["tope_2022"] == 600) & (sim["tope_2024"] == 600), "ine"])
@@ -63,6 +65,10 @@ def main():
 
     n_m, n_k = int(p.loc[p["ine"].isin(moved), "ine"].nunique()), int(p.loc[p["ine"].isin(kept), "ine"].nunique())
     req = p.groupby("year")["requests"].sum()
+    with sqlite3.connect(ROOT / "data" / "bono_alquiler_joven.sqlite") as con:  # the Bono 2022 requests, same municipalities
+        b22 = pd.read_sql("SELECT ine, solicitudes FROM solicitudes WHERE programa = 'bono_alquiler_joven' "
+                          "AND anio_convocatoria = 2022", con)
+    bono = b22.loc[b22["ine"].isin(set(p["ine"])), "solicitudes"].sum()
     out = {
         "note": "EXPLORATORIO, escrito el 17-nov-2026 antes de ejecutarlo: placebo de diferencias en diferencias con las "
                 "Ayudas al alquiler para jóvenes 2022-2023 (mismos topes los dos años), entre los municipios que pasaron "
@@ -70,6 +76,7 @@ def main():
         "municipios": {"pasaron_a_900_en_2024": n_m, "siguieron_en_600": n_k,
                        "faltan_en_el_panel": sorted((moved | kept) - set(p["ine"]))},
         "solicitudes_ayudas": {"2022": int(req[2022]), "2023": int(req[2023])},
+        "solicitudes_bono_2022_en_los_mismos_municipios": int(bono),
         "placebo_2023": {"beta": b, "se_cluster": se, "rate_ratio": round(math.exp(b), 3),
                          "rate_ratio_ci95": [round(math.exp(lo), 3), round(math.exp(hi), 3)]},
         "crecimiento_2023_sobre_2022": {"pasaron_a_900": round(growth["moved"], 3), "siguieron_en_600": round(growth["kept"], 3),

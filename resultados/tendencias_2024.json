@@ -1,0 +1,43 @@
+{
+  "note": "EXPLORATORIO, escrito el 17-nov-2026 antes de ejecutarlo: placebo de diferencias en diferencias con las Ayudas al alquiler para jóvenes 2022-2023 (mismos topes los dos años), entre los municipios que pasaron de 600 a 900 € en 2024 y los que siguieron en 600 €",
+  "municipios": {
+    "pasaron_a_900_en_2024": 26,
+    "siguieron_en_600": 73,
+    "faltan_en_el_panel": [
+      "102",
+      "109",
+      "122",
+      "173"
+    ]
+  },
+  "solicitudes_ayudas": {
+    "2022": 665,
+    "2023": 1047
+  },
+  "solicitudes_bono_2022_en_los_mismos_municipios": 3534,
+  "placebo_2023": {
+    "beta": -0.17347015262623253,
+    "se_cluster": 0.15105992920652878,
+    "rate_ratio": 0.841,
+    "rate_ratio_ci95": [
+      0.625,
+      1.13
+    ]
+  },
+  "crecimiento_2023_sobre_2022": {
+    "pasaron_a_900": 1.472,
+    "siguieron_en_600": 1.753,
+    "cociente": 0.839
+  },
+  "potencia_con_este_error": {
+    "prediccion_central_pct": 29.6,
+    "potencia_central": 0.404,
+    "prediccion_baja_pct": 10.0,
+    "potencia_baja": 0.097
+  },
+  "esperado": [
+    "T1 (placebo entre 0,85 y 1,15, con 1 en el intervalo): 0.841 (0.625 a 1.13) -> ❌",
+    "T2 (crecimiento en bruto a menos del 15 %): cociente 0.839 -> ❌",
+    "T3 (potencia para +29.6 % entre 50 y 95 %; para +10.0 %, menos del 40 %): 40 % y 10 % -> ❌"
+  ]
+}
