@@ -19,7 +19,7 @@ pip install -r requirements.txt                 # Python 3.12
 streamlit run app/streamlit_app.py              # la app, en local
 python scripts/rehacer_todo.py --comprobar      # rehace todos los resultados (unos 6 min) y dice si algo cambia
 ```
-GitHub repite ese último comando en Linux en cada subida y comprueba que todos los números coinciden hasta la novena cifra; en Linux algunos cambian en la última, hacia 1e-16 ([comprobaciones](https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/actions/workflows/comprobar.yml)).
+GitHub repite ese último comando en Linux en cada subida, con todas las pruebas, y enseña en qué se diferencia de los resultados del repositorio ([comprobaciones](https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/actions/workflows/comprobar.yml)).
 
 ## La pregunta
 El Bono Alquiler Joven (RD 42/2022) da 250 € al mes, pero solo si el alquiler no pasa de **600 €**, o de **900 €** en los 29 municipios del Anexo II del Acuerdo del Consejo de Gobierno de 14-sep-2022.
@@ -64,7 +64,7 @@ pip install -r requirements.txt
 python scripts/rehacer_todo.py --comprobar
 ```
 
-En Windows da exactamente lo mismo; en Linux, lo mismo salvo la última cifra decimal de algunos números (hacia 1e-16), y GitHub lo comprueba en cada subida (`scripts/comparar_con_tolerancia.py`). Los ficheros de texto se guardan con finales de línea LF (`.gitattributes`), así que la comparación mira el contenido, no los finales de línea. Los datos descargados (`data/raw*/`) se guardan byte a byte, como vinieron, porque sus huellas se comparan con las del portal. Las figuras (PNG) salen aparte: usan la fuente Segoe UI, o DejaVu Sans donde no está, así que sus píxeles cambian de un sistema a otro.
+En Windows da exactamente lo mismo. En Linux (GitHub, 17-nov) las cifras del pitch salen iguales, pero hay diferencias pequeñas: decimales lejanos, empates ordenados de otra forma, un ajuste que converge algo distinto (en las habitaciones, −0,70868 frente a −0,70871) y dos recuentos que cambian en 1 (en `robustez_indice.json`, 53 municipios que cambian de bolsa en vez de 54). GitHub las enseña en cada subida (`scripts/comparar_con_tolerancia.py`). Los ficheros de texto se guardan con finales de línea LF (`.gitattributes`), así que la comparación mira el contenido, no los finales de línea. Los datos descargados (`data/raw*/`) se guardan byte a byte, como vinieron, porque sus huellas se comparan con las del portal. Las figuras (PNG) salen aparte: usan la fuente Segoe UI, o DejaVu Sans donde no está, así que sus píxeles cambian de un sistema a otro.
 
 Son estos pasos, que también se pueden lanzar uno a uno:
 
