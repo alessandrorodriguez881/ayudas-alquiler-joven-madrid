@@ -3,6 +3,7 @@ numbers equal up to a relative tolerance of 1e-9 (Linux and Windows can differ i
 The figures (PNG) do not count: their pixels depend on the fonts. The SQLite database is compared table by table.
 Exit code 1 if anything differs more than that.  Run:  python scripts/comparar_con_tolerancia.py   (used by GitHub, comprobar.yml)"""
 import math
+import os
 import re
 import sqlite3
 import subprocess
@@ -28,6 +29,18 @@ def same_text(old, new):
     if NUM.sub("#", old) != NUM.sub("#", new):
         return False
     return all(close(a, b) for a, b in zip(NUM.findall(old), NUM.findall(new)))
+
+
+def first_difference(old, new):
+    """Where the two texts first differ beyond the tolerance (for the error message)."""
+    a, b = NUM.split(old), NUM.split(new)
+    if a != b:
+        i = len(os.path.commonprefix([old, new]))
+        return f"texto distinto: {old[max(0, i - 40):i + 60]!r} -> {new[max(0, i - 40):i + 60]!r}"
+    for x, y in zip(NUM.findall(old), NUM.findall(new)):
+        if not close(x, y):
+            return f"{x} -> {y}"
+    return "?"
 
 
 def rows(path):
@@ -73,7 +86,10 @@ def main():
             ok = same_text(old.decode("utf-8"), (ROOT / f).read_bytes().decode("utf-8").replace("\r\n", "\n"))
         print("igual con tolerancia" if ok else "DISTINTO", f)
         if not ok:
-            bad.append(f)
+            bad.append(f + ("" if f.endswith(".sqlite") else ": " + first_difference(
+                old.decode("utf-8"), (ROOT / f).read_bytes().decode("utf-8").replace("\r\n", "\n"))))
+    if bad and os.environ.get("GITHUB_ACTIONS"):  # visible on the run page without signing in
+        print("::error title=Distinto más allá de 1e-9::" + " | ".join(bad)[:3000].replace("%", "%25").replace("\n", " "))
     print(f"{len(changed)} ficheros con cambios; {len(bad)} distintos más allá de {REL:g} (relativo).")
     sys.exit(1 if bad else 0)
 
