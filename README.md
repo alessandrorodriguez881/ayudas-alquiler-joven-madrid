@@ -13,6 +13,14 @@ Proyecto para **DataMad 2026** (URJC, UCM y Comunidad de Madrid), sobre el **Bon
 - **La propuesta: +41 % de ayudas en los municipios con más necesidad fuera de Madrid capital.** Topes según el alquiler de cada municipio, con la base del estudio que permite el art. 135 del Plan, y el dinero repartido por necesidad, no solo por orden de llegada. Con el mismo dinero, los municipios con más necesidad fuera de Madrid capital (36, que suman el 39 % de sus jóvenes) reciben un 41 % más de ayudas que con el Plan tal cual. Madrid capital, que hoy recibe más ayudas por joven que el resto y también tiene mucha necesidad, recibe un 11 % menos. Dentro de Madrid capital, si su bolsa se reparte por la necesidad de sus distritos, los que más la necesitan (Puente de Vallecas, Usera, Villaverde…) reciben un 2,2 % más que con el Plan, en vez de perder, y los de menos necesidad, un 23,9 % menos; lo calculamos después de ver el resultado preregistrado ([por distritos](data/DISTRITOS_CIFRA3.md)). El +41 % sale del reparto: subir los topes no lo cambia, pero deja que los jóvenes de 63 pueblos puedan volver a pedirla. Y para que pedirla tenga la misma probabilidad que hoy, la propuesta necesita solo 0,2 M€ más que el Plan. Cabe en las convocatorias abiertas todo el año que pide el Plan (art. 138): el dinero se reparte en 4 bolsas por necesidad y, dentro de cada una, por orden de llegada ([cómo se aplica](data/COMO_SE_APLICA.md)).
 - **Para usarlo hoy:** una [app](https://invisibles-del-bono.streamlit.app) («¿Puedo pedirla?», «¿Dónde me llega la ayuda?», la ficha de cada municipio y un simulador para la Consejería), la [base del estudio del art. 135](data/ESTUDIO_ART135.md), una base SQLite con su diccionario, una ficha DCAT-AP-ES, los indicadores como Smart Data Models y un servidor MCP. **Todo se rehace con un comando:** `python scripts/rehacer_todo.py`.
 
+## Pruébalo
+```bash
+pip install -r requirements.txt                 # Python 3.12
+streamlit run app/streamlit_app.py              # la app, en local
+python scripts/rehacer_todo.py --comprobar      # rehace todos los resultados (unos 6 min) y dice si algo cambia
+```
+GitHub repite ese último comando en Linux en cada subida ([comprobaciones](https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/actions/workflows/comprobar.yml)).
+
 ## La pregunta
 El Bono Alquiler Joven (RD 42/2022) da 250 € al mes, pero solo si el alquiler no pasa de **600 €**, o de **900 €** en los 29 municipios del Anexo II del Acuerdo del Consejo de Gobierno de 14-sep-2022.
 

@@ -1,0 +1,37 @@
+name: comprobar que todo se rehace igual
+
+# En cada subida, GitHub rehace todos los resultados desde los datos del repositorio, en Linux y con las versiones de
+# requirements.txt, y falla si algún fichero de texto del repositorio cambia (las figuras PNG no cuentan: sus píxeles
+# dependen de las fuentes de cada sistema). Es el mismo comando que explica el README, en «Cómo repetirlo».
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rehacer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Rehacer todo (python scripts/rehacer_todo.py --comprobar)
+        run: python scripts/rehacer_todo.py --comprobar
+      - name: Ningún fichero de texto ha cambiado
+        run: |
+          git update-index -q --refresh
+          cambiados=$(git diff --name-only -- . ':(exclude)resultados/figuras/*.png')
+          if [ -n "$cambiados" ]; then
+            echo "Han cambiado estos ficheros:"; echo "$cambiados"
+            git diff --stat -- . ':(exclude)resultados/figuras/*.png'
+            exit 1
+          fi
+          echo "Ningún resultado ha cambiado: el repositorio da lo mismo que el código."
