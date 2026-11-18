@@ -28,4 +28,7 @@ page = st.navigation(
 )
 page.run()
 st.caption("Herramienta independiente hecha para DataMad 2026 con datos abiertos. **No es una herramienta oficial** de la "
-           "Comunidad de Madrid ni del Ministerio de Vivienda: para pedir la ayuda, la convocatoria oficial es la que vale.")
+           "Comunidad de Madrid ni del Ministerio de Vivienda: para pedir la ayuda, la convocatoria oficial es la que vale. "
+           "Código, datos y método, abiertos (MIT): "
+           "[github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid]"
+           "(https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid).")

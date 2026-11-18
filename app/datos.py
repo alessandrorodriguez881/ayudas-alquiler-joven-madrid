@@ -38,7 +38,8 @@ def es(x, decimals=0):
         return "sin dato"
     q = Decimal(str(float(x))).quantize(Decimal(1).scaleb(-decimals), rounding=ROUND_HALF_UP)
     q = q.copy_abs() if q.is_zero() else q  # -0.3 rounds to «0», not «-0»
-    return f"{q:,.{decimals}f}".replace(",", "_").replace(".", ",").replace("_", ".")
+    # the typographic minus «−», as in the pitch and the rest of the app: Inicio said «-7,6 %» (execution review, 17-nov)
+    return f"{q:,.{decimals}f}".replace(",", "_").replace(".", ",").replace("_", ".").replace("-", "−")
 
 
 def pct(x, decimals=0):
@@ -130,15 +131,31 @@ def map_spec(col, bins, colors, title, fmt):
                       fmt).to_dict()
 
 
-@st.cache_data(show_spinner=False)
+def stamp(path):
+    """Size and modification time of a file: part of the cache key, so a new copy pulled from GitHub is read again.
+    Streamlit Cloud pulls new commits without restarting, and the cache kept the database of 8-nov after the one of
+    17-nov had arrived («Método» showed the old date; the cerebro saw it on 18-nov)."""
+    s = path.stat()
+    return s.st_size, s.st_mtime_ns
+
+
 def query(sql, params=()):
     """Rows of the project's SQLite database, opened read-only."""
+    return _query(sql, tuple(params), stamp(DB))
+
+
+@st.cache_data(show_spinner=False)
+def _query(sql, params, version):
     with closing(sqlite3.connect(DB.as_uri() + "?mode=ro", uri=True)) as con:
         return pd.read_sql(sql, con, params=params)
 
 
-@st.cache_data(show_spinner=False)
 def result(name):
+    return _result(name, stamp(RES / f"{name}.json"))
+
+
+@st.cache_data(show_spinner=False)
+def _result(name, version):
     return json.loads((RES / f"{name}.json").read_text(encoding="utf-8"))
 
 
