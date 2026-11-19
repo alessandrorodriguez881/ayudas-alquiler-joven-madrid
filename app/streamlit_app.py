@@ -12,7 +12,11 @@ st.logo(str(pathlib.Path(__file__).resolve().parent / "logo.svg"), size="large")
 st.html("<style>@media (min-width: 640px) and (max-width: 1399px) {[data-testid='stMetricValue'], "
         "[data-testid='stMetricValue'] * {font-size: clamp(1.15rem, 2.4vw, 2.25rem);}} "
         "[data-testid='stMetricLabel'] [data-testid='stMarkdownContainer'], [data-testid='stMetricLabel'] p "
-        "{white-space: normal; overflow: visible; text-overflow: clip;}</style>")
+        "{white-space: normal; overflow: visible; text-overflow: clip;} "
+        # the menu: from 640 to 1,399 px without the small icons and with less padding, so the 7 pages fit in one line;
+        # at 1,024 px two of them hid behind an English «2 more», and at 1,366 px «¿Cómo se aplica?» was cut (17-nov)
+        "@media (min-width: 640px) and (max-width: 1399px) {[data-testid='stTopNavLink'] > span:first-child "
+        "{display: none;} [data-testid='stTopNavLink'] {gap: 0; padding: 0 4px;}}</style>")
 
 page = st.navigation(
     [

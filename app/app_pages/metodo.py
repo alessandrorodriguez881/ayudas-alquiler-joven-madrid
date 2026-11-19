@@ -3,6 +3,9 @@ import streamlit as st
 
 from datos import DB, INTERIM, RES, es, query, result
 
+# the files the page cites, opened on GitHub (review of 17-nov: «Método» named .md files without a link)
+GH = "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/"
+
 pct10 = lambda b: 100 * (np.exp(0.1 * b) - 1)  # noqa: E731  (% change in requests per 10 points above the cap)
 h1 = result("contraste_real")["H1"]
 fake = result("exploratorio_topes_falsos")
@@ -110,7 +113,8 @@ st.markdown(
     f"{es(d_after['outside_madrid_by_third_change_vs_A_pct']['resto, necesidad alta'], 1)} %, Madrid entera sigue "
     f"perdiendo un {es(-d_after['madrid_city_change_vs_A_pct'], 1)} % y sus distritos con más necesidad pasan a ganar un "
     f"{es(d_sub['necesidad alta']['change_vs_A_pct'], 1)} %; los de menos necesidad pierden un "
-    f"{es(-d_sub['necesidad baja']['change_vs_A_pct'], 1)} %. Detalle en data/DISTRITOS_CIFRA3.md del repositorio."
+    f"{es(-d_sub['necesidad baja']['change_vs_A_pct'], 1)} %. Detalle en [data/DISTRITOS_CIFRA3.md]({GH}data/DISTRITOS_CIFRA3.md) "
+    "del repositorio."
 )
 
 st.subheader("Para quién es y cuánto cuesta mantenerlo")
@@ -151,8 +155,9 @@ st.table({
                  "CC BY 4.0 (Ayuntamiento); reutilización permitida citando la fuente (INE)"],
 }, alt="Datos que usa el proyecto, su fuente y su licencia")
 st.caption("Todo es estadística agregada por municipio o por distrito: ningún dato personal. Las licencias y las huellas "
-           "de cada descarga están en el README y en data/VERIFICACION.md del repositorio (las de los distritos, en "
-           "data/raw_2026-11-13/metadata.json).")
+           f"de cada descarga están en el [README]({GH}README.md) y en [data/VERIFICACION.md]({GH}data/VERIFICACION.md) "
+           f"del repositorio (las de los distritos, en "
+           f"[data/raw_2026-11-13/metadata.json]({GH}data/raw_2026-11-13/metadata.json)).")
 
 st.subheader("La base de datos")
 tables = query("SELECT tabla, COUNT(*) AS columnas FROM diccionario GROUP BY tabla")
