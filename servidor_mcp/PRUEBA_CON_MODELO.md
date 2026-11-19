@@ -57,3 +57,17 @@ uno mayor, y no lo hemos probado. **No se puede decir que funcione con un modelo
   `programa` y `regla` (lo prueba `probar_servidor.py`);
 - las descripciones dicen qué herramienta usar: `buscar_municipio` avisa de que los datos están en `ficha_municipio`,
   esta dice que acepta el nombre sin buscar antes, y `consulta_sql` nombra las columnas de las tablas principales.
+
+### Segunda ejecución, después de esas mejoras: jue 19-nov a las 22:50 (0 de 7 otra vez)
+No estaba en lo esperado: la hicimos después de ver la primera. Conversación entera:
+`prueba_con_modelo/2026-11-19_2250_llama3.2_3b.json`.
+
+- **El mismo resultado:** ninguna de las 7 bien, y la trampa de Getafe, bien. Citó una fuente en una de las 8.
+- **El error nuevo llegó y no lo usó.** Recibió las columnas que hay y no volvió a intentarlo: sigue haciendo una sola
+  llamada por pregunta.
+- **Sigue inventando:** se inventó los requisitos («de 18 a 30 años», con ingresos «entre 15.000 y 20.000 euros»; el
+  Bono es hasta los 35 y hasta 25.200 €) y dio un enlace que no traen nuestras herramientas.
+
+**Conclusión de las dos:** con un modelo de este tamaño, nuestro servidor no sirve para responder a nadie, por bien
+que respondan las herramientas. Por eso cada respuesta trae su fuente: para que una persona pueda comprobarla. Probar
+un modelo mayor queda pendiente: hace falta descargarlo, unos 5 GB.
