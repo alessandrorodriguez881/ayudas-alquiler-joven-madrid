@@ -85,7 +85,10 @@ def ficha_municipio(municipio):
     bono22 = next((x for x in req if x["programa"] == "bono_alquiler_joven"), None)
     cap22 = next(c["tope_piso"] for c in caps if c["regla"] == "bono_2022")
     share22 = share_above(cap22, r22.get("p25"), r22.get("p75"))
-    not_made = None  # requests not made in 2022 because of the cap: requests with the share at 0, minus actual ones
+    # extra 2022 requests the model gives if all the rent had been under the cap (as simulador.not_made): an
+    # extrapolation of an association between municipalities, not a proven causal effect (README). Until 19-nov the
+    # key said «no_hechas_por_el_tope», a cause the project does not claim
+    not_made = None
     if bono22 and not math.isnan(share22):
         not_made = round(bono22["solicitudes"] * (math.exp(-BETA * share22) - 1))  # as simulador.not_made
     return {
@@ -97,12 +100,13 @@ def ficha_municipio(municipio):
                                   "viviendas": r24.get("viviendas")} if r24 else None,
         "topes": caps,
         "solicitudes": req,
-        "solicitudes_bono_2022_no_hechas_por_el_tope": not_made,
+        "solicitudes_bono_2022_de_mas_con_todo_bajo_el_tope": not_made,
         "bonos_simulados": {k: round(v[0]["bonos"], 1) if v else None for k, v in sim.items()},
         "parte_irpf_bajo_3iprem_2024": r["parte_irpf_bajo_3iprem_2024"],
         "parte_irpf_bajo_5iprem_2024": r["parte_irpf_bajo_5iprem_2024"],
-        "nota": NOTE + ". «solicitudes_bono_2022_no_hechas_por_el_tope» es una estimación del modelo: las que habría "
-                "con todo el alquiler de 2022 por debajo del tope, menos las que hubo.",
+        "nota": NOTE + ". «solicitudes_bono_2022_de_mas_con_todo_bajo_el_tope» es una extrapolación del modelo: las que "
+                "habría con todo el alquiler de 2022 por debajo del tope, menos las que hubo. Sale de una asociación "
+                "entre municipios, no de un efecto causal probado.",
         "fuentes": sources("spacm_bono_alquiler_joven_2022", "spacm_ayudas_alquiler_vivienda_jovenes_sectores_escasos_recursos",
                            "poblacion_censada_por_edad_nacionalidad_y_sexo", "serpavi_mivau"),
     }
@@ -176,6 +180,20 @@ def table_sources(sql):
     return by_table, (sources(*named) if named else [])
 
 
+def schema_hint(sql):
+    """The columns of the tables a failed query names (or of the main ones), so the AI can write it again. 19-nov: a
+    small local model guessed columns («tipo», «municipio») and gave up (servidor_mcp/PRUEBA_CON_MODELO.md)."""
+    used = [t for t in TABLES if re.search(rf"{t}", sql, re.I)] or ["municipios", "solicitudes", "topes",
+                                                                         "alquiler_serpavi"]
+    with closing(sqlite3.connect(DB.as_uri() + "?mode=ro", uri=True)) as con:
+        cols = {t: [r[1] for r in con.execute(f"PRAGMA table_info({t})")] for t in used}
+        values = {c: [r[0] for r in con.execute(f"SELECT DISTINCT {c} FROM {t} ORDER BY 1")]
+                  for t, c in (("solicitudes", "programa"), ("topes", "regla")) if t in used}
+    hint = "Columnas: " + "; ".join(f"{t}({', '.join(c)})" for t, c in cols.items()) + "."
+    hint += "".join(f" Valores de {c}: {', '.join(map(str, v))}." for c, v in values.items())
+    return hint + " El nombre del municipio está en municipios.municipio; las demás tablas se unen por «ine»."
+
+
 def consulta_sql(sql):
     """One SELECT (or WITH ... SELECT) on the read-only database; at most MAX_ROWS rows and SQL_SECONDS seconds. The
     answer carries the sources of the tables the query reads (table_sources) and the method note."""
@@ -191,9 +209,11 @@ def consulta_sql(sql):
             cols = [d[0] for d in cur.description]
             got = cur.fetchmany(MAX_ROWS + 1)
         except sqlite3.OperationalError as e:
-            if "interrupted" not in str(e):
-                raise
-            raise ValueError(f"La consulta tardaba más de {SQL_SECONDS} s y se ha parado: acótala (con WHERE o LIMIT)") from e
+            if "interrupted" in str(e):
+                raise ValueError(f"La consulta tardaba más de {SQL_SECONDS} s y se ha parado: acótala (con WHERE o LIMIT)") from e
+            if re.search(r"no such (column|table)", str(e)):
+                raise ValueError(f"{e}. {schema_hint(text)}") from e
+            raise
     by_table, named = table_sources(text)
     return {"columnas": cols, "filas": [list(x) for x in got[:MAX_ROWS]], "recortado": len(got) > MAX_ROWS,
             "fuentes_por_tabla": by_table, "fuentes": named, "nota": NOTE}

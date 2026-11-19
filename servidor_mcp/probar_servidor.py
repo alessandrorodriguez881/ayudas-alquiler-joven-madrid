@@ -99,6 +99,10 @@ async def main():
                                                "SELECT COUNT(*) FROM x")
             assert attr(r, "is_error", "isError") and "se ha parado" in why(r), why(r)
             ok("consulta_sql: una consulta que no acaba se para a los 5 s")
+            # 19-nov: a column that does not exist answers with the real ones (a small model guessed «tipo» and gave up)
+            r = await call("consulta_sql", sql="SELECT COUNT(*) FROM solicitudes WHERE tipo = 'bono'")
+            assert attr(r, "is_error", "isError") and "anio_convocatoria" in why(r) and "bono_alquiler_joven" in why(r), why(r)
+            ok("consulta_sql: una columna que no existe responde con las que hay y los valores de «programa»")
             for args, word in (({"con_quien": "jovenes", "jovenes_que_firman": 0}, "jovenes_que_firman"),
                                ({"precio": -1}, "precio")):
                 r = await call("puedo_pedirla", **{"municipio": "Parla", "edad": 27, "precio": 750, "ingresos": 18000,

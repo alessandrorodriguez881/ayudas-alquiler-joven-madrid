@@ -49,18 +49,21 @@ def explained():
 @mcp.tool()
 def buscar_municipio(texto: str) -> list[dict]:
     """Busca municipios de la Comunidad de Madrid cuyo nombre contiene el texto (sin importar tildes ni artículos).
-    Devuelve el código INE, el nombre oficial y la población de 2024."""
+    Devuelve el código INE, el nombre oficial y la población de 2024. Para sus datos (jóvenes, alquiler, topes,
+    solicitudes), llama después a ficha_municipio."""
     with explained():
         return q.buscar_municipio(texto)
 
 
 @mcp.tool()
 def ficha_municipio(municipio: str) -> dict:
-    """Indicadores de un municipio (nombre o código INE de 3 cifras): jóvenes de 20 a 34 años, índice de necesidad
+    """Indicadores de un municipio (nombre o código INE de 3 cifras; no hace falta buscarlo antes): jóvenes de 20 a 34
+    años, índice de necesidad
     (0-100), alquiler mensual de 2024 (SERPAVI), el tope del alquiler con el Bono 2022, el Bono 2024 (hoy), el Plan
     Estatal 2026-2030 y la propuesta del proyecto, con la parte de los alquileres de 2024 que queda por encima de cada
-    tope; solicitudes del Bono 2022 y de las Ayudas al alquiler de 2022 y 2023; las solicitudes del Bono 2022 que no se
-    hicieron por el tope (estimación del modelo) y los bonos simulados con cada regla. Incluye las fuentes: cítalas."""
+    tope; solicitudes del Bono 2022 y de las Ayudas al alquiler de 2022 y 2023; cuántas solicitudes más del Bono 2022
+    da el modelo si todo el alquiler hubiera quedado por debajo del tope (una extrapolación, no un efecto causal
+    probado) y los bonos simulados con cada regla. Incluye las fuentes: cítalas."""
     with explained():
         return q.ficha_municipio(municipio)
 
@@ -112,8 +115,11 @@ def diccionario(tabla: str = "") -> list[dict]:
 @mcp.tool()
 def consulta_sql(sql: str) -> dict:
     """Una consulta SELECT (SQLite) sobre la base de datos del proyecto, solo de lectura, de hasta 500 filas. Mira antes
-    diccionario() para conocer las tablas. La clave de municipio es «ine» (3 cifras). La respuesta trae las fuentes de
-    las tablas que lee («fuentes_por_tabla» y «fuentes», con su enlace): cítalas."""
+    diccionario() para conocer las tablas; las principales: municipios (ine, municipio, pob_total_2024,
+    jovenes_20_34_2024, indice_necesidad, grupo_necesidad…), solicitudes (ine, programa, anio_convocatoria, solicitudes,
+    aceptadas, rechazadas), topes (ine, regla, tope_piso, tope_habitacion) y alquiler_serpavi (ine, anio, viviendas,
+    mediana, p25, p75). La clave de municipio es «ine» (3 cifras). Si una columna no existe, el error dice cuáles hay.
+    La respuesta trae las fuentes de las tablas que lee («fuentes_por_tabla» y «fuentes», con su enlace): cítalas."""
     with explained():
         return q.consulta_sql(sql)
 
