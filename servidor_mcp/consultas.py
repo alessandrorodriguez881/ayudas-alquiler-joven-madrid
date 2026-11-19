@@ -1,5 +1,6 @@
 """What the MCP server answers, read from data/bono_alquiler_joven.sqlite (scripts/base_datos.py), opened read-only.
-Every answer carries the sources of its figures (table fuentes), so an AI that uses it can cite them. No MCP code here:
+The answers carry the sources of their figures (table fuentes; consulta_sql, those of the tables it reads, since
+19-nov), so an AI that uses it can cite them. No MCP code here:
 servidor.py registers these functions as tools, and they can be tested or reused without the SDK."""
 import json
 import math
@@ -153,8 +154,31 @@ def diccionario(tabla=None):
     return rows("SELECT tabla, columna, tipo, unidad, descripcion, fuente FROM diccionario")
 
 
+TABLES = ("municipios", "reglas", "topes", "solicitudes", "alquiler_serpavi", "alquiler_distritos_madrid", "simulacion",
+          "fuentes", "diccionario", "metadatos")
+squash = lambda s: re.sub(r"[^a-z0-9]", "", s.lower())  # noqa: E731  («SERPAVI (MIVAU)» names serpavi_mivau)
+
+
+def table_sources(sql):
+    """The sources of the tables a query reads: the «fuente» of their columns in the dictionary, and the rows of the
+    table fuentes those texts name (with title, licence and URL). 19-nov: consulta_sql answered without sources, though
+    the README said every answer cites them (a juror's rehearsal saw it)."""
+    used = [t for t in TABLES if re.search(rf"\b{t}\b", sql, re.I)]
+    if not used:
+        return {}, []
+    marks = ", ".join("?" * len(used))
+    by_table = {}
+    for r in rows(f"SELECT DISTINCT tabla, fuente FROM diccionario WHERE tabla IN ({marks}) AND fuente IS NOT NULL "
+                  "AND TRIM(fuente) <> '' ORDER BY tabla, fuente", used):
+        by_table.setdefault(r["tabla"], []).append(r["fuente"])
+    texts = squash(" ".join(f for fs in by_table.values() for f in fs))
+    named = [r["fuente"] for r in rows("SELECT fuente FROM fuentes") if squash(r["fuente"]) in texts]
+    return by_table, (sources(*named) if named else [])
+
+
 def consulta_sql(sql):
-    """One SELECT (or WITH ... SELECT) on the read-only database; at most MAX_ROWS rows and SQL_SECONDS seconds."""
+    """One SELECT (or WITH ... SELECT) on the read-only database; at most MAX_ROWS rows and SQL_SECONDS seconds. The
+    answer carries the sources of the tables the query reads (table_sources) and the method note."""
     text = sql.strip().rstrip(";").strip()
     if not re.match(r"(?is)^(select|with)\b", text) or ";" in text:
         raise ValueError("Solo se admite una consulta SELECT (o WITH … SELECT), sin «;» en medio")
@@ -170,4 +194,6 @@ def consulta_sql(sql):
             if "interrupted" not in str(e):
                 raise
             raise ValueError(f"La consulta tardaba más de {SQL_SECONDS} s y se ha parado: acótala (con WHERE o LIMIT)") from e
-    return {"columnas": cols, "filas": [list(x) for x in got[:MAX_ROWS]], "recortado": len(got) > MAX_ROWS}
+    by_table, named = table_sources(text)
+    return {"columnas": cols, "filas": [list(x) for x in got[:MAX_ROWS]], "recortado": len(got) > MAX_ROWS,
+            "fuentes_por_tabla": by_table, "fuentes": named, "nota": NOTE}

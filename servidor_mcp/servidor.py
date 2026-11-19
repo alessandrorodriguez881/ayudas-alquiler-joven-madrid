@@ -112,7 +112,8 @@ def diccionario(tabla: str = "") -> list[dict]:
 @mcp.tool()
 def consulta_sql(sql: str) -> dict:
     """Una consulta SELECT (SQLite) sobre la base de datos del proyecto, solo de lectura, de hasta 500 filas. Mira antes
-    diccionario() para conocer las tablas. La clave de municipio es «ine» (3 cifras)."""
+    diccionario() para conocer las tablas. La clave de municipio es «ine» (3 cifras). La respuesta trae las fuentes de
+    las tablas que lee («fuentes_por_tabla» y «fuentes», con su enlace): cítalas."""
     with explained():
         return q.consulta_sql(sql)
 

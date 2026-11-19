@@ -78,6 +78,11 @@ async def main():
 
             n = content(await call("consulta_sql", sql="SELECT COUNT(*) AS n FROM municipios"))
             assert n["filas"] == [[179]], n
+            # 19-nov: the free query also carries the sources of the tables it reads
+            s = content(await call("consulta_sql", sql="SELECT ine, mediana FROM alquiler_serpavi WHERE anio = 2024 LIMIT 3"))
+            assert s["fuentes_por_tabla"].get("alquiler_serpavi") and \
+                [f["fuente"] for f in s["fuentes"]] == ["serpavi_mivau"] and all(f["url"] for f in s["fuentes"]), s
+            ok("consulta_sql: trae las fuentes de las tablas que lee (alquiler_serpavi -> SERPAVI, con su enlace)")
             for sql in ("DELETE FROM municipios", "WITH x AS (SELECT 1) DELETE FROM municipios",
                         "SELECT 1; DROP TABLE municipios"):
                 assert attr(await call("consulta_sql", sql=sql), "is_error", "isError"), sql

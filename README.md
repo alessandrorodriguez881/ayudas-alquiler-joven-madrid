@@ -115,7 +115,7 @@ Los CSV del portal que usamos están en `data/raw/`, tal y como se descargaron. 
 - **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado de la oferta de alquiler (art. 135). Este proyecto le da la base de ese estudio, repetible con un comando ([data/ESTUDIO_ART135.md](data/ESTUDIO_ART135.md)): de los 63 municipios pequeños donde proponemos subir el tope de 500 €, en 49 hay base en los datos (en 33, por la oferta de alquiler), y el simulador le deja probar topes y cupos antes de la convocatoria, con su coste.
 - **Ayuntamientos y oficinas de juventud:** la ficha de cada municipio, «¿Dónde me llega la ayuda?» y la calculadora, para orientar a quien pregunta.
 - **Los jóvenes:** saber en dos minutos si pueden pedirla, cuánto cobrarían y dónde les llega.
-- **Asistentes de IA:** el servidor MCP responde con nuestras cifras y cita la fuente de cada una.
+- **Asistentes de IA:** el servidor MCP responde con nuestras cifras y con la fuente de cada una, también en la consulta SQL libre (las fuentes de las tablas que lee), para que la IA las cite.
 
 Mantenerlo cuesta casi nada: código abierto (MIT), datos públicos, un comando por cada año nuevo de datos y pruebas automáticas que avisan si algo cambia. La app funciona en un servicio gratuito, Streamlit Community Cloud (el aspecto está en `.streamlit/config.toml`), y la base de datos es un solo fichero de medio megabyte.
 
