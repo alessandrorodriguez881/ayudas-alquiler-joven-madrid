@@ -32,4 +32,28 @@ tiene muchos parámetros. Y que cite la fuente en menos de la mitad, salvo en la
 Claude. Si falla, el fallo dice qué herramienta o qué descripción hay que aclarar, o que hace falta un modelo mayor.
 
 ## Lo que salió
-(Se escribe después de la primera ejecución, sin cambiar lo de arriba.)
+### Primera ejecución: jue 19-nov a las 22:41, con Llama 3.2 de 3.200 millones (0 de 7)
+Conversación entera: `prueba_con_modelo/2026-11-19_2241_llama3.2_3b.json` (Ollama 0.40.16, temperatura 0). Un
+primer intento a las 22:36 se paró antes de preguntar nada al modelo, por un fallo del script al leer las filas del
+SQL; se arregló sin tocar las preguntas ni la regla.
+
+**No acertó ninguna de las 7 que se corrigen solas, y no citó ninguna fuente.** La de Getafe (la trampa) está bien:
+dice que no hay datos de 2025 y no da cifra. Mucho peor de lo que esperábamos (de 4 a 6). Lo que pasó:
+- **Una sola llamada y respuesta.** Llamó a una herramienta en cada pregunta y respondió sin seguir: buscó Parla
+  (`buscar_municipio`, que solo da el código) y no pidió su ficha.
+- **SQL a ciegas.** Escribió columnas que no existen («tipo», «municipio», «alquiler_serpavi») sin mirar antes el
+  diccionario, y no lo intentó otra vez después del error.
+- **Inventó cuando le faltaba el dato.** Dijo que el tope de Parla es de «106 euros» (106 es su código INE), dio «1.444
+  solicitudes» en 2022 (son 48.383) y se inventó una fuente con un enlace que no es nuestro.
+- **«¿Puedo pedirla?»:** mandó `jovenes_que_firman = 0`; el servidor respondió con el error explicado (de 1 a 20) y el
+  modelo no lo corrigió.
+
+**Qué quiere decir.** El servidor respondió bien a cada llamada y sus errores llegaron explicados. Lo que falla es el
+modelo: uno de 3.200 millones de parámetros no encadena herramientas. Para una demo con un modelo abierto hace falta
+uno mayor, y no lo hemos probado. **No se puede decir que funcione con un modelo pequeño en local.**
+
+**Dos mejoras que sirven para cualquier modelo** (hechas después de ver esto, en el commit siguiente):
+- si una consulta SQL nombra una columna o una tabla que no existe, el error dice qué columnas hay y los valores de
+  `programa` y `regla` (lo prueba `probar_servidor.py`);
+- las descripciones dicen qué herramienta usar: `buscar_municipio` avisa de que los datos están en `ficha_municipio`,
+  esta dice que acepta el nombre sin buscar antes, y `consulta_sql` nombra las columnas de las tablas principales.

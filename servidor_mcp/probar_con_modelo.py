@@ -97,9 +97,9 @@ async def expected_values(session):
                       "vale": percent_forms(cap(hoyo, "plan_2026_2030")["parte_alquiler_2024_por_encima"])},
         "puedo_parla": {"valor": {"cumple_hoy": can["hoy"]["cumple"], "ayuda_al_mes": can["hoy"]["ayuda_al_mes"]},
                         "vale": number_forms(can["hoy"]["ayuda_al_mes"])},
-        "total_2022": {"valor": total["filas"][0]["n"], "vale": number_forms(total["filas"][0]["n"])},
-        "municipios_900": {"valor": n900["filas"][0]["n"], "vale": number_forms(n900["filas"][0]["n"])},
-        "trampa_2025": {"valor": {"anios_del_bono_en_la_base": [r["anio_convocatoria"] for r in years["filas"]]},
+        "total_2022": {"valor": total["filas"][0][0], "vale": number_forms(total["filas"][0][0])},
+        "municipios_900": {"valor": n900["filas"][0][0], "vale": number_forms(n900["filas"][0][0])},
+        "trampa_2025": {"valor": {"anios_del_bono_en_la_base": [r[0] for r in years["filas"]]},
                         "vale": None},
         "fuente_hoyo": {"valor": serpavi[0], "vale": ["serpavi", "mivau.gob.es"]},
     }
