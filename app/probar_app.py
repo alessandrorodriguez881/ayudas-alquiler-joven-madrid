@@ -154,4 +154,6 @@ assert any("I de Moran" in m.value and "Conley" in m.value for m in at.markdown)
 assert any("entre un 31 % y un 52 % más" in m.value for m in at.markdown), "método: falta el +41 % con otras medidas"
 assert any("Madrid capital por distritos" in m.value and "8,7 % más que con el Plan" in m.value
            and "Calculado después de verlo" in m.value for m in at.markdown), "método: falta Madrid por distritos (13-nov)"
+assert any("1.132.424 personas" in m.value and "2.ª comunidad donde más pesa, después de Illes Balears" in m.value
+           and "¿Quién publica el Bono por municipio?" in m.value for m in at.markdown), "método: falta fuera de Madrid (19-nov)"
 ok(at, "método y datos")

@@ -117,6 +117,26 @@ st.markdown(
     "del repositorio."
 )
 
+# outside Madrid (16-17 nov): until 19-nov only the README said it (pending 5 of pitch/MEJORAS_DIARIAS.md)
+spain = result("espana_tope500")
+sp, rank = spain["espana"], [r["comunidad"] for r in spain["ranking_parte_sobre_500"]]
+mad_pos = rank.index("Comunidad de Madrid") + 1
+st.subheader("¿Y fuera de Madrid?")
+st.markdown(
+    f"- **El tope de 500 € del Plan, en toda España** (exploratorio): con el mismo código y el SERPAVI de 2024, en las "
+    f"comunidades donde se aplica el Plan (todas menos el País Vasco y Navarra, art. 1.5), hay "
+    f"{es(sp['municipios_mas_de_la_mitad_sobre_500'])} municipios de 10.000 habitantes o menos, donde viven "
+    f"{es(sp['habitantes_en_ellos'])} personas, en los que ese tope dejaría fuera más de la mitad del alquiler. Madrid es la "
+    f"{mad_pos}.ª comunidad donde más pesa, después de {' y '.join(rank[:mad_pos - 1])}: un "
+    f"{es(100 * spain['madrid_comparacion']['ponderado_por_alquileres_serpavi'])} % del alquiler de sus pueblos quedaría "
+    f"fuera, ponderando por pisos alquilados (el 58 % de la portada pondera por jóvenes, que solo tenemos en Madrid). "
+    f"Detalle en [data/ESPANA_TOPE500.md]({GH}data/ESPANA_TOPE500.md).\n"
+    f"- **¿Quién publica el Bono por municipio?** Que sepamos, solo Madrid, y solo de 2022: en datos.gob.es, el único "
+    f"conjunto con «Bono Alquiler Joven» en el título es el suyo, y nadie publica 2023, 2024 ni 2025 por municipio. Por "
+    f"eso pedimos que el portal lo publique cada año. Detalle en "
+    f"[data/BONO_POR_COMUNIDADES.md]({GH}data/BONO_POR_COMUNIDADES.md)."
+)
+
 st.subheader("Para quién es y cuánto cuesta mantenerlo")
 st.markdown(
     "- **La Consejería de Vivienda:** el Plan 2026-2030 le deja subir el tope si lo justifica con un estudio actualizado "
@@ -142,17 +162,22 @@ st.markdown(
 st.subheader("Datos")
 st.table({
     "Fuente": ["Portal de Datos Abiertos de la Comunidad de Madrid", "SERPAVI, Ministerio de Vivienda y Agenda Urbana",
-               "Base de Datos Nacional de Subvenciones", "Ayuntamiento de Madrid e INE (solo para Madrid por distritos)"],
+               "Base de Datos Nacional de Subvenciones", "Ayuntamiento de Madrid e INE (solo para Madrid por distritos)",
+               "INE (solo para el tope de 500 € en España)"],
     "Qué usamos": ["Bono Alquiler Joven 2022 (solicitudes, aceptadas y rechazadas por municipio); Ayudas al alquiler para "
                    "jóvenes; población por edad; renta disponible; declaraciones del IRPF por tramo; paro registrado por "
                    "edad; Censo 2021 (viviendas en alquiler); alquiler medio e índices de precios del alquiler (para "
                    "comprobar el SERPAVI, también por distritos); límites de los municipios y de los distritos de Madrid",
-                   "Alquiler mediano, p25 y p75 por municipio, de 2011 a 2024, y por distrito de Madrid (2024)",
+                   "Alquiler mediano, p25 y p75 por municipio, de 2011 a 2024, y por distrito de Madrid (2024); para el "
+                   "tope de 500 € en España, los municipios pequeños de todas las comunidades (2024)",
                    "Municipios con tope de 900 € en cada convocatoria: 29 hasta 2023 y 55 desde 2024",
                    "Padrón municipal a 1-1-2024 y panel de indicadores de distritos (renta y paro de 16 a 24 años) del "
-                   "Ayuntamiento; Censo 2021 por secciones del INE (hogares en alquiler). Exploratorio"],
+                   "Ayuntamiento; Censo 2021 por secciones del INE (hogares en alquiler). Exploratorio",
+                   "Cifras oficiales de población de cada municipio a 1-1-2024 (revisión del padrón), para saber cuáles "
+                   "tienen 10.000 habitantes o menos. Exploratorio"],
     "Licencia": ["CC BY 4.0", "Reutilización permitida citando la fuente", "Textos oficiales publicados",
-                 "CC BY 4.0 (Ayuntamiento); reutilización permitida citando la fuente (INE)"],
+                 "CC BY 4.0 (Ayuntamiento); reutilización permitida citando la fuente (INE)",
+                 "Reutilización permitida citando la fuente"],
 }, alt="Datos que usa el proyecto, su fuente y su licencia")
 st.caption("Todo es estadística agregada por municipio o por distrito: ningún dato personal. Las licencias y las huellas "
            f"de cada descarga están en el [README]({GH}README.md) y en [data/VERIFICACION.md]({GH}data/VERIFICACION.md) "
