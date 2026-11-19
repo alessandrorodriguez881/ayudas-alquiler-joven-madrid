@@ -19,16 +19,18 @@ def rent_chart(rent, caps):
     """Median rent with its p25-p75 band (SERPAVI) and today's and the Plan's caps as dashed lines."""
     x = alt.X("anio:O", title=None, axis=alt.Axis(labelAngle=0))
     band = alt.Chart(rent).mark_area(color=BLUE[1], opacity=0.5).encode(
-        x=x, y=alt.Y("p25:Q", title="€ al mes"), y2="p75:Q")
+        # Spanish thousands: «1.200», not the «1,200» of the chart library (seen 17-nov on the axis)
+        x=x, y=alt.Y("p25:Q", title="€ al mes", axis=alt.Axis(format=",.0f", labelExpr="replace(datum.label, ',', '.')")),
+        y2="p75:Q")
     line = alt.Chart(rent).mark_line(color=SLOT1, strokeWidth=2, point=alt.OverlayMarkDef(size=60, filled=True)).encode(
         x=x, y="mediana:Q",
-        tooltip=[alt.Tooltip("anio:O", title="Año"), alt.Tooltip("mediana:Q", title="Mediano (€)", format=",.0f"),
-                 alt.Tooltip("p25:Q", title="Uno de cada cuatro paga menos de (€)", format=",.0f"),
-                 alt.Tooltip("p75:Q", title="Uno de cada cuatro paga más de (€)", format=",.0f")])
+        tooltip=[alt.Tooltip("anio:O", title="Año"), alt.Tooltip("mediana:Q", title="Mediano (€)", format=".0f"),
+                 alt.Tooltip("p25:Q", title="Uno de cada cuatro paga menos de (€)", format=".0f"),
+                 alt.Tooltip("p75:Q", title="Uno de cada cuatro paga más de (€)", format=".0f")])
     rules = alt.Chart(caps).mark_rule(strokeDash=[6, 4], strokeWidth=2).encode(
         y="tope:Q", color=alt.Color("nombre:N", title=None, scale=alt.Scale(range=[SLOT2, "#8a8a8a"]),
                                     legend=alt.Legend(orient="top")),
-        tooltip=[alt.Tooltip("nombre:N", title="Tope"), alt.Tooltip("tope:Q", title="€ al mes", format=",.0f")])
+        tooltip=[alt.Tooltip("nombre:N", title="Tope"), alt.Tooltip("tope:Q", title="€ al mes", format=".0f")])
     return (band + line + rules).properties(height=300)
 
 t = municipalities()

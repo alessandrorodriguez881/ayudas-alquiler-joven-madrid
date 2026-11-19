@@ -58,7 +58,7 @@ def district_bars(dis, picked):
                      axis=alt.Axis(format=".0%", values=[0, 0.25, 0.5, 0.75, 1])),
         color=alt.when("datum.elegido").then(alt.value(SLOT2)).otherwise(alt.value(SLOT1)),
         tooltip=[alt.Tooltip("distrito:N", title="Distrito"), alt.Tooltip("etiqueta:N", title="Dentro del tope"),
-                 alt.Tooltip("mediana:Q", title="Alquiler mediano (€)", format=",.0f")])
+                 alt.Tooltip("mediana:Q", title="Alquiler mediano (€)", format=".0f")])
     # the chart theme leaves text marks black, which the dark background hides: textColor of .streamlit/config.toml
     ink = "#e6edf6" if st.context.theme.type == "dark" else "#18212f"
     labels = alt.Chart(data).mark_text(align="left", dx=4, color=ink).encode(y=y, x="entra:Q", text="etiqueta:N")
