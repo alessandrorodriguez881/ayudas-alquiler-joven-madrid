@@ -29,6 +29,7 @@ STEPS = [
     "scripts/panel_ayudas.py",
     "scripts/validacion_fuera_muestra.py",
     "scripts/simulador.py",                 # allocation of the aid under each rule
+    "scripts/reparto_real_2022.py",         # the simulator against the real Bono 2022 accepted (exploratory)
     "scripts/prediccion_2024.py",           # prediction for 2024, written before the data exist
     "scripts/tendencias_2024.py",           # before the 2024 change: placebo 2022-2023 and power (exploratory)
     "scripts/espacial.py",                  # neighbours and zones: Moran's I, Conley errors, spatial validation

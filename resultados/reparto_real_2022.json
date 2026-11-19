@@ -1,0 +1,91 @@
+{
+  "what": "Simulator (first come, 2022 caps) against the real Bono 2022 accepted requests, by need group (exploratory)",
+  "written_before_running": "19-Nov-2026; a first quick calculation by a simulated jury had been seen (see docstring)",
+  "municipalities": 132,
+  "requests_2022": 48298,
+  "accepted_2022": 11472,
+  "regional_acceptance_rate_pct": 23.8,
+  "simulated_bonos_2024_budget": 5300,
+  "by_group": {
+    "Madrid capital": {
+      "municipalities": 1,
+      "requests_2022": 30961,
+      "accepted_2022": 7324,
+      "acceptance_rate_pct": 23.7,
+      "acceptance_rate_ci95": [
+        23.2,
+        24.1
+      ],
+      "share_of_accepted_pct": 63.8,
+      "share_of_requests_pct": 64.1,
+      "share_of_simulated_bonos_pct": 65.3
+    },
+    "resto, necesidad alta": {
+      "municipalities": 36,
+      "requests_2022": 7737,
+      "accepted_2022": 1924,
+      "acceptance_rate_pct": 24.9,
+      "acceptance_rate_ci95": [
+        23.9,
+        25.8
+      ],
+      "share_of_accepted_pct": 16.8,
+      "share_of_requests_pct": 16.0,
+      "share_of_simulated_bonos_pct": 15.4
+    },
+    "resto, necesidad baja": {
+      "municipalities": 65,
+      "requests_2022": 3791,
+      "accepted_2022": 913,
+      "acceptance_rate_pct": 24.1,
+      "acceptance_rate_ci95": [
+        22.7,
+        25.5
+      ],
+      "share_of_accepted_pct": 8.0,
+      "share_of_requests_pct": 7.8,
+      "share_of_simulated_bonos_pct": 7.5
+    },
+    "resto, necesidad media": {
+      "municipalities": 30,
+      "requests_2022": 5809,
+      "accepted_2022": 1311,
+      "acceptance_rate_pct": 22.6,
+      "acceptance_rate_ci95": [
+        21.5,
+        23.7
+      ],
+      "share_of_accepted_pct": 11.4,
+      "share_of_requests_pct": 12.0,
+      "share_of_simulated_bonos_pct": 11.8
+    }
+  },
+  "spearman_accepted_vs_simulated": {
+    "rho": 0.948,
+    "p": 9.259349272165338e-67
+  },
+  "municipalities_50plus_requests": 46,
+  "of_them_rate_outside_regional_pm10": 4,
+  "outside_list": [
+    {
+      "municipio": "Tres Cantos",
+      "requests": 269,
+      "rate_pct": 38.3
+    },
+    {
+      "municipio": "San Lorenzo de El Escorial",
+      "requests": 92,
+      "rate_pct": 34.8
+    },
+    {
+      "municipio": "Pedrezuela",
+      "requests": 62,
+      "rate_pct": 35.5
+    },
+    {
+      "municipio": "Molar (El)",
+      "requests": 52,
+      "rate_pct": 11.5
+    }
+  ]
+}
