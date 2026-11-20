@@ -25,6 +25,16 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Los ficheros grandes de los distritos, guardados entre ejecuciones
+        # 20-nov: datos.madrid.es no contestó (504) y la comprobación falló sin que cambiara el código. Se bajan una vez y
+        # se guardan; scripts/distritos_cifra3.py comprueba su SHA-256 con data/raw_2026-11-13/metadata.json
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/raw_2026-11-13/padron_ayto_202401
+            data/raw_2026-11-13/panel_indicadores_ayto
+            data/raw_2026-11-13/ine_censo2021_secciones
+          key: distritos-${{ hashFiles('data/raw_2026-11-13/metadata.json') }}
       - name: Rehacer todo (python scripts/rehacer_todo.py --comprobar)
         env:
           REHACER_EN_CI: "1"

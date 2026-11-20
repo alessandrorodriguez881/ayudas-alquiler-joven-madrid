@@ -64,7 +64,7 @@ def ensure_raw():
             req = urllib.request.Request(info["url"], headers={"User-Agent": "datos-cliente/1.0"})
             for attempt in range(4):  # 20-nov: the server answered 504 once in GitHub; try again before failing
                 try:
-                    with urllib.request.urlopen(req, timeout=300) as r:
+                    with urllib.request.urlopen(req, timeout=90) as r:
                         f.write_bytes(r.read())
                     break
                 except (urllib.error.URLError, TimeoutError) as e:  # HTTPError is a URLError
