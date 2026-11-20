@@ -16,7 +16,11 @@ st.html("<style>@media (min-width: 640px) and (max-width: 1399px) {[data-testid=
         # the menu: from 640 to 1,399 px without the small icons and with less padding, so the 7 pages fit in one line;
         # at 1,024 px two of them hid behind an English «2 more», and at 1,366 px «¿Cómo se aplica?» was cut (17-nov)
         "@media (min-width: 640px) and (max-width: 1399px) {[data-testid='stTopNavLink'] > span:first-child "
-        "{display: none;} [data-testid='stTopNavLink'] {gap: 0; padding: 0 4px;}}</style>")
+        "{display: none;} [data-testid='stTopNavLink'] {gap: 0; padding: 0 4px;}} "
+        # on a phone, a wide table (the 9 columns of «¿Cómo se aplica?») scrolls inside its own box instead of moving the
+        # whole page sideways: at 375 px it was 739 px wide and the page scrolled (20-nov)
+        "@media (max-width: 639px) {[data-testid='stMarkdownContainer'] table {display: block; overflow-x: auto;}}"
+        "</style>")
 
 page = st.navigation(
     [
