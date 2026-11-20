@@ -53,6 +53,8 @@ def ensure_raw():
     addresses in data/raw_2026-11-13/metadata.json and warn if its SHA-256 is not the one used on 13-Nov-2026 (the
     panel and the register are updated by the Ayuntamiento)."""
     import hashlib
+    import time
+    import urllib.error
     import urllib.request
     meta = json.loads((RAW13 / "metadata.json").read_text(encoding="utf-8"))
     for path, info in meta["ficheros"].items():
@@ -60,8 +62,16 @@ def ensure_raw():
         if not f.exists():
             f.parent.mkdir(parents=True, exist_ok=True)
             req = urllib.request.Request(info["url"], headers={"User-Agent": "datos-cliente/1.0"})
-            with urllib.request.urlopen(req, timeout=300) as r:
-                f.write_bytes(r.read())
+            for attempt in range(4):  # 20-nov: the server answered 504 once in GitHub; try again before failing
+                try:
+                    with urllib.request.urlopen(req, timeout=300) as r:
+                        f.write_bytes(r.read())
+                    break
+                except (urllib.error.URLError, TimeoutError) as e:  # HTTPError is a URLError
+                    if attempt == 3 or (isinstance(e, urllib.error.HTTPError) and e.code < 500):
+                        raise
+                    print(f"AVISO: {path}: {e}; lo intento otra vez en {30 * (attempt + 1)} s")
+                    time.sleep(30 * (attempt + 1))
         if hashlib.sha256(f.read_bytes()).hexdigest() != info["sha256"]:
             print(f"AVISO: {path} no es el fichero del 13-nov-2026 (la fuente se ha actualizado); las cifras pueden cambiar")
 
