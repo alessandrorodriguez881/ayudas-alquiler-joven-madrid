@@ -11,7 +11,7 @@
     dct:issued "2026-11-08"^^xsd:date ;
     dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
-    dct:modified "2026-11-17"^^xsd:date ;
+    dct:modified "2026-11-20"^^xsd:date ;
     dct:publisher <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo> ;
     dct:spatial <http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Comunidad-Madrid> ;
     dct:title "Datos del proyecto sobre el Bono Alquiler Joven en la Comunidad de Madrid"@es ;
@@ -27,7 +27,7 @@
     dct:description "Todo lo que usa el proyecto, por municipio de la Comunidad de Madrid, en un solo fichero SQLite: población, renta, paro, hogares de alquiler e índice de necesidad; cada convocatoria del Bono Alquiler Joven, de las Ayudas al alquiler para jóvenes y del Plan Estatal de Vivienda 2026-2030 con su tope en cada municipio; solicitudes por programa y año; alquiler del SERPAVI de 2011 a 2024, por municipio y en los 21 distritos de Madrid capital; y el reparto simulado con cada regla. Con diccionario de cada columna. La crea scripts/base_datos.py. Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: reutilización permitida citando la fuente y la fecha de actualización (9-jul-2026)."@es ;
     dct:issued "2026-11-08"^^xsd:date ;
     dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
-    dct:modified "2026-11-17"^^xsd:date ;
+    dct:modified "2026-11-20"^^xsd:date ;
     dct:publisher <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo> ;
     dct:source <https://datos.comunidad.madrid/dataset/censo_2021_viviendas_familiares_por_tenencia>,
         <https://datos.comunidad.madrid/dataset/irpf_declaraciones_por_tramo>,
@@ -66,11 +66,11 @@
     dct:description "Fichero data/bono_alquiler_joven.sqlite del repositorio. Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: reutilización permitida citando la fuente y la fecha de actualización (9-jul-2026)."@es ;
     dct:issued "2026-11-08"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
-    dct:modified "2026-11-17"^^xsd:date ;
+    dct:modified "2026-11-20"^^xsd:date ;
     dct:title "Bono Alquiler Joven y alquiler por municipio: base de datos del proyecto (SQLite)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
-            spdx:checksumValue "9ea414de943b789e96dc457d93d6db153a0f8f4a"^^xsd:hexBinary ] ;
+            spdx:checksumValue "d397fcbe3357d4e84a5418137d8aee5724ddd2bd"^^xsd:hexBinary ] ;
     dcat:accessURL <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/blob/main/data/bono_alquiler_joven.sqlite> ;
     dcat:byteSize "561152"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/data/bono_alquiler_joven.sqlite> ;
