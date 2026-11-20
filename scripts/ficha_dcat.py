@@ -7,7 +7,8 @@ Choices the norm leaves to the publisher, said here:
   - publisher: the project team, as a foaf:Agent with its own URI; it has no DIR3 code (not a public body). If the
     Comunidad publishes the data, its DIR3 URI goes here
   - the addresses are those of the GitHub repository; they work once the repository is public
-  - licence CC BY 4.0, as the portal's data; the SERPAVI columns keep the MIVAU legal notice (said in each description)
+  - licence CC BY 4.0, as the portal's data; the SERPAVI columns keep the MIVAU legal notice (said in each description
+    and, since 20-Nov, as a dct:RightsStatement on every distribution that links the notice)
   - no dct:format for the SQLite file (the EU file-type list has no SQLite entry): its IANA media type says what it is
 Usage:  python -P scripts/ficha_dcat.py   (needs rdflib and pyshacl; downloads the shapes once, at a fixed commit)"""
 import hashlib
@@ -19,7 +20,7 @@ import sys
 import urllib.request
 
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
-from rdflib.namespace import DCAT, DCTERMS as DCT, FOAF, RDF, XSD
+from rdflib.namespace import DCAT, DCTERMS as DCT, FOAF, RDF, RDFS, XSD
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))  # python -P drops the script folder
 from comun import ROOT  # noqa: E402
@@ -41,6 +42,8 @@ MADRID = URIRef("http://datos.gob.es/recurso/sector-publico/territorio/Autonomia
 LICENCE = URIRef(EU + "licence/CC_BY_4_0")
 TEAM = URIRef(REPO + "#equipo")
 PLACEHOLDER = URIRef("http://datos.gob.es/recurso/sector-publico/org/Organismo/E00000000")  # DIR3 shape, not a body
+RIGHTS = URIRef(REPO + "#derechos")
+MIVAU_NOTICE = URIRef("https://www.mivau.gob.es/ministerio/aviso-legal")  # the notice the README cites for SERPAVI
 SERPAVI = ("Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: "
            "reutilización permitida citando la fuente y la fecha de actualización (9-jul-2026).")
 KEYWORDS = ["Bono Alquiler Joven", "alquiler", "jóvenes", "vivienda", "Plan Estatal de Vivienda 2026-2030", "SERPAVI",
@@ -107,13 +110,17 @@ def lit_date(d):
 
 def build():
     g = Graph()
-    for p, ns in [("dcat", DCAT), ("dcatap", DCATAP), ("dct", DCT), ("foaf", FOAF), ("spdx", SPDX), ("vcard", VCARD),
-                  ("xsd", XSD)]:
+    for p, ns in [("dcat", DCAT), ("dcatap", DCATAP), ("dct", DCT), ("foaf", FOAF), ("rdfs", RDFS), ("spdx", SPDX),
+                  ("vcard", VCARD), ("xsd", XSD)]:
         g.bind(p, ns)
     cat = URIRef(REPO + "#catalogo")
     g.add((TEAM, RDF.type, FOAF.Agent))
     g.add((TEAM, FOAF.name, Literal("Equipo del proyecto «¿Llegan las ayudas al alquiler a quien más las necesita?» "
                                     "(DataMad 2026)", lang="es")))
+    # the reuse conditions as a statement too, not only inside each description (Abella's question, 19-Nov rehearsal)
+    g.add((RIGHTS, RDF.type, DCT.RightsStatement))
+    g.add((RIGHTS, RDFS.label, Literal("Licencia CC BY 4.0, como los datos del portal. " + SERPAVI, lang="es")))
+    g.add((RIGHTS, RDFS.seeAlso, MIVAU_NOTICE))
     g.add((cat, RDF.type, DCAT.Catalog))
     g.add((cat, DCT.title, Literal("Datos del proyecto sobre el Bono Alquiler Joven en la Comunidad de Madrid", lang="es")))
     g.add((cat, DCT.description, Literal("Datos abiertos, agregados por municipio, para estudiar si los topes de las ayudas "
@@ -172,6 +179,7 @@ def build():
                 g.add((dist, DCT.format, URIRef(EU + "file-type/" + fmt)))
             g.add((dist, DCAT.mediaType, URIRef("https://www.iana.org/assignments/media-types/" + media)))
             g.add((dist, DCT.license, LICENCE))
+            g.add((dist, DCT.rights, RIGHTS))
             g.add((dist, DCATAP.availability, URIRef(EU + "planned-availability/STABLE")))
             g.add((dist, DCAT.byteSize, Literal(len(data), datatype=XSD.nonNegativeInteger)))
             check = BNode()

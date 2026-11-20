@@ -2,6 +2,7 @@
 @prefix dcatap: <http://data.europa.eu/r5r/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix spdx: <http://spdx.org/rdf/terms#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -67,6 +68,7 @@
     dct:issued "2026-11-08"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
     dct:modified "2026-11-20"^^xsd:date ;
+    dct:rights <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#derechos> ;
     dct:title "Bono Alquiler Joven y alquiler por municipio: base de datos del proyecto (SQLite)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
@@ -119,6 +121,7 @@
     dct:issued "2026-11-07"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
     dct:modified "2026-11-12"^^xsd:date ;
+    dct:rights <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#derechos> ;
     dct:title "Indicadores por municipio de la Comunidad de Madrid, 2024 (CSV)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
@@ -174,6 +177,7 @@
     dct:issued "2026-11-07"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
     dct:modified "2026-11-12"^^xsd:date ;
+    dct:rights <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#derechos> ;
     dct:title "Reparto simulado del Bono Alquiler Joven con distintos topes y criterios (CSV)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
@@ -190,6 +194,7 @@
     dct:issued "2026-11-07"^^xsd:date ;
     dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
     dct:modified "2026-11-12"^^xsd:date ;
+    dct:rights <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#derechos> ;
     dct:title "Reparto simulado del Bono Alquiler Joven con distintos topes y criterios (JSON)"@es ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm spdx:checksumAlgorithm_sha1 ;
@@ -198,6 +203,10 @@
     dcat:byteSize "55654"^^xsd:nonNegativeInteger ;
     dcat:downloadURL <https://raw.githubusercontent.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid/main/resultados/simulador_reparto.json> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/application/json> .
+
+<https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#derechos> a dct:RightsStatement ;
+    rdfs:label "Licencia CC BY 4.0, como los datos del portal. Las columnas que vienen del SERPAVI (Ministerio de Vivienda y Agenda Urbana) siguen su aviso legal: reutilización permitida citando la fuente y la fecha de actualización (9-jul-2026)."@es ;
+    rdfs:seeAlso <https://www.mivau.gob.es/ministerio/aviso-legal> .
 
 <https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#equipo> a foaf:Agent ;
     foaf:name "Equipo del proyecto «¿Llegan las ayudas al alquiler a quien más las necesita?» (DataMad 2026)"@es .

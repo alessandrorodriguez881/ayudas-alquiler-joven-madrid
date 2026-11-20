@@ -3,7 +3,7 @@
  "plantillas": "DCAT-AP-ES 1.0.0, commit c6ab533",
  "cumple": false,
  "cumple_con_un_publicador_dir3_de_ejemplo": true,
- "triples": 197,
+ "triples": 204,
  "Violation": [
   {
    "nodo": "https://github.com/alessandrorodriguez881/ayudas-alquiler-joven-madrid#base-de-datos",
