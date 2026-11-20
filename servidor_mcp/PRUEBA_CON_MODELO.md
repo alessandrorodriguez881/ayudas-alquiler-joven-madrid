@@ -71,3 +71,26 @@ No estaba en lo esperado: la hicimos después de ver la primera. Conversación e
 **Conclusión de las dos:** con un modelo de este tamaño, nuestro servidor no sirve para responder a nadie, por bien
 que respondan las herramientas. Por eso cada respuesta trae su fuente: para que una persona pueda comprobarla. Probar
 un modelo mayor queda pendiente: hace falta descargarlo, unos 5 GB.
+
+## Con un modelo grande: Claude, como agente que ejecuta órdenes (vie 20-nov)
+Para no tocar la configuración de ninguna app ni descargar nada, el modelo es un agente de Claude Code: un subagente
+nuevo de la sesión que mantiene el proyecto, sin nada de lo que esa sesión sabe. Usa las herramientas desde la línea de
+comandos con `llamar.py`, que pasa cada llamada por el cliente oficial de MCP (como hace una app) y la guarda en un
+registro. Recibe las mismas instrucciones y las mismas 8 preguntas que el modelo pequeño, más cómo llamar a las
+herramientas: `prueba_con_modelo/instrucciones_agente.md`, tal cual. Se corrige con la misma regla y el mismo código:
+
+```bash
+python servidor_mcp/probar_con_modelo.py --corregir <registro> --modelo <modelo> --como "<cómo se ejecutó>"
+```
+
+### Lo esperado, escrito antes de ejecutarla (vie 20-nov, a las 09:25)
+- **Claude Sonnet 5.5:** las 7 que se corrigen solas, bien, y la trampa de Getafe, bien. Que cite la fuente en al menos
+  6 de las 8.
+- **Claude Haiku 5.5** (el modelo pequeño y barato de Claude): al menos 6 de las 7, y la trampa, bien.
+- Si falla alguna, se apunta igual, y lo que falle dice qué herramienta o qué descripción hay que aclarar.
+
+**Lo que esta prueba no dice:**
+- que funcione con un modelo abierto en local: el de 3.200 millones no basta, y uno mayor no lo hemos probado;
+- que funcione con Gemini o con ChatGPT: necesitan una cuenta, y no lo hemos probado;
+- que sea una app de chat: el agente, además de las herramientas, puede ejecutar órdenes. Le pedimos que no lea nada
+  más, y el registro guarda cada llamada que hizo.

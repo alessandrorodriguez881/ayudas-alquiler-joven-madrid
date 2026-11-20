@@ -13,6 +13,10 @@ another, so this is a recorded run (servidor_mcp/prueba_con_modelo/), not a resu
 
 Run:  ollama pull llama3.2:3b   (once)
       python servidor_mcp/probar_con_modelo.py [--modelo llama3.2:3b]
+
+A model that runs commands instead (an agent) answers the same 8 questions with llamar.py, which records every call
+and answer (prueba_con_modelo/instrucciones_agente.md); then the run is graded with the same rule and the same code:
+      python servidor_mcp/probar_con_modelo.py --corregir REGISTRO.jsonl --modelo NOMBRE --como "CÓMO SE EJECUTÓ"
 """
 import argparse
 import asyncio
@@ -164,10 +168,60 @@ def grade(qid, answer, calls, expected):
             "nota": "" if calls else "no llamó a ninguna herramienta"}
 
 
+def read_log(path):
+    """A run recorded by llamar.py --registro: the calls made before an answer belong to that question."""
+    entries = [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+    answers, pending = {}, []
+    for e in entries:
+        if "herramienta" in e:
+            pending.append({k: e[k] for k in ("herramienta", "argumentos", "respuesta")})
+        elif "respuesta_a" in e:  # an answer given twice keeps the last text and every call
+            calls = answers.get(e["respuesta_a"], {}).get("llamadas", []) + pending
+            answers[e["respuesta_a"]] = {"texto": e["texto"], "llamadas": calls, "hora": e["hora"]}
+            pending = []
+    return entries, answers, pending
+
+
+async def grade_log(path, model, how, instructions):
+    entries, answers, leftover = read_log(path)
+    params = StdioServerParameters(command=sys.executable, args=[str(SERVER)], env=dict(os.environ))
+    async with stdio_client(params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            expected = await expected_values(session)
+    rows = []
+    for n, (qid, question) in enumerate(QUESTIONS, 1):
+        given = answers.get(n, {"texto": "(sin respuesta)", "llamadas": [], "hora": None})
+        row = {"id": qid, "pregunta": question, "respuesta": given["texto"], "herramientas": given["llamadas"],
+               "hora": given["hora"], "esperado": expected[qid]["valor"]}
+        row.update(grade(qid, given["texto"], given["llamadas"], expected[qid]))
+        rows.append(row)
+        print(f"{qid}: acierta={row['acierta']} cita_fuente={row['cita_fuente']} "
+              f"herramientas={[c['herramienta'] for c in given['llamadas']]}", flush=True)
+    start = datetime.datetime.fromisoformat(entries[0]["hora"])
+    path_out = OUT / f"{start:%Y-%m-%d_%H%M}_{model.replace(':', '_').replace('/', '_')}.json"
+    record = {"fecha": entries[0]["hora"], "fin": entries[-1]["hora"], "modelo": model, "como": how,
+              "registro": Path(path).name, "equipo": platform.platform(),
+              "instrucciones": Path(instructions).read_text(encoding="utf-8") if instructions else None,
+              "llamadas_sin_respuesta_despues": leftover, "preguntas": rows,
+              "aciertos": sum(r["acierta"] is True for r in rows),
+              "corregidas_solas": sum(r["acierta"] is not None for r in rows),
+              "citan_fuente": sum(r["cita_fuente"] for r in rows)}
+    path_out.write_text(json.dumps(record, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
+    print(f"{record['aciertos']} de {record['corregidas_solas']} corregidas solas; citan fuente {record['citan_fuente']} "
+          f"de {len(rows)} -> {path_out.name}")
+
+
 async def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--modelo", default="llama3.2:3b")
-    model = parser.parse_args().modelo
+    parser.add_argument("--corregir", metavar="REGISTRO", help="grade a run recorded by llamar.py (no Ollama)")
+    parser.add_argument("--como", default="", help="with --corregir: how the model was run")
+    parser.add_argument("--instrucciones", help="with --corregir: the file with the instructions the model got")
+    opts = parser.parse_args()
+    if opts.corregir:
+        return await grade_log(opts.corregir, opts.modelo, opts.como, opts.instrucciones)
+    model = opts.modelo
     version = ollama("/api/version")["version"]
     info = next(m for m in ollama("/api/tags")["models"] if m["name"] == model)
 
