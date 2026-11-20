@@ -83,6 +83,7 @@ SCHEMA = {
         "regla": ("TEXT", "", "Clave de la regla", ""),
         "nombre": ("TEXT", "", "Nombre", ""),
         "norma": ("TEXT", "", "Norma que la fija", ""),
+        "url_norma": ("TEXT", "", "Enlace oficial a la norma (BOE o BDNS)", ""),
         "estado": ("TEXT", "", "Situación a 8-nov-2026", ""),
         "topes": ("TEXT", "", "Cómo se fija el tope del alquiler", ""),
         "limite_ingresos_iprem": ("REAL", "veces el IPREM", "Límite de ingresos anuales (NULL si no lo hemos leído en la norma)", ""),
@@ -208,6 +209,13 @@ def rules():
          5, "solo la persona (art. 133.1.d)", 300, 200, 60, 24,
          "Con cupos por jóvenes × necesidad × parte por debajo del límite de ingresos (simulador.py)"),
     ]
+    # 20-nov: the caps had no link to their norm (an assistant using the MCP could not cite one); BOE or BDNS
+    bdns = "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias/"
+    boe = "https://www.boe.es/diario_boe/txt.php?id="
+    links = {"bono_2022": boe + "BOE-A-2022-802", "bono_2024": bdns + "805618",
+             **{f"ayudas_jovenes_{y}": bdns + c.split()[-1] for y, c in CALLS.items()},
+             "plan_2026_2030": boe + "BOE-A-2026-8872", "propuesta": boe + "BOE-A-2026-8872"}
+    rows = [(*r[:3], links[r[0]], *r[3:]) for r in rows]
     return pd.DataFrame(rows, columns=list(SCHEMA["reglas"][2]))
 
 

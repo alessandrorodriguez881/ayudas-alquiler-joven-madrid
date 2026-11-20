@@ -73,7 +73,8 @@ def ficha_municipio(municipio):
     rent = {x["anio"]: x for x in rows("SELECT anio, viviendas, mediana, p25, p75 FROM alquiler_serpavi WHERE ine = ? "
                                        "AND anio IN (2022, 2024)", (ine,))}
     r24, r22 = rent.get(2024, {}), rent.get(2022, {})
-    caps = rows(f"SELECT t.regla, r.nombre, t.tope_piso, t.tope_habitacion FROM topes t JOIN reglas r USING (regla) "
+    caps = rows(f"SELECT t.regla, r.nombre, t.tope_piso, t.tope_habitacion, r.norma, r.url_norma FROM topes t "
+                f"JOIN reglas r USING (regla) "
                 f"WHERE t.ine = ? AND t.regla IN ({', '.join('?' * len(CAP_RULES))})", (ine, *CAP_RULES))
     for c in caps:
         share = share_above(c["tope_piso"], r24.get("p25"), r24.get("p75"))
@@ -183,7 +184,7 @@ def table_sources(sql):
 def schema_hint(sql):
     """The columns of the tables a failed query names (or of the main ones), so the AI can write it again. 19-nov: a
     small local model guessed columns («tipo», «municipio») and gave up (servidor_mcp/PRUEBA_CON_MODELO.md)."""
-    used = [t for t in TABLES if re.search(rf"{t}", sql, re.I)] or ["municipios", "solicitudes", "topes",
+    used = [t for t in TABLES if re.search(rf"\b{t}\b", sql, re.I)] or ["municipios", "solicitudes", "topes",
                                                                          "alquiler_serpavi"]
     with closing(sqlite3.connect(DB.as_uri() + "?mode=ro", uri=True)) as con:
         cols = {t: [r[1] for r in con.execute(f"PRAGMA table_info({t})")] for t in used}
@@ -215,5 +216,8 @@ def consulta_sql(sql):
                 raise ValueError(f"{e}. {schema_hint(text)}") from e
             raise
     by_table, named = table_sources(text)
-    return {"columnas": cols, "filas": [list(x) for x in got[:MAX_ROWS]], "recortado": len(got) > MAX_ROWS,
-            "fuentes_por_tabla": by_table, "fuentes": named, "nota": NOTE}
+    out = {"columnas": cols, "filas": [list(x) for x in got[:MAX_ROWS]], "recortado": len(got) > MAX_ROWS,
+           "fuentes_por_tabla": by_table, "fuentes": named, "nota": NOTE}
+    if re.search(r"\b(topes|reglas)\b", text, re.I):  # 20-nov: the caps cite their norm, with its official link
+        out["normas"] = rows("SELECT regla, nombre, norma, url_norma FROM reglas ORDER BY regla")
+    return out

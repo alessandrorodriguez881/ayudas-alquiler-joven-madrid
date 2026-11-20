@@ -57,6 +57,8 @@ async def main():
             caps = {c["regla"]: c["tope_piso"] for c in card["topes"]}
             assert caps == {"bono_2022": 900, "bono_2024": 900, "plan_2026_2030": 1000, "propuesta": 1000}, caps
             assert card["fuentes"] and all(f["url"] for f in card["fuentes"])
+            norms = {c["regla"]: c["url_norma"] for c in card["topes"]}
+            assert norms["bono_2024"].endswith("/805618") and norms["plan_2026_2030"].endswith("BOE-A-2026-8872"), norms
             ok(f"ficha_municipio: Parla, {card['jovenes_20_34_2024']} jóvenes, topes {caps}, {len(card['fuentes'])} fuentes")
 
             res = content(await call("puedo_pedirla", municipio="Parla", edad=27, precio=750, ingresos=18000))
@@ -83,6 +85,9 @@ async def main():
             assert s["fuentes_por_tabla"].get("alquiler_serpavi") and \
                 [f["fuente"] for f in s["fuentes"]] == ["serpavi_mivau"] and all(f["url"] for f in s["fuentes"]), s
             ok("consulta_sql: trae las fuentes de las tablas que lee (alquiler_serpavi -> SERPAVI, con su enlace)")
+            t = content(await call("consulta_sql", sql="SELECT tope_piso FROM topes WHERE ine = '106' AND regla = 'bono_2024'"))
+            assert all(n["url_norma"].startswith("https://") for n in t["normas"]), t
+            ok("consulta_sql: los topes traen su norma con el enlace oficial (BDNS o BOE)")
             for sql in ("DELETE FROM municipios", "WITH x AS (SELECT 1) DELETE FROM municipios",
                         "SELECT 1; DROP TABLE municipios"):
                 assert attr(await call("consulta_sql", sql=sql), "is_error", "isError"), sql

@@ -2,7 +2,7 @@
 
 Una sola base SQLite con todo lo que usa el proyecto, por municipio (y el alquiler de Madrid capital también por distrito). La genera `scripts/base_datos.py` (este fichero también, con el mismo diccionario que va dentro de la base, en la tabla `diccionario`). La leen la app y, más adelante, el servidor MCP.
 
-Hecha el 2026-11-17 desde el commit `be16840`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
+Hecha el 2026-11-20 desde el commit `e867abf (con cambios sin commit)`. Clave de municipio: `ine` (3 cifras). Vista `ficha_municipio`: los topes de hoy, del Plan y de la propuesta junto al alquiler de 2024.
 
 ```sql
 SELECT municipio, tope_hoy, tope_plan, tope_propuesta, alquiler_p75_2024
@@ -45,6 +45,7 @@ Cada convocatoria o regla, con lo que dice su norma. Clave: `regla`.
 | `regla` | TEXT |  | Clave de la regla |  |
 | `nombre` | TEXT |  | Nombre |  |
 | `norma` | TEXT |  | Norma que la fija |  |
+| `url_norma` | TEXT |  | Enlace oficial a la norma (BOE o BDNS) |  |
 | `estado` | TEXT |  | Situación a 8-nov-2026 |  |
 | `topes` | TEXT |  | Cómo se fija el tope del alquiler |  |
 | `limite_ingresos_iprem` | REAL | veces el IPREM | Límite de ingresos anuales (NULL si no lo hemos leído en la norma) |  |
@@ -135,7 +136,7 @@ Datos usados, con su licencia. Clave: `fuente`.
 | `actualizado` | TEXT |  | Fecha de la última actualización según la fuente |  |
 | `carpeta` | TEXT |  | Carpeta del repositorio con la copia y su metadata.json |  |
 
-## `diccionario` (78 filas)
+## `diccionario` (79 filas)
 
 Cada columna de cada tabla. Clave: `tabla, columna`.
 
