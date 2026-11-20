@@ -2,8 +2,11 @@
 
 `probar_servidor.py` prueba las seis herramientas con el cliente oficial de MCP, pero sin ningún modelo: llama a cada
 herramienta con respuestas conocidas. Aquí un modelo de lenguaje recibe preguntas y las herramientas, decide él qué
-llamar y responde. Usamos un modelo **abierto y pequeño que funciona en local** (Llama 3.2 de 3.200 millones de
-parámetros, con Ollama), sin cuentas ni claves: si funciona con uno así, el servidor no depende de un proveedor.
+llamar y responde. Lo hemos probado con dos tipos de modelo, siempre con lo esperado escrito antes:
+- **uno abierto y pequeño que funciona en local** (Llama 3.2 de 3.200 millones de parámetros, con Ollama), sin cuentas
+  ni claves, porque si funcionara con uno así el servidor no dependería de un proveedor: **no basta** (0 de 7, dos veces);
+- **dos de Claude** (Sonnet 5.5 y Haiku 5.5), como agentes que ejecutan órdenes: **las 7 cifras bien** con los dos,
+  aunque con la regla escrita antes salen 3 de 7 (abajo, el porqué).
 
 ```bash
 ollama pull llama3.2:3b                      # una vez
@@ -83,7 +86,7 @@ herramientas: `prueba_con_modelo/instrucciones_agente.md`, tal cual. Se corrige 
 python servidor_mcp/probar_con_modelo.py --corregir <registro> --modelo <modelo> --como "<cómo se ejecutó>"
 ```
 
-### Lo esperado, escrito antes de ejecutarla (vie 20-nov, a las 09:25)
+### Lo esperado, escrito antes de ejecutarla (vie 20-nov, commit `6ad6f5e` de las 09:24)
 - **Claude Sonnet 5.5:** las 7 que se corrigen solas, bien, y la trampa de Getafe, bien. Que cite la fuente en al menos
   6 de las 8.
 - **Claude Haiku 5.5** (el modelo pequeño y barato de Claude): al menos 6 de las 7, y la trampa, bien.
@@ -94,3 +97,46 @@ python servidor_mcp/probar_con_modelo.py --corregir <registro> --modelo <modelo>
 - que funcione con Gemini o con ChatGPT: necesitan una cuenta, y no lo hemos probado;
 - que sea una app de chat: el agente, además de las herramientas, puede ejecutar órdenes. Le pedimos que no lea nada
   más, y el registro guarda cada llamada que hizo.
+
+### Lo que salió: vie 20-nov, de 09:25 a 09:27 (las 7 cifras bien con los dos; con la regla escrita antes, 3 de 7)
+Registros: `prueba_con_modelo/2026-11-20_0925_claude-sonnet-5-5.registro.jsonl` y `…_claude-haiku-5-5.registro.jsonl`,
+con cada llamada y cada respuesta; la corrección de cada uno, en el `.json` del mismo nombre.
+
+| | Claude Sonnet 5.5 | Claude Haiku 5.5 | Llama 3.2 de 3.200 millones (19-nov) |
+|---|---|---|---|
+| Cifra bien, de 7 | **7** | **7** | 0 |
+| Con la regla escrita antes (solo cuentan las llamadas de cada pregunta) | 3 | 3 | 0 |
+| Con lo que ya había traído en la conversación (recuento añadido después) | 7 | 7 | 0 |
+| La trampa de Getafe (2025 no está) | Bien | Bien | Bien |
+| Cita una fuente que trajeron las herramientas, de 8 | 7 | 8 | 0 y 1 |
+| Llamadas a las herramientas | 9 | 7 | Una por pregunta |
+| Tiempo | 2 min 14 s | 1 min 56 s | |
+
+**Lo esperado no se cumple con la regla escrita antes: 3 de 7 en los dos.** El fallo es de la prueba, no de los
+modelos, pero la regla se escribió antes y se apunta tal cual. Con Ollama cada pregunta iba en una conversación aparte;
+aquí las 8 van en la misma, y los dos pidieron una vez lo que servía para varias: la ficha de Parla contesta la 1 y la
+2, y la de Hoyo, la 3 y la 8. El script solo contaba las llamadas hechas entre una respuesta y la anterior. El segundo
+recuento, que acepta cualquier llamada hecha antes de la respuesta, lo añadimos después de ver la prueba, y así lo dice
+el código. **Cada cifra está en una llamada hecha antes de su respuesta:**
+- **Sonnet:** la 2, en la ficha de Parla (09:25:41); la 3 y la 8, en la de Hoyo (09:25:48); la 6, en una consulta SQL
+  de los topes de 900 € por regla (09:26:43).
+- **Haiku:** la 2, en la ficha de Parla (09:25:41); la 4, en `puedo_pedirla` (09:26:09); la 6, en una consulta SQL de
+  los topes de 900 € (09:26:44); la 8, en la ficha de Hoyo (09:25:58).
+
+**Lo que hicieron que el modelo pequeño no hizo:** encadenar herramientas (7 y 9 llamadas), escribir SQL con las
+columnas que hay (Haiku, a la primera; Sonnet, mirando antes los valores con `GROUP BY`), no inventarse nada y, en la
+trampa, decir que 2025 no está y dar el dato de 2022 solo como contexto.
+
+**Lo de más que dijeron, comprobado a mano** repitiendo sus llamadas: el 7,1 % de Parla y el 77,4 % de Hoyo con el
+tope de hoy, las 282 aceptadas de Getafe en 2022, la mediana de 756,67 € sobre 391 viviendas de Hoyo, el límite de
+25.200 € y el acuerdo del 26-dic-2024 (Haiku lo leyó en las fuentes de una consulta SQL). Todo está en lo que
+devolvieron las herramientas.
+
+**Lo que hay que mejorar en el servidor:** los topes no traen el enlace a su norma. Haiku lo dijo en la 6 («la consulta
+no devolvió URL concreta para esta tabla») y en la 2 dio el enlace del Bono 2022 del portal, que es la fuente de las
+solicitudes, no la del tope.
+
+**Qué quiere decir:** con un modelo grande o mediano, el servidor sirve. Con los dos modelos de Claude, las 7 cifras
+bien, cada una con lo que trajeron las herramientas, y casi siempre con su fuente. Con uno abierto pequeño en local, no.
+Con uno abierto mayor y con Gemini, **no lo hemos medido**. Y es una sola ejecución de cada uno: no sabemos cuánto
+varía de una vez a otra.

@@ -164,20 +164,22 @@ def grade(qid, answer, calls, expected):
     found = any(v.lower() in low for v in expected["vale"])
     if qid == "puedo_parla":  # also has to say yes
         found = found and not re.search(r"\bno (puedes|cumples|podr[ií]as)\b", low)
-    return {"acierta": bool(found and calls), "cita_fuente": cites,
+    return {"acierta": bool(found and calls), "cifra_bien": bool(found), "cita_fuente": cites,
             "nota": "" if calls else "no llamó a ninguna herramienta"}
 
 
 def read_log(path):
     """A run recorded by llamar.py --registro: the calls made before an answer belong to that question."""
     entries = [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
-    answers, pending = {}, []
+    answers, pending, made = {}, [], 0
     for e in entries:
         if "herramienta" in e:
             pending.append({k: e[k] for k in ("herramienta", "argumentos", "respuesta")})
+            made += 1
         elif "respuesta_a" in e:  # an answer given twice keeps the last text and every call
             calls = answers.get(e["respuesta_a"], {}).get("llamadas", []) + pending
-            answers[e["respuesta_a"]] = {"texto": e["texto"], "llamadas": calls, "hora": e["hora"]}
+            answers[e["respuesta_a"]] = {"texto": e["texto"], "llamadas": calls, "hora": e["hora"],
+                                         "llamadas_antes_en_la_conversacion": made}
             pending = []
     return entries, answers, pending
 
@@ -191,12 +193,20 @@ async def grade_log(path, model, how, instructions):
             expected = await expected_values(session)
     rows = []
     for n, (qid, question) in enumerate(QUESTIONS, 1):
-        given = answers.get(n, {"texto": "(sin respuesta)", "llamadas": [], "hora": None})
+        given = answers.get(n, {"texto": "(sin respuesta)", "llamadas": [], "hora": None,
+                                "llamadas_antes_en_la_conversacion": 0})
         row = {"id": qid, "pregunta": question, "respuesta": given["texto"], "herramientas": given["llamadas"],
                "hora": given["hora"], "esperado": expected[qid]["valor"]}
         row.update(grade(qid, given["texto"], given["llamadas"], expected[qid]))
+        # Added after the first agent runs (20-nov): all 8 questions go in one conversation, and a model may answer
+        # with what an earlier call already brought (the card of Parla answers questions 1 and 2). This second count
+        # takes any call made before the answer; the rule written before stays in «acierta».
+        before = given["llamadas_antes_en_la_conversacion"]
+        row["llamadas_antes_en_la_conversacion"] = before
+        row["acierta_con_lo_ya_traido"] = None if row["acierta"] is None else bool(row["cifra_bien"] and before)
         rows.append(row)
-        print(f"{qid}: acierta={row['acierta']} cita_fuente={row['cita_fuente']} "
+        print(f"{qid}: acierta={row['acierta']} cifra_bien={row.get('cifra_bien')} "
+              f"con_lo_ya_traido={row['acierta_con_lo_ya_traido']} cita_fuente={row['cita_fuente']} "
               f"herramientas={[c['herramienta'] for c in given['llamadas']]}", flush=True)
     start = datetime.datetime.fromisoformat(entries[0]["hora"])
     path_out = OUT / f"{start:%Y-%m-%d_%H%M}_{model.replace(':', '_').replace('/', '_')}.json"
@@ -205,11 +215,13 @@ async def grade_log(path, model, how, instructions):
               "instrucciones": Path(instructions).read_text(encoding="utf-8") if instructions else None,
               "llamadas_sin_respuesta_despues": leftover, "preguntas": rows,
               "aciertos": sum(r["acierta"] is True for r in rows),
+              "aciertos_con_lo_ya_traido": sum(r["acierta_con_lo_ya_traido"] is True for r in rows),
               "corregidas_solas": sum(r["acierta"] is not None for r in rows),
               "citan_fuente": sum(r["cita_fuente"] for r in rows)}
     path_out.write_text(json.dumps(record, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
-    print(f"{record['aciertos']} de {record['corregidas_solas']} corregidas solas; citan fuente {record['citan_fuente']} "
-          f"de {len(rows)} -> {path_out.name}")
+    print(f"{record['aciertos']} de {record['corregidas_solas']} corregidas solas con la regla escrita antes; "
+          f"{record['aciertos_con_lo_ya_traido']} con lo ya traído en la conversación; citan fuente "
+          f"{record['citan_fuente']} de {len(rows)} -> {path_out.name}")
 
 
 async def main():

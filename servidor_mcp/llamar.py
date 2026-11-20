@@ -4,6 +4,7 @@ For people, and for testing the server with a model that runs commands (servidor
 
   python servidor_mcp/llamar.py --herramientas                    # the tools, with their descriptions and arguments
   python servidor_mcp/llamar.py ficha_municipio '{"municipio": "Parla"}'
+  python servidor_mcp/llamar.py ficha_municipio municipio=Parla     # the same, in any terminal (also PowerShell)
   python servidor_mcp/llamar.py consulta_sql - <<'FIN'            # «-»: the arguments come from stdin
   {"sql": "SELECT COUNT(*) FROM municipios"}
   FIN
@@ -62,10 +63,30 @@ def stdin_text():
     return sys.stdin.read().strip()
 
 
+def parse_arguments(items):
+    """One JSON object, «-» (JSON from stdin) or key=value pairs (a number stays a number)."""
+    if not items:
+        return {}
+    if items == ["-"]:
+        return json.loads(stdin_text() or "{}")
+    if len(items) == 1 and items[0].lstrip().startswith("{"):
+        return json.loads(items[0])
+    args = {}
+    for item in items:
+        key, sep, value = item.partition("=")
+        if not sep:
+            raise json.JSONDecodeError("se esperaba JSON o clave=valor", item, 0)
+        try:
+            args[key] = json.loads(value)  # 27 -> 27, true -> True, "x" -> "x"
+        except json.JSONDecodeError:
+            args[key] = value  # plain text: Parla, Hoyo de Manzanares
+    return args
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     p.add_argument("herramienta", nargs="?", help="the tool (or, with --respuesta, the text, or «-» for stdin)")
-    p.add_argument("argumentos", nargs="?", help="the arguments in JSON, or «-» to read them from stdin")
+    p.add_argument("argumentos", nargs="*", help="the arguments: JSON, key=value pairs, or «-» to read JSON from stdin")
     p.add_argument("--herramientas", action="store_true", help="list the tools")
     p.add_argument("--registro", help="append each call (and each --respuesta) to this file, one JSON per line")
     p.add_argument("--respuesta", type=int, metavar="N", help="record the final answer to question N")
@@ -75,18 +96,18 @@ def main():
     if args.respuesta is not None:
         if not args.registro or args.herramienta is None:
             p.error("--respuesta N necesita --registro y el texto (o «-» y el texto por stdin)")
-        text = stdin_text() if args.herramienta == "-" else " ".join(filter(None, [args.herramienta, args.argumentos]))
+        text = stdin_text() if args.herramienta == "-" else " ".join([args.herramienta, *args.argumentos])
         log(args.registro, {"respuesta_a": args.respuesta, "texto": text})
         print(f"anotada la respuesta a la pregunta {args.respuesta}")
         return
     if not args.herramientas:
         if not args.herramienta:
             p.error("falta la herramienta (o --herramientas para verlas)")
-        raw = stdin_text() if args.argumentos == "-" else args.argumentos
+        raw = args.argumentos
         try:
-            args.argumentos = json.loads(raw) if raw else {}
+            args.argumentos = parse_arguments(raw)
         except json.JSONDecodeError as e:
-            msg = f"ERROR: los argumentos no son JSON válido ({e})"
+            msg = f"ERROR: los argumentos no son JSON válido ni clave=valor ({e})"
             log(args.registro, {"herramienta": args.herramienta, "argumentos": raw, "respuesta": msg})
             print(msg)
             sys.exit(2)
