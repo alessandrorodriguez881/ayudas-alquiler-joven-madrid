@@ -30,7 +30,7 @@ El nuevo Plan Estatal de Vivienda 2026-2030 (RD 326/2026, art. 133.1.e) pone el 
 ## Resultados
 Una línea por resultado. Cada uno tiene su script y su fichero en `resultados/`; el detalle, con los intervalos, está en **[ANALISIS.md](ANALISIS.md)**. «Exploratorio» quiere decir que no estaba en el preregistro.
 
-**Registrado antes de ver los datos**
+**Registrado antes de hacer el contraste**
 - **El contraste (7-nov):** por cada 10 puntos más de alquileres por encima del tope, un 7,6 % menos de solicitudes del Bono por joven (del 3,9 % al 11,1 %). Cumple las tres condiciones fijadas antes.
 - **Lo que no salió:** un umbral de 900 € igual para todos explica las solicitudes mejor que el tope real, así que una parte es el alquiler caro en sí. Separando las dos cosas (después), la parte del tope es un −5,3 % por cada 10 puntos (del −8,5 % al −2,0 %).
 - **Una predicción para 2024, escrita antes de tener los datos:** en los 26 municipios que pasaron de 600 a 900 € en 2024, las solicitudes crecerán de 2022 a 2024 un 30 % más que en los que siguieron con 600 € (del 10 % al 53 %). Se sabrá cuando se publiquen.

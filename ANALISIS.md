@@ -2,7 +2,7 @@
 
 El resumen está en el [README](README.md). Aquí va cada resultado entero, con sus intervalos, su script y su fichero en `resultados/`. «Exploratorio» quiere decir que no estaba en el preregistro: se hizo después del contraste registrado del 7-nov, y en la mayoría lo esperado se escribió antes de ejecutarlo (cada uno lo dice).
 
-## Lo registrado antes de ver los datos
+## Lo registrado antes de hacer el contraste
 
 ### El trabajo previo, declarado
 Datos descargados y verificados, una tabla de 159 municipios, y la hipótesis y las reglas para darla por buena escritas antes de ver el resultado ([PREREGISTRO.md](PREREGISTRO.md)). El contraste se probó antes solo con datos inventados.
