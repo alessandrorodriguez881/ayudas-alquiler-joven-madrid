@@ -172,7 +172,7 @@ Solo datos agregados por municipio: **ningún dato personal**.
 </details>
 
 ## Uso de IA
-Preparado con ayuda de Claude (Anthropic), como se explica en [TRABAJO_PREVIO.md](TRABAJO_PREVIO.md). Las bases de DataMad permiten usar IA (apartado 7).
+Quién hizo qué, tal cual. **La idea la propuso la IA:** Alessandro le pidió a Claude (Anthropic) que trabajara en DataMad, Claude le propuso tres ideas y él eligió la primera, la que Claude recomendaba. **Desde ahí, Claude escribió casi todo el código, los análisis y los textos**, y por eso todos los commits llevan «Co-Authored-By: Claude». **Lo de Alessandro han sido las decisiones** (ir solo, el nombre del proyecto, qué versión del pitch presentar) **y presentarlo y responder de ello.** Para no tener que fiarse ni de él ni de la IA, un comando rehace los resultados desde los datos (salvo los dos pasos que explica «Cómo repetirlo»), y GitHub lo repite en cada subida. Las bases de DataMad permiten usar IA (apartado 7). Lo hecho antes del 7-nov está en [TRABAJO_PREVIO.md](TRABAJO_PREVIO.md).
 
 ## Licencia
 El código está bajo licencia [MIT](LICENSE). Los datos conservan la licencia de su fuente.
