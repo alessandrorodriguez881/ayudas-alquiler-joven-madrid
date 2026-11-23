@@ -157,6 +157,8 @@ with right:
                       "30 %, el alquiler pesa demasiado.")
         if st.button("Comprobar mi caso aquí, requisito a requisito", icon=":material/checklist:", type="primary",
                      width="stretch", key="donde_ir"):
+            for key in [k for k in st.session_state if k.startswith(("calc_", "_calc_"))]:
+                del st.session_state[key]  # a fresh case: the rest of the calculator goes back to its usual answers
             st.session_state.update({"calc_municipio": r["municipio"], "calc_precio": int(round(r["alquiler"])),
                                      "calc_ingresos": int(income), "calc_tipo": "Piso entero",
                                      "calc_convivencia": "jovenes" if n > 1 else "solo"})

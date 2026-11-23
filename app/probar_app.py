@@ -49,6 +49,12 @@ at.segmented_control(key="calc_tipo").set_value("Habitación").run()
 at.selectbox(key="calc_municipio").select("Acebeda (La)").run()  # small, no SERPAVI rents: the proposal keeps the Plan
 at.multiselect(key="calc_exclusiones").select("vivienda_conviviente").run()
 ok(at, "calculadora: habitación en Acebeda, con una exclusión")
+# 23-nov review: leaving the page and coming back kept nothing (it went back to Hoyo, 750 EUR); now the case stays
+at.switch_page("app_pages/mapa.py").run()
+at.switch_page("app_pages/calculadora.py").run()
+assert (at.selectbox(key="calc_municipio").value, at.segmented_control(key="calc_tipo").value,
+        at.number_input(key="calc_precio").value, at.multiselect(key="calc_exclusiones").value) ==     ("Acebeda (La)", "Habitación", 900, ["vivienda_conviviente"]), "calculadora: el caso se pierde al volver"
+ok(at, "calculadora: al volver de otra página sigue el mismo caso")
 
 at.switch_page("app_pages/donde.py").run()
 assert not at.error, [e.value for e in at.error]

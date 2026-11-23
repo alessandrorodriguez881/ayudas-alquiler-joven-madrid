@@ -18,8 +18,17 @@ t = municipalities().set_index("municipio")
 options = sorted(t.index, key=str.lower)
 # defaults through session state, not value=: «¿Dónde te llega?» fills these keys before switching to this page.
 # It opens with the case of the pitch: 750 EUR in Hoyo de Manzanares (cap 600 EUR today, 500 with the Plan, 900 with ours)
-for key, value in {"calc_municipio": "Hoyo de Manzanares", "calc_precio": 750, "calc_ingresos": 18000, "calc_tipo": "Piso entero",
-                   "calc_n": 2}.items():
+# Streamlit forgets the state of the widgets of a page that stops being shown, so each answer is also kept in a copy of
+# its own («_calc_…») and comes back from it when the visitor returns to this page (23-nov review: the case was lost)
+KEYS = ["calc_municipio", "calc_edad", "calc_tipo", "calc_precio", "calc_ingresos", "calc_convivencia", "calc_n",
+        "calc_otros", "calc_incluye", "calc_gastos", "calc_discapacidad", "calc_fuente", "calc_exclusiones",
+        "calc_nacionalidad", "calc_otra_ayuda", "calc_iprem"]
+for key in KEYS:
+    if key not in st.session_state and "_" + key in st.session_state:
+        st.session_state[key] = st.session_state["_" + key]
+for key, value in {"calc_municipio": "Hoyo de Manzanares", "calc_edad": 27, "calc_precio": 750, "calc_ingresos": 18000,
+                   "calc_tipo": "Piso entero", "calc_n": 2, "calc_otros": 0, "calc_fuente": True,
+                   "calc_nacionalidad": True, "calc_iprem": int(rb.IPREM_YEAR_2024)}.items():
     st.session_state.setdefault(key, value)
 
 st.title("¿Puedo pedir la ayuda al alquiler?")
@@ -30,7 +39,7 @@ with st.container(border=True):
     st.subheader("Tu caso")
     a, b, c = st.columns(3)
     name = a.selectbox("Municipio", options, key="calc_municipio")
-    age = b.number_input("Edad", min_value=14, max_value=60, value=27, key="calc_edad")
+    age = b.number_input("Edad", min_value=14, max_value=60, key="calc_edad")
     kind = c.segmented_control("¿Qué alquilas?", ["Piso entero", "Habitación"], key="calc_tipo", required=True, wrap=True)
     kind = "habitacion" if kind == "Habitación" else "piso"
 
@@ -53,7 +62,7 @@ with st.container(border=True):
                                          key="calc_n")
             elif living == "otros":
                 others = b.number_input("Ingresos al año de los demás que viven en el piso (€)", min_value=0,
-                                        max_value=1000000, value=0, step=1000, key="calc_otros",
+                                        max_value=1000000, step=1000, key="calc_otros",
                                         help="Hoy cuentan los ingresos de todos los que viven en el piso; en el Plan, "
                                              "solo los tuyos.")
         a, b = st.columns(2, vertical_alignment="bottom")
@@ -67,21 +76,24 @@ with st.container(border=True):
         disability = a.selectbox("¿Alguna de estas situaciones?", list(DISABILITY), format_func=DISABILITY.get,
                                  key="calc_discapacidad",
                                  help="Solo cambia el límite de ingresos del Plan (5,5 o 6 × IPREM).")
-        regular = b.checkbox("Tengo trabajo o una prestación", value=True, key="calc_fuente",
+        regular = b.checkbox("Tengo trabajo o una prestación", key="calc_fuente",
                              help="Con al menos 3 meses cotizados en los últimos 6, o una fuente de ingresos prevista de "
                                   "al menos 6 meses. La pide la regla de hoy (art. 4.1.d).")
         exclusions = st.multiselect("¿Te pasa alguna de estas cosas?", list(rb.EXCLUSIONS), format_func=rb.EXCLUSIONS.get,
                                     key="calc_exclusiones", placeholder="Ninguna")
         a, b = st.columns(2)
-        nationality = a.checkbox("Nacionalidad o residencia válidas", value=True, key="calc_nacionalidad",
+        nationality = a.checkbox("Nacionalidad o residencia válidas", key="calc_nacionalidad",
                                  help="Nacionalidad española, de la UE, del EEE o Suiza, o residencia legal en España.")
         other_aid = b.checkbox("Cobro otra ayuda al alquiler", key="calc_otra_ayuda",
                                help="Otra ayuda pública para pagar el alquiler. El Ingreso Mínimo Vital y las pensiones "
                                     "no contributivas no cuentan.")
         iprem = st.number_input("IPREM al año, en 14 pagas (€)", min_value=1000, max_value=20000,
-                                value=int(rb.IPREM_YEAR_2024), step=100, key="calc_iprem",
+                                step=100, key="calc_iprem",
                                 help="Los ingresos se comparan con el IPREM del año al que se refieren. 8.400 € es el de "
                                      "2024 (600 € al mes en 14 pagas).")
+for key in KEYS:  # the copy that survives a change of page
+    if key in st.session_state:
+        st.session_state["_" + key] = st.session_state[key]
 
 case = rb.Case(age=int(age), kind=kind, price=float(price), includes=includes, expenses_included=expenses, living=living,
                sharers=int(sharers), income=float(income), others_income=float(others), regular_income=regular,
