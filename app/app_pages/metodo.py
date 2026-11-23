@@ -131,9 +131,11 @@ st.markdown(
     f"{es(100 * spain['madrid_comparacion']['ponderado_por_alquileres_serpavi'])} % del alquiler de sus pueblos quedaría "
     f"fuera, ponderando por pisos alquilados (el 58 % de la portada pondera por jóvenes, que solo tenemos en Madrid). "
     f"Detalle en [data/ESPANA_TOPE500.md]({GH}data/ESPANA_TOPE500.md).\n"
-    f"- **¿Quién publica el Bono por municipio?** Que sepamos, solo Madrid, y solo de 2022: en datos.gob.es, el único "
-    f"conjunto con «Bono Alquiler Joven» en el título es el suyo, y nadie publica 2023, 2024 ni 2025 por municipio. Por "
-    f"eso pedimos que el portal lo publique cada año. Detalle en "
+    f"- **¿Quién publica el Bono por municipio?** En datos abiertos, que sepamos, solo Madrid, y solo de 2022: en "
+    f"datos.gob.es y en el portal europeo, el único conjunto del Bono es el suyo. De 2024 hay un avance en PDF, en una "
+    f"respuesta del Gobierno a la Asamblea, con las ayudas concedidas y no las solicitudes. Los datos existen: se envían "
+    f"al Ministerio cada semestre, por municipio (RD 42/2022, art. 134). Por eso pedimos que el portal lo publique cada "
+    f"año. Detalle en "
     f"[data/BONO_POR_COMUNIDADES.md]({GH}data/BONO_POR_COMUNIDADES.md)."
 )
 
