@@ -60,7 +60,7 @@ Una línea por resultado. Cada uno tiene su script y su fichero en `resultados/`
 - **La app** (`app/`): «¿Puedo pedirla?», «¿Dónde me llega la ayuda?», el mapa, la ficha de cada municipio, el simulador para la Consejería, «¿Cómo se aplica?» y el método. Lee la base de datos y usa las mismas funciones que los scripts, así que sus cifras son las mismas.
 - **La base de datos** (`data/bono_alquiler_joven.sqlite`, 0,6 MB): 10 tablas unidas por el código INE, con un diccionario de cada columna ([data/DICCIONARIO_BASE_DE_DATOS.md](data/DICCIONARIO_BASE_DE_DATOS.md)).
 - **El servidor MCP** (`servidor_mcp/`): seis herramientas de solo lectura para que un asistente de IA consulte nuestras cifras, y cada respuesta trae sus fuentes. GitHub lo prueba con el cliente oficial de MCP en cada subida. Lo probamos con modelos de verdad, con lo esperado escrito antes: con dos de Claude (Sonnet y Haiku), las 7 cifras bien y con su fuente; con uno abierto pequeño en local (Llama 3.2 de 3.200 millones), ninguna ([la prueba, también lo que no salió como esperábamos](servidor_mcp/PRUEBA_CON_MODELO.md)).
-- **La ficha DCAT-AP-ES** (`data/dcat_ap_es.ttl`), validada con las plantillas SHACL oficiales de datos.gob.es: cumple todo salvo el publicador, que tiene que ser un organismo con código DIR3.
+- **La ficha DCAT-AP-ES** (`data/dcat_ap_es.ttl`), comprobada con las plantillas SHACL oficiales de datos.gob.es: cumple todo salvo el publicador, que tiene que ser un organismo con código DIR3.
 - **Smart Data Models** (`data/smart_data_models/`): los indicadores de cada municipio como 739 entidades KeyPerformanceIndicator, validadas con el esquema oficial.
 - **El trabajo previo, declarado** ([TRABAJO_PREVIO.md](TRABAJO_PREVIO.md)), y los preregistros ([PREREGISTRO.md](PREREGISTRO.md) y [PREREGISTRO_DISTRITOS.md](PREREGISTRO_DISTRITOS.md)). Las notas internas de planificación no están en el repositorio.
 
@@ -104,7 +104,7 @@ python scripts/probar_reglas.py           # las reglas de la calculadora, con ca
 python scripts/distritos_madrid.py        # los 21 distritos de Madrid: su forma para el mapa y sus nombres
 python scripts/distritos_cifra3.py        # exploratorio: la cifra 3 con Madrid capital por distritos (data/DISTRITOS_CIFRA3.md; la primera vez descarga 76 MB)
 python scripts/base_datos.py              # la base SQLite (data/bono_alquiler_joven.sqlite) y su diccionario
-python scripts/ficha_dcat.py              # ficha DCAT-AP-ES (data/dcat_ap_es.ttl), validada con SHACL
+python scripts/ficha_dcat.py              # ficha DCAT-AP-ES (data/dcat_ap_es.ttl), comprobada con SHACL
 python scripts/smart_data_models.py       # los indicadores como Smart Data Models, validados con el esquema oficial
 python servidor_mcp/probar_servidor.py    # arranca el servidor MCP y prueba sus herramientas
 python scripts/graficos.py                # figuras (resultados/figuras/) y mapa municipal para la app

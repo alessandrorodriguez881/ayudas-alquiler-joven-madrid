@@ -127,7 +127,7 @@ Para que un asistente de IA consulte nuestros indicadores ya calculados y cite l
 ### La ficha DCAT-AP-ES
 *`data/dcat_ap_es.ttl`*
 
-El catálogo con la base de datos, los indicadores por municipio y el reparto simulado, con tamaño y SHA-1 de cada fichero, licencia, tema (vivienda) y ámbito. Validada con las plantillas SHACL oficiales de datos.gob.es (`resultados/validacion_dcat.json`): cumple todo salvo el publicador, que tiene que ser un organismo con código DIR3. Si la Comunidad publica estos datos, basta con poner el suyo.
+El catálogo con la base de datos, los indicadores por municipio y el reparto simulado, con tamaño y SHA-1 de cada fichero, licencia, tema (vivienda) y ámbito. Comprobada con las plantillas SHACL oficiales de datos.gob.es (`resultados/validacion_dcat.json`): cumple todo salvo el publicador, que tiene que ser un organismo con código DIR3. Si la Comunidad publica estos datos, basta con poner el suyo.
 
 ### Smart Data Models
 *`scripts/smart_data_models.py` → `data/smart_data_models/KeyPerformanceIndicator_municipios.json`, 16-nov*
