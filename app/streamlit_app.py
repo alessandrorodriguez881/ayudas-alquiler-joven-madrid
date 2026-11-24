@@ -17,6 +17,10 @@ st.html("<style>@media (min-width: 640px) and (max-width: 1399px) {[data-testid=
         # at 1,024 px two of them hid behind an English «2 more», and at 1,366 px «¿Cómo se aplica?» was cut (17-nov)
         "@media (min-width: 640px) and (max-width: 1399px) {[data-testid='stTopNavLink'] > span:first-child "
         "{display: none;} [data-testid='stTopNavLink'] {gap: 0; padding: 0 4px;}} "
+        # and only the house of the logo (its 240 px with the name left room for 5 pages: at 1,024 px «¿Cómo se aplica?»
+        # and «Método y datos» went behind «2 more» again on the published app; with the house alone the 7 fit, 24-nov)
+        "@media (min-width: 640px) and (max-width: 1399px) {[data-testid='stHeaderLogo'] {width: 32px !important; "
+        "max-width: 32px !important; object-fit: cover; object-position: left center;}} "
         # on a phone, a wide table (the 9 columns of «¿Cómo se aplica?») scrolls inside its own box instead of moving the
         # whole page sideways: at 375 px it was 739 px wide and the page scrolled (20-nov)
         "@media (max-width: 639px) {[data-testid='stMarkdownContainer'] table {display: block; overflow-x: auto;}}"
