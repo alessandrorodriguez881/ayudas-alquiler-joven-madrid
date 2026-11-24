@@ -133,7 +133,7 @@ st.markdown(
     f"Detalle en [data/ESPANA_TOPE500.md]({GH}data/ESPANA_TOPE500.md).\n"
     f"- **¿Quién publica el Bono por municipio?** En datos abiertos, que sepamos, solo Madrid, y solo de 2022: en "
     f"datos.gob.es y en el portal europeo, el único conjunto del Bono es el suyo. De 2024 hay un avance en PDF, en una "
-    f"respuesta del Gobierno a la Asamblea, con las ayudas concedidas y no las solicitudes. Los datos existen: se envían "
+    f"respuesta del Gobierno a la Asamblea, con las ayudas concedidas y no las solicitudes. Los datos tienen que existir: la norma obliga a enviarlos "
     f"al Ministerio cada semestre, por municipio (RD 42/2022, art. 134). Por eso pedimos que el portal lo publique cada "
     f"año. Detalle en "
     f"[data/BONO_POR_COMUNIDADES.md]({GH}data/BONO_POR_COMUNIDADES.md)."
