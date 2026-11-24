@@ -53,7 +53,7 @@ with st.container(horizontal=True):
     st.metric("Bonos 2022 por 1.000 jóvenes", es(r["cobertura_2022"], 1), border=True, height="stretch",
               help=f"En el resto de la Comunidad sin Madrid capital: {es(rest_rate, 1)}. Sin dato si hay menos de 500 jóvenes.")
 
-st.subheader("El tope y el alquiler")
+st.subheader(f"El tope y el alquiler en {name}")  # 24-nov: the name on screen too, where the demo scrolls to
 if np.isnan(r["serpavi_p25_2024"]):
     st.info("El SERPAVI no da alquileres de 2024 para este municipio, así que no se puede medir qué parte supera el tope.",
             icon=":material/info:")
@@ -64,8 +64,17 @@ else:
             ("Bono 2024 (hoy)", r["tope_2024"], r["share_above_tope_2024_en_2024"]),
             ("Plan 2026-2030", r["tope_plan"], r["fuera_plan"]),
             ("Propuesta: Plan o alquiler local, hasta 1.000 €", r["tope_propuesta"], r["fuera_propuesta"])]
-    st.table({"Regla": [x[0] for x in rows], "Tope del piso": [es(x[1]) + " €" for x in rows],
-              "Alquileres de 2024 por encima": [pct(x[2]) if not np.isnan(x[2]) else "—" for x in rows]},
+    # 24-nov: the Plan's row and the proposal's, in bold and in the slides' colours (orange and green; Markdown colours
+    # follow the light and dark themes): they are the two rows the demo points at
+    hl = {2: "orange", 3: "green"}
+
+    def cell(i, s):
+        return f":{hl[i]}[**{s}**]" if i in hl else s
+
+    st.table({"Regla": [cell(i, x[0]) for i, x in enumerate(rows)],
+              "Tope del piso": [cell(i, es(x[1]) + " €") for i, x in enumerate(rows)],
+              "Alquileres de 2024 por encima": [cell(i, pct(x[2]) if not np.isnan(x[2]) else "—")
+                                                for i, x in enumerate(rows)]},
              alt=f"Topes del Bono en {name} y parte del alquiler de 2024 que los supera")
     st.caption(f"Tres jóvenes que comparten piso con contratos de habitación pueden pagar entre los tres hasta "
                f"{es(1.5 * r['tope_2024'])} € (3 × {es(r['tope_2024'] / 2)} €). Con ese límite queda fuera el "
@@ -90,13 +99,13 @@ if r["ine"] in study.index and study.loc[r["ine"], "sube_tope"]:  # a village wh
     if a["justificacion"] in ("a", "a y b"):
         reasons.append("el alquiler pasa del 30 % de la renta del hogar (Ley 12/2023, art. 18.3 a)")
     if reasons:
-        st.success(f"{lift}, y la base del estudio del art. 135 lo apoya: {'; y '.join(reasons)}. Decidirlo y "
+        st.success(f"**{lift}**, y la base del estudio del art. 135 lo apoya: {'; y '.join(reasons)}. Decidirlo y "
                    "acordarlo con el Ministerio le toca a la Comunidad.", icon=":material/gavel:")
     elif a["justificacion"] == "ninguno":
-        st.info(f"{lift}, pero con estos datos la base del estudio del art. 135 no lo apoya: {offer}, menos de la "
+        st.info(f"**{lift}**, pero con estos datos la base del estudio del art. 135 no lo apoya: {offer}, menos de la "
                 f"mitad, y {rise} (hacía falta un {es(threshold, 1)} %).", icon=":material/gavel:")
     else:
-        st.info(f"{lift}. Para apoyarlo en el art. 135 faltan datos: el SERPAVI tiene aquí menos de 30 viviendas en "
+        st.info(f"**{lift}**. Para apoyarlo en el art. 135 faltan datos: el SERPAVI tiene aquí menos de 30 viviendas en "
                 "alquiler en 2019 o en 2024" + (f" ({offer}, menos de la mitad)." if offer else "."),
                 icon=":material/gavel:")
 
