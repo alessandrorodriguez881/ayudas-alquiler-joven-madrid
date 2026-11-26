@@ -42,16 +42,20 @@ rest = t[t["ine"] != "079"]
 rest_rate = 1000 * rest["bono_aceptadas"].sum() / rest["jovenes_20_34_2022"].sum()
 
 st.title(name)
+# 26-nov: the need level in its colour (alta red, media orange, baja green), as the gauge under the index below
+LEVEL = {"alta": ("red", "#e03131"), "media": ("orange", "#f08c00"), "baja": ("green", "#2f9e44")}
+level = next((k for k in LEVEL if str(r["grupo_necesidad"]).endswith(k)), None)
 if isinstance(r["grupo_necesidad"], str):
-    st.badge(r["grupo_necesidad"].capitalize(), icon=":material/group:")
+    st.badge(r["grupo_necesidad"].capitalize(), icon=":material/group:", color=LEVEL[level][0] if level else "blue")
 
-with st.container(horizontal=True):
-    st.metric("Jóvenes de 20 a 34 años (2024)", es(r["jovenes_20_34_2024"]), border=True, height="stretch")
+# 26-nov: the diagnosis first, in the same row and height as before: need (with its gauge), the rents above the Plan's cap
+# (orange) and the cap of the proposal (green), the same figures as the table below; the 2022 figures go after it
+with st.container(horizontal=True, key="ficha_cifras"):  # key: only for the style of these cards (streamlit_app.py)
     st.metric("Índice de necesidad (0-100)", es(r["indice_necesidad"]), border=True, height="stretch")
-    st.metric("Solicitudes del Bono 2022 por 1.000 jóvenes", es(r["solicitudes_1000_2022"], 1), border=True,
-              height="stretch")
-    st.metric("Bonos 2022 por 1.000 jóvenes", es(r["cobertura_2022"], 1), border=True, height="stretch",
-              help=f"En el resto de la Comunidad sin Madrid capital: {es(rest_rate, 1)}. Sin dato si hay menos de 500 jóvenes.")
+    st.metric("Alquileres de 2024 por encima del tope del Plan",
+              "—" if np.isnan(r["fuera_plan"]) else pct(r["fuera_plan"]), border=True, height="stretch")
+    st.metric("Tope del piso con la propuesta", es(r["tope_propuesta"]) + " €", border=True, height="stretch")
+    st.metric("Jóvenes de 20 a 34 años (2024)", es(r["jovenes_20_34_2024"]), border=True, height="stretch")
 
 st.subheader(f"El tope y el alquiler en {name}")  # 24-nov: the name on screen too, where the demo scrolls to
 if np.isnan(r["serpavi_p25_2024"]):
@@ -109,6 +113,12 @@ if r["ine"] in study.index and study.loc[r["ine"], "sube_tope"]:  # a village wh
                 "alquiler en 2019 o en 2024" + (f" ({offer}, menos de la mitad)." if offer else "."),
                 icon=":material/gavel:")
 
+with st.container(horizontal=True):  # 26-nov: moved here from the top row, unchanged
+    st.metric("Solicitudes del Bono 2022 por 1.000 jóvenes", es(r["solicitudes_1000_2022"], 1), border=True,
+              height="stretch")
+    st.metric("Bonos 2022 por 1.000 jóvenes", es(r["cobertura_2022"], 1), border=True, height="stretch",
+              help=f"En el resto de la Comunidad sin Madrid capital: {es(rest_rate, 1)}. Sin dato si hay menos de 500 jóvenes.")
+
 left, right = st.columns([3, 2], gap="large")
 with left:
     st.subheader("El alquiler, año a año")
@@ -139,7 +149,7 @@ with right:
                    "topes que el Bono.")
 
 st.subheader("El límite de ingresos y el reparto")
-with st.container(horizontal=True):
+with st.container(horizontal=True, key="ficha_ingresos"):  # key: only for the gauges (end of this page)
     st.metric("Declaraciones del IRPF por debajo de 3 × IPREM (2024)", pct(r["share_irpf_bajo_3iprem_2024"]),
               border=True, height="stretch",
               help="Parte de las declaraciones con base imponible de hasta 25.200 €, de todas las edades: compara "
@@ -156,3 +166,23 @@ with st.container(horizontal=True):
               help="El mismo dinero, con topes del Plan o del alquiler local (hasta 1.000 €) y cupos por jóvenes × "
                    "necesidad × parte por debajo del límite de ingresos.")
 st.caption(SOURCE + " Simulación con β = −0,54 (solo la parte del efecto que se debe al tope); ver «Método y datos».")
+
+
+def gauge(key, n, share, colour):
+    """26-nov: a thin bar at the foot of the n-th figure of a row, as long as the figure itself (0 to 1). Drawn inside the
+    card's own bottom padding, so the cards keep their height and nothing below them moves."""
+    if share != share:  # NaN: no bar
+        return ""
+    card = f".st-key-{key} [data-testid='stElementContainer']:nth-child({n}) > [data-testid='stMetric']"
+    return (f"{card} {{position: relative;}} {card}::before, {card}::after {{content: ''; position: absolute; left: 1rem;"
+            f" bottom: .55rem; height: 6px; border-radius: 999px;}} {card}::before {{right: 1rem;"
+            f" background: rgba(128, 128, 128, .17);}} {card}::after {{width: calc((100% - 2rem) * "
+            f"{max(0.0, min(1.0, float(share))):.4f}); background: {colour};}}")
+
+
+# at the end of the page, so this style takes no room above the blocks of the demo
+st.html("<style>" + gauge("ficha_cifras", 1, r["indice_necesidad"] / 100, LEVEL[level][1] if level else SLOT1)
+        + f".st-key-ficha_cifras [data-testid='stElementContainer']:nth-child(1) > [data-testid='stMetric'] "
+          f"{{border-left: 5px solid {LEVEL[level][1] if level else '#2563eb'};}}"
+        + gauge("ficha_ingresos", 1, r["share_irpf_bajo_3iprem_2024"], SLOT1)
+        + gauge("ficha_ingresos", 2, r["share_irpf_bajo_5iprem_2024"], SLOT1) + "</style>")

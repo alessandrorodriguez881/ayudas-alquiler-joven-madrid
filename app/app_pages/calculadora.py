@@ -35,7 +35,7 @@ st.title("¿Puedo pedir la ayuda al alquiler?")
 st.caption("Te decimos si cumples los requisitos hoy, con el Plan 2026-2030 y con nuestra propuesta, y cuánto cobrarías. "
            "Es orientativo y no se guarda nada de lo que escribes.")  # short: on a phone the answer is right below
 
-with st.container(border=True):
+with st.container(border=True, key="card_caso"):  # key: only for the card style (streamlit_app.py)
     st.subheader("Tu caso")
     a, b, c = st.columns(3)
     name = a.selectbox("Municipio", options, key="calc_municipio")
@@ -122,6 +122,12 @@ else:
 # the pitch's story at a glance: the rent against each rule's cap (in Hoyo, 750 € against 600, 500 and 900 €)
 room = kind == "habitacion"
 SHORT = {"hoy": "Hoy (Bono 2024)", "plan": "Plan 2026-2030", "propuesta": "Nuestra propuesta"}  # fit at a phone's width
+# 26-nov: the answer for the three scenarios at a glance, right under the box (same caps as the chart below; ✔ or ✘ is
+# whether the case meets the requirements of that rule, as the box says). Style: .sc… in streamlit_app.py
+st.html("<div class='sc-row'>" + "".join(
+    f"<span class='sc sc-{rule} {'sc-si' if res.eligible else 'sc-no'}'><span class='sc-mark'>"
+    f"{'✔' if res.eligible else '✘'}</span>{SHORT[rule]} · tope {es(res.room_cap if room else res.flat_cap)} €</span>"
+    for rule, res in results.items()) + "</div>")
 caps_df = pd.DataFrame({"regla": [SHORT[r] for r in results],
                         "tope": [res.room_cap if room else res.flat_cap for res in results.values()]})
 caps_df["etiqueta"] = [es(v) + " €" for v in caps_df["tope"]]
@@ -160,7 +166,8 @@ SUBTITLE = {"hoy": "Convocatoria abierta desde el 3-feb-2025: 250 € al mes dur
             "plan": "Lo que fija el Estado. La Comunidad aún no ha sacado su convocatoria y puede añadir requisitos",
             "propuesta": "El Plan, con el tope del piso subido al alquiler de cada municipio (hasta 1.000 €), como permite su art. 135, y el de la habitación en el 60 % del piso"}
 for col, (rule, res) in zip(st.columns(3), results.items()):
-    with col.container(border=True, height="stretch"):
+    # key: the card's colour stripe, and a green halo on the rules the case meets (streamlit_app.py)
+    with col.container(border=True, height="stretch", key=f"card_regla_{rule}_{'ok' if res.eligible else 'ko'}"):
         st.markdown(f"**{rb.RULES[rule]}**")
         st.caption(SUBTITLE[rule])
         if res.eligible:

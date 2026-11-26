@@ -14,12 +14,12 @@ showWidgetBorder = true
 linkUnderline = false
 
 [theme.light]
-primaryColor = "#256abf"
+primaryColor = "#2563eb"  # 26-nov: the blue of the slides (was #256abf)
 backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#f2f6fb"
 textColor = "#18212f"
 borderColor = "#d6dfeb"
-linkColor = "#256abf"
+linkColor = "#2563eb"
 chartCategoricalColors = ["#2a78d6", "#eb6834", "#1a7f5a", "#8250df", "#bf8700", "#57606a"]
 
 [theme.dark]

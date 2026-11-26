@@ -2,14 +2,50 @@ import math
 
 import streamlit as st
 
-from datos import BLUE, ORANGE, SOURCE, es, map_spec, municipalities, pct, result
+from datos import BLUE, ORANGE, SLOT1, SLOT2, SLOT3, SOURCE, es, map_spec, municipalities, pct, result
 
-st.caption("**Los invisibles del Bono** · DataMad 2026")
-st.title("Donde el alquiler supera el tope, los jóvenes piden menos el Bono")
-st.caption("Bono Alquiler Joven de la Comunidad de Madrid: 250 € al mes durante 2 años, solo para alquileres de hasta "
-           "600 o 900 € (habitación: 300 o 450 €). Si su alquiler pasa del tope, el joven ni la pide y no sale en las "
-           "estadísticas: son los invisibles del Bono. No es un buscador de pisos: medimos si la ayuda llega a quien más "
-           "la necesita y proponemos cómo hacer que llegue.")
+# 26-nov: need level of a municipality (column grupo_necesidad) → its colour, for the gauge of the map card
+LEVEL = {"alta": "#e03131", "media": "#f08c00", "baja": "#2f9e44"}
+
+
+def bars(rows):
+    """Index bars under a figure: (label, share of the bar from 0 to 1, colour, figure as text). Drawn from the same
+    figures as the card, no new ones (style in streamlit_app.py, classes .ix…)."""
+    st.html("<div class='ix'>" + "".join(
+        f"<div class='ix-head'><span class='ix-lab'>{label}</span><span class='ix-val'>{text}</span></div>"
+        f"<div class='ix-track'><div class='ix-fill' style='width: {100 * max(0.0, min(1.0, share)):.1f}%; "
+        f"background: {colour};'></div></div>" for label, share, colour, text in rows) + "</div>")
+
+with st.container(key="hero"):  # 26-nov: the same three texts, in a blue band (style in streamlit_app.py)
+    st.caption(":material/visibility_off: **Los invisibles del Bono** · DataMad 2026")
+    st.title("Donde el alquiler supera el tope, los jóvenes piden menos el Bono")
+    st.caption("Bono Alquiler Joven de la Comunidad de Madrid: 250 € al mes durante 2 años, solo para alquileres de hasta "
+               "600 o 900 € (habitación: 300 o 450 €). Si su alquiler pasa del tope, el joven ni la pide y no sale en las "
+               "estadísticas: son los invisibles del Bono. No es un buscador de pisos: medimos si la ayuda llega a quien "
+               "más la necesita y proponemos cómo hacer que llegue.")
+    st.html("<div class='hero-chips'><span class='hero-chip'>Datos abiertos</span>"
+            "<span class='hero-chip'>Código abierto (MIT)</span>"
+            "<span class='hero-chip'>Propuesta con el art. 135 del Plan</span></div>")
+
+# 26-nov: two ways in, one per audience, with the buttons that were under the figures (style in streamlit_app.py)
+young, admin = st.columns(2)
+with young.container(border=True, height="stretch", key="ruta_jovenes"):
+    st.markdown("#### :material/person: Para jóvenes")
+    st.caption("Te decimos si cumples los requisitos hoy, con el Plan 2026-2030 y con nuestra propuesta, y cuánto "
+               "cobrarías.")
+    with st.container(horizontal=True):
+        if st.button("¿Puedo pedirla?", icon=":material/checklist:", type="primary"):
+            st.switch_page("app_pages/calculadora.py")
+        if st.button("¿Dónde me llega la ayuda?", icon=":material/explore:"):
+            st.switch_page("app_pages/donde.py")
+with admin.container(border=True, height="stretch", key="ruta_admin"):
+    st.markdown("#### :material/account_balance: Para la Administración")
+    st.caption("La ficha de cada municipio y el reparto del Bono simulado con el mismo dinero.")
+    with st.container(horizontal=True):
+        if st.button("Tu municipio", icon=":material/location_city:", type="primary"):
+            st.switch_page("app_pages/ficha.py")
+        if st.button("Simular el reparto (para la Consejería)", icon=":material/tune:"):
+            st.switch_page("app_pages/simular.py")
 
 test = result("contraste_real")
 h1 = test["H1"]
@@ -32,17 +68,23 @@ KPIS = [  # short label, value, what it means (in sight: metric labels are cut t
      "dinero (31,8 M€). Madrid capital, que hoy recibe más ayudas por joven que el resto, baja un "
      f"{pct(1 - capital('necesidad_requisito_plan_p75_hasta_1000') / capital('plan_estatal'))}"),
 ]
-for col, (label, value, note) in zip(st.columns(3), KPIS):
-    with col.container(border=True, height="stretch"):
-        st.metric(label, value)
+ICONS = [":material/trending_down:", ":material/block:", ":material/trending_up:"]  # 26-nov, one per figure
+# 26-nov: under each figure, two bars with figures that its own note already gives (blue today, orange the Plan, green
+# our proposal, as in the calculator's chart)
+plan_out, today_out = gap["2024_rents_plan_estatal"]["10000_or_fewer"], gap["2024_rents_2024_list"]["10000_or_fewer"]
+plan_rate, ours_rate = high("plan_estatal"), high("necesidad_requisito_plan_p75_hasta_1000")
+BARS = [
+    [("Todo el efecto", 1.0, SLOT1, f"{es(h1['pct_per_10_points'], 1)} %"),
+     ("La parte del propio tope", abs(cap_part / h1["pct_per_10_points"]), BLUE[2], f"{es(cap_part, 1)} %")],
+    [("Hoy", today_out, SLOT1, pct(today_out)), ("Con el Plan 2026-2030", plan_out, SLOT2, pct(plan_out))],
+    [("Ayudas por joven con el Plan", plan_rate / max(plan_rate, ours_rate), SLOT2, ""),
+     ("Con nuestra propuesta", ours_rate / max(plan_rate, ours_rate), SLOT3, KPIS[2][1])],
+]
+for i, (col, (label, value, note)) in enumerate(zip(st.columns(3), KPIS)):
+    with col.container(border=True, height="stretch", key=f"card_kpi_{i}"):
+        st.metric(f"{ICONS[i]} {label}", value)
+        bars(BARS[i])
         st.caption(note)
-with st.container(horizontal=True):
-    if st.button("¿Puedo pedirla?", icon=":material/checklist:", type="primary"):
-        st.switch_page("app_pages/calculadora.py")
-    if st.button("¿Dónde me llega la ayuda?", icon=":material/explore:", type="primary"):
-        st.switch_page("app_pages/donde.py")
-    if st.button("Simular el reparto (para la Consejería)", icon=":material/tune:"):
-        st.switch_page("app_pages/simular.py")
 st.divider()
 st.caption("Haz clic en un municipio para ver sus cifras.")
 
@@ -76,7 +118,7 @@ picked = [p.get("ine") for p in event.selection.get("municipio", [])] if event e
 with right:
     if picked and picked[0] in names:
         r = t.set_index("ine").loc[picked[0]]
-        with st.container(border=True):
+        with st.container(border=True, key="card_municipio"):
             st.subheader(r["municipio"])
             a, b = st.columns(2)
             a.metric("Jóvenes de 20 a 34 años (2024)", es(r["jovenes_20_34_2024"]))
@@ -85,6 +127,14 @@ with right:
             b.metric("Tope del piso (2024)", es(r["tope_2024"]) + " €")
             a.metric("Alquiler por encima del tope", pct(r["share_above_tope_2024_en_2024"]))
             b.metric("Con el Plan 2026-2030", pct(r["fuera_plan"]))
+            # 26-nov: the need index as a gauge, in the colour of its level (alta, media, baja)
+            group = r["grupo_necesidad"] if isinstance(r["grupo_necesidad"], str) else ""
+            level = next((k for k in LEVEL if group.endswith(k)), None)
+            if r["indice_necesidad"] == r["indice_necesidad"]:  # not NaN
+                chip = (f" <span class='ix-chip' style='background: {LEVEL[level]};'>Necesidad {level}</span>"
+                        if level else "")
+                bars([(f"Índice de necesidad{chip}", r["indice_necesidad"] / 100, LEVEL.get(level, SLOT1),
+                       es(r["indice_necesidad"]) + " / 100")])
             if st.button("Ver la ficha completa", icon=":material/arrow_forward:", width="stretch"):
                 st.session_state["municipio"] = r["municipio"]
                 st.switch_page("app_pages/ficha.py")
@@ -101,7 +151,8 @@ with right:
         [{"Municipio": m["municipio"], "Necesidad": m["indice_necesidad"], "Bonos por 1.000 jóvenes": m["cobertura_2022"],
           "Tope 2022": m["tope_2022"], "Tope 2024": m["tope_2024"]} for m in under["municipalities"]],
         hide_index=True, height=300,
-        column_config={"Necesidad": st.column_config.NumberColumn(format="%.0f"),
+        column_config={"Necesidad": st.column_config.ProgressColumn(format="%.0f", min_value=0, max_value=100,
+                                                                    color="#e03131"),  # 26-nov: the index as a bar
                        "Bonos por 1.000 jóvenes": st.column_config.NumberColumn(format="%.1f"),
                        "Tope 2022": st.column_config.NumberColumn(format="%d €"),
                        "Tope 2024": st.column_config.NumberColumn(format="%d €")},
